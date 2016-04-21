@@ -1,7 +1,7 @@
-const gulp = require('gulp')
-const jasmine = require('gulp-jasmine')
-const ts = require('gulp-typescript')
-const clean = require('gulp-clean')
+const gulp = require('gulp');
+const jasmine = require('gulp-jasmine');
+const ts = require('gulp-typescript');
+const clean = require('gulp-clean');
 
 const tsv = ts.createProject({});
 const tst = ts.createProject({});
@@ -11,7 +11,7 @@ gulp.task('compile', function() {
 });
 
 gulp.task('test', ['compile'], function() {
-	return gulp.src('./src/test/*.ts').pipe(ts(tst)).pipe(jasmine());
+	return gulp.src('./src/test/*.ts', { cwd: './target/' }).pipe(ts(tst)).pipe(jasmine());
 });
 
 gulp.task('clean', function() {
