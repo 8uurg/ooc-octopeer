@@ -1,3 +1,5 @@
+[![wercker status](https://app.wercker.com/status/58d7606deea2e9a573c66d7fd5f57ef4/m "wercker status")](https://app.wercker.com/project/bykey/58d7606deea2e9a573c66d7fd5f57ef4)
+
 # Octopeer for Bitbucket
 
 ## Setting up / building
