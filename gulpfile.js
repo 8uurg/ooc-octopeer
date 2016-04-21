@@ -6,12 +6,13 @@ const clean = require('gulp-clean');
 const tsv = ts.createProject({});
 const tst = ts.createProject({});
 
-gulp.task('compile', function() {
-	return gulp.src('./src/main/*.ts').pipe(ts(tsv)).pipe(gulp.dest('./target/'));
+gulp.task('compile', ['clean'], function() {
+	//gulp.src(['./src/main/js/*.js', './src/test/*.js']).pipe(gulp.dest('./target/'));
+	return gulp.src(['./src/main/ts/*.ts', './src/test/ts/*.ts']).pipe(ts(tsv)).pipe(gulp.dest('./target/'));
 });
 
 gulp.task('test', ['compile'], function() {
-	return gulp.src('./src/test/*.ts', { cwd: './target/' }).pipe(ts(tst)).pipe(jasmine());
+	return gulp.src('./src/test/*.js').pipe(jasmine());
 });
 
 gulp.task('clean', function() {
