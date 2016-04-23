@@ -3,6 +3,20 @@
 	
 	"name": "Octopeer-BitBucket",
 	"description": "Monitors peer-review behaviour on pull requests on BitBucket for acquiring peer review behaviour",
+	"version": "0.0.1",
 
-	"permissions": []
+	"browser_action": {},
+
+	"content_scripts": [
+
+	],
+
+	"background": {
+		"scripts": ["src/main/eventPage.js"],
+		"persistent": false
+	},
+
+	"permissions": [
+		"notifications", "http://bitbucket.org/*", "https://bitbucket.org/*"
+	]
 }
