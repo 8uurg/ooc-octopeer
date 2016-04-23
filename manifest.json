@@ -5,7 +5,9 @@
 	"description": "Monitors peer-review behaviour on pull requests on BitBucket for acquiring peer review behaviour",
 	"version": "0.0.1",
 
-	"browser_action": {},
+	"browser_action": {
+	
+	},
 
 	"content_scripts": [
 
