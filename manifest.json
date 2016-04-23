@@ -19,6 +19,8 @@
 	},
 
 	"permissions": [
-		"notifications", "http://bitbucket.org/*", "https://bitbucket.org/*"
+		"notifications", 
+		"http://bitbucket.org/*", 
+		"https://bitbucket.org/*"
 	]
 }
