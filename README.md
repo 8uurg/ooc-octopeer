@@ -15,7 +15,10 @@ Also, in order to compile things, get *tsd*:
 ```
 npm install -g tsd
 ```
-And use it to install the typings for _chrome_ and _jasmine_
+And use it to install the typings for _chrome_ and _jasmine_:
+```
+tsd install
+```
 
 Install other dependencies:
 ```
