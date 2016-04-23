@@ -7,7 +7,7 @@
 var fs = require("fs");
 
 function __require( file ) {
-    var dir = process.cwd().concat("/target/");
+    var dir = process.cwd().concat("/target/js/");
     return fs.readFileSync(
         dir.concat(file),
         "utf-8"

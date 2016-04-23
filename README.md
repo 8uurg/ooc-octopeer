@@ -15,7 +15,10 @@ Also, in order to compile things, get *tsd*:
 ```
 npm install -g tsd
 ```
-And use it to install the typings for _chrome_ and _jasmine_
+And use it to install the typings for _chrome_ and _jasmine_:
+```
+tsd install
+```
 
 Install other dependencies:
 ```
@@ -26,6 +29,13 @@ npm install
 A few commands can be executed using gulp:
 - *Compile* convert typescript to javascript
 - *Test*: Run the test suite
+
+### Using the result
+Load the `target` folder in chrome:
+- Go to `extensions` (or your regional equivalent)
+- Make sure `Developer Mode` is enabled
+- Load unpacked extension
+- Choose `target` folder
 
 # Software Engineering Documentation
 Sprint backlog 1, 22-04-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/ab788018da61a9b5c202b1324185a75cbc448250/doc/Sprint%20Backlog%20%231.pdf?at=master&fileviewer=file-view-default)
