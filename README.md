@@ -39,6 +39,7 @@ Load the `target` folder in chrome:
 
 # Software Engineering Documentation
 Sprint backlog 1, 22-04-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/ab788018da61a9b5c202b1324185a75cbc448250/doc/Sprint%20Backlog%20%231.pdf?at=master&fileviewer=file-view-default)
+Sprint backlog 1, version 1.1, 25-04-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/934378f786a3e43441c72eea64d90fddb6cb3ee8/doc/Sprint%20backlog%20%231%20Version%201.1.pdf?at=master&fileviewer=file-view-default)
 
 # Detailed repository information #
 [![wercker status](https://app.wercker.com/status/58d7606deea2e9a573c66d7fd5f57ef4/m "wercker status")](https://app.wercker.com/project/bykey/58d7606deea2e9a573c66d7fd5f57ef4)
