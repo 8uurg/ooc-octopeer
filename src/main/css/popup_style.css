@@ -1,12 +1,10 @@
-html,body
-{
+html,body {
     height: 260px;
     width: 175px;
     background-image: url("../bg_popup.jpg");
 }
 
-.Stop_Tracking_Button
-{
+.StopTrackingButton {
     background-color: #e7e7e7;
     color: black;
     border-radius: 4px;
@@ -22,14 +20,13 @@ html,body
     transition-duration: 0.4s;
 }
 
-.Stop_Tracking_Button:hover
-{
+.StopTrackingButton:hover {
     background-color: black;
     color: white;
 }
 
 /*Used when the button is pressed to make it appear to the user as pressed.*/
-.Stop_Tracking_Button_Opaque {
+.StopTrackingButtonOpaque {
     opacity: 0.6;
     cursor: not-allowed;
 }
