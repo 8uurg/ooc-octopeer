@@ -2,7 +2,6 @@
 	"manifest_version": 2,
 	
 	"name": "Octopeer-BitBucket",
-	"default_locale": "en",
 	"description": "Monitors peer-review behaviour on pull requests on BitBucket for acquiring peer review behaviour",
 	"version": "0.0.1",
 
