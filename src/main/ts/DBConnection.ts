@@ -2,7 +2,7 @@
  * Created by Cas on 23-4-2016.
  */
 class DBConnection {
-    
+
     database_location: string;
 
     /**
@@ -19,9 +19,9 @@ class DBConnection {
      * @param user_hash - The hash of the user.
      * @returns JSON Object - The JSON object of a session.
      */
-    sessionSetup(sessionID: string, user_hash: string) : JSON {
+    sessionSetup(url: string, started: Date, ended: Date, user: string) : JSON {
         var jsonObject2 = new JSON.constructor();
-        jsonObject2 = {"session": sessionID, "user_hash": user_hash, "platform": "bitbucket"};
+        jsonObject2 = {"url": started, "started_at": ended, "ended_at": , "user": user};
         return jsonObject2
     }
 
