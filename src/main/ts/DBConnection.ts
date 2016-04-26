@@ -21,7 +21,7 @@ class DBConnection {
      */
     sessionSetup(url: string, started: Date, ended: Date, user: string) : JSON {
         var jsonObject2 = new JSON.constructor();
-        jsonObject2 = {"url": started, "started_at": ended, "ended_at": , "user": user};
+        jsonObject2 = {"url": started, "started_at": started, "ended_at": ended, "user": user};
         return jsonObject2
     }
 
