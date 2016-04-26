@@ -13,9 +13,10 @@ gulp.task('compile', ['clean'], function() {
 	const jsorig = gulp.src('./src/main/js/*.js');
 	const tstojs = gulp.src('./src/main/ts/*.ts').pipe(ts(tsv));
 	const js     = merge(tstojs, jsorig).pipe(gulp.dest('./target/js/'));
+	const css    = gulp.src('./src/main/css/*.css').pipe(gulp.dest('./target/css/'));
 	const resour = gulp.src('./src/main/resources/**').pipe(gulp.dest('./target/'));
 	const movmnf = gulp.src('./manifest.json').pipe(gulp.dest('./target/'));
-	return merge(js, movmnf, resour);
+	return merge(js, css, movmnf, resour);
 });
 
 gulp.task('compiletest', ['compile'], function() {
