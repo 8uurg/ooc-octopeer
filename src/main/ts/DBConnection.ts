@@ -2,7 +2,7 @@
  * Created by Cas on 23-4-2016.
  */
 class DBConnection {
-
+    
     database_location: string;
 
     /**
