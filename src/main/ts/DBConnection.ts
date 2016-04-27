@@ -3,14 +3,14 @@
  */
 class DBConnection {
 
-    database_location: string;
+    api_location: string;
 
     /**
      * The constructor for setting the location of the database.
      * @param url - The URL of the RESTful API to send the data to.
      */
     constructor(url: string) {
-        this.database_location = url;
+        this.api_location = url;
     }
 
     /**
@@ -21,7 +21,7 @@ class DBConnection {
      * @returns JSON object of the data.
      */
     pullRequest(created: Date, merged: Date, closed: Date) : JSON {
-        var jsonObject2 = new JSON.constructor();
+        var jsonObject2 = JSON.constructor();
         jsonObject2 = {"created_at": created, "merged_at": merged, "closed_at": closed};
         return jsonObject2
     }
@@ -32,13 +32,13 @@ class DBConnection {
      * @param data - The data in JSON format.
      */
     sendToDatabase(table: string, data: JSON) {
-        if(this.database_location != null) {
+        if(this.api_location == null) {
+            console.error("No location for the restful api is known.")
+        } else {
             var xmlHTTP = new XMLHttpRequest();
-            xmlHTTP.open("POST", this.database_location + "" + table, true);
+            xmlHTTP.open("POST", this.api_location + "" + table, true);
             xmlHTTP.setRequestHeader("Content-Type", "application/json");
             xmlHTTP.send(JSON.stringify(data));
-        } else {
-            console.log("Database connection needs an url!");
         }
     }
 }
