@@ -14,14 +14,15 @@ class DBConnection {
     }
 
     /**
-     * Creating an JSON Object for a session.
-     * @param sessionID - The session id.
-     * @param user_hash - The hash of the user.
-     * @returns JSON Object - The JSON object of a session.
+     * Create pull request.
+     * @param created - The date the pull request is created.
+     * @param merged - The date the pull request is merged.
+     * @param closed - The date the pull request is closed.
+     * @returns JSON object of the data.
      */
-    sessionSetup(url: string, started: Date, ended: Date, user: string) : JSON {
+    pullRequest(created: Date, merged: Date, closed: Date) : JSON {
         var jsonObject2 = new JSON.constructor();
-        jsonObject2 = {"url": started, "started_at": started, "ended_at": ended, "user": user};
+        jsonObject2 = {"created_at": created, "merged_at": merged, "closed_at": closed};
         return jsonObject2
     }
 
@@ -34,8 +35,8 @@ class DBConnection {
         if(this.database_location != null) {
             var xmlHTTP = new XMLHttpRequest();
             xmlHTTP.open("POST", this.database_location + "" + table, true);
-            xmlHTTP.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xmlHTTP.send(data);
+            xmlHTTP.setRequestHeader("Content-Type", "application/json");
+            xmlHTTP.send(JSON.stringify(data));
         } else {
             console.log("Database connection needs an url!");
         }
