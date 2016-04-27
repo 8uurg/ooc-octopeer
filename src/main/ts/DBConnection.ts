@@ -5,6 +5,7 @@ class DBConnection {
 
     api_location: string;
 
+
     /**
      * The constructor for setting the location of the database.
      * @param url - The URL of the RESTful API to send the data to.
@@ -31,14 +32,14 @@ class DBConnection {
      * @param table - The table to put the information in.
      * @param data - The data in JSON format.
      */
-    sendToDatabase(table: string, data: JSON) {
+    sendRequest(table: string, data: JSON) {
         if(this.api_location == null) {
             console.error("No location for the restful api is known.")
-        } else {
-            var xmlHTTP = new XMLHttpRequest();
-            xmlHTTP.open("POST", this.api_location + "" + table, true);
-            xmlHTTP.setRequestHeader("Content-Type", "application/json");
-            xmlHTTP.send(JSON.stringify(data));
+            return;
         }
+        var xmlHTTP = new XMLHttpRequest();
+        xmlHTTP.open("POST", this.api_location + "" + table, true);
+        xmlHTTP.setRequestHeader("Content-Type", "application/json");
+        xmlHTTP.send(JSON.stringify(data));
     }
 }
