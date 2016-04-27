@@ -23,6 +23,7 @@
 		"notifications", 
 		"http://bitbucket.org/*", 
 		"https://bitbucket.org/*",
-		"https://localhost:8000/api/*"
+		"https://localhost:8000/api/*",
+		"octopeer.app"
 	]
 }
