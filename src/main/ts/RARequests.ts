@@ -24,9 +24,9 @@ class RARequests {
             console.error("No location for the restful api is known.")
             return;
         }
-        
+
         var xmlHTTP = new XMLHttpRequest();
-        xmlHTTP.open("POST", this.api_location + "" + table, true);
+        xmlHTTP.open("POST", this.api_location + table, true);
         xmlHTTP.setRequestHeader("Content-Type", "application/json");
         xmlHTTP.send(JSON.stringify(data));
 
