@@ -1,7 +1,10 @@
-var cursorX;
-var cursorY;
+var cursorX: number;
+var cursorY: number;
 
-//keep mouse location constantly updated.
+/**
+ * Update the mouse coordinates every time the cursor moves.
+ * @param e event object that contains the required cursor information.
+ */
 document.onmousemove = function(e){
     cursorX = e.pageX;
     cursorY = e.pageY;
@@ -10,7 +13,11 @@ document.onmousemove = function(e){
 //call the log function every given timeframe in ms.
 setInterval("logMousePosition()", 1000);
 
-//log the current mouse location
-function logMousePosition(){
+/**
+ * Log the cursor X and  Y position in the console.
+ */
+function logMousePosition() {
     console.log("Mouse position at: " + cursorX + ", " + cursorY);
 }
+
+

@@ -12,10 +12,12 @@ const fail = function() {
 }
 
 const tsv = ts.createProject({
-	noEmitOnError: true
+	noEmitOnError: true,
+	target: "es6"
 });
 const tst = ts.createProject({
-	noEmitOnError: true
+	noEmitOnError: true,
+	target: "es6"
 });
 
 gulp.task('compile', ['clean'], function() {
