@@ -5,6 +5,6 @@
 //This file runs in the background and can be used to add events.
 chrome.browserAction.onClicked.addListener(function(tab) {
     chrome.tabs.executeScript({
-        file: 'js/mouseTracker.js'
+        file: 'js/mouseTracker.ts'
     });
 });
