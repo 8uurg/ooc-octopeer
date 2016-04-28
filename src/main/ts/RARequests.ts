@@ -15,28 +15,16 @@ class RARequests {
     }
 
     /**
-     * Create pull request.
-     * @param created - The date the pull request is created.
-     * @param merged - The date the pull request is merged.
-     * @param closed - The date the pull request is closed.
-     * @returns JSON object of the data.
-     */
-    pullRequest(created: Date, merged: Date, closed: Date) : JSON {
-        var jsonObject2 = JSON.constructor();
-        jsonObject2 = {"created_at": created, "merged_at": merged, "closed_at": closed};
-        return jsonObject2
-    }
-
-    /**
      * Sends the data to the database if a database location is set.
      * @param table - The table to put the information in.
      * @param data - The data in JSON format.
      */
-    sendRequest(table: string, data: JSON) {
+    sendRequest(table: string, data: Object) {
         if(this.api_location == null) {
             console.error("No location for the restful api is known.")
             return;
         }
+        
         var xmlHTTP = new XMLHttpRequest();
         xmlHTTP.open("POST", this.api_location + "" + table, true);
         xmlHTTP.setRequestHeader("Content-Type", "application/json");
