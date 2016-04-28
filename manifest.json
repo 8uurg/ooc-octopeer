@@ -32,8 +32,6 @@
 		"https://bitbucket.org/*",
 
 		// Chrome API Permissions
-		"notifications",
-		"tabs",
-		"webNavigation"
+		"tabs"
 	]
 }

@@ -14,7 +14,6 @@ function logUserInformation(page: Document) {
     let bodyAttributes = page.getElementsByTagName("body")[0].attributes;
 
     if(bodyAttributes.getNamedItem("data-current-repo") == null) {
-        console.warn("Octopeer:\t", "Not in a repo, not logging.");
         return;
     }
 
