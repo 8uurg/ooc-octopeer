@@ -1,7 +1,7 @@
 /**
  * Created by Cas on 23-4-2016.
  */
-class DBConnection {
+class RARequests {
 
     api_location: string;
 
@@ -41,5 +41,9 @@ class DBConnection {
         xmlHTTP.open("POST", this.api_location + "" + table, true);
         xmlHTTP.setRequestHeader("Content-Type", "application/json");
         xmlHTTP.send(JSON.stringify(data));
+
+        if(xmlHTTP.status != 200) {
+            console.error("An error occurred while sending data to the server: " + xmlHTTP.status);
+        }
     }
 }
