@@ -11,17 +11,29 @@
 	},
 
 	"content_scripts": [
-
+      {
+        "matches": [
+          "http://bitbucket.org/*",
+          "https://bitbucket.org/*"
+        ],
+        "js": [
+          "js/trackUserId.js"
+        ]
+      }
 	],
 
 	"background": {
-		"scripts": ["js/eventPage.js"],
-		"persistent": false
+
 	},
 
 	"permissions": [
-		"notifications", 
+		// Domain Permissions
 		"http://bitbucket.org/*", 
-		"https://bitbucket.org/*"
+		"https://bitbucket.org/*",
+
+		// Chrome API Permissions
+		"notifications",
+		"tabs",
+		"webNavigation"
 	]
 }
