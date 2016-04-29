@@ -5,7 +5,7 @@ interface WindowSize {
 }
 
 var last: WindowSize = null;
-var timer: number = null
+var timer: number = null;
 
 function pass() {
     // TODO: Send last to collector
@@ -14,7 +14,7 @@ function pass() {
 }
 
 // Registers all resize events (even during resize)
-window.addEventListener('resize', function (e) {
+window.addEventListener('resize', function () {
     last =
         {
             width: window.innerWidth,
@@ -22,5 +22,5 @@ window.addEventListener('resize', function (e) {
             timestamp: e.timeStamp
         };
     window.clearTimeout(timer); // Stop the previous resize event from being sent.
-    timer = window.setTimeout(pass, 400); // Wait 400ms before sending size.
+    timer = window.setTimeout(pass, 400);
 });
