@@ -10,13 +10,20 @@
 		"default_popup": "./popup.html"
 	},
 
-	"content_scripts": [
-
-	],
+    "content_scripts": [
+      {
+        "matches": [
+          "http://bitbucket.org/*",
+          "https://bitbucket.org/*"
+        ],
+        "js": [
+          "js/mouseTracker.js"
+        ]
+      }
+    ],
 
 	"background": {
-		"scripts": ["js/eventPage.js"],
-		"persistent": false
+
 	},
 
 	"permissions": [
