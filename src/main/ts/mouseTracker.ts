@@ -8,7 +8,7 @@ var cursorY: number;
 document.addEventListener('mousemove', function(event) {
     cursorX = event.pageX;
     cursorY = event.pageY;
-})
+});
 
 setInterval("logMousePosition()", 1000);
 
