@@ -6,16 +6,25 @@
 	"version": "0.0.1",
 
 	"browser_action": {
-	
+		"default_title": "Octopeer",
+		"default_popup": "./popup.html"
 	},
 
-	"content_scripts": [
-
-	],
+    "content_scripts": [
+      {
+        "matches": [
+          "http://bitbucket.org/*",
+          "https://bitbucket.org/*"
+        ],
+        "js": [
+          "js/mouseTracker.js",
+					"js/resizeTracker.js"
+        ]
+      }
+    ],
 
 	"background": {
-		"scripts": ["js/eventPage.js"],
-		"persistent": false
+
 	},
 
 	"permissions": [
