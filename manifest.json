@@ -1,16 +1,16 @@
 {
-	"manifest_version": 2,
-	
-	"name": "Octopeer-BitBucket",
-	"description": "Monitors peer-review behaviour on pull requests on BitBucket for acquiring peer review behaviour",
-	"version": "0.0.1",
+  "manifest_version": 2,
+  
+  "name": "Octopeer-BitBucket",
+  "description": "Monitors peer-review behaviour on pull requests on BitBucket for acquiring peer review behaviour",
+  "version": "0.0.1",
 
-	"browser_action": {
-		"default_title": "Octopeer",
-		"default_popup": "./popup.html"
-	},
+  "browser_action": {
+    "default_title": "Octopeer",
+    "default_popup": "./popup.html"
+  },
 
-	"content_scripts": [
+  "content_scripts": [
       {
         "matches": [
           "http://bitbucket.org/*",
@@ -18,20 +18,20 @@
         ],
         "js": [
           "js/trackUserId.js",
-		  "js/mouseTracker.js"
+          "js/mouseTracker.js"
         ]
       }
-	],
+  ],
 
-	"background": {
+  "background": {
 
-	},
+  },
 
-	"permissions": [
-		// Domain Permissions
-		"https://bitbucket.org/*",
-		"https://localhost:8000/api/*"
+  "permissions": [
+    // Domain Permissions
+    "https://bitbucket.org/*",
+    "https://localhost:8000/api/*"
 
-		// Chrome API Permissions
-	]
+    // Chrome API Permissions
+  ]
 }
