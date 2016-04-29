@@ -3,6 +3,7 @@
  * This interface is used to convert Repository data to a definite type.
  */
 interface Repository {
+    
     /**
      * The full repo url, without "bitbucket.org"
      */

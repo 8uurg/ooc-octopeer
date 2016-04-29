@@ -3,6 +3,7 @@
  * This interface is used to convert JSON Objects which contain user information, to a definite type.
  */
 interface UserData {
+    
     /**
      * The user avatar url.
      */

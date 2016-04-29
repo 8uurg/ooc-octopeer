@@ -7,7 +7,6 @@ let octopeer_constants = {
     "current_repo_id_key" : "octopeer_current_repo_id"
 };
 
-logUserInformation(document);
 
 function logUserInformation(page: Document) {
 
@@ -25,3 +24,4 @@ function logUserInformation(page: Document) {
     console.log("The current user is: " + currentUserData.displayName + " and he/she is in repo: " + currentRepositoryData.fullslug);
 }
 
+logUserInformation(document);
