@@ -10,8 +10,6 @@ document.addEventListener('mousemove', function(event) {
     cursorY = event.pageY;
 });
 
-setInterval(logMousePosition(), 1000);
-
 /**
  * Log the cursor X and  Y position in the console.
  */
@@ -19,4 +17,4 @@ function logMousePosition() {
     console.log("Mouse position at: " + cursorX + ", " + cursorY);
 }
 
-
+setInterval(logMousePosition, 1000);
