@@ -17,7 +17,8 @@
           "https://bitbucket.org/*"
         ],
         "js": [
-          "js/trackUserId.js"
+          "js/trackUserId.js",
+		  "js/mouseTracker.js"
         ]
       }
 	],
@@ -28,10 +29,9 @@
 
 	"permissions": [
 		// Domain Permissions
-		"http://bitbucket.org/*", 
 		"https://bitbucket.org/*",
+		"https://localhost:8000/api/*"
 
 		// Chrome API Permissions
-		"tabs"
 	]
 }
