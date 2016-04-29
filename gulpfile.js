@@ -9,7 +9,7 @@ const util = require('gulp-util');
 const fail = function() {
 	util.log("A component which does not force fail, failed.")
 	process.exit(1);
-}
+};
 
 const tsv = ts.createProject({
 	noEmitOnError: true
@@ -32,7 +32,7 @@ gulp.task('compiletest', ['compile'], function() {
 	const jsorig = gulp.src('./src/test/*.js');
 	const tstojs = gulp.src('./src/test/*.ts').pipe(ts(tsv)).on('error', fail);
 	return merge(tstojs, jsorig).pipe(gulp.dest('./target/test/js/'));
-})
+});
 
 gulp.task('test', ['compiletest'], function() {
 	return gulp.src('./target/test/js/*.js').pipe(jasmine());
