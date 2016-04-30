@@ -1,0 +1,11 @@
+{
+  "name": "Octopeer-Bitbucket",
+  "version": false,
+  "ambientDependencies": {
+    "MediaStream": "github:DefinitelyTyped/DefinitelyTyped/webrtc/MediaStream.d.ts#544a35a10866b32afda9c7f029c0764558563f4f",
+    "filewriter": "github:DefinitelyTyped/DefinitelyTyped/filewriter/filewriter.d.ts#544a35a10866b32afda9c7f029c0764558563f4f",
+    "filesystem": "github:DefinitelyTyped/DefinitelyTyped/filesystem/filesystem.d.ts#544a35a10866b32afda9c7f029c0764558563f4f",
+    "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#544a35a10866b32afda9c7f029c0764558563f4f",
+    "chrome": "github:DefinitelyTyped/DefinitelyTyped/chrome/chrome.d.ts#544a35a10866b32afda9c7f029c0764558563f4f"
+  }
+}
