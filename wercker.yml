@@ -6,7 +6,9 @@ build:
     # Install the typings for typescript
     - script:
       name: typings-install
-      code: typings install
+      code: 
+        - npm install typings -g
+        - typings install
     # A step that executes `npm test` command
     - npm-test
     
