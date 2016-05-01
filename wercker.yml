@@ -4,11 +4,7 @@ build:
     # A step that executes `npm install` command
     - npm-install
     # Install the typings for typescript
-    - script:
-      name: typings-install
-      code: 
-        - npm install typings -g
-        - typings install
+    - wend/typings-install@0.0.3
     # A step that executes `npm test` command
     - npm-test
     
