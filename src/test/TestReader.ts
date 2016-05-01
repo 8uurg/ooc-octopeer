@@ -1,5 +1,5 @@
 ///<reference path="../../typings/main.d.ts" />
-import {Reader} from '../main/js/reader';
+import {Reader} from '../main/ts/reader';
 
 /**
  * This is an example file on how to test.

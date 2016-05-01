@@ -42,7 +42,11 @@ gulp.task('run-test', function() {
 });
 
 gulp.task('build', ['test'], function() {
-    return gulp.src('./target/src/main/**').pipe(gulp.dest('./dest'))
+    var bG = gulp;
+        bG.src('./target/src/main/ts/**').pipe(gulp.dest('./dest/js'));
+        bG.src('./target/src/main/css/**').pipe(gulp.dest('./dest/css'));
+        bG.src('./target/src/main/*.*').pipe(gulp.dest('./dest'));
+    return bG;
 });
 
 gulp.task('clean', function() {
