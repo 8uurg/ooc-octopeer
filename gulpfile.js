@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const jasmine = require('gulp-jasmine');
+const istanbul = require('gulp-istanbul');
 const ts = require('gulp-typescript');
 const clean = require('gulp-clean');
 const util = require('gulp-util');
@@ -33,8 +34,19 @@ gulp.task('compile', ['clean'], function() {
            pipe(gulp.dest('./target/src'));
 });
 
-gulp.task('test', ['compile'], function() {
-    return gulp.src(['./target/src/test/**/*.js', './target/src/js/test/*.js']).pipe(jasmine());
+gulp.task('test', ['compile'], function(done) {
+    return gulp.src(['./target/src/*.js', './target/src/**/*.js'])
+        .pipe(istanbul({includeUntested: true}))
+        .pipe(istanbul.hookRequire())
+        .on('end', function() { 
+            gulp.src(['./target/src/test/**/*.js', './target/src/js/test/*.js'])
+                 .pipe(jasmine())
+                 .pipe(istanbul.writeReports({
+                    dir: './target/assets/unit-test-coverage',
+                    reporters: [ 'lcov' ],
+                    reportOpts: { dir: './target/assets/unit-test-coverage'}
+                 }));
+        });
 });
 
 gulp.task('run-test', function() {
