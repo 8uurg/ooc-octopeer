@@ -4,14 +4,23 @@ const ts = require('gulp-typescript');
 const clean = require('gulp-clean');
 const merge = require('merge-stream');
 const runSequence = require('run-sequence');
+const util = require('gulp-util');
 
+const fail = function() {
+	util.log("A component which does not force fail, failed.")
+	process.exit(1);
+};
 
-const tsv = ts.createProject({});
-const tst = ts.createProject({});
+const tsv = ts.createProject({
+	noEmitOnError: true
+});
+const tst = ts.createProject({
+	noEmitOnError: true
+});
 
 gulp.task('compile', ['clean'], function() {
 	const jsorig = gulp.src('./src/main/js/*.js');
-	const tstojs = gulp.src('./src/main/ts/*.ts').pipe(ts(tsv));
+	const tstojs = gulp.src('./src/main/ts/*.ts').pipe(ts(tsv)).on('error', fail);
 	const js     = merge(tstojs, jsorig).pipe(gulp.dest('./target/js/'));
 	const css    = gulp.src('./src/main/css/*.css').pipe(gulp.dest('./target/css/'));
 	const resour = gulp.src('./src/main/resources/**').pipe(gulp.dest('./target/'));
@@ -21,9 +30,9 @@ gulp.task('compile', ['clean'], function() {
 
 gulp.task('compiletest', ['compile'], function() {
 	const jsorig = gulp.src('./src/test/*.js');
-	const tstojs = gulp.src('./src/test/*.ts').pipe(ts(tsv));
+	const tstojs = gulp.src('./src/test/*.ts').pipe(ts(tsv)).on('error', fail);
 	return merge(tstojs, jsorig).pipe(gulp.dest('./target/test/js/'));
-})
+});
 
 gulp.task('test', ['compiletest'], function() {
 	return gulp.src('./target/test/js/*.js').pipe(jasmine());
