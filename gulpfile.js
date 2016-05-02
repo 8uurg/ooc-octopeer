@@ -11,7 +11,7 @@ const remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
 
 
 const fail = function() {
-    util.log("A component which does not force fail, failed.")
+    util.log("A component which does not force fail, failed.");
     process.exit(1);
 };
 
@@ -30,11 +30,13 @@ const tst = ts.createProject({
 
 gulp.task('lint', function() {
     // Add linting tasks here.
-})
+});
 
-const compile_ts = lazypipe().pipe(sourcemaps.init).pipe(
-    function() { return ts(tsv).on('error', fail); }
-).pipe(sourcemaps.write, './maps')
+const compile_ts = lazypipe()
+    .pipe(sourcemaps.init)
+    .pipe(function() { 
+        return ts(tsv).on('error', fail); })
+    .pipe(sourcemaps.write, './maps');
 
 gulp.task('compile', ['clean'], function() {
     return gulp.src('./src/**')
@@ -66,7 +68,7 @@ gulp.task('test-report', ['test-run'], function() {
                 'html': './target/assets/unit-test-coverage/html-report'
             }
         }));
-})
+});
 
 gulp.task('test', ['test-report']); 
 
