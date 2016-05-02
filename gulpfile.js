@@ -70,30 +70,6 @@ gulp.task('test-report', ['test-run'], function() {
 
 gulp.task('test', ['test-report']); 
 
-// gulp.task('test', ['compile'], function(done) {
-//     return gulp.src(['./target/src/*.js', './target/src/**/*.js'])
-//         .pipe(istanbul({includeUntested: true}))
-//         .pipe(istanbul.hookRequire())
-//         .on('end', function() { 
-//             gulp.src(['./target/src/test/**/*.js', './target/src/js/test/*.js'])
-//                  .pipe(jasmine())
-//                  .pipe(istanbul.writeReports({
-//                     dir: './target/assets/unit-test-coverage',
-//                     reporters: [ 'json' ], // Report json to transform
-//                     reportOpts: { dir: './target/assets/unit-test-coverage'}
-//                  })).on('end', function () {
-//                     // Convert coverage from js to ts.
-//                     gulp.src("./target/assets/unit-test-coverage/coverage-final.json").pipe(remapIstanbul({
-//                         reports: {
-//                             'json': './target/assets/unit-test-coverage/coverage.json',
-//                             'html': './target/assets/unit-test-coverage/html-report'
-//                         }
-//                     }));
-//             });
-//         });
-// });
-
-
 gulp.task('build', ['test'], function() {
     return gulp.src('./target/src/main/**').pipe(gulp.dest('./dest'))
 });
