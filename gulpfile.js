@@ -5,6 +5,9 @@ const ts = require('gulp-typescript');
 const clean = require('gulp-clean');
 const util = require('gulp-util');
 const gulpif = require('gulp-if');
+const sourcemaps = require('gulp-sourcemaps');
+const lazypipe = require('lazypipe');
+
 
 const fail = function() {
     util.log("A component which does not force fail, failed.")
@@ -28,10 +31,14 @@ gulp.task('lint', function() {
     // Add linting tasks here.
 })
 
+const compile_ts = lazypipe().pipe(sourcemaps.init).pipe(
+    function() { return ts(tsv).on('error', fail); }
+).pipe(sourcemaps.write, './maps')
+
 gulp.task('compile', ['clean'], function() {
-    return gulp.src('./src/**').
-           pipe(gulpif('**/*.ts', ts(tsv).on('error', fail))). // Compile TypeScript files.
-           pipe(gulp.dest('./target/src'));
+    return gulp.src('./src/**')
+           .pipe(gulpif('**/*.ts', compile_ts())) // Compile TypeScript files.
+           .pipe(gulp.dest('./target/src'));
 });
 
 gulp.task('test', ['compile'], function(done) {

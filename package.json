@@ -12,9 +12,11 @@
     "gulp-if": "^2.0.0",
     "gulp-istanbul": "^0.10.4",
     "gulp-jasmine": "^2.3.0",
+    "gulp-sourcemaps": "^2.0.0-alpha",
     "gulp-typescript": "^2.13.0",
     "gulp-util": "^3.0.7",
     "istanbul": "^0.4.3",
+    "lazypipe": "^1.0.1",
     "merge-stream": "^1.0.0",
     "run-sequence": "^1.1.5",
     "typings": "^0.8.1"
