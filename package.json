@@ -18,6 +18,7 @@
     "istanbul": "^0.4.3",
     "lazypipe": "^1.0.1",
     "merge-stream": "^1.0.0",
+    "remap-istanbul": "^0.6.3",
     "run-sequence": "^1.1.5",
     "typings": "^0.8.1"
   }
