@@ -60,7 +60,7 @@ gulp.task('test-run', ['test-prepare'], function() {
         .pipe(jasmine())
         .pipe(istanbul.writeReports({
             dir: './target/assets/unit-test-coverage',
-            reporters: [ 'json', 'lcov' ], // Report json to transform
+            reporters: [ 'json' ], // Report json to transform
             reportOpts: { dir: './target/assets/unit-test-coverage'}
         }));
 });
