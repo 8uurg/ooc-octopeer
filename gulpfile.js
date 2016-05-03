@@ -37,10 +37,15 @@ const compile_ts = lazypipe()
     .pipe(function() { 
         return ts(tsv).on('error', fail); })
     .pipe(sourcemaps.write, './maps');
+    
+ const sourcemap_js = lazypipe()
+    .pipe(sourcemaps.init, {identityMap: true}) // identityMap is turned on because of how the coverage remapper works.
+    .pipe(sourcemaps.write, './maps');
 
 gulp.task('compile', ['clean'], function() {
     return gulp.src('./src/**')
-           .pipe(gulpif('**/*.ts', compile_ts())) // Compile TypeScript files.
+           .pipe(gulpif('**/*.ts', compile_ts()))
+           .pipe(gulpif('**/*.js', sourcemap_js()))
            .pipe(gulp.dest('./target/src'));
 });
 
@@ -55,7 +60,7 @@ gulp.task('test-run', ['test-prepare'], function() {
         .pipe(jasmine())
         .pipe(istanbul.writeReports({
             dir: './target/assets/unit-test-coverage',
-            reporters: [ 'json' ], // Report json to transform
+            reporters: [ 'json', 'lcov' ], // Report json to transform
             reportOpts: { dir: './target/assets/unit-test-coverage'}
         }));
 });
