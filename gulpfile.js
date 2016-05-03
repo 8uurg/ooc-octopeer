@@ -8,6 +8,7 @@ const gulpif = require('gulp-if');
 const sourcemaps = require('gulp-sourcemaps');
 const lazypipe = require('lazypipe');
 const remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
+const tslint = require('gulp-tslint');
 
 
 const fail = function() {
@@ -30,6 +31,11 @@ const tst = ts.createProject({
 
 gulp.task('lint', function() {
     // Add linting tasks here.
+    return gulp.src('./src/**/*.ts')
+    .pipe(tslint())
+    .pipe(tslint.report("prose", {
+          emitError: false
+        }));
 });
 
 const compile_ts = lazypipe()
@@ -47,7 +53,7 @@ gulp.task('compile', ['clean'], function() {
 gulp.task('test-prepare', ['compile'], function() {
     return gulp.src(['./target/src/*.js', './target/src/**/*.js'])
         .pipe(istanbul({includeUntested: true}))
-        .pipe(istanbul.hookRequire())
+        .pipe(istanbul.hookRequire());
 });
 
 gulp.task('test-run', ['test-prepare'], function() {
@@ -73,7 +79,7 @@ gulp.task('test-report', ['test-run'], function() {
 gulp.task('test', ['test-report']); 
 
 gulp.task('build', ['test'], function() {
-    return gulp.src('./target/src/main/**').pipe(gulp.dest('./dest'))
+    return gulp.src('./target/src/main/**').pipe(gulp.dest('./dest'));
 });
 
 gulp.task('clean', function() {
