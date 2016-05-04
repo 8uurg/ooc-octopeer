@@ -1,0 +1,45 @@
+/**
+ * Replaces the normal checkbox with a slider.
+ */
+
+input[type=checkbox] {
+    visibility: hidden;
+    width: 32px;
+    height: 16px;
+    position: relative;
+}
+
+input[type=checkbox]::before {
+    content: " ";
+    visibility: visible;
+    width: 32px;
+    height: 16px;
+    border-radius: 8px;
+    display: inline-block;
+    
+    border: 2px solid darkred;
+    background-color: red;
+    
+    transition: 200ms background-color;
+}
+input[type=checkbox]:checked::before {
+    border: 2px solid green;
+    background-color: lightgreen;
+}
+
+input[type=checkbox]::after {
+    content: " ";
+    visibility: visible;
+    position: absolute;
+    top: 2px;
+    border-radius: 7px;
+    display: inline-block;
+    margin-left: 1px;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    transition: 200ms transform;
+}
+input[type=checkbox]:checked::after {
+    transform: translateX(18px);
+}
