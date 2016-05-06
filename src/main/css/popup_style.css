@@ -7,12 +7,24 @@ html,body {
 .page {
     width: 100%;
 }
-.block {
+
+.block-track {
     display: inline-block;
+    float: left;
     zoom: 1;
 }
 
-.block ul {
+.block-track ul {
+    list-style-type: none;
+}
+
+.block-privacy {
+    display: inline-block;
+    float: left;
+    zoom: 1;
+}
+
+.block-privacy ul {
     list-style-type: none;
 }
 

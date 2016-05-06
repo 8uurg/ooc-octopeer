@@ -63,25 +63,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     /*HASHING*/
-    /* Hashing Mouse Position Listener */
+    /* Hashing Username Listener */
     var hashMousePos = document.getElementById("checkboxHashUsername");
     hashMousePos.addEventListener("click", function() {
         bHashUsername = !bHashUsername;
         console.log("Hash Mouse Position: " + bTrackingMousePos);
-    });
-
-    /* Hashing Screen Resolution Listener */
-    var hashScreenRes = document.getElementById("checkboxHashMousPos");
-    hashScreenRes.addEventListener("click", function() {
-        bHashMousePos = !bHashMousePos;
-        console.log("Hash Mouse Positions: " + bTrackingScreenRes);
-    });
-
-    /* Hashing Page Resolution Listener */
-    var hashPageRes = document.getElementById("checkboxHashRes");
-    hashPageRes.addEventListener("click", function() {
-        bHashResolutions =  !bHashResolutions;
-        console.log("Hash Resolutions: " + bTrackingPageRes);
     });
 
     /* Hashing Keystrokes Listener */
