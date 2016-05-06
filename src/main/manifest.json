@@ -33,7 +33,5 @@
     // Domain Permissions
     "https://bitbucket.org/*",
     "https://localhost:8000/api/*"
-
-    // Chrome API Permissions
   ]
 }
