@@ -14,5 +14,5 @@ interface Requests {
      * @param table - The table the data has to be stored in.
      * @param data - The data to be sent in JSON format.
      */
-    sendRequest(table: string, data: Object)
+    sendRequest(table: string, data: Object): void;
 }

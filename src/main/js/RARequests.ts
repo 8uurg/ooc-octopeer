@@ -18,7 +18,7 @@ class RARequests implements Requests {
      * Sends the username to the database.
      * @param userData - An enforced JSON type for the storage of the username.
      */
-    sendUserName(userData: UserJSON) {
+    sendUserName(userData: UserJSON): void {
         this.sendRequest("users", userData);
     }
 
@@ -27,7 +27,7 @@ class RARequests implements Requests {
      * @param table - The table to put the information in.
      * @param data - The data in JSON format.
      */
-    private sendRequest(table: string, data: Object) {
+    sendRequest(table: string, data: Object): void {
         if(this.api_location == null) {
             console.error("No location for the restful api is known.")
             return;
