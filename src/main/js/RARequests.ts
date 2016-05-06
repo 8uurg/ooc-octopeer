@@ -1,7 +1,7 @@
 /**
  * Created by Cas on 23-4-2016.
  */
-class RARequests {
+class RARequests implements Requests {
 
     api_location: string;
 
@@ -15,11 +15,19 @@ class RARequests {
     }
 
     /**
+     * Sends the username to the database.
+     * @param userData - An enforced JSON type for the storage of the username.
+     */
+    sendUserName(userData: UserJSON) {
+        this.sendRequest("users", userData);
+    }
+
+    /**
      * Sends the data to the database if a database location is set.
      * @param table - The table to put the information in.
      * @param data - The data in JSON format.
      */
-    sendRequest(table: string, data: Object) {
+    private sendRequest(table: string, data: Object) {
         if(this.api_location == null) {
             console.error("No location for the restful api is known.")
             return;
