@@ -35,7 +35,7 @@ Load the `target` folder in chrome:
 - Go to `extensions` (or your regional equivalent)
 - Make sure `Developer Mode` is enabled
 - Load unpacked extension
-- Choose `target` folder
+- Choose `dest` folder
 
 # Software Engineering Documentation
 
