@@ -1,5 +1,5 @@
 {
-  "name": "Octopeer-Bitbucket",
+  "name": "octopeer-bitbucket",
   "version": "0.0.0",
   "description": "Monitoring and logging for collecting data about usage of peer reviewing through pull requests on bitbucket",
   "main": "./target/main.js",
@@ -9,10 +9,12 @@
   "dependencies": {
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
+    "gulp-if": "^2.0.0",
     "gulp-jasmine": "^2.3.0",
     "gulp-typescript": "^2.13.0",
     "gulp-util": "^3.0.7",
     "merge-stream": "^1.0.0",
-    "run-sequence": "^1.1.5"
+    "run-sequence": "^1.1.5",
+    "typings": "^0.8.1"
   }
 }
