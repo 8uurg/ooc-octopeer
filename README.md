@@ -13,11 +13,11 @@ npm install -g gulp
 ```
 Also, in order to compile things, get *tsd*:
 ```
-npm install -g tsd
+npm install -g typings
 ```
 And use it to install the typings for _chrome_ and _jasmine_:
 ```
-tsd install
+typings install
 ```
 
 Install other dependencies:
