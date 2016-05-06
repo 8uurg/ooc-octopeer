@@ -1,48 +1,63 @@
 const gulp = require('gulp');
 const jasmine = require('gulp-jasmine');
+const istanbul = require('gulp-istanbul');
 const ts = require('gulp-typescript');
 const clean = require('gulp-clean');
-const merge = require('merge-stream');
-const runSequence = require('run-sequence');
 const util = require('gulp-util');
+const gulpif = require('gulp-if');
 
 const fail = function() {
-	util.log("A component which does not force fail, failed.")
-	process.exit(1);
+    util.log("A component which does not force fail, failed.")
+    process.exit(1);
 };
 
 const tsv = ts.createProject({
-	noEmitOnError: true
+    noEmitOnError: true,
+    target: 'es6',
+    module: 'commonjs',
+    noImplicitAny: true
 });
 const tst = ts.createProject({
-	noEmitOnError: true
+    noEmitOnError: true,
+    target: 'es6',
+    module: 'commonjs',
+    noImplicitAny: true
 });
+
+gulp.task('lint', function() {
+    // Add linting tasks here.
+})
 
 gulp.task('compile', ['clean'], function() {
-	const jsorig = gulp.src('./src/main/js/*.js');
-	const tstojs = gulp.src('./src/main/ts/*.ts').pipe(ts(tsv)).on('error', fail);
-	const js     = merge(tstojs, jsorig).pipe(gulp.dest('./target/js/'));
-	const css    = gulp.src('./src/main/css/*.css').pipe(gulp.dest('./target/css/'));
-	const resour = gulp.src('./src/main/resources/**').pipe(gulp.dest('./target/'));
-	const movmnf = gulp.src('./manifest.json').pipe(gulp.dest('./target/'));
-	return merge(js, css, movmnf, resour);
+    return gulp.src('./src/**').
+           pipe(gulpif('**/*.ts', ts(tsv).on('error', fail))). // Compile TypeScript files.
+           pipe(gulp.dest('./target/src'));
 });
 
-gulp.task('compiletest', ['compile'], function() {
-	const jsorig = gulp.src('./src/test/*.js');
-	const tstojs = gulp.src('./src/test/*.ts').pipe(ts(tsv)).on('error', fail);
-	return merge(tstojs, jsorig).pipe(gulp.dest('./target/test/js/'));
+gulp.task('test', ['compile'], function(done) {
+    return gulp.src(['./target/src/*.js', './target/src/**/*.js'])
+        .pipe(istanbul({includeUntested: true}))
+        .pipe(istanbul.hookRequire())
+        .on('end', function() { 
+            gulp.src(['./target/src/test/**/*.js', './target/src/js/test/*.js'])
+                 .pipe(jasmine())
+                 .pipe(istanbul.writeReports({
+                    dir: './target/assets/unit-test-coverage',
+                    reporters: [ 'lcov' ],
+                    reportOpts: { dir: './target/assets/unit-test-coverage'}
+                 }));
+        });
 });
 
-gulp.task('test', ['compiletest'], function() {
-	return gulp.src('./target/test/js/*.js').pipe(jasmine());
+gulp.task('run-test', function() {
+    return gulp.src(['./target/src/test/**/*.js', './src/target/js/test/*.js']).pipe(jasmine());
 });
 
-gulp.task('build', function() {
-	return runSequence('test', 'compile');
+gulp.task('build', ['test'], function() {
+    return gulp.src('./target/src/main/**').pipe(gulp.dest('./dest'))
 });
 
 gulp.task('clean', function() {
-	return gulp.src(['./target', './dest'], {read: false}).pipe(clean());
+    return gulp.src(['./target', './dest'], {read: false}).pipe(clean());
 });
 
