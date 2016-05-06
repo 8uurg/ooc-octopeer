@@ -3,7 +3,7 @@
   
   "name": "Octopeer-BitBucket",
   "description": "Monitors peer-review behaviour on pull requests on BitBucket for acquiring peer review behaviour",
-  "version": "0.0.1",
+  "version": "0.0.2",
 
   "browser_action": {
     "default_title": "Octopeer",
@@ -33,7 +33,5 @@
     // Domain Permissions
     "https://bitbucket.org/*",
     "https://localhost:8000/api/*"
-
-    // Chrome API Permissions
   ]
 }
