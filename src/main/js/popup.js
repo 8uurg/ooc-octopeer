@@ -1,63 +1,107 @@
 /*This scripts ensures scripts can be used from the popup*/
 
 /*Variables to keep track of user settings*/
-var bTracking = true;
-var bHashUsername;
-var bEncrypt;
-var bMouseData;
-var bKeyboardData;
-var bPrMetaData;
-var bBrowserData;
+var bTrackingMousePos       = false;
+var bTrackingScreenRes      = false;
+var bTrackingPageRes        = false;
+var bTrackingKeystrokes     = false;
+var bTrackingPRMetaData     = false;
+var bTrackingBrowserData    = false;
+var bHashUsername           = true;
+var bHashMousePos           = true;
+var bHashResolutions        = true;
+var bHashKeystrokes         = true;
+var bHashPRMetaData         = true;
+var bHashBrowserData        = true;
+
 
 /*TODO: Initialize variables by loading user settings*/
 
 document.addEventListener("DOMContentLoaded", function() {
-    /* Tracking Button Listener */
-    var stopTrackingButtonPress = document.getElementById("stopTrackingButton");
-    stopTrackingButtonPress.addEventListener("click", function() {
-            bTracking = !bTracking;
-            console.log("Tracking: " + bTracking);
+
+    /*TRACKING*/
+    /* Tracking Mouse Position Listener */
+    var trackMousePos = document.getElementById("checkboxMousPos");
+    trackMousePos.addEventListener("click", function() {
+        bTrackingMousePos = !bTrackingMousePos;
+            console.log("Tracking Mouse Position: " + bTrackingMousePos);
     });
 
-    /* Encrypt Username Checkbox Listener */
-    var hashUserNameCheckbox = document.getElementById("checkboxHashUsername");
-    hashUserNameCheckbox.addEventListener("click", function() {
-            bHashUsername = hashUserNameCheckbox.checked;
-            console.log("Hash Username: " + bHashUsername);
+    /* Tracking Screen Resolution Listener */
+    var trackScreenRes = document.getElementById("checkboxScreenRes");
+    trackScreenRes.addEventListener("click", function() {
+        bTrackingScreenRes = !bTrackingScreenRes;
+            console.log("Tracking Screen Resolution: " + bTrackingScreenRes);
     });
 
-    /* Encrypt User Data Checkbox Listener */
-    var encryptCheckbox = document.getElementById("checkboxEncrypt");
-    encryptCheckbox.addEventListener("click", function() {
-            bEncrypt =  encryptCheckbox.checked;
-            console.log("Encrypt Tracking Data: " + bEncrypt);
+    /* Tracking Page Resolution Listener */
+    var trackPageRes = document.getElementById("checkboxPageRes");
+    trackPageRes.addEventListener("click", function() {
+        bTrackingPageRes =  !bTrackingPageRes;
+            console.log("Tracking Page Resolution: " + bTrackingPageRes);
     });
 
-    /* Track Mouse Data Checkbox Listener */
-    var mouseDataCheckbox = document.getElementById("checkboxMouseData");
-    mouseDataCheckbox.addEventListener("click", function() {
-            bMouseData = mouseDataCheckbox.checked;
-            console.log("Track Mouse Data: " + bMouseData);
+    /* Tracking Keystrokes Listener */
+    var trackKeyStrokes = document.getElementById("checkboxKeystrokes");
+    trackKeyStrokes.addEventListener("click", function() {
+        bTrackingKeystrokes = !bTrackingKeystrokes;
+            console.log("Tracking Keystrokes: " + bTrackingKeystrokes);
     });
 
-    /* Track Keyboard Data Checkbox Listener */
-    var keyboardDataCheckbox = document.getElementById("checkboxKeyboardData");
-    keyboardDataCheckbox.addEventListener("click", function() {
-            bKeyboardData = keyboardDataCheckbox.checked;
-            console.log("Track Keyboard Data: " + bKeyboardData);
+    /* Tracking PR Metadata Listener */
+    var trackPRMeta = document.getElementById("checkboxPrMetaDta");
+    trackPRMeta.addEventListener("click", function() {
+        bTrackingPRMetaData = !bTrackingPRMetaData;
+            console.log("Tracking Pull Request Data: " + bTrackingPRMetaData);
     });
 
-    /* Track PR Meta Data Checkbox Listener */
-    var prMetaDataCheckbox = document.getElementById("checkboxPrMetaData");
-    prMetaDataCheckbox.addEventListener("click", function() {
-            bPrMetaData = prMetaDataCheckbox.checked;
-            console.log("Track PR Meta Data: " + bPrMetaData);
+    /* Tracking Browser Data Listener */
+    var trackBrowserdata = document.getElementById("checkboxBrowserData");
+    trackBrowserdata.addEventListener("click", function() {
+        bTrackingBrowserData = !bTrackingBrowserData;
+            console.log("Tracking Browser Data: " + bTrackingBrowserData);
     });
 
-    /* Track Browser Data Checkbox Listener */
-    var browserDataCheckbox = document.getElementById("checkboxBrowserData");
-    browserDataCheckbox.addEventListener("click", function () {
-            bBrowserData = browserDataCheckbox.checked;
-            console.log("Track Browser Data: " + bBrowserData);
+    /*HASHING*/
+    /* Hashing Mouse Position Listener */
+    var hashMousePos = document.getElementById("checkboxHashUsername");
+    hashMousePos.addEventListener("click", function() {
+        bHashUsername = !bHashUsername;
+        console.log("Hash Mouse Position: " + bTrackingMousePos);
+    });
+
+    /* Hashing Screen Resolution Listener */
+    var hashScreenRes = document.getElementById("checkboxHashMousPos");
+    hashScreenRes.addEventListener("click", function() {
+        bHashMousePos = !bHashMousePos;
+        console.log("Hash Mouse Positions: " + bTrackingScreenRes);
+    });
+
+    /* Hashing Page Resolution Listener */
+    var hashPageRes = document.getElementById("checkboxHashRes");
+    hashPageRes.addEventListener("click", function() {
+        bHashResolutions =  !bHashResolutions;
+        console.log("Hash Resolutions: " + bTrackingPageRes);
+    });
+
+    /* Hashing Keystrokes Listener */
+    var hashKeyStrokes = document.getElementById("checkboxHashKeystrokes");
+    hashKeyStrokes.addEventListener("click", function() {
+        bHashKeystrokes = !bHashKeystrokes;
+        console.log("Hash Keystrokes: " + bTrackingKeystrokes);
+    });
+
+    /* Hashing PR Metadata Listener */
+    var hashPRMeta = document.getElementById("checkboxHashPRData");
+    hashPRMeta.addEventListener("click", function() {
+        bHashPRMetaData = !bHashPRMetaData;
+        console.log("Hash Pull Request Data: " + bTrackingPRMetaData);
+    });
+
+    /* Hashing Browser Data Listener */
+    var hashBrowserdata = document.getElementById("checkboxHashBrowserData");
+    hashBrowserdata.addEventListener("click", function() {
+        bHashBrowserData = !bHashBrowserData;
+        console.log("Hash Browser Data: " + bTrackingBrowserData);
     });
 });
