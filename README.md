@@ -30,6 +30,8 @@ A few commands can be executed using gulp:
 - *Compile* convert typescript to javascript
 - *Test*: Run the test suite
 
+You can view the code coverage as measured in `target/assets/unit-test-coverage/html-report`
+
 ### Using the result
 Load the `target` folder in chrome:
 - Go to `extensions` (or your regional equivalent)
