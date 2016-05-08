@@ -40,6 +40,7 @@ describe('RESTFul API requests', () => {
             this.open = function() {};
             this.setRequestHeader = function() {};
             this.send = function() {};
+            // Force success
             this.status = 200;
         }
         
@@ -55,6 +56,7 @@ describe('RESTFul API requests', () => {
             this.open = function() {};
             this.setRequestHeader = function() {};
             this.send = function() {};
+            // Force failure
             this.status = 201;
         }
         
