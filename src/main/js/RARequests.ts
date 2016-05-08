@@ -1,9 +1,12 @@
 /**
  * Created by Cas on 23-4-2016.
  */
-class RARequests implements Requests {
+export class RARequests implements Requests {
 
     api_location: string;
+    table: string;
+    data: Object;
+    send: boolean;
 
 
     /**
@@ -12,14 +15,18 @@ class RARequests implements Requests {
      */
     constructor(url: string) {
         this.api_location = url;
+        this.send = false;
     }
 
     /**
      * Sends the username to the database.
      * @param userData - An enforced JSON type for the storage of the username.
      */
-    sendUserName(userData: UserJSON): void {
-        this.sendRequest("users", userData);
+    public sendUserName(userData: UserJSON): void {
+        this.send = false;
+        this.table = "users";
+        this.data = userData;
+        this.sendRequest();
     }
 
     /**
@@ -27,19 +34,21 @@ class RARequests implements Requests {
      * @param table - The table to put the information in.
      * @param data - The data in JSON format.
      */
-    sendRequest(table: string, data: Object): void {
+     sendRequest(): void {
         if(this.api_location == null) {
             console.error("No location for the restful api is known.")
             return;
         }
 
         var xmlHTTP = new XMLHttpRequest();
-        xmlHTTP.open("POST", this.api_location + table, true);
+        xmlHTTP.open("POST", this.api_location + this.table, true);
         xmlHTTP.setRequestHeader("Content-Type", "application/json");
-        xmlHTTP.send(JSON.stringify(data));
+        xmlHTTP.send(JSON.stringify(this.data));
 
         if(xmlHTTP.status != 200) {
             console.error("An error occurred while sending data to the server: " + xmlHTTP.status);
+        } else {
+            this.send = true;
         }
     }
 }
