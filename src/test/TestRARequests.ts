@@ -7,9 +7,9 @@ import {RARequests} from '../main/js/RARequests';
 
 describe('RESTFul API requests', () => {
 
-    it('The constructor returns an object', () => expect(new RARequests("location")).not.toBeNull(true));
+    it('should create a constructor', () => expect(new RARequests("location")).not.toBeNull(true));
 
-    it('The sendUsername has been successfully called', function() {
+    it('should trigger the sendRequest when calling sendUsername', function() {
 
         var rarObject = new RARequests("someLocation");
         spyOn(rarObject, "sendRequest").and.callFake(function() {
@@ -23,7 +23,7 @@ describe('RESTFul API requests', () => {
         expect(rarObject.getSend()).toEqual(true);
     });
 
-    it('The api_location was not set', function() {
+    it('should have an api_location set', function() {
 
         var rarObject = new RARequests(null);
         rarObject.sendUserName({"url":"someURL", "username":"someUsername"});

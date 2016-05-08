@@ -68,7 +68,7 @@ export class RARequests implements Requests {
      */
      sendRequest(): void {
         if(this.api_location == null) {
-            console.error("No location for the restful api is known.")
+            console.error("No location for the restful api is known.");
             return;
         }
 
