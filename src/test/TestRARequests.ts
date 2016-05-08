@@ -7,7 +7,10 @@ import {RARequests} from '../main/js/RARequests';
 
 describe('RESTFul API requests', () => {
 
-    it('should create a constructor', () => expect(new RARequests("location")).not.toBeNull(true));
+    it('should create an object', function() {
+        expect(new RARequests("location")).not.toBeNull(true);
+        expect(new RARequests("location").api_location).toEqual("location");
+    });
 
     it('should trigger the sendRequest when calling sendUsername', function() {
 
