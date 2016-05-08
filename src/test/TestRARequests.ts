@@ -13,14 +13,14 @@ describe('RESTFul API requests', () => {
 
         var rarObject = new RARequests("someLocation");
         spyOn(rarObject, "sendRequest").and.callFake(function() {
-            rarObject.send = true;
+            rarObject.setSend(true);
         });
 
         rarObject.sendUserName({"url":"someURL", "username":"someUsername"});
 
-        expect(rarObject.table).toEqual("users");
-        expect(rarObject.data).toEqual({"url":"someURL", "username":"someUsername"});
-        expect(rarObject.send).toEqual(true);
+        expect(rarObject.getTable()).toEqual("users");
+        expect(rarObject.getData()).toEqual({"url":"someURL", "username":"someUsername"});
+        expect(rarObject.getSend()).toEqual(true);
     });
 
     it('The api_location was not set', function() {
@@ -28,6 +28,6 @@ describe('RESTFul API requests', () => {
         var rarObject = new RARequests(null);
         rarObject.sendUserName({"url":"someURL", "username":"someUsername"});
 
-        expect(rarObject.send).toEqual(false);
+        expect(rarObject.getSend()).toEqual(false);
     });
 });

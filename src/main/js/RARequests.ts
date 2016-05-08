@@ -4,9 +4,9 @@
 export class RARequests implements Requests {
 
     api_location: string;
-    table: string;
-    data: Object;
-    send: boolean;
+    private table: string;
+    private data: Object;
+    private send: boolean;
 
 
     /**
@@ -16,6 +16,38 @@ export class RARequests implements Requests {
     constructor(url: string) {
         this.api_location = url;
         this.send = false;
+    }
+
+    /**
+     * Returns the boolean value of send.
+     * @returns {boolean}
+     */
+    public getSend(): boolean {
+        return this.send;
+    }
+
+    /**
+     * Returns the string value of table.
+     * @returns string
+     */
+    public getTable(): string {
+        return this.table;
+    }
+
+    /**
+     * Returns the Object value of data.
+     * @returns Object
+     */
+    public getData(): Object {
+        return this.data;
+    }
+
+    /**
+     * Sets the value of send (For test purposes).
+     * @param value - The boolean value for send.
+     */
+    public setSend(value: boolean): void {
+        this.send = value;
     }
 
     /**
