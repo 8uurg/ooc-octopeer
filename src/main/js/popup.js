@@ -1,84 +1,80 @@
 /*This scripts ensures scripts can be used from the popup*/
 
 /*Variables to keep track of user settings*/
-var bTrackingMousePos       = false;
-var bTrackingScreenRes      = false;
-var bTrackingPageRes        = false;
-var bTrackingKeystrokes     = false;
-var bTrackingPRMetaData     = false;
-var bTrackingBrowserData    = false;
-var bHashUsername           = true;
-var bHashKeystrokes         = true;
-var bHashPRMetaData         = true;
-var bHashBrowserData        = true;
-
-
-/*TODO: Initialize variables by loading user settings*/
+var bTrackingMousePos       = localStorage.getItem("trackMousePos")    || false;
+var bTrackingScreenRes      = localStorage.getItem("trackScreenRes")   || false;
+var bTrackingPageRes        = localStorage.getItem("trackPageRes")     || false;
+var bTrackingKeystrokes     = localStorage.getItem("trackKeystrokes")  || false;
+var bTrackingPRMetaData     = localStorage.getItem("trackPRMetaData")  || false;
+var bTrackingBrowserData    = localStorage.getItem("trackBrowserData") || false;
+var bHashUsername           = localStorage.getItem("hashUsername")     || false;
+var bHashPRMetaData         = localStorage.getItem("hashPRMetaData")   || false;
+var bHashBrowserData        = localStorage.getItem("hashBrowserData")  || false;
 
 document.addEventListener("DOMContentLoaded", function() {
-
     /*TRACKING*/
     /* Tracking Mouse Position Listener */
     var trackMousePos = document.getElementById("checkboxMousPos");
     trackMousePos.addEventListener("click", function() {
         bTrackingMousePos = !bTrackingMousePos;
-            console.log("Tracking Mouse Position: " + bTrackingMousePos);
+        localStorage.setItem("trackMousePos", bTrackingMousePos);
+        console.log("Tracking Mouse Position: " + bTrackingMousePos);
     });
 
     /* Tracking Screen Resolution Listener */
     var trackScreenRes = document.getElementById("checkboxScreenRes");
     trackScreenRes.addEventListener("click", function() {
         bTrackingScreenRes = !bTrackingScreenRes;
-            console.log("Tracking Screen Resolution: " + bTrackingScreenRes);
+        localStorage.setItem("trackScreenRes", trackScreenRes);
+        console.log("Tracking Screen Resolution: " + bTrackingScreenRes);
     });
 
     /* Tracking Page Resolution Listener */
     var trackPageRes = document.getElementById("checkboxPageRes");
     trackPageRes.addEventListener("click", function() {
         bTrackingPageRes =  !bTrackingPageRes;
-            console.log("Tracking Page Resolution: " + bTrackingPageRes);
+        localStorage.setItem("trackPageRes", bTrackingPageRes);
+        console.log("Tracking Page Resolution: " + bTrackingPageRes);
     });
 
     /* Tracking Keystrokes Listener */
     var trackKeyStrokes = document.getElementById("checkboxKeystrokes");
     trackKeyStrokes.addEventListener("click", function() {
         bTrackingKeystrokes = !bTrackingKeystrokes;
-            console.log("Tracking Keystrokes: " + bTrackingKeystrokes);
+        localStorage.setItem("trackKeystrokes", bTrackingKeystrokes);
+        console.log("Tracking Keystrokes: " + bTrackingKeystrokes);
     });
 
     /* Tracking PR Metadata Listener */
     var trackPRMeta = document.getElementById("checkboxPrMetaDta");
     trackPRMeta.addEventListener("click", function() {
         bTrackingPRMetaData = !bTrackingPRMetaData;
-            console.log("Tracking Pull Request Data: " + bTrackingPRMetaData);
+        localStorage.setItem("trackPRMetaData", bTrackingPRMetaData);
+        console.log("Tracking Pull Request Data: " + bTrackingPRMetaData);
     });
 
     /* Tracking Browser Data Listener */
     var trackBrowserdata = document.getElementById("checkboxBrowserData");
     trackBrowserdata.addEventListener("click", function() {
         bTrackingBrowserData = !bTrackingBrowserData;
-            console.log("Tracking Browser Data: " + bTrackingBrowserData);
+        localStorage.setItem("trackBrowserData", bTrackingBrowserData);
+        console.log("Tracking Browser Data: " + bTrackingBrowserData);
     });
 
     /*HASHING*/
     /* Hashing Username Listener */
-    var hashMousePos = document.getElementById("checkboxHashUsername");
-    hashMousePos.addEventListener("click", function() {
+    var hashUsername = document.getElementById("checkboxHashUsername");
+    hashUsername.addEventListener("click", function() {
         bHashUsername = !bHashUsername;
+        localStorage.setItem("hashUsername", bHashUsername);
         console.log("Hash Mouse Position: " + bTrackingMousePos);
-    });
-
-    /* Hashing Keystrokes Listener */
-    var hashKeyStrokes = document.getElementById("checkboxHashKeystrokes");
-    hashKeyStrokes.addEventListener("click", function() {
-        bHashKeystrokes = !bHashKeystrokes;
-        console.log("Hash Keystrokes: " + bTrackingKeystrokes);
     });
 
     /* Hashing PR Metadata Listener */
     var hashPRMeta = document.getElementById("checkboxHashPRData");
     hashPRMeta.addEventListener("click", function() {
         bHashPRMetaData = !bHashPRMetaData;
+        localStorage.setItem("hashPRMetaData", bHashPRMetaData);
         console.log("Hash Pull Request Data: " + bTrackingPRMetaData);
     });
 
@@ -86,6 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var hashBrowserdata = document.getElementById("checkboxHashBrowserData");
     hashBrowserdata.addEventListener("click", function() {
         bHashBrowserData = !bHashBrowserData;
+        localStorage.setItem("hashBrowserData", bHashBrowserData);
         console.log("Hash Browser Data: " + bTrackingBrowserData);
     });
 });
