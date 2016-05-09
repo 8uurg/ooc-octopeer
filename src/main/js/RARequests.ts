@@ -73,14 +73,17 @@ export class RARequests implements Requests {
         }
 
         var xmlHTTP = new XMLHttpRequest();
+        var currentSpot: RARequests = this;
         xmlHTTP.open("POST", this.api_location + this.table, true);
         xmlHTTP.setRequestHeader("Content-Type", "application/json");
-        xmlHTTP.send(JSON.stringify(this.data));
+        xmlHTTP.onreadystatechange = function() {
+            if(xmlHTTP.status != 200) {
+                console.error("An error occurred while sending data to the server: " + xmlHTTP.status);
+            } else {
 
-        if(xmlHTTP.status != 200) {
-            console.error("An error occurred while sending data to the server: " + xmlHTTP.status);
-        } else {
-            this.send = true;
+                currentSpot.send = true;
+            }
         }
+        xmlHTTP.send(JSON.stringify(this.data));
     }
 }

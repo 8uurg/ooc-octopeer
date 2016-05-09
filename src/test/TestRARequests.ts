@@ -39,7 +39,8 @@ describe('RESTFul API requests', () => {
         global.XMLHttpRequest = function() {
             this.open = function() {};
             this.setRequestHeader = function() {};
-            this.send = function() {};
+            this.onreadystatechange = function() {};
+            this.send = function() {this.onreadystatechange()};
             // Force success
             this.status = 200;
         }
@@ -55,7 +56,8 @@ describe('RESTFul API requests', () => {
         global.XMLHttpRequest = function() {
             this.open = function() {};
             this.setRequestHeader = function() {};
-            this.send = function() {};
+            this.onreadystatechange = function() {};
+            this.send = function() {this.onreadystatechange()};
             // Force failure
             this.status = 201;
         }
