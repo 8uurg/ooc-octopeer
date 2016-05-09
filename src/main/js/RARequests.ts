@@ -80,7 +80,6 @@ export class RARequests implements Requests {
             if(xmlHTTP.status != 200) {
                 console.error("An error occurred while sending data to the server: " + xmlHTTP.status);
             } else {
-
                 currentSpot.send = true;
             }
         }
