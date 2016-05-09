@@ -1,5 +1,4 @@
 ///<reference path="../../typings/main.d.ts" />
-import {MouseTracker} from '../main/js/mouseTracker';
 
 // Nullroute the default creation of the mousetracker.
 declare var global: any;
@@ -9,6 +8,7 @@ var original_setInterval = global.setInterval;
 global.setInterval = function() {};
 
 // Actual imports.
+import {MouseTracker} from '../main/js/mouseTracker';
 global.setInterval = original_setInterval;
 
 describe("The MouseTracker", function() {
