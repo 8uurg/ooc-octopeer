@@ -8,10 +8,10 @@ interface UserJSON {
     /**
      * The url to the repository of the user.
      */
-    url:        string;
+    url: string;
 
     /**
      * The username of the user on BitBucket.
      */
-    username:   string;
+    username: string;
 }
