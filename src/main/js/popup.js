@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
     /*TRACKING*/
     /* Tracking Mouse Position Listener */
     var trackMousePos = document.getElementById("checkboxMousPos");
+    trackMousePos.checked = bTrackingMousePos === "true";
     trackMousePos.addEventListener("click", function() {
         bTrackingMousePos = !bTrackingMousePos;
         localStorage.setItem("trackMousePos", bTrackingMousePos);
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     /* Tracking Screen Resolution Listener */
     var trackScreenRes = document.getElementById("checkboxScreenRes");
+    trackScreenRes.checked = bTrackingScreenRes === "true";
     trackScreenRes.addEventListener("click", function() {
         bTrackingScreenRes = !bTrackingScreenRes;
         localStorage.setItem("trackScreenRes", trackScreenRes);
@@ -31,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     /* Tracking Page Resolution Listener */
     var trackPageRes = document.getElementById("checkboxPageRes");
+    trackPageRes.checked = bTrackingPageRes === "true";
     trackPageRes.addEventListener("click", function() {
         bTrackingPageRes =  !bTrackingPageRes;
         localStorage.setItem("trackPageRes", bTrackingPageRes);
@@ -39,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     /* Tracking Keystrokes Listener */
     var trackKeyStrokes = document.getElementById("checkboxKeystrokes");
+    trackKeyStrokes.checked = bTrackingKeystrokes === "true";
     trackKeyStrokes.addEventListener("click", function() {
         bTrackingKeystrokes = !bTrackingKeystrokes;
         localStorage.setItem("trackKeystrokes", bTrackingKeystrokes);
@@ -47,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     /* Tracking PR Metadata Listener */
     var trackPRMeta = document.getElementById("checkboxPrMetaDta");
+    trackPRMeta.checked = bTrackingPRMetaData === "true";
     trackPRMeta.addEventListener("click", function() {
         bTrackingPRMetaData = !bTrackingPRMetaData;
         localStorage.setItem("trackPRMetaData", bTrackingPRMetaData);
@@ -55,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     /* Tracking Browser Data Listener */
     var trackBrowserdata = document.getElementById("checkboxBrowserData");
+    trackBrowserdata.checked = bTrackingBrowserData === "true";
     trackBrowserdata.addEventListener("click", function() {
         bTrackingBrowserData = !bTrackingBrowserData;
         localStorage.setItem("trackBrowserData", bTrackingBrowserData);
@@ -64,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
     /*HASHING*/
     /* Hashing Username Listener */
     var hashUsername = document.getElementById("checkboxHashUsername");
+    hashUsername.checked = bHashUsername === "true";
     hashUsername.addEventListener("click", function() {
         bHashUsername = !bHashUsername;
         localStorage.setItem("hashUsername", bHashUsername);
@@ -72,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     /* Hashing PR Metadata Listener */
     var hashPRMeta = document.getElementById("checkboxHashPRData");
+    hashPRMeta.checked = bHashPRMetaData === "true";
     hashPRMeta.addEventListener("click", function() {
         bHashPRMetaData = !bHashPRMetaData;
         localStorage.setItem("hashPRMetaData", bHashPRMetaData);
@@ -80,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     /* Hashing Browser Data Listener */
     var hashBrowserdata = document.getElementById("checkboxHashBrowserData");
+    hashBrowserdata = bHashBrowserData === "true";
     hashBrowserdata.addEventListener("click", function() {
         bHashBrowserData = !bHashBrowserData;
         localStorage.setItem("hashBrowserData", bHashBrowserData);
