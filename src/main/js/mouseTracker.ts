@@ -1,7 +1,6 @@
-
 export class MouseTracker {
-    public cursorX: number = 0;
-    public cursorY: number = 0;
+    private cursorX: number = 0;
+    private cursorY: number = 0;
     
     /**
      * Register the mouse tracker to the document.
@@ -9,6 +8,7 @@ export class MouseTracker {
     public register() {
         // Store `this` for usage in functions.
         var current: MouseTracker = this;
+        
         /**
          * Update the mouse coordinates every time the cursor moves.
          * @param event object that contains the required cursor information.
@@ -17,6 +17,7 @@ export class MouseTracker {
             current.cursorX = event.pageX;
             current.cursorY = event.pageY;
         });
+        
         setInterval(function(){current.logMousePosition()}, 1000);
     }
     
@@ -34,7 +35,6 @@ export class MouseTracker {
     sendData(cursorX: number, cursorY: number) {
         // TODO: Implement this.
     }
-
 }
 
 // Register the mousetracker to the current document.

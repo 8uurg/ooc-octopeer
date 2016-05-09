@@ -1,12 +1,14 @@
 ///<reference path="../../typings/main.d.ts" />
+import {MouseTracker} from '../main/js/mouseTracker';
+
 // Nullroute the default creation of the mousetracker.
 declare var global: any;
 global.document = {};
 global.document.addEventListener = function() {};
 var original_setInterval = global.setInterval;
 global.setInterval = function() {};
+
 // Actual imports.
-import {MouseTracker} from '../main/js/mouseTracker';
 global.setInterval = original_setInterval;
 
 describe("The MouseTracker", function() {
@@ -35,6 +37,7 @@ describe("The MouseTracker", function() {
         spyOn(tracker, "sendData");
         jasmine.clock().tick(1000);
         expect(tracker.sendData).toHaveBeenCalledWith(0, 0);
+        
         // Change cursor position.
         eventCall({
             pageX: 50,
