@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     /* Hashing Browser Data Listener */
     var hashBrowserdata = document.getElementById("checkboxHashBrowserData");
-    hashBrowserdata = bHashBrowserData === "true";
+    hashBrowserdata.checked = bHashBrowserData === "true";
     hashBrowserdata.addEventListener("click", function() {
         bHashBrowserData = !bHashBrowserData;
         localStorage.setItem("hashBrowserData", bHashBrowserData);
