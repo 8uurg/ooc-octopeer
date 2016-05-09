@@ -26,7 +26,7 @@ const tst = ts.createProject({
 
 gulp.task('lint', function() {
     // Add linting tasks here.
-})
+});
 
 gulp.task('compile', ['clean'], function() {
     return gulp.src('./src/**').
