@@ -31,12 +31,12 @@ export class UserIdTracker {
      * @returns {CurrentUserData} The data about the user and the repo.
      */
     static readUserInformation(bodyAttributes: NamedNodeMap): CurrentUserData {
-        if (!(bodyAttributes.hasOwnProperty('data-current-repo') && bodyAttributes.hasOwnProperty("data-current-user"))) {
+        if (!(bodyAttributes.hasOwnProperty("data-current-repo") && bodyAttributes.hasOwnProperty("data-current-user"))) {
             return undefined;
         }
 
-        let currentRepositoryData:Repository = JSON.parse(bodyAttributes.getNamedItem("data-current-repo").value);
-        let currentUserData:UserData = JSON.parse(bodyAttributes.getNamedItem("data-current-user").value);
+        let currentRepositoryData: Repository = JSON.parse(bodyAttributes.getNamedItem("data-current-repo").value);
+        let currentUserData: UserData = JSON.parse(bodyAttributes.getNamedItem("data-current-user").value);
 
         return {userId: currentUserData.displayName, repository: currentRepositoryData.fullslug};
     }
@@ -44,7 +44,7 @@ export class UserIdTracker {
     /**
      * When the page has loaded the user information is loaded and stored.
      */
-    //TODO: Send data to database
+    // TODO: Send data to database
     read(doc: Document): void {
         let userInfo = UserIdTracker.readUserInformation(doc.getElementsByTagName("body")[0].attributes);
         console.log("The user " + userInfo.userId + " is in repository " + userInfo.repository);

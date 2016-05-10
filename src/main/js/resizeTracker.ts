@@ -14,9 +14,8 @@ function pass() {
 }
 
 // Registers all resize events (even during resize)
-window.addEventListener('resize', function (e) {
-    last =
-        {
+window.addEventListener("resize", function (e) {
+    last = {
             width: window.innerWidth,
             height: window.innerHeight,
             timestamp: e.timeStamp

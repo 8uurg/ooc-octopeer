@@ -1,5 +1,5 @@
 ///<reference path="../../typings/main.d.ts" />
-import {Reader} from '../main/js/reader';
+import {Reader} from "../main/js/reader";
 
 /**
  * This is an example file on how to test.
@@ -11,5 +11,5 @@ describe("Reader", function() {
     });
     it("Should not return Hi", function() {
         expect((new Reader).flip()).not.toBe("Hi");
-    })
+    });
 });
