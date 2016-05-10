@@ -16,6 +16,7 @@
     "gulp-util": "^3.0.7",
     "istanbul": "^0.4.3",
     "merge-stream": "^1.0.0",
+    "mock-browser": "^0.92.11",
     "run-sequence": "^1.1.5",
     "typings": "^0.8.1"
   }
