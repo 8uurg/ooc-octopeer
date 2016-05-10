@@ -9,7 +9,7 @@ const sourcemaps    = require('gulp-sourcemaps');
 const lazypipe      = require('lazypipe');
 const remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
 const tslint        = require('gulp-tslint');
-
+const replace       = require('gulp-replace');
 
 const fail = function() {
     util.log("A component which does not force fail, failed.");
@@ -85,7 +85,9 @@ gulp.task('test-report', ['test-run'], function() {
 gulp.task('test', ['test-report']); 
 
 gulp.task('build', ['test'], function() {
-    return gulp.src('./target/src/main/**').pipe(gulp.dest('./dest'));
+    return gulp.src('./target/src/main/**')
+        .pipe(gulpif("**/*.js", replace(/.*exports[^\n;]*(;|\n)/g, "")))
+        .pipe(gulp.dest('./dest'));
 });
 
 gulp.task('clean', function() {
