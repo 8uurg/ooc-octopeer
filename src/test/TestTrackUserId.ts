@@ -53,4 +53,22 @@ describe("UserIdTracker.ts tests", () => {
         var attributes = body.attributes;
         expect(UserIdTracker.readUserInformation(attributes)).toBe(undefined);
     });
+
+    it("readUserData from a repository page when a user is logged in", () => {
+        var body = <Element> document.getElementsByTagName("body")[0];
+        body.setAttribute("data-current-repo", JSON.stringify(sampleRepoData));
+        body.setAttribute("data-current-user", JSON.stringify(sampleUserData));
+        var attributes = body.attributes;
+        expect(UserIdTracker.readUserInformation(attributes)).toEqual({
+            userId: sampleUserData.displayName,
+            repository : sampleRepoData.fullslug
+        });
+    });
+
+    it("Read information from the complete page", () => {
+        var body = <Element> document.getElementsByTagName("body")[0];
+        body.setAttribute("data-current-repo", JSON.stringify(sampleRepoData));
+        body.setAttribute("data-current-user", JSON.stringify(sampleUserData));
+        new UserIdTracker().read(document);
+    });
 });
