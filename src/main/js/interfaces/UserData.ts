@@ -1,6 +1,6 @@
 /**
  * Created by larsstegman on 28-04-16.
- * This interface is used to convert JSON Objects which contain user information, to a definite type.
+ * This interface is used to convert structured Objects which contain user information, to a definite type.
  */
 interface UserData {
 

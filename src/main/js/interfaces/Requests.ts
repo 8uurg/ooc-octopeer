@@ -11,8 +11,6 @@ interface Requests {
 
     /**
      * Sends a request with data to the api_location with the specified table.
-     * @param table - The table the data has to be stored in.
-     * @param data - The data to be sent in JSON format.
      */
-    sendRequest(table: string, data: Object): void;
+    sendRequest(): void;
 }

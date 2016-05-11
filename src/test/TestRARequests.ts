@@ -1,5 +1,5 @@
 ///<reference path="../../typings/main.d.ts" />
-import {RARequests} from '../main/js/RARequests';
+import {RARequests} from '../main/js/RARequestsSender';
 
 /**
  * Created by Cas on 8-5-2016.
