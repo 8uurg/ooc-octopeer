@@ -7,7 +7,6 @@ global.window = {
 import {ResizeTracker} from "../main/js/resizeTracker";
 
 describe("The ResizeTracker", function() {
-
     beforeEach(function () {
         jasmine.clock().install();
     });

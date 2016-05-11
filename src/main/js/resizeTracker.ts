@@ -8,6 +8,9 @@ export class ResizeTracker {
     private last: WindowSize = null;
     private timer: number = null;
 
+    /**
+     * Registers and hooks the instance into the environment.
+     */
     public register() {
         const current = this;
         // Registers all resize events (even during resize)
@@ -25,6 +28,9 @@ export class ResizeTracker {
         });
     }
 
+    /**
+     * Sends data - somewhere.
+     */
     sendData(window: WindowSize) {
         // TODO: Send last to collector
         console.log(window);
