@@ -1,11 +1,15 @@
+# Octopeer for Bitbucket
+**Latest Build**
+
 [![wercker status](https://app.wercker.com/status/58d7606deea2e9a573c66d7fd5f57ef4/s "wercker status")](https://app.wercker.com/project/bykey/58d7606deea2e9a573c66d7fd5f57ef4)
 [![Coverage Status](https://coveralls.io/repos/bitbucket/CasBs/ooc-octopeer/badge.svg?branch=develop)](https://coveralls.io/bitbucket/CasBs/ooc-octopeer?branch=develop)
 
-**Last Release**: 
+[![wercker status](https://app.wercker.com/status/58d7606deea2e9a573c66d7fd5f57ef4/m "wercker status")](https://app.wercker.com/project/bykey/58d7606deea2e9a573c66d7fd5f57ef4)
+
+**Latest Release**
+
 [![Coverage Status](https://coveralls.io/repos/bitbucket/CasBs/ooc-octopeer/badge.svg?branch=master)](https://coveralls.io/bitbucket/CasBs/ooc-octopeer?branch=master)
 
-
-# Octopeer for Bitbucket
 
 ## Setting up / building
 Install *NodeJS* from [here](https://nodejs.org)
@@ -30,11 +34,13 @@ npm install
 
 ## Gulp
 A few commands can be executed using gulp:
+
 - *Compile* convert typescript to javascript
 - *Test*: Run the test suite
 
 ### Using the result
-Load the `target` folder in chrome:
+Load the `dest` folder in chrome:
+
 - Go to `extensions` (or your regional equivalent)
 - Make sure `Developer Mode` is enabled
 - Load unpacked extension
@@ -58,6 +64,3 @@ Load the `target` folder in chrome:
 - Product Planning V1.0, 03-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/f1625bae0961d75aebd905517f3f421888117857/doc/Product%20Planning%20V1.0.pdf?fileviewer=file-view-default)
 - Product Vision V1.0, 03-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/f1625bae0961d75aebd905517f3f421888117857/doc/Product%20Vision%20V1.0.pdf?fileviewer=file-view-default)
 - Tooling Choices Motivation, 06-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/f1625bae0961d75aebd905517f3f421888117857/doc/Tooling%20Choices%20Clarification.pdf?fileviewer=file-view-default)
-
-# Detailed repository information #
-[![wercker status](https://app.wercker.com/status/58d7606deea2e9a573c66d7fd5f57ef4/m "wercker status")](https://app.wercker.com/project/bykey/58d7606deea2e9a573c66d7fd5f57ef4)
