@@ -1,8 +1,11 @@
 /*This script ensures scripts can be used from the popup*/
 
+/*
+ * This function handles the status of the checkboxes and stores changes made by users locally.
+ */
 function registerCheckbox(storagename: string, checkboxId: string) {
-    var checkbox = <HTMLInputElement> document.getElementById(checkboxId);
-    checkbox.checked =  JSON.parse(localStorage.getItem(storagename)) || false;
+    let checkbox = <HTMLInputElement> document.getElementById(checkboxId);
+    checkbox.checked = JSON.parse(localStorage.getItem(storagename)) || false;
 
     checkbox.addEventListener("click", function() {
         localStorage.setItem(storagename, this.checked);
