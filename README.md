@@ -1,5 +1,5 @@
 [![wercker status](https://app.wercker.com/status/58d7606deea2e9a573c66d7fd5f57ef4/s "wercker status")](https://app.wercker.com/project/bykey/58d7606deea2e9a573c66d7fd5f57ef4)
-[![Coverage Status](https://coveralls.io/repos/bitbucket/CasBs/ooc-octopeer/badge.svg?develop)](https://coveralls.io/bitbucket/CasBs/ooc-octopeer?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/bitbucket/CasBs/ooc-octopeer/badge.svg?branch=develop)](https://coveralls.io/bitbucket/CasBs/ooc-octopeer?branch=develop)
 
 
 
