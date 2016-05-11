@@ -1,9 +1,8 @@
 /**
  * Created by Cas on 23-4-2016.
- * This class lets the caller create an object to send JSON requests to the restful api, which will on
- * it's turn place the JSON in the database.
+ * This class lets gives the possibility to send JSON requests to the restful api.
  */
-export class RARequests implements Requests {
+export class RARequestsSender implements Requests {
 
     api_location: string;
     private table: string;
