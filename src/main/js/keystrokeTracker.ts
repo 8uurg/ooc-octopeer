@@ -88,4 +88,4 @@ export class KeystrokeTracker {
 }
 
 //Create an instance of the keystroke tracker.
-(new KeystrokeTracker()).register();
+(new KeystrokeTracker).register();
