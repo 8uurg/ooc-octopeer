@@ -1,20 +1,46 @@
-var cursorX: number;
-var cursorY: number;
-
 /**
- * Update the mouse coordinates every time the cursor moves.
- * @param event object that contains the required cursor information.
+ * Provides a tracker that tracks the mouse on the webpage.
  */
-document.addEventListener("mousemove", function(event) {
-    cursorX = event.pageX;
-    cursorY = event.pageY;
-});
+export class MouseTracker {
+    private cursorX: number = 0;
+    private cursorY: number = 0;
 
-/**
- * Log the cursor X and  Y position in the console.
- */
-function logMousePosition() {
-    console.log("Mouse position at: " + cursorX + ", " + cursorY);
+    /**
+     * Register the mouse tracker to the document.
+     */
+    public register() {
+        // Store `this` for usage in functions.
+        const _this: MouseTracker = this;
+
+        /**
+         * Update the mouse coordinates every time the cursor moves.
+         * @param event object that contains the required cursor information.
+         */
+        document.addEventListener("mousemove", function(event) {
+            _this.cursorX = event.pageX;
+            _this.cursorY = event.pageY;
+        });
+
+        setInterval(function(){ _this.logMousePosition(); }, 1000);
+    }
+
+    /**
+     * Logs the current mouse position and sends it to the right data source.
+     */
+    logMousePosition() {
+        this.sendData(this.cursorX, this.cursorY);
+        console.log("Mouse position at: " + this.cursorX + ", " + this.cursorY);
+    }
+
+    /**
+     * Send data to centralized collector.
+     * @param cursorX The recorded x position of the cursor.
+     * @param cursorY The recorded y position of the cursor.
+     */
+    sendData(cursorX: number, cursorY: number) {
+        // TODO: Implement this.
+    }
 }
 
-setInterval(logMousePosition, 1000);
+// Register the mousetracker to the current document.
+(new MouseTracker).register();
