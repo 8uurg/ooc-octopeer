@@ -7,20 +7,20 @@ export class MouseTracker {
      */
     public register() {
         // Store `this` for usage in functions.
-        var current: MouseTracker = this;
-        
+        const _this: MouseTracker = this;
+
         /**
          * Update the mouse coordinates every time the cursor moves.
          * @param event object that contains the required cursor information.
          */
         document.addEventListener('mousemove', function(event) {
-            current.cursorX = event.pageX;
-            current.cursorY = event.pageY;
+            _this.cursorX = event.pageX;
+            _this.cursorY = event.pageY;
         });
-        
-        setInterval(function(){current.logMousePosition()}, 1000);
+
+        setInterval(function(){_this.logMousePosition()}, 1000);
     }
-    
+
     /**
      * Logs the current mouse position and sends it to the right data source.
      */
@@ -28,7 +28,7 @@ export class MouseTracker {
         this.sendData(this.cursorX, this.cursorY);
         console.log("Mouse position at: " + this.cursorX + ", " + this.cursorY);
     }
-    
+
     /**
      * Send data to centralized collector.
      */

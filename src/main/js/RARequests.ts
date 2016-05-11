@@ -5,7 +5,6 @@ class RARequests {
 
     api_location: string;
 
-
     /**
      * The constructor for setting the location of the database.
      * @param url - The URL of the RESTful API to send the data to.
@@ -20,17 +19,17 @@ class RARequests {
      * @param data - The data in JSON format.
      */
     sendRequest(table: string, data: Object) {
-        if(this.api_location == null) {
-            console.error("No location for the restful api is known.")
+        if (this.api_location == null) {
+            console.error("No location for the restful api is known.");
             return;
         }
 
-        var xmlHTTP = new XMLHttpRequest();
+        let xmlHTTP = new XMLHttpRequest();
         xmlHTTP.open("POST", this.api_location + table, true);
         xmlHTTP.setRequestHeader("Content-Type", "application/json");
         xmlHTTP.send(JSON.stringify(data));
 
-        if(xmlHTTP.status != 200) {
+        if (xmlHTTP.status !== 200) {
             console.error("An error occurred while sending data to the server: " + xmlHTTP.status);
         }
     }
