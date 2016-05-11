@@ -4,7 +4,7 @@ import {RARequests} from '../main/js/RARequests';
 /**
  * Created by Cas on 8-5-2016.
  */
-declare var global: any;
+declare let global: any;
 
 describe('RESTFul API requests', () => {
 
@@ -15,7 +15,7 @@ describe('RESTFul API requests', () => {
 
     it('should trigger the sendRequest when calling sendUsername', function() {
 
-        var rarObject = new RARequests("someLocation");
+        let rarObject = new RARequests("someLocation");
         spyOn(rarObject, "sendRequest").and.callFake(function() {
             rarObject.setSend(true);
         });
@@ -28,7 +28,7 @@ describe('RESTFul API requests', () => {
     });
 
     it('should have an api_location set', function() {
-        var rarObject = new RARequests(null);
+        let rarObject = new RARequests(null);
         rarObject.sendUserName({"url":"someURL", "username":"someUsername"});
 
         expect(rarObject.getSend()).toEqual(false);
@@ -44,8 +44,8 @@ describe('RESTFul API requests', () => {
             // Force success
             this.status = 200;
         }
-        
-        var rarObject = new RARequests("Test");
+
+        let rarObject = new RARequests("Test");
         rarObject.sendUserName({"url":"someURL", "username":"someUsername"});
 
         expect(rarObject.getSend()).toBeTruthy();
@@ -61,8 +61,8 @@ describe('RESTFul API requests', () => {
             // Force failure
             this.status = 201;
         }
-        
-        var rarObject = new RARequests("Test");
+
+        let rarObject = new RARequests("Test");
         rarObject.sendUserName({"url":"someURL", "username":"someUsername"});
 
         expect(rarObject.getSend()).toBeFalsy();

@@ -72,8 +72,8 @@ export class RARequests implements Requests {
             return;
         }
 
-        var xmlHTTP = new XMLHttpRequest();
-        var currentSpot: RARequests = this;
+        let xmlHTTP = new XMLHttpRequest();
+        let currentSpot: RARequests = this;
         xmlHTTP.open("POST", this.api_location + this.table, true);
         xmlHTTP.setRequestHeader("Content-Type", "application/json");
         xmlHTTP.onreadystatechange = function() {
