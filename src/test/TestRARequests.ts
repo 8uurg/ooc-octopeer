@@ -14,7 +14,6 @@ describe('RESTFul API requests', function() {
     });
 
     it('should trigger the sendRequest when calling sendUsername', function() {
-
         let rarObject = new RARequests("someLocation");
         spyOn(rarObject, "sendRequest").and.callFake(function() {
             rarObject.setSend(true);
