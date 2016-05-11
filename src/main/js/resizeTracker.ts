@@ -6,7 +6,7 @@ interface WindowSize {
 
 export class ResizeTracker {
     private last: WindowSize = null;
-    private timer: number = null;
+    private timer: any = null;
 
     /**
      * Registers and hooks the instance into the environment.
@@ -18,7 +18,7 @@ export class ResizeTracker {
             current.last = {
                     width: window.innerWidth,
                     height: window.innerHeight,
-                    timestamp: e.timeStamp
+                    timestamp: Date.now()
                 };
 
             // Stop the previous resize event from being sent.

@@ -5,7 +5,7 @@ var cursorY: number;
  * Update the mouse coordinates every time the cursor moves.
  * @param event object that contains the required cursor information.
  */
-document.addEventListener('mousemove', function(event) {
+document.addEventListener("mousemove", function(event) {
     cursorX = event.pageX;
     cursorY = event.pageY;
 });

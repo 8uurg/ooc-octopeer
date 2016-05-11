@@ -42,18 +42,17 @@ const sourcemap_js = lazypipe()
 
 gulp.task('compile', ['clean'], function() {
     return gulp.src('./src/**')
-           .pipe(gulpif('**/*.ts', compile_ts()))
-           .pipe(gulpif('**/*.js', sourcemap_js()))
-           .pipe(gulp.dest('./target/src'));
+        .pipe(gulpif('**/*.ts', compile_ts()))
+        .pipe(gulpif('**/*.js', sourcemap_js()))
+        .pipe(gulp.dest('./target/src'));
 });
 
 gulp.task('lint', function() {
-    // Add linting tasks here.
     return gulp.src('./src/**/*.ts')
-    .pipe(tslint())
-    .pipe(tslint.report("prose", {
-          emitError: false
-        }));
+       .pipe(tslint())
+       .pipe(tslint.report("prose", {
+             emitError: false
+       }));
 });
 
 gulp.task('test-prepare', ['compile'], function() {
