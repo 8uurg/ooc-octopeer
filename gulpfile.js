@@ -76,9 +76,9 @@ gulp.task('test-report', ['test-run'], function() {
     return gulp.src("./target/assets/unit-test-coverage/coverage-final.json")
         .pipe(remapIstanbul({
             reports: {
+                'html': './target/assets/unit-test-coverage/html-report',
                 'json': './target/assets/unit-test-coverage/coverage.json',
-                'lcovonly': './target/assets/unit-test-coverage/lcov.info',
-                'html': './target/assets/unit-test-coverage/html-report'
+                'lcovonly': './target/assets/unit-test-coverage/lcov.info'
             }
         }));
 });
