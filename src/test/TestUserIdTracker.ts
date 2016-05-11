@@ -9,7 +9,9 @@ import {UserIdTracker} from "../main/js/UserIdTracker";
 
 /**
  * A data sample for a repo.
- * @type {{scm: string, readOnly: boolean, mainbranch: {name: string}, language: string, owner: {username: string, isTeam: boolean}, fullslug: string, slug: string, id: number, pygmentsLanguage: string}}
+ * @type {{scm: string, readOnly: boolean, mainbranch: {name: string}, language: string,
+ *          owner: {username: string, isTeam: boolean}, fullslug: string, slug: string, id: number,
+ *          pygmentsLanguage: string}}
  */
 const sampleRepoData = {
     "scm": "git",
@@ -25,7 +27,9 @@ const sampleRepoData = {
 
 /**
  * A data sample for user data.
- * @type {{username: string, displayName: string, uuid: string, firstName: string, avatarUrl: string, lastName: string, isTeam: boolean, isSshEnabled: boolean, isKbdShortcutsEnabled: boolean, id: number, isAuthenticated: boolean}}
+ * @type {{username: string, displayName: string, uuid: string, firstName: string, avatarUrl: string, lastName: string,
+ *          isTeam: boolean, isSshEnabled: boolean, isKbdShortcutsEnabled: boolean, id: number,
+ *          isAuthenticated: boolean}}
  */
 const sampleUserData = {
     "username": "joesixpack",
@@ -52,24 +56,24 @@ describe("UserIdTracker.ts tests", function () {
         global.document = browser.getDocument();
     });
 
-    it("readUserData from non repository page", function () {
+    it("reads data from non repository pages.", function () {
         let attributes = document.getElementsByTagName("body")[0].attributes;
-        expect(new UserIdTracker().readUserInformation(attributes)).toBe(undefined);
+        expect((new UserIdTracker()).readUserInformation(attributes)).toBe(undefined);
     });
 
-    it("readUserData from a repository page when a user is not logged in", function () {
+    it("reads data from a repository page when a user is not logged in", function () {
         let body = <Element> document.getElementsByTagName("body")[0];
-        body.setAttribute("data-current-repo", String(sampleRepoData));
+        body.setAttribute("data-current-repo", JSON.stringify(sampleRepoData));
         let attributes = body.attributes;
-        expect(new UserIdTracker().readUserInformation(attributes)).toBe(undefined);
+        expect((new UserIdTracker()).readUserInformation(attributes)).toBe(undefined);
     });
 
-    it("readUserData from a repository page when a user is logged in", function () {
+    it("reads data from a repository page when a user is logged in", function () {
         let body = <Element> document.getElementsByTagName("body")[0];
         body.setAttribute("data-current-repo", JSON.stringify(sampleRepoData));
         body.setAttribute("data-current-user", JSON.stringify(sampleUserData));
         let attributes = body.attributes;
-        expect(new UserIdTracker().readUserInformation(attributes)).toEqual({
+        expect((new UserIdTracker()).readUserInformation(attributes)).toEqual({
             userId: sampleUserData.displayName,
             repository : sampleRepoData.fullslug
         });

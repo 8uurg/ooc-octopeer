@@ -30,7 +30,6 @@ const tst = ts.createProject({
     noImplicitAny: true
 });
 
-
 const compile_ts = lazypipe()
     .pipe(sourcemaps.init)
     .pipe(function() { 
@@ -43,9 +42,9 @@ const sourcemap_js = lazypipe()
 
 gulp.task('compile', ['clean'], function() {
     return gulp.src('./src/**')
-           .pipe(gulpif('**/*.ts', compile_ts()))
-           .pipe(gulpif('**/*.js', sourcemap_js()))
-           .pipe(gulp.dest('./target/src'));
+        .pipe(gulpif('**/*.ts', compile_ts()))
+        .pipe(gulpif('**/*.js', sourcemap_js()))
+        .pipe(gulp.dest('./target/src'));
 });
 
 gulp.task('lint', function() {

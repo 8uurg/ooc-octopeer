@@ -14,6 +14,9 @@ export interface CurrentUserData {
     repository: string;
 }
 
+/**
+ * This class tracks the user and repository data on BitBucket pages.
+ */
 export class UserIdTracker {
 
     /**
@@ -31,7 +34,8 @@ export class UserIdTracker {
      * @returns {CurrentUserData} The data about the user and the repo.
      */
     readUserInformation(bodyAttributes: NamedNodeMap): CurrentUserData {
-        if (!(bodyAttributes.hasOwnProperty("data-current-repo") && bodyAttributes.hasOwnProperty("data-current-user"))) {
+        if (!(bodyAttributes.hasOwnProperty("data-current-repo")
+            && bodyAttributes.hasOwnProperty("data-current-user"))) {
             return undefined;
         }
 
@@ -41,10 +45,14 @@ export class UserIdTracker {
         return {userId: currentUserData.displayName, repository: currentRepositoryData.fullslug};
     }
 
-    public log(doc: Document): void {
+    /**
+     * Registers the user and repository page data.
+     * @param doc The page document.
+     */
+    log(doc: Document): void {
         let data = this.readUserInformation(doc.getElementsByTagName("body")[0].attributes);
         console.log("User id tracker: " + JSON.stringify(data));
     }
 }
 
-new UserIdTracker().log(document);
+(new UserIdTracker()).log(document);
