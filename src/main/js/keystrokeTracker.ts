@@ -1,4 +1,4 @@
-export class keystrokeTracker {
+export class KeystrokeTracker {
 
     private keyCode: number = 0;
     private keyName: string = "";
@@ -7,7 +7,7 @@ export class keystrokeTracker {
      * Register the keystroke tracker.
      */
     public register() {
-        var current: keystrokeTracker = this;
+        var current: KeystrokeTracker = this;
 
         /**
          * Create an EventListener that fires each time a key is pressed. Log the key that is pressed in the console.
@@ -88,5 +88,5 @@ export class keystrokeTracker {
 }
 
 //Create an instance of the keystroke tracker.
-var tracker = new keystrokeTracker();
+var tracker = new KeystrokeTracker();
 tracker.register();
