@@ -14,7 +14,7 @@ Make sure *gulp* is globally installed, if not: install using npm:
 ```
 npm install -g gulp
 ```
-Also, in order to compile things, get *tsd*:
+Also, in order to compile things, get *typings*:
 ```
 npm install -g typings
 ```
