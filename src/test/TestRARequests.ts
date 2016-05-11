@@ -6,7 +6,7 @@ import {RARequests} from '../main/js/RARequests';
  */
 declare let global: any;
 
-describe('RESTFul API requests', () => {
+describe('RESTFul API requests', function() {
 
     it('should create an object', function() {
         expect(new RARequests("location")).not.toBeNull(true);

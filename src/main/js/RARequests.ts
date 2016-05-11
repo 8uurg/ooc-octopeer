@@ -1,5 +1,7 @@
 /**
  * Created by Cas on 23-4-2016.
+ * This class lets the caller create an object to send JSON requests to the restful api, which will on
+ * it's turn place the JSON in the database.
  */
 export class RARequests implements Requests {
 
@@ -67,7 +69,7 @@ export class RARequests implements Requests {
      * @param data   The data in JSON format.
      */
      sendRequest(): void {
-        if(this.api_location == null) {
+        if (this.api_location === null) {
             console.error("No location for the restful api is known.");
             return;
         }
@@ -77,7 +79,7 @@ export class RARequests implements Requests {
         xmlHTTP.open("POST", this.api_location + this.table, true);
         xmlHTTP.setRequestHeader("Content-Type", "application/json");
         xmlHTTP.onreadystatechange = function() {
-            if(xmlHTTP.status != 200) {
+            if (xmlHTTP.status !== 200) {
                 console.error("An error occurred while sending data to the server: " + xmlHTTP.status);
             } else {
                 currentSpot.send = true;
