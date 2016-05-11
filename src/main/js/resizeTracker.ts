@@ -8,8 +8,11 @@ export class ResizeTracker {
     private last: WindowSize = null;
     private timer: number = null;
 
+    /**
+     * Registers and hooks the instance into the environment.
+     */
     public register() {
-        const current = this;
+        const current: ResizeTracker = this;
         // Registers all resize events (even during resize)
         window.addEventListener("resize", function (e) {
             current.last = {
@@ -17,7 +20,10 @@ export class ResizeTracker {
                     height: window.innerHeight,
                     timestamp: e.timeStamp
                 };
-            clearTimeout(current.timer); // Stop the previous resize event from being sent.
+
+            // Stop the previous resize event from being sent.
+            clearTimeout(current.timer);
+
             current.timer = setTimeout(function() {
                 current.sendData(current.last);
                 current.last = null;
@@ -25,11 +31,13 @@ export class ResizeTracker {
         });
     }
 
+    /**
+     * Sends data - somewhere.
+     */
     sendData(window: WindowSize) {
         // TODO: Send last to collector
         console.log(window);
     }
 }
-
 
 (new ResizeTracker).register();

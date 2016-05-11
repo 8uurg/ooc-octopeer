@@ -7,43 +7,34 @@ global.window = {
 import {ResizeTracker} from "../main/js/resizeTracker";
 
 describe("The ResizeTracker", function() {
-
     beforeEach(function () {
         jasmine.clock().install();
+        this.tracker = new ResizeTracker();
+        this.ev = <(e: any) => void> null;
+        let here = this;
+        global.window = {
+            addEventListener: function(eventName: string, callback: (e: any) => void) {
+                here.ev = callback;
+            },
+            innerWidth: 400,
+            innerHeight: 500
+        };
+       this.tracker.register();
     });
 
     it("should not start sending without being triggered first.", function() {
-       let tracker = new ResizeTracker();
-       let ev: (e: any) => void = null;
-       global.window = {
-           addEventListener: function(eventName: string, callback: (e: any) => void) {
-               ev = callback;
-           }
-       };
-       tracker.register();
-       this.ev = ev;
        spyOn(this, "ev");
        jasmine.clock().tick(5000);
        expect(this.ev).not.toHaveBeenCalled();
     });
 
     it("should send a resize if the screen got resized.", function() {
-       let tracker = new ResizeTracker();
-       let ev: (e: any) => void = null;
-       global.window = {
-           addEventListener: function(eventName: string, callback: (e: any) => void) {
-               ev = callback;
-           },
-           innerWidth: 400,
-           innerHeight: 500
-       };
-       tracker.register();
-       spyOn(tracker, "sendData");
-       ev({
+       spyOn(this.tracker, "sendData");
+       this.ev({
            timeStamp: 450
        });
        jasmine.clock().tick(400);
-       expect(tracker.sendData).toHaveBeenCalledWith({
+       expect(this.tracker.sendData).toHaveBeenCalledWith({
            width: 400,
            height: 500,
            timestamp: 450
@@ -51,31 +42,21 @@ describe("The ResizeTracker", function() {
     });
 
     it("should not send all resize events during a resize.", function() {
-       let tracker = new ResizeTracker();
-       let ev: (e: any) => void = null;
-       global.window = {
-           addEventListener: function(eventName: string, callback: (e: any) => void) {
-               ev = callback;
-           },
-           innerWidth: 400,
-           innerHeight: 500
-       };
-       tracker.register();
-       spyOn(tracker, "sendData");
-       ev({
+       spyOn(this.tracker, "sendData");
+       this.ev({
            timeStamp: 450
        });
        jasmine.clock().tick(40);
-       ev({
+       this.ev({
            timeStamp: 459
        });
        jasmine.clock().tick(400);
-       expect(tracker.sendData).not.toHaveBeenCalledWith({
+       expect(this.tracker.sendData).not.toHaveBeenCalledWith({
            width: 400,
            height: 500,
            timestamp: 450
        });
-       expect(tracker.sendData).toHaveBeenCalledWith({
+       expect(this.tracker.sendData).toHaveBeenCalledWith({
            width: 400,
            height: 500,
            timestamp: 459
