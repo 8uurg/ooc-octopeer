@@ -43,8 +43,8 @@ describe("KeystrokeTracker", function() {
         {name: 'page down', keyCode: 34, result: '[Page Down]'},
         {name: 'end', keyCode: 35, result: '[End]'},
         {name: 'home', keyCode: 36, result: '[Home]'},
-        {name: 'tab', keyCode: 45, result: '[Insert]'},
-        {name: 'tab', keyCode: 46, result: '[Delete]'}
+        {name: 'insert', keyCode: 45, result: '[Insert]'},
+        {name: 'delete', keyCode: 46, result: '[Delete]'}
     ];
 
     testArray.forEach( function(item) {
