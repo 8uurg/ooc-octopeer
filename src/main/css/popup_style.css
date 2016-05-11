@@ -1,7 +1,7 @@
 html,body {
     height: 200px;
     width: 500px;
-    background-image: url("/bg_popup.jpg");
+    background-image: url("../bg_popup.jpg");
 }
 
 .page {

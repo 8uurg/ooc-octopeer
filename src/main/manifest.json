@@ -21,7 +21,7 @@
           "js/KeystrokeTracker.js",
           "js/mouseTracker.js",
           "js/resizeTracker.js",
-          "js/trackUserId.js"
+          "js/UserIdTracker.js"
         ]
       }
   ],
