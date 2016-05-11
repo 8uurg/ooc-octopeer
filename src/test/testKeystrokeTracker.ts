@@ -23,91 +23,34 @@ describe("KeystrokeTracker", function() {
         tracker = new KeystrokeTracker();
         tracker.register();
         spyOn(tracker, "sendData");
-    });
+    })
 
-    it("should log a key press after the 'keyup' event with a 'default' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 53});
-        expect(tracker.sendData).toHaveBeenCalledWith('5');
+    var testArray = [
+        {name: 'five', keyCode: 53, result: '5'},
+        {name: '@', keyCode: 64, result: '@'},
+        {name: 'A', keyCode: 65, result: 'A'},
+        {name: 'a', keyCode: 97, result: 'a'},
+        {name: 'backspace', keyCode: 8, result: '[Backspace]'},
+        {name: 'tab', keyCode: 9, result: '[Tab]'},
+        {name: 'enter', keyCode: 13, result: '[Enter]'},
+        {name: 'shift', keyCode: 16, result: '[Shift]'},
+        {name: 'control', keyCode: 17, result: '[Control]'},
+        {name: 'alt', keyCode: 18, result: '[Alt]'},
+        {name: 'caps lock', keyCode: 20, result: '[Caps Lock]'},
+        {name: 'escape', keyCode: 27, result: '[Escape]'},
+        {name: 'space', keyCode: 32, result: '[Space]'},
+        {name: 'page up', keyCode: 33, result: '[Page Up]'},
+        {name: 'page down', keyCode: 34, result: '[Page Down]'},
+        {name: 'end', keyCode: 35, result: '[End]'},
+        {name: 'home', keyCode: 36, result: '[Home]'},
+        {name: 'tab', keyCode: 45, result: '[Insert]'},
+        {name: 'tab', keyCode: 46, result: '[Delete]'}
+    ];
 
-        eventCall({keyBoardEvent: 'keyup', keyCode: 64});
-        expect(tracker.sendData).toHaveBeenCalledWith('@');
-
-        eventCall({keyBoardEvent: 'keyup', keyCode: 65});
-        expect(tracker.sendData).toHaveBeenCalledWith('A');
-    });
-    
-    it("should log a key press after the 'keyup' event with the 'backspace' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 8});
-        expect(tracker.sendData).toHaveBeenCalledWith('[Backspace]');
-    });
-
-    it("should log a key press after the 'keyup' event with the 'tab' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 9});
-        expect(tracker.sendData).toHaveBeenCalledWith('[Tab]');
-    });
-
-    it("should log a key press after the 'keyup' event with the 'enter' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 13});
-        expect(tracker.sendData).toHaveBeenCalledWith('[Enter]');
-    });
-
-    it("should log a key press after the 'keyup' event with the 'shift' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 16});
-        expect(tracker.sendData).toHaveBeenCalledWith('[Shift]');
-    });
-
-    it("should log a key press after the 'keyup' event with the 'control' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 17});
-        expect(tracker.sendData).toHaveBeenCalledWith('[Control]');
-    });
-
-    it("should log a key press after the 'keyup' event with the 'alt' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 18});
-        expect(tracker.sendData).toHaveBeenCalledWith('[Alt]');
-    });
-
-    it("should log a key press after the 'keyup' event with the 'caps lock' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 20});
-        expect(tracker.sendData).toHaveBeenCalledWith('[Caps Lock]');
-    });
-
-    it("should log a key press after the 'keyup' event with the 'escape' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 27});
-        expect(tracker.sendData).toHaveBeenCalledWith('[Escape]');
-    });
-
-    it("should log a key press after the 'keyup' event with the 'space' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 32});
-        expect(tracker.sendData).toHaveBeenCalledWith('[Space]');
-    });
-
-    it("should log a key press after the 'keyup' event with the 'page up' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 33});
-        expect(tracker.sendData).toHaveBeenCalledWith('[Page Up]');
-    });
-
-    it("should log a key press after the 'keyup' event with the 'page down' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 34});
-        expect(tracker.sendData).toHaveBeenCalledWith('[Page Down]');
-    });
-
-    it("should log a key press after the 'keyup' event with the 'end' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 35});
-        expect(tracker.sendData).toHaveBeenCalledWith('[End]');
-    });
-
-    it("should log a key press after the 'keyup' event with the 'home' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 36});
-        expect(tracker.sendData).toHaveBeenCalledWith('[Home]');
-    });
-
-    it("should log a key press after the 'keyup' event with the 'insert' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 45});
-        expect(tracker.sendData).toHaveBeenCalledWith('[Insert]');
-    });
-
-    it("should log a key press after the 'keyup' event with the 'delete' key", function() {
-        eventCall({keyBoardEvent: 'keyup', keyCode: 46});
-        expect(tracker.sendData).toHaveBeenCalledWith('[Delete]');
+    testArray.forEach( function(item) {
+        it("should log a key press after the 'keyup' event with the '" + item.name + "' key.", function() {
+            eventCall({keyBoardEvent: 'keyup', keyCode: item.keyCode});
+            expect(tracker.sendData).toHaveBeenCalledWith(item.result);
+        });
     });
 });
