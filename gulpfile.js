@@ -52,7 +52,7 @@ gulp.task('lint', function() {
        .pipe(tslint())
        .pipe(tslint.report("prose", {
              emitError: false
-           }));
+       }));
 });
 
 gulp.task('test-prepare', ['compile'], function() {

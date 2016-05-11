@@ -1,18 +1,4 @@
-/**
- * Created by larsstegman on 28-04-16.
- */
-
-export interface CurrentUserData {
-    /**
-     * The user's BitBucket id.
-     */
-    userId: string;
-
-    /**
-     * The repository the user is currently visiting.
-     */
-    repository: string;
-}
+import {CurrentUserData} from "./interfaces/CurrentUserData";
 
 /**
  * This class tracks the user and repository data on BitBucket pages.
@@ -30,7 +16,7 @@ export class UserIdTracker {
 
     /**
      * Reads user data from attributes in a bitbucket repo page.
-     * @param bodyAttributes The attributes in a body tag from a repo page.
+     * @param   bodyAttributes The attributes in a body tag from a repo page.
      * @returns {CurrentUserData} The data about the user and the repo.
      */
     readUserInformation(bodyAttributes: NamedNodeMap): CurrentUserData {
@@ -47,7 +33,7 @@ export class UserIdTracker {
 
     /**
      * Registers the user and repository page data.
-     * @param doc The page document.
+     * @param doc   The page document.
      */
     log(doc: Document): void {
         let data = this.readUserInformation(doc.getElementsByTagName("body")[0].attributes);

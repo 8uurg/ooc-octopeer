@@ -72,8 +72,7 @@ describe("UserIdTracker.ts tests", function () {
         let body = <Element> document.getElementsByTagName("body")[0];
         body.setAttribute("data-current-repo", JSON.stringify(sampleRepoData));
         body.setAttribute("data-current-user", JSON.stringify(sampleUserData));
-        let attributes = body.attributes;
-        expect((new UserIdTracker()).readUserInformation(attributes)).toEqual({
+        expect((new UserIdTracker()).readUserInformation(body.attributes)).toEqual({
             userId: sampleUserData.displayName,
             repository : sampleRepoData.fullslug
         });
