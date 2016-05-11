@@ -73,7 +73,7 @@ export class RARequestsSender implements Requests {
         }
 
         let xmlHTTP = new XMLHttpRequest();
-        let _this: RARequests = this;
+        let _this: RARequestsSender = this;
         xmlHTTP.open("POST", this.api_location + this.table, true);
         xmlHTTP.setRequestHeader("Content-Type", "application/json");
         xmlHTTP.onreadystatechange = function() {
