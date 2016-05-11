@@ -1,3 +1,6 @@
+/**
+ * Provides a tracker that tracks the mouse on the webpage.
+ */
 export class MouseTracker {
     private cursorX: number = 0;
     private cursorY: number = 0;
