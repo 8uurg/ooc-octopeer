@@ -1,7 +1,7 @@
 export class MouseTracker {
     private cursorX: number = 0;
     private cursorY: number = 0;
-    
+
     /**
      * Register the mouse tracker to the document.
      */
@@ -13,12 +13,12 @@ export class MouseTracker {
          * Update the mouse coordinates every time the cursor moves.
          * @param event object that contains the required cursor information.
          */
-        document.addEventListener('mousemove', function(event) {
+        document.addEventListener("mousemove", function(event) {
             _this.cursorX = event.pageX;
             _this.cursorY = event.pageY;
         });
 
-        setInterval(function(){_this.logMousePosition()}, 1000);
+        setInterval(function(){ _this.logMousePosition(); }, 1000);
     }
 
     /**
@@ -31,6 +31,8 @@ export class MouseTracker {
 
     /**
      * Send data to centralized collector.
+     * @param cursorX The recorded x position of the cursor.
+     * @param cursorY The recorded y position of the cursor.
      */
     sendData(cursorX: number, cursorY: number) {
         // TODO: Implement this.

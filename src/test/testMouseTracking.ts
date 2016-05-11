@@ -2,52 +2,50 @@
 
 // Nullroute the default creation of the mousetracker.
 declare var global: any;
-global.document = {};
-global.document.addEventListener = function() {};
-var original_setInterval = global.setInterval;
+global.document = {
+    addEventListener: function() {}
+};
+const original_setInterval = global.setInterval;
 global.setInterval = function() {};
 
 // Actual imports.
-import {MouseTracker} from '../main/js/mouseTracker';
+import {MouseTracker} from "../main/js/mouseTracker";
 global.setInterval = original_setInterval;
 
 describe("The MouseTracker", function() {
     beforeEach(function(){
         jasmine.clock().install();
-    });
-    
-    it("should log the current position of the mouse regularily", function() {
+        const _this = this;
+        this.eventCall = <(event: any) => void> null;
+
         // Capture any added eventlisteners.
-        global.document.addEventListener = function() {};
-        var tracker = new MouseTracker();
-        tracker.register();
-        spyOn(tracker, "sendData");
-        jasmine.clock().tick(1000);
-        expect(tracker.sendData).toHaveBeenCalledTimes(1);
-        jasmine.clock().tick(1000);
-        expect(tracker.sendData).toHaveBeenCalledTimes(2);
+        global.document.addEventListener = function(ev: string, func: (event: any) => void) { _this.eventCall = func; };
+        this.tracker = new MouseTracker();
+        this.tracker.register();
+        spyOn(this.tracker, "sendData");
     });
-   
+
+    it("should log the current position of the mouse regularily, even if the mouse hasn't moved.", function() {
+        jasmine.clock().tick(1000);
+        expect(this.tracker.sendData).toHaveBeenCalledTimes(1);
+        jasmine.clock().tick(1000);
+        expect(this.tracker.sendData).toHaveBeenCalledTimes(2);
+    });
+
     it("should log the current position of the mouse", function() {
-        var eventCall: (event: any) => void = null;
-        // Capture any added eventlisteners.
-        global.document.addEventListener = function(ev: string, func: (event: any) => void) { eventCall = func; };
-        var tracker = new MouseTracker();
-        tracker.register();
-        spyOn(tracker, "sendData");
         jasmine.clock().tick(1000);
-        expect(tracker.sendData).toHaveBeenCalledWith(0, 0);
-        
+        expect(this.tracker.sendData).toHaveBeenCalledWith(0, 0);
+
         // Change cursor position.
-        eventCall({
+        this.eventCall({
             pageX: 50,
             pageY: 100
         });
         jasmine.clock().tick(1000);
-        expect(tracker.sendData).toHaveBeenCalledWith(50, 100);
+        expect(this.tracker.sendData).toHaveBeenCalledWith(50, 100);
     });
-   
+
     afterEach(function() {
         jasmine.clock().uninstall();
-    }); 
+    });
 });
