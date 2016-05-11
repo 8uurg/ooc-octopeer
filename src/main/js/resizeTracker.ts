@@ -4,22 +4,40 @@ interface WindowSize {
     timestamp: number;
 }
 
-var last: WindowSize = null;
-var timer: number = null;
+export class ResizeTracker {
+    private last: WindowSize = null;
+    private timer: any = null;
 
-function pass() {
-    // TODO: Send last to collector
-    console.log(last);
-    last = null;
+    /**
+     * Registers and hooks the instance into the environment.
+     */
+    public register() {
+        const current: ResizeTracker = this;
+        // Registers all resize events (even during resize)
+        window.addEventListener("resize", function (e) {
+            current.last = {
+                    width: window.innerWidth,
+                    height: window.innerHeight,
+                    timestamp: Date.now()
+                };
+
+            // Stop the previous resize event from being sent.
+            clearTimeout(current.timer);
+
+            current.timer = setTimeout(function() {
+                current.sendData(current.last);
+                current.last = null;
+            }, 400);
+        });
+    }
+
+    /**
+     * Sends data - somewhere.
+     */
+    sendData(window: WindowSize) {
+        // TODO: Send last to collector
+        console.log(window);
+    }
 }
 
-// Registers all resize events (even during resize)
-window.addEventListener("resize", function (e) {
-    last = {
-            width: window.innerWidth,
-            height: window.innerHeight,
-            timestamp: e.timeStamp
-        };
-    window.clearTimeout(timer); // Stop the previous resize event from being sent.
-    timer = window.setTimeout(pass, 400);
-});
+(new ResizeTracker).register();

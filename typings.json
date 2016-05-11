@@ -9,6 +9,6 @@
     "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#544a35a10866b32afda9c7f029c0764558563f4f",
     "jquery": "registry:dt/jquery#1.10.0+20160417213236",
     "jsdom": "registry:dt/jsdom#2.0.0+20160316155526",
-    "node": "registry:dt/node#4.0.0+20160509082809"
+    "node": "registry:dt/node#4.0.0+20160509154515"
   }
 }
