@@ -9,7 +9,7 @@ const sourcemaps    = require('gulp-sourcemaps');
 const lazypipe      = require('lazypipe');
 const remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
 const tslint        = require('gulp-tslint');
-
+const replace       = require('gulp-replace');
 
 const fail = function() {
     util.log("A component which does not force fail, failed.");
@@ -42,18 +42,17 @@ const sourcemap_js = lazypipe()
 
 gulp.task('compile', ['clean'], function() {
     return gulp.src('./src/**')
-           .pipe(gulpif('**/*.ts', compile_ts()))
-           .pipe(gulpif('**/*.js', sourcemap_js()))
-           .pipe(gulp.dest('./target/src'));
+        .pipe(gulpif('**/*.ts', compile_ts()))
+        .pipe(gulpif('**/*.js', sourcemap_js()))
+        .pipe(gulp.dest('./target/src'));
 });
 
 gulp.task('lint', function() {
-    // Add linting tasks here.
     return gulp.src('./src/**/*.ts')
-    .pipe(tslint())
-    .pipe(tslint.report("prose", {
-          emitError: false
-        }));
+       .pipe(tslint())
+       .pipe(tslint.report("prose", {
+             emitError: false
+       }));
 });
 
 gulp.task('test-prepare', ['compile'], function() {
@@ -76,16 +75,25 @@ gulp.task('test-report', ['test-run'], function() {
     return gulp.src("./target/assets/unit-test-coverage/coverage-final.json")
         .pipe(remapIstanbul({
             reports: {
+                'html': './target/assets/unit-test-coverage/html-report',
                 'json': './target/assets/unit-test-coverage/coverage.json',
-                'html': './target/assets/unit-test-coverage/html-report'
+                'lcovonly': './target/assets/unit-test-coverage/lcov.info'
             }
         }));
 });
 
-gulp.task('test', ['test-report']); 
+gulp.task('test-report-coveralls', ['test-report'], function() {
+    return gulp.src("./target/assets/unit-test-coverage/lcov.info")
+        .pipe(replace("SF:", "SF:src/"))
+        .pipe(gulp.dest('./target/assets/unit-test-coverage/'));
+})
+
+gulp.task('test', ['test-report-coveralls']); 
 
 gulp.task('build', ['test'], function() {
-    return gulp.src('./target/src/main/**').pipe(gulp.dest('./dest'));
+    return gulp.src('./target/src/main/**')
+        .pipe(gulpif("**/*.js", replace(/.*exports[^\n;]*(;|\n)/g, "")))
+        .pipe(gulp.dest('./dest'));
 });
 
 gulp.task('clean', function() {

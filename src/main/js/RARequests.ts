@@ -10,7 +10,6 @@ export class RARequests implements Requests {
     private data: Object;
     private send: boolean;
 
-
     /**
      * The constructor for setting the location of the database.
      * @param url  The URL of the RESTful API to send the data to.

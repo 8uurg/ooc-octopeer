@@ -18,9 +18,9 @@
           "https://bitbucket.org/*"
         ],
         "js": [
-          "js/trackUserId.js",
           "js/mouseTracker.js",
-          "js/resizeTracker.js"
+          "js/resizeTracker.js",
+          "js/UserIdTracker.js"
         ]
       }
   ],
