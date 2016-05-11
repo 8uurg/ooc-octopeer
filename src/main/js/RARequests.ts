@@ -11,7 +11,7 @@ export class RARequests implements Requests {
 
     /**
      * The constructor for setting the location of the database.
-     * @param url - The URL of the RESTful API to send the data to.
+     * @param url  The URL of the RESTful API to send the data to.
      */
     constructor(url: string) {
         this.api_location = url;
@@ -44,7 +44,7 @@ export class RARequests implements Requests {
 
     /**
      * Sets the value of send (For test purposes).
-     * @param value - The boolean value for send.
+     * @param value  The boolean value for send.
      */
     public setSend(value: boolean): void {
         this.send = value;
@@ -52,7 +52,7 @@ export class RARequests implements Requests {
 
     /**
      * Sends the username to the database.
-     * @param userData - An enforced JSON type for the storage of the username.
+     * @param userData  An enforced JSON type for the storage of the username.
      */
     public sendUserName(userData: UserJSON): void {
         this.send = false;
@@ -63,8 +63,8 @@ export class RARequests implements Requests {
 
     /**
      * Sends the data to the database if a database location is set.
-     * @param table - The table to put the information in.
-     * @param data - The data in JSON format.
+     * @param table  The table to put the information in.
+     * @param data   The data in JSON format.
      */
      sendRequest(): void {
         if(this.api_location == null) {
