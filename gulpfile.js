@@ -75,13 +75,20 @@ gulp.task('test-report', ['test-run'], function() {
     return gulp.src("./target/assets/unit-test-coverage/coverage-final.json")
         .pipe(remapIstanbul({
             reports: {
+                'html': './target/assets/unit-test-coverage/html-report',
                 'json': './target/assets/unit-test-coverage/coverage.json',
-                'html': './target/assets/unit-test-coverage/html-report'
+                'lcovonly': './target/assets/unit-test-coverage/lcov.info'
             }
         }));
 });
 
-gulp.task('test', ['test-report']); 
+gulp.task('test-report-coveralls', ['test-report'], function() {
+    return gulp.src("./target/assets/unit-test-coverage/lcov.info")
+        .pipe(replace("SF:", "SF:src/"))
+        .pipe(gulp.dest('./target/assets/unit-test-coverage/'));
+})
+
+gulp.task('test', ['test-report-coveralls']); 
 
 gulp.task('build', ['test'], function() {
     return gulp.src('./target/src/main/**')
