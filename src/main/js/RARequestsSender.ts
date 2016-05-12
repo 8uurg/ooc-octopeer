@@ -62,6 +62,17 @@ export class RARequestsSender implements Requests {
     }
 
     /**
+     * Sends the mouse position to the database.
+     * @param mouseData  An enforced structure for the storage of the mouse position.
+     */
+    public sendMousePosition(mouseData: MousePosJSON): void {
+        this.send = false;
+        this.table = "mouse-position-events";
+        this.data = mouseData;
+        this.sendRequest();
+    }
+
+    /**
      * Sends the data to the database if a database location is set.
      * @param table  The table to put the information in.
      * @param data   The data in an object..
