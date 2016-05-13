@@ -1,6 +1,6 @@
 {
   "name": "octopeer-bitbucket",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "description": "Monitoring and logging for collecting data about usage of peer reviewing through pull requests on bitbucket",
   "main": "./target/main.js",
   "scripts": {
