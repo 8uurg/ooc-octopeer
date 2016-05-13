@@ -1,8 +1,15 @@
-[![wercker status](https://app.wercker.com/status/58d7606deea2e9a573c66d7fd5f57ef4/s "wercker status")](https://app.wercker.com/project/bykey/58d7606deea2e9a573c66d7fd5f57ef4)
-
-
-
 # Octopeer for Bitbucket
+**Latest Build**
+
+[![wercker status](https://app.wercker.com/status/58d7606deea2e9a573c66d7fd5f57ef4/s "wercker status")](https://app.wercker.com/project/bykey/58d7606deea2e9a573c66d7fd5f57ef4)
+[![Coverage Status](https://coveralls.io/repos/bitbucket/CasBs/ooc-octopeer/badge.svg?branch=develop)](https://coveralls.io/bitbucket/CasBs/ooc-octopeer?branch=develop)
+
+[![wercker status](https://app.wercker.com/status/58d7606deea2e9a573c66d7fd5f57ef4/m "wercker status")](https://app.wercker.com/project/bykey/58d7606deea2e9a573c66d7fd5f57ef4)
+
+**Latest Release**
+
+[![Coverage Status](https://coveralls.io/repos/bitbucket/CasBs/ooc-octopeer/badge.svg?branch=master)](https://coveralls.io/bitbucket/CasBs/ooc-octopeer?branch=master)
+
 
 ## Setting up / building
 Install *NodeJS* from [here](https://nodejs.org)
@@ -11,7 +18,7 @@ Make sure *gulp* is globally installed, if not: install using npm:
 ```
 npm install -g gulp
 ```
-Also, in order to compile things, get *tsd*:
+Also, in order to compile things, get *typings*:
 ```
 npm install -g typings
 ```
@@ -27,13 +34,15 @@ npm install
 
 ## Gulp
 A few commands can be executed using gulp:
+
 - *Compile* convert typescript to javascript
 - *Test*: Run the test suite
 
 You can view the code coverage as measured in `target/assets/unit-test-coverage/html-report`
 
 ### Using the result
-Load the `target` folder in chrome:
+Load the `dest` folder in chrome:
+
 - Go to `extensions` (or your regional equivalent)
 - Make sure `Developer Mode` is enabled
 - Load unpacked extension
