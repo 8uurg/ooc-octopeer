@@ -1,9 +1,3 @@
-interface WindowSize {
-    width: number;
-    height: number;
-    timestamp: number;
-}
-
 export class ResizeTracker {
     private last: WindowSize = null;
     private timer: any = null;
