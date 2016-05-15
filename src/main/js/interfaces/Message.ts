@@ -5,7 +5,7 @@ interface Message {
     /**
      * The type of the message. *F.E.: MousePos for mouse position events*
      */
-    table: string;
+    table: "mouse-position-events/"|"sessions/"|"users/";
 
     /**
      * The data object which adheres one interface.
