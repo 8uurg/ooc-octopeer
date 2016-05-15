@@ -67,7 +67,7 @@ describe('RESTFul API requests', function() {
             this.setRequestHeader = function() {};
             this.onreadystatechange = function() {};
             this.send = function() {this.onreadystatechange()};
-            // Force success
+            // Force failure
             this.status = 201;
             this.readyState = 4;
         }
