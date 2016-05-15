@@ -63,6 +63,7 @@ export class RARequestsSender implements Requests {
 
     /**
      * Sends the keystrokes to the database.
+     * @param keystrokeData  An enforced structure for the storage of the keystroke.
      */
     public sendKeystrokes(keystrokeData: KeystrokeJSON): void {
         this.send = false;
