@@ -3,7 +3,7 @@
 /*
  * This function handles the status of the checkboxes and stores changes made by users locally.
  */
-function registerCheckbox(storagename: string, checkboxId: string) {
+export function registerCheckbox(storagename: string, checkboxId: string) {
     let checkbox = <HTMLInputElement> document.getElementById(checkboxId);
     checkbox.checked = JSON.parse(localStorage.getItem(storagename)) || false;
 
