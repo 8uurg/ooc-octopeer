@@ -1,3 +1,4 @@
+///<reference path="./interfaces/message.ts" />
 /**
  * Created by Cas on 23-4-2016.
  * This class lets gives the possibility to send JSON requests to the restful api.

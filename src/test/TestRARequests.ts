@@ -8,7 +8,7 @@ global.chrome = {
     runtime: {
         connect: function() {
             return {
-                postMessage: function() {}
+                postMessage: function() {this.onConnect.addListener();}
             }
         },
         onConnect: {
@@ -85,5 +85,12 @@ describe('RARequestSender Tests', function() {
         let rarObject = new RARequestsSender("location");
         rarObject.sendRequest("table", {});
         expect(rarObject.isSent()).toBeFalsy();
+    });
+
+    it('should hear a message', function() {
+        spyOn(chrome.runtime.onConnect, "addListener");
+
+        chrome.runtime.connect({name: "requestSender"}).postMessage({table: "keystroke-events/", data: {}});
+        expect(chrome.runtime.onConnect.addListener).toHaveBeenCalled();
     });
 });
