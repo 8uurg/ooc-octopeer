@@ -62,6 +62,17 @@ export class RARequestsSender implements Requests {
     }
 
     /**
+     * Sends the resolution to the database.
+     * @param resolutionData An enforced structure for the storage of the resolution.
+     */
+    public sendResolution(resolutionData: ResolutionJSON): void {
+        this.send = false;
+        this.table = "window_resolution";
+        this.data = resolutionData;
+        this.sendRequest();
+    }
+
+    /**
      * Sends the data to the database if a database location is set.
      * @param table  The table to put the information in.
      * @param data   The data in an object..

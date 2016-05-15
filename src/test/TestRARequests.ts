@@ -67,4 +67,15 @@ describe('RESTFul API requests', function() {
 
         expect(rarObject.isSent()).toBeFalsy();
     });
+
+    it('should set the right variables when sending a resolution', function() {
+        let rarObject = new RARequestsSender(null);
+        let date = new Date("09/10/2011 11:00:00");
+        rarObject.sendResolution({"url":"someURL", "created_at":date, "width":2160,
+            "height":1440, "session":"a"});
+        expect(rarObject.isSent()).toEqual(false);
+        expect(rarObject.getTable()).toEqual("window_resolution");
+        expect(rarObject.getData()).toEqual({"url":"someURL", "created_at":date, "width":2160,
+            "height":1440, "session":"a"});
+    });
 });
