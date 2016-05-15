@@ -30,9 +30,10 @@ describe('RARequestSender Tests', function() {
 
     it('should create an object and call register', function() {
         spyOn(chrome.runtime.onConnect, "addListener");
-        expect(new RARequestsSender("location").api_location).toEqual("location");
+        let rarObject = new RARequestsSender("location");
+        expect(rarObject.api_location).toEqual("location");
         expect(chrome.runtime.onConnect.addListener).toHaveBeenCalled();
-        expect(new RARequestsSender("location").isSent()).toBeFalsy();
+        expect(rarObject.isSent()).toBeFalsy();
     });
 
     it('should have an api_location set', function() {
