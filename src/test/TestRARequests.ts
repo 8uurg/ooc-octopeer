@@ -26,21 +26,30 @@ global.chrome = {
 import {RARequestsSender} from '../main/js/RARequestSender';
 
 
-describe('RESTFul API requests', function() {
+describe('RARequestSender Tests', function() {
 
     it('should create an object and call register', function() {
         spyOn(chrome.runtime.onConnect, "addListener");
-        expect(new RARequestsSender("location")).not.toBeNull(true);
         expect(new RARequestsSender("location").api_location).toEqual("location");
         expect(chrome.runtime.onConnect.addListener).toHaveBeenCalled();
         expect(new RARequestsSender("location").isSent()).toBeFalsy();
     });
 
     it('should have an api_location set', function() {
-        spyOn(console, "error");
+        //Fake the XMLHttpRequest object so that the test can run.
+        global.XMLHttpRequest = function() {
+            this.open = function() {};
+            this.setRequestHeader = function() {};
+            this.onreadystatechange = function() {};
+            this.send = function() {this.onreadystatechange()};
+            // Force success
+            this.status = 200;
+            this.readyState = 4;
+        }
+
         let rarObject = new RARequestsSender(null);
-        rarObject.sendRequest("table", {});
-        expect(console.error).toHaveBeenCalled();
+        let returnValue = rarObject.sendRequest("table", {});
+        expect(returnValue).toEqual(undefined);
     });
 
     it('should send the request and set send to true if it succeeds.', function() {
