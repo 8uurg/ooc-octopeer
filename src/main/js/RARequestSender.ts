@@ -25,11 +25,7 @@ export class RARequestsSender {
         chrome.runtime.onConnect.addListener(function(port) {
             console.assert(port.name == "requestSender");
             port.onMessage.addListener(function(msg: Message) {
-                if (msg.table === "/mouse-position-events/") {
-                    _this.sendRequest(msg.table, msg.data);
-                } else {
-                    console.error("An illegal message has been used.");
-                }
+                _this.sendRequest(msg.table, msg.data);
             });
         });
     }

@@ -10,5 +10,5 @@ interface Message {
     /**
      * The data object which adheres one interface.
      */
-    data: any;
+    data: MousePosJSON|SessionJSON|UserJSON;
 }
