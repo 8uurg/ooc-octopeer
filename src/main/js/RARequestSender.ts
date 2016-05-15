@@ -1,3 +1,4 @@
+///<reference path="../../../typings/main.d.ts" />
 /**
  * Created by Cas on 23-4-2016.
  * This class lets gives the possibility to send JSON requests to the restful api.
@@ -5,7 +6,7 @@
 export class RARequestsSender {
 
     api_location: string;
-    private send: boolean;
+    private send: boolean = false;
 
     /**
      * The constructor for setting the location of the database.
@@ -13,7 +14,6 @@ export class RARequestsSender {
      */
     constructor(url: string) {
         this.api_location = url;
-        this.send = false;
         this.register();
     }
 
@@ -44,19 +44,11 @@ export class RARequestsSender {
     }
 
     /**
-     * Sets the value of send (For test purposes).
-     * @param value  The boolean value for send.
-     */
-    public setSend(value: boolean): void {
-        this.send = value;
-    }
-
-    /**
      * Sends the data to the database if a database location is set.
      * @param table  The table to put the information in.
      * @param data   The data in an object..
      */
-     private sendRequest(table: string, data: Object): void {
+     public sendRequest(table: string, data: Object): void {
         if (this.api_location === null) {
             console.error("No location for the restful api is known.");
             return;

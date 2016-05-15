@@ -40,7 +40,6 @@ export class MouseTracker {
     sendData(cursorX: number, cursorY: number) {
         // TODO: Implement this.
         console.log("Called");
-        chrome.runtime.connect({name: "requestSender"}).postMessage({table: "mousePos", data: {}});
     }
 }
 
