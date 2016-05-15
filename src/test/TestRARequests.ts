@@ -1,5 +1,5 @@
 ///<reference path="../../typings/main.d.ts" />
-import {RARequestsSender} from '../main/js/RARequestsSender';
+import {RARequestsSender} from '../main/js/RARequestSender';
 
 /**
  * Created by Cas on 8-5-2016.
@@ -13,20 +13,9 @@ describe('RESTFul API requests', function() {
         expect(new RARequestsSender("location").api_location).toEqual("location");
     });
 
-    it('should trigger the sendRequest when calling sendUsername', function() {
-        let rarObject = new RARequestsSender("someLocation");
-        spyOn(rarObject, "sendRequest").and.callFake(function() {
-            rarObject.setSend(true);
-        });
 
-        rarObject.sendUserName({"url":"someURL", "username":"someUsername"});
 
-        expect(rarObject.getTable()).toEqual("users");
-        expect(rarObject.getData()).toEqual({"url":"someURL", "username":"someUsername"});
-        expect(rarObject.isSent()).toEqual(true);
-    });
-
-    it('should have an api_location set', function() {
+    /*it('should have an api_location set', function() {
         let rarObject = new RARequestsSender(null);
         rarObject.sendUserName({"url":"someURL", "username":"someUsername"});
 
@@ -66,5 +55,5 @@ describe('RESTFul API requests', function() {
         rarObject.sendUserName({"url":"someURL", "username":"someUsername"});
 
         expect(rarObject.isSent()).toBeFalsy();
-    });
+    });*/
 });
