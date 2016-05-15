@@ -6,17 +6,10 @@ declare let global: any;
 
 global.chrome = {
     runtime: {
-        connect: function() {
-            return {
-                postMessage: function() {this.onConnect.addListener();}
-            }
-        },
         onConnect: {
             addListener: function() {
                 return {
-                    onMessage: {
-                        addEventListener: function () {}
-                    }
+                    onMessage: {}
                 }
             }
         }
@@ -37,17 +30,6 @@ describe('RARequestSender Tests', function() {
     });
 
     it('should have an api_location set', function() {
-        //Fake the XMLHttpRequest object so that the test can run.
-        global.XMLHttpRequest = function() {
-            this.open = function() {};
-            this.setRequestHeader = function() {};
-            this.onreadystatechange = function() {};
-            this.send = function() {this.onreadystatechange()};
-            // Force success
-            this.status = 200;
-            this.readyState = 4;
-        }
-
         let rarObject = new RARequestsSender(null);
         let returnValue = rarObject.sendRequest("table", {});
         expect(returnValue).toEqual(undefined);
@@ -85,12 +67,5 @@ describe('RARequestSender Tests', function() {
         let rarObject = new RARequestsSender("location");
         rarObject.sendRequest("table", {});
         expect(rarObject.isSent()).toBeFalsy();
-    });
-
-    it('should hear a message', function() {
-        spyOn(chrome.runtime.onConnect, "addListener");
-
-        chrome.runtime.connect({name: "requestSender"}).postMessage({table: "keystroke-events/", data: {}});
-        expect(chrome.runtime.onConnect.addListener).toHaveBeenCalled();
     });
 });
