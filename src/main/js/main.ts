@@ -1,4 +1,4 @@
-///<reference path="./KeystrokeTracker.ts" />
+///<reference path="./keystrokeTracker.ts" />
 ///<reference path="./mouseTracker.ts" />
 ///<reference path="./resizeTracker.ts" />
 ///<reference path="./UserIdTracker.ts" />
