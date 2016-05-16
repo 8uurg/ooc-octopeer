@@ -22,7 +22,7 @@ describe("popup.ts tests", function () {
         let body = <Element> document.getElementsByTagName("body")[0];
         localStorage.setItem("testStorageName", "false");
         // Create a checkbox to be used in this test.
-        var checkbox = <HTMLInputElement> document.createElement("INPUT");
+        let checkbox = <HTMLInputElement> document.createElement("INPUT");
         checkbox.checked = true;
         checkbox.setAttribute("type", "checkbox");
         checkbox.setAttribute("id", "some_value");
@@ -37,7 +37,7 @@ describe("popup.ts tests", function () {
         let body = <Element> document.getElementsByTagName("body")[0];
         localStorage.setItem("testStorageName", "true");
         // Create a checkbox to be used in this test.
-        var checkbox = <HTMLInputElement> document.createElement("INPUT");
+        let checkbox = <HTMLInputElement> document.createElement("INPUT");
         checkbox.checked = false;
         checkbox.setAttribute("type", "checkbox");
         checkbox.setAttribute("id", "some_value");
@@ -52,7 +52,7 @@ describe("popup.ts tests", function () {
         let body = <Element> document.getElementsByTagName("body")[0];
         localStorage.setItem("testStorageName", "false");
         // Create a checkbox to be used in this test.
-        var checkbox = <HTMLInputElement> document.createElement("INPUT");
+        let checkbox = <HTMLInputElement> document.createElement("INPUT");
         checkbox.checked = false;
         checkbox.setAttribute("type", "checkbox");
         checkbox.setAttribute("id", "some_value");
