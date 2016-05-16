@@ -1,9 +1,4 @@
-interface WindowSize {
-    width: number;
-    height: number;
-    timestamp: number;
-}
-
+///<reference path="./interfaces/WindowSize.ts" />
 export class ResizeTracker {
     private last: WindowSize = null;
     private timer: any = null;
@@ -29,6 +24,7 @@ export class ResizeTracker {
                 current.last = null;
             }, 400);
         });
+        console.log("Registered Resize Tracker.");
     }
 
     /**
@@ -39,5 +35,3 @@ export class ResizeTracker {
         console.log(window);
     }
 }
-
-(new ResizeTracker).register();

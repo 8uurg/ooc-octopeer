@@ -21,13 +21,14 @@
           "js/KeystrokeTracker.js",
           "js/mouseTracker.js",
           "js/resizeTracker.js",
-          "js/UserIdTracker.js"
+          "js/UserIdTracker.js",
+          "js/main.js"
         ]
       }
   ],
 
   "background": {
-
+    "scripts": ["js/RARequestSender.js"]
   },
 
   "permissions": [
