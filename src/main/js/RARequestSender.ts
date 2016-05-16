@@ -40,17 +40,6 @@ export class RARequestsSender {
     }
 
     /**
-     * Sends the keystrokes to the database.
-     * @param keystrokeData  An enforced structure for the storage of the keystroke.
-     */
-    public sendKeystrokes(keystrokeData: KeystrokeJSON): void {
-        this.send = false;
-        this.table = "keystroke_event";
-        this.data = keystrokeData;
-        this.sendRequest();
-    }
-
-    /**
      * Sends the data to the database if a database location is set.
      * @param table  The table to put the information in.
      * @param data   The data in an object..

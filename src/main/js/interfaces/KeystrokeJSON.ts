@@ -16,7 +16,7 @@ interface KeystrokeJSON {
     /**
      * The key name of the keystroke that was logged.
      */
-    keyName: string
+    keyName: string;
 
     /**
      * The link to the session of the PR of this user.

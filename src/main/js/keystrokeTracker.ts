@@ -83,7 +83,9 @@ export class KeystrokeTracker {
      * @param keyName name of the key that has been pressed.
      */
     sendData(keyName: string) {
-        // TODO: implement this
+        // TODO: Implementations of URL and Session.
+        chrome.runtime.connect({name: "requestSender"}).postMessage({table: "keystroke_event/", data: {"url": "TODO",
+            "created_at": Date.now(), keyName: keyName, "session": "TODO"}});
     }
 }
 
