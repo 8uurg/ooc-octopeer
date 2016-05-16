@@ -24,7 +24,7 @@ export class RARequestsSender {
         const _this: RARequestsSender = this;
 
         chrome.runtime.onConnect.addListener(function(port) {
-            console.assert(port.name == "requestSender");
+            console.assert(port.name === "requestSender");
             port.onMessage.addListener(function(msg: Message) {
                 _this.sendRequest(msg.table, msg.data);
             });
@@ -60,7 +60,7 @@ export class RARequestsSender {
             } else {
                 _this.send = true;
             }
-        }
+        };
         xmlHTTP.send(JSON.stringify(data));
     }
 }
