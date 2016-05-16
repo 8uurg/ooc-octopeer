@@ -7,13 +7,13 @@ export class KeystrokeTracker {
      * Register the keystroke tracker.
      */
     public register() {
-        var current: KeystrokeTracker = this;
+        let current: KeystrokeTracker = this;
 
         /**
          * Create an EventListener that fires each time a key is pressed. Log the key that is pressed in the console.
          * @param event object that contains the required key information.
          */
-        document.addEventListener('keyup', function (event) {
+        document.addEventListener("keyup", function (event) {
             current.keyCode = event.keyCode;
 
             switch (current.keyCode) {
@@ -83,9 +83,9 @@ export class KeystrokeTracker {
      * @param keyName name of the key that has been pressed.
      */
     sendData(keyName: string) {
-        //TODO: implement this
+        // TODO: implement this
     }
 }
 
-//Create an instance of the keystroke tracker.
+// Create an instance of the keystroke tracker.
 (new KeystrokeTracker).register();
