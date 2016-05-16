@@ -24,6 +24,7 @@ export class ResizeTracker {
                 current.last = null;
             }, 400);
         });
+        console.log("Registered Resize Tracker.");
     }
 
     /**
@@ -34,5 +35,3 @@ export class ResizeTracker {
         console.log(window);
     }
 }
-
-(new ResizeTracker).register();
