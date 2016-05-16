@@ -28,7 +28,7 @@
   ],
 
   "background": {
-
+    "scripts": ["js/RARequestSender.js"]
   },
 
   "permissions": [
