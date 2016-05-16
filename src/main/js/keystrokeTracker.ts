@@ -68,6 +68,7 @@ export class KeystrokeTracker {
 
             current.logKeystroke();
         });
+        console.log("Registered Keystroke Tracker.");
     }
 
     /**
@@ -83,9 +84,8 @@ export class KeystrokeTracker {
      * @param keyName name of the key that has been pressed.
      */
     sendData(keyName: string) {
-        //TODO: implement this
+        // TODO: implement this
     }
 }
 
-//Create an instance of the keystroke tracker.
-(new KeystrokeTracker).register();
+

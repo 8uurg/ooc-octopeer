@@ -8,7 +8,7 @@ var original_setInterval = global.setInterval;
 global.setInterval = function() {};
 
 // Actual imports.
-import {KeystrokeTracker} from '../main/js/keystrokeTracker';
+import {KeystrokeTracker} from '../main/js/KeystrokeTracker';
 global.setInterval = original_setInterval;
 
 describe("KeystrokeTracker", function() {
