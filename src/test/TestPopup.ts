@@ -14,37 +14,62 @@ import {registerCheckbox} from "../main/js/popup";
 describe("popup.ts tests", function () {
     beforeEach(function () {
         browser = new MockBrowser();
-        browser.getDocument().createElement("body");
         global.document = browser.getDocument();
+        global.localStorage = browser.getLocalStorage();
     });
 
-    /**
-     * Simulates a click on the DOM.
-     * Source: https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
-     */
-    function simulateClick(item: string) {
-        var event = new MouseEvent('click', {
-            'view': window,
-            'bubbles': true,
-            'cancelable': true
-        });
-        browser.getElementById(item).dispatchEvent(event);
-    }
-    
-    it("stores settings locally upon a click on the checkbox", function () {
+    it("should restore state on registration when saved state is false.", function (){
         let body = <Element> document.getElementsByTagName("body")[0];
-        var doc = browser.getDocument(),
-            div = doc.createElement('div');
-        body.appendChild(div);
-        var storage = browser.getLocalStorage();
-        
+        localStorage.setItem("testStorageName", "false");
         // Create a checkbox to be used in this test.
-        var checkbox = document.createElement("INPUT");
+        var checkbox = <HTMLInputElement> document.createElement("INPUT");
+        checkbox.checked = true;
         checkbox.setAttribute("type", "checkbox");
         checkbox.setAttribute("id", "some_value");
         body.appendChild(checkbox);
+
         registerCheckbox("testStorageName", "some_value");
 
-        expect(JSON.parse(storage.getItem("testStorageName"))).toBeFalsy();
+        expect(checkbox.checked).toBeFalsy();
+    });
+
+    it("should restore state on registration when saved state is true.", function (){
+        let body = <Element> document.getElementsByTagName("body")[0];
+        localStorage.setItem("testStorageName", "true");
+        // Create a checkbox to be used in this test.
+        var checkbox = <HTMLInputElement> document.createElement("INPUT");
+        checkbox.checked = false;
+        checkbox.setAttribute("type", "checkbox");
+        checkbox.setAttribute("id", "some_value");
+        body.appendChild(checkbox);
+
+        registerCheckbox("testStorageName", "some_value");
+
+        expect(checkbox.checked).toBeTruthy();
+    });
+
+    it("stores settings locally upon a click on the checkbox", function () {
+        let body = <Element> document.getElementsByTagName("body")[0];
+        localStorage.setItem("testStorageName", "false");
+        // Create a checkbox to be used in this test.
+        var checkbox = <HTMLInputElement> document.createElement("INPUT");
+        checkbox.checked = false;
+        checkbox.setAttribute("type", "checkbox");
+        checkbox.setAttribute("id", "some_value");
+        body.appendChild(checkbox);
+
+        registerCheckbox("testStorageName", "some_value");
+        expect(checkbox.checked).toBeFalsy();
+        expect(JSON.parse(localStorage.getItem("testStorageName"))).toBeFalsy();
+        checkbox.click();
+        expect(checkbox.checked).toBeTruthy();
+        checkbox.click();
+        expect(JSON.parse(localStorage.getItem("testStorageName"))).toBeTruthy();
+        // FIXME: Due to a issue with how the fake dom works, 
+        // it updates the checkedness of the checkbox after the event
+        // Unlike in the browser, where it happens before the event.
+        // This means the assertions in this test keep this in mind.
+        // If this is fixed in the future and you encounter this comment,
+        // Remove the second checkbox.click().
     });
 });
