@@ -39,6 +39,7 @@ export class MouseTracker {
      */
     sendData(cursorX: number, cursorY: number) {
         // TODO: Implement this.
+        console.log("Called");
     }
 }
 
