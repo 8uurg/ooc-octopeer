@@ -1,3 +1,4 @@
+///<reference path="./interfaces/WindowSize.ts" />
 export class ResizeTracker {
     private last: WindowSize = null;
     private timer: any = null;
