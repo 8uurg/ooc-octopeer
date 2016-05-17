@@ -1,5 +1,5 @@
 /**
- * An interface which stores the basic user id tracking.                                                                
+ * An interface which stores the basic user id tracking.
  */
 export interface CurrentUserData {
     /**
