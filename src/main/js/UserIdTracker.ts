@@ -6,15 +6,6 @@ import {CurrentUserData} from "./interfaces/CurrentUserData";
 export class UserIdTracker {
 
     /**
-     * Constants that are used in the local storage for Octopeer.
-     * @type {{user_id_key: string, current_repo_id_key: string}}
-     */
-    private static octopeer_constants = {
-        "user_id_key": "octopeer_user_id",
-        "current_repo_id_key": "octopeer_current_repo_id"
-    };
-
-    /**
      * Reads user data from attributes in a bitbucket repo page.
      * @param   bodyAttributes The attributes in a body tag from a repo page.
      * @returns {CurrentUserData} The data about the user and the repo.
