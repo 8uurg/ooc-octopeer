@@ -47,7 +47,7 @@ gulp.task('compile', ['clean'], function() {
         .pipe(gulp.dest('./target/src'));
 });
 
-gulp.task('lint', ['test'], function() {
+gulp.task('lint', function() {
     return gulp.src('./src/**/*.ts')
        .pipe(tslint())
        .pipe(tslint.report("prose", {
@@ -90,7 +90,7 @@ gulp.task('test-report-coveralls', ['test-report'], function() {
 
 gulp.task('test', ['test-report-coveralls']); 
 
-gulp.task('build', ['lint'], function() {
+gulp.task('build', ['test', 'lint'], function() {
     return gulp.src('./target/src/main/**')
         .pipe(gulpif("**/*.js", replace(/.*exports[^\n;]*(;|\n)/g, "")))
         .pipe(gulp.dest('./dest'));
