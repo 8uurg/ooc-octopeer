@@ -1,4 +1,4 @@
-///<reference path="../../typings/main.d.ts" />
+///<reference path="../../typings/index.d.ts" />
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
 declare var global: any;
 
