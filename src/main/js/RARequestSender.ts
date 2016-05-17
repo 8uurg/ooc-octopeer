@@ -1,3 +1,4 @@
+///<reference path="../../../typings/main.d.ts" />
 ///<reference path="./interfaces/message.ts" />
 /**
  * Created by Cas on 23-4-2016.
