@@ -10,7 +10,7 @@ global.chrome = {
             return {
                 postMessage: function() {
                 }
-            }
+            };
         },
         onConnect: {
             addListener: function() {

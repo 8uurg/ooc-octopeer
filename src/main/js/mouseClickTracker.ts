@@ -11,9 +11,9 @@ export class MouseClickTracker {
      */
     public register() {
         // Store `this` for usage in functions.
-        const _this:MouseClickTracker = this;
+        const _this: MouseClickTracker = this;
 
-        _this.port = chrome.runtime.connect({name:"requestSender"});
+        _this.port = chrome.runtime.connect({name: "requestSender"});
 
         /**
          * Call the log function whenever a mouse click occurs.
@@ -23,13 +23,13 @@ export class MouseClickTracker {
             _this.sendData();
         });
     }
-    
+
     /**
      * Send mouse click data to centralized collector.
      */
     sendData() {
         this.port.postMessage({
-            table: "mouse-click-events/", 
+            table: "mouse-click-events/",
             data: {
                 url: "",
                 session: "",

@@ -13,8 +13,8 @@ export class MousePositionTracker {
         // Store `this` for usage in functions.
         const _this: MousePositionTracker = this;
 
-        _this.port = chrome.runtime.connect({name:"requestSender"});
-        
+        _this.port = chrome.runtime.connect({name: "requestSender"});
+
         /**
          * Update the mouse coordinates every time the cursor moves.
          * @param event object that contains the required cursor information.
@@ -24,7 +24,7 @@ export class MousePositionTracker {
             _this.cursorY = event.pageY;
         });
 
-        setInterval(function(){ _this.sendData(this.cursorX, this.cursorY); }, 1000);
+        setInterval(function(){ _this.sendData(_this.cursorX, _this.cursorY); }, 1000);
         console.log("Registered Mouse Tracker.");
     }
 
