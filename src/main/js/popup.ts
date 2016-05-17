@@ -8,15 +8,11 @@ declare var OCTOPEER_CONSTANTS: any;
 function registerCheckbox(storageName: string, checkboxId: string) {
     let checkbox = <HTMLInputElement> document.getElementById(checkboxId);
     let syncedStorage = chrome.storage.sync;
-    syncedStorage.get(storageName, (items: { [key: string]: any }) => {
-        checkbox.checked = items[storageName] == null ? true : items[storageName];
+    syncedStorage.get({[storageName]: true}, (items: { [key: string]: any }) => {
+        checkbox.checked = items[storageName];
         checkbox.addEventListener("click", function() {
             syncedStorage.set({[storageName]: this.checked});
             console.log(storageName + ": " + this.checked);
-            syncedStorage.get(null, function (items) {
-                console.log("Storage: ");
-                console.log(items);
-            });
         });
     });
 }
