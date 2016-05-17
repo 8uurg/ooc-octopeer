@@ -24,6 +24,7 @@ export class ResizeTracker {
                 current.last = null;
             }, 400);
         });
+        console.log("Registered Resize Tracker.");
     }
 
     /**
@@ -36,5 +37,3 @@ export class ResizeTracker {
             "created_at": Date.now(), "width": window.width, "height": window.height, "session": "TODO"}});
     }
 }
-
-(new ResizeTracker).register();

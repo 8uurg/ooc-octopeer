@@ -22,6 +22,7 @@ export class MouseTracker {
         });
 
         setInterval(function(){ _this.logMousePosition(); }, 1000);
+        console.log("Registered Mouse Tracker.");
     }
 
     /**
@@ -42,6 +43,3 @@ export class MouseTracker {
         console.log("Called");
     }
 }
-
-// Register the mousetracker to the current document.
-(new MouseTracker).register();
