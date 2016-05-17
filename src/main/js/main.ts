@@ -1,9 +1,11 @@
 ///<reference path="./keystrokeTracker.ts" />
-///<reference path="./mouseTracker.ts" />
+///<reference path="./mouseClickTracker.ts" />
+///<reference path="./mousePositionTracker.ts" />
 ///<reference path="./resizeTracker.ts" />
 ///<reference path="./UserIdTracker.ts" />
 declare var KeystrokeTracker: any;
-declare var MouseTracker: any;
+declare var MouseClickTracker: any;
+declare var MousePositionTracker: any;
 declare var ResizeTracker: any;
 declare var UserIdTracker: any;
 
@@ -18,8 +20,11 @@ declare var UserIdTracker: any;
 // Create an instance of the keystroke tracker.
 (new KeystrokeTracker).register();
 
-// Register the mousetracker to the current document.
-(new MouseTracker()).register();
+// Register the mouse click tracker to the current document.
+(new MouseClickTracker()).register();
+
+// Register the mouse position tracker to the current document.
+(new MousePositionTracker()).register();
 
 // Register the resize tracker to the current document.
 (new ResizeTracker()).register();

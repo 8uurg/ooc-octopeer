@@ -26,6 +26,7 @@ export class RARequestsSender {
         chrome.runtime.onConnect.addListener(function(port) {
             console.assert(port.name === "requestSender");
             port.onMessage.addListener(function(msg: Message) {
+                console.log("Got called");
                 _this.sendRequest(msg.table, msg.data);
             });
         });
