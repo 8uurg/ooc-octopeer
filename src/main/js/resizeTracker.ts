@@ -29,7 +29,7 @@ export class ResizeTracker {
     /**
      * Sends data - somewhere.
      */
-    sendData(window: WindowSize) {
+    public sendData(window: WindowSize) {
         // TODO: Send last to collector
         console.log(window);
     }

@@ -5,14 +5,14 @@
  */
 export class RARequestsSender {
 
-    api_location: string;
+    public api_location: string;
     private send: boolean = false;
 
     /**
      * The constructor for setting the location of the database.
      * @param url  The URL of the RESTful API to send the data to.
      */
-    constructor(url: string) {
+    public constructor(url: string) {
         this.api_location = url;
         this.register();
     }

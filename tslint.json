@@ -3,16 +3,23 @@
         "class-name": true,
         "comment-format": [
             true,
-            "check-space"
+            "check-space",
+            "check-uppercase"
         ],
+        "curly": true,
         "indent": [
             true,
             "spaces"
         ],
+        "max-line-length": [true, 120],
+        "member-access": [true, "check-accessor", "check-constructor"],
+        "no-consecutive-blank-lines": true,
         "no-duplicate-variable": true,
         "no-eval": true,
         "no-internal-module": true,
         "no-trailing-whitespace": true,
+        "no-unreachable": true,
+        "no-unused-expression": true,
         "no-var-keyword": true,
         "one-line": [
             true,

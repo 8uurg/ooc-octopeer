@@ -73,7 +73,7 @@ export class KeystrokeTracker {
     /**
      * Log the key that has been pressed and send it to the database.
      */
-    logKeystroke() {
+    public logKeystroke() {
         this.sendData(this.keyName);
         console.log("Keystroke: " + this.keyName);
     }
@@ -82,7 +82,7 @@ export class KeystrokeTracker {
      * Send data to the database
      * @param keyName name of the key that has been pressed.
      */
-    sendData(keyName: string) {
+    public sendData(keyName: string) {
         // TODO: implement this
     }
 }
