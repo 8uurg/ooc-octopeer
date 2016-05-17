@@ -35,10 +35,9 @@ export class UserIdTracker {
      * Registers the user and repository page data.
      * @param doc   The page document.
      */
-    public log(doc: Document): void {
-        let data = this.readUserInformation(doc.getElementsByTagName("body")[0].attributes);
+    public log(): void {
+        let data = this.readUserInformation(document.getElementsByTagName("body")[0].attributes);
         console.log("User id tracker: " + JSON.stringify(data));
+        console.log("Logged user id");
     }
 }
-
-(new UserIdTracker()).log(document);
