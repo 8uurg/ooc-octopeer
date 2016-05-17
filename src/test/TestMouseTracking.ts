@@ -1,4 +1,4 @@
-///<reference path="../../typings/main.d.ts" />
+///<reference path="../../typings/index.d.ts" />
 
 // Nullroute the default creation of the mousetracker.
 declare var global: any;
