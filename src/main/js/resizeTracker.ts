@@ -34,7 +34,6 @@ export class ResizeTracker {
         // TODO: Implementations of URL and Session.
         chrome.runtime.connect({name: "requestSender"}).postMessage({table: "window_resolution/", data: {"url": "TODO",
             "created_at": Date.now(), "width": window.width, "height": window.height, "session": "TODO"}});
-        console.log(window);
     }
 }
 
