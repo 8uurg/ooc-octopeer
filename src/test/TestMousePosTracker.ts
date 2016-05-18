@@ -46,7 +46,6 @@ describe("The Mouse Position Tracker", function() {
         this.tracker.register();
 
         jasmine.clock().tick(1000);
-        expect(this.tracker.sendData).toHaveBeenCalled();
         expect(port.postMessage).toHaveBeenCalledWith({
             table: "mouse-position-events/",
             data: {
@@ -76,7 +75,6 @@ describe("The Mouse Position Tracker", function() {
         });
 
         jasmine.clock().tick(1000);
-        expect(this.tracker.sendData).toHaveBeenCalled();
         expect(port.postMessage).toHaveBeenCalledWith({
             table: "mouse-position-events/",
             data: {

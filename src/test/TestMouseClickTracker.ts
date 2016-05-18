@@ -34,7 +34,6 @@ describe("The Mouse Click Tracker", function() {
 
         // Verify that the send method has not been called yet
         expect(this.tracker.sendData).not.toHaveBeenCalled();
-        expect(port.postMessage).not.toHaveBeenCalled();
     });
 
     it("should call sendData on clicks", function() {
