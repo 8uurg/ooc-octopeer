@@ -3,18 +3,18 @@
  *
  * Constants that are used in the local storage for Octopeer.
  */
-var OCTOPEER_CONSTANTS: any = {
-    "user_id_key": "octopeer_user_id",
-    "current_repo_id_key": "octopeer_current_repo_id",
+var OCTOPEER_CONSTANTS: any = { // tslint:disable-line
+    "user_id_key":              "octopeer_user_id",
+    "current_repo_id_key":      "octopeer_current_repo_id",
 
     // The permissions/preferences
-    "track_mouse_position": "trackMousePos",
-    "track_screen_resolution": "trackScreenRes",
-    "track_page_resolution": "trackPageRes",
-    "track_key_strokes": "trackKeystrokes",
-    "track_pr_metadata": "trackPRMetaData",
-    "track_browser_data": "trackBrowserData",
-    "hash_username": "hashUsername",
-    "hash_pr_metadata": "hashPRMetaData",
-    "hash_browser_data": "hashBrowserData"
+    "track_mouse_position":     "trackMousePos",
+    "track_screen_resolution":  "trackScreenRes",
+    "track_page_resolution":    "trackPageRes",
+    "track_key_strokes":        "trackKeystrokes",
+    "track_pr_metadata":        "trackPRMetaData",
+    "track_browser_data":       "trackBrowserData",
+    "hash_username":            "hashUsername",
+    "hash_pr_metadata":         "hashPRMetaData",
+    "hash_browser_data":        "hashBrowserData"
 };

@@ -18,13 +18,13 @@ function registerCheckbox(storageName: string, checkboxId: string) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_position, "checkboxMousPos");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_screen_resolution, "checkboxScreenRes");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution, "checkboxPageRes");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes, "checkboxKeystrokes");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_pr_metadata, "checkboxPrMetaDta");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_browser_data, "checkboxBrowserData");
-    registerCheckbox(OCTOPEER_CONSTANTS.hash_username, "checkboxHashUsername");
-    registerCheckbox(OCTOPEER_CONSTANTS.hash_pr_metadata, "checkboxHashPRData");
-    registerCheckbox(OCTOPEER_CONSTANTS.hash_browser_data, "checkboxHashBrowserData");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_position,       "checkboxMousPos");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_screen_resolution,    "checkboxScreenRes");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution,      "checkboxPageRes");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,          "checkboxKeystrokes");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_pr_metadata,          "checkboxPrMetaDta");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_browser_data,         "checkboxBrowserData");
+    registerCheckbox(OCTOPEER_CONSTANTS.hash_username,              "checkboxHashUsername");
+    registerCheckbox(OCTOPEER_CONSTANTS.hash_pr_metadata,           "checkboxHashPRData");
+    registerCheckbox(OCTOPEER_CONSTANTS.hash_browser_data,          "checkboxHashBrowserData");
 });
