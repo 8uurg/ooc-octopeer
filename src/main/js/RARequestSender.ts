@@ -14,7 +14,7 @@ export class RARequestsSender {
      * The constructor for setting the location of the database.
      * @param url  The URL of the RESTful API to send the data to.
      */
-    public constructor(url: string) {
+    constructor(url: string) {
         this.api_location = url;
         this.register();
     }
