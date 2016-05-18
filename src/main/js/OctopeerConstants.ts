@@ -9,7 +9,7 @@ var OCTOPEER_CONSTANTS: any = { // tslint:disable-line
 
     // The permissions/preferences
     "track_mouse_position":     "trackMousePos",
-    "track_screen_resolution":  "trackScreenRes",
+    "track_mouse_clicks":       "checkboxMouseClicks",
     "track_page_resolution":    "trackPageRes",
     "track_key_strokes":        "trackKeystrokes",
     "track_pr_metadata":        "trackPRMetaData",

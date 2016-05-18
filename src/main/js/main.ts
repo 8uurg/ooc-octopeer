@@ -18,12 +18,18 @@ declare var UserIdTracker: any;
 let neededSettings: { [key: string]: boolean; } = {
     [OCTOPEER_CONSTANTS.track_key_strokes]: true,
     [OCTOPEER_CONSTANTS.track_mouse_position]: true,
-    [OCTOPEER_CONSTANTS.track_page_resolution]: true
+    [OCTOPEER_CONSTANTS.track_page_resolution]: true,
+    [OCTOPEER_CONSTANTS.track_mouse_clicks]: true
 };
 
 chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
     // Log the current user name and repository id.
     (new UserIdTracker()).log();
+
+    // Register the resize tracker to the current document.
+    if (items[OCTOPEER_CONSTANTS.track_page_resolution]) {
+        (new ResizeTracker()).register();
+    }
 
     // Create an instance of the keystroke tracker.
     if (items[OCTOPEER_CONSTANTS.track_key_strokes]) {
@@ -33,12 +39,11 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
     // Register the mousetracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_mouse_position]) {
         (new MousePositionTracker()).register();
-        (new MouseClickTracker()).register();
     }
 
-    // Register the resize tracker to the current document.
-    if (items[OCTOPEER_CONSTANTS.track_page_resolution]) {
-        (new ResizeTracker()).register();
+    // Register the mouse click tracker to the current document.
+    if (items[OCTOPEER_CONSTANTS.track_mouse_clicks]) {
+        (new MouseClickTracker()).register();
     }
 });
 

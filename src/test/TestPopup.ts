@@ -12,21 +12,22 @@ global.localStorage = browser.getLocalStorage();
  * Tests for popup.
  */
 describe("popup.ts tests", function () {
+    let checkbox: HTMLInputElement;
     beforeEach(function () {
         browser = new MockBrowser();
         global.document = browser.getDocument();
         global.localStorage = browser.getLocalStorage();
-    });
 
-    it("should restore state on registration when saved state is false.", function () {
-        // Create a checkbox to be used in this test.
+        // Create a checkbox to be used in the tests.
         let body = <Element> document.getElementsByTagName("body")[0];
-        let checkbox = <HTMLInputElement> document.createElement("INPUT");
+        checkbox = <HTMLInputElement> document.createElement("INPUT");
         checkbox.checked = true;
         checkbox.setAttribute("type", "checkbox");
         checkbox.setAttribute("id", "some_value");
         body.appendChild(checkbox);
+    });
 
+    it("should restore state on registration when saved state is false.", function () {
         spyOn(chrome.storage.sync, "get").and.callFake((_: {[key: string]: any}, callback: any ) => {
             callback({"testStorageName": false});
         });
@@ -36,15 +37,7 @@ describe("popup.ts tests", function () {
     });
 
     it("should restore state on registration when saved state is true.", function () {
-        // Create a checkbox to be used in this test.
-        let body = <Element> document.getElementsByTagName("body")[0];
-        let checkbox = <HTMLInputElement> document.createElement("INPUT");
-        checkbox.checked = false;
-        checkbox.setAttribute("type", "checkbox");
-        checkbox.setAttribute("id", "some_value");
-        body.appendChild(checkbox);
-
-        spyOn(chrome.storage.sync, "get").and.callFake((_: {[key: string]: any}, callback: any) => {
+        spyOn(chrome.storage.sync, "get").and.callFake((_: {[key: string]: any}, callback: any ) => {
            callback({"testStorageName": true});
         });
 
@@ -53,14 +46,6 @@ describe("popup.ts tests", function () {
     });
 
     it("stores settings locally upon a click on the checkbox", function () {
-        // Create a checkbox to be used in this test.
-        let body = <Element> document.getElementsByTagName("body")[0];
-        let checkbox = <HTMLInputElement> document.createElement("INPUT");
-        checkbox.checked = false;
-        checkbox.setAttribute("type", "checkbox");
-        checkbox.setAttribute("id", "some_value");
-        body.appendChild(checkbox);
-
         spyOn(chrome.storage.sync, "get").and.callFake((_: {[key: string]: any}, callback: any ) => {
             callback({"testStorageName": false});
         });
