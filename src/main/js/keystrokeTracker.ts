@@ -68,12 +68,13 @@ export class KeystrokeTracker {
 
             current.logKeystroke();
         });
+        console.log("Registered Keystroke Tracker.");
     }
 
     /**
      * Log the key that has been pressed and send it to the database.
      */
-    logKeystroke() {
+    public logKeystroke() {
         this.sendData(this.keyName);
         console.log("Keystroke: " + this.keyName);
     }
@@ -82,12 +83,9 @@ export class KeystrokeTracker {
      * Send data to the database
      * @param keyName name of the key that has been pressed.
      */
-    sendData(keyName: string) {
+    public sendData(keyName: string) {
         // TODO: Implementations of URL and Session.
         chrome.runtime.connect({name: "requestSender"}).postMessage({table: "keystroke_event/", data: {"url": "TODO",
             "created_at": Date.now(), keyName: keyName, "session": "TODO"}});
     }
 }
-
-// Create an instance of the keystroke tracker.
-(new KeystrokeTracker).register();

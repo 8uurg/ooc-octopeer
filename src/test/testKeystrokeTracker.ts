@@ -1,4 +1,4 @@
-///<reference path="../../typings/main.d.ts" />
+///<reference path="../../typings/index.d.ts" />
 
 // Nullroute the default creation of the KeystrokeTracker.
 declare var global: any;

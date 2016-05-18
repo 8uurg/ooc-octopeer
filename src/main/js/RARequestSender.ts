@@ -1,11 +1,13 @@
 ///<reference path="./interfaces/message.ts" />
+/// <reference path="../../../typings/index.d.ts" />
+
 /**
  * Created by Cas on 23-4-2016.
  * This class lets gives the possibility to send JSON requests to the restful api.
  */
 export class RARequestsSender {
 
-    api_location: string;
+    public api_location: string;
     private send: boolean = false;
 
     /**

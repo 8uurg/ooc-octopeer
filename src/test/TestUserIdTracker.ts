@@ -1,4 +1,4 @@
-///<reference path="../../typings/main.d.ts" />
+///<reference path="../../typings/index.d.ts" />
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
 declare var global: any;
 
@@ -36,7 +36,8 @@ const sampleUserData = {
     "displayName": "Joey Sax",
     "uuid": "{897}",
     "firstName": "Joey",
-    "avatarUrl": "https://tctechcrunch2011.files.wordpress.com/2014/03/zap-the-bedhoppingest-characters-on-tv-from-do-017.jpeg",
+    "avatarUrl":
+        "https://tctechcrunch2011.files.wordpress.com/2014/03/zap-the-bedhoppingest-characters-on-tv-from-do-017.jpeg",
     "lastName": "Tribbiani",
     "isTeam": false,
     "isSshEnabled": false,
