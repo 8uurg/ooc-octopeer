@@ -37,9 +37,9 @@ export class ResizeTracker {
         this.port.postMessage({
             table: "window_resolution/",
             data: {
-                created_at: Date.now(),
                 width: this.last.width,
                 height: this.last.height,
+                created_at: Date.now(),
                 session: "" // Empty for now
             }
         });

@@ -4,6 +4,8 @@ declare var global: any;
 global.window = {
     addEventListener: function() {}
 };
+
+import createSpyObj = jasmine.createSpyObj;
 import {ResizeTracker} from "../main/js/resizeTracker";
 
 describe("The ResizeTracker", function() {
@@ -19,74 +21,106 @@ describe("The ResizeTracker", function() {
             innerWidth: 400,
             innerHeight: 500
         };
-       this.tracker.register();
+        spyOn(this.tracker, "sendData").and.callThrough();
 
-       // Mock current date for repeatable tests. 
-       _this.date = 0;
-       spyOn(Date, "now").and.callFake(function () {
-           return _this.date;
-       });
+        // Mock current date for repeatable tests. 
+        _this.date = 0;
+        spyOn(Date, "now").and.callFake(function () {
+            return _this.date;
+        });
     });
 
     it("should not start sending without being triggered first.", function() {
-       spyOn(this, "ev");
-       jasmine.clock().tick(5000);
-       expect(this.ev).not.toHaveBeenCalled();
+        this.tracker.register();
+        spyOn(this, "ev");
+        jasmine.clock().tick(5000);
+        expect(this.ev).not.toHaveBeenCalled();
     });
 
     it("should send a resize if the screen got resized.", function() {
-       spyOn(this.tracker, "sendData");
-       this.date = 450;
-       this.ev();
-       jasmine.clock().tick(400);
-       expect(this.tracker.sendData).toHaveBeenCalledWith({
-           width: 400,
-           height: 500,
-           timestamp: 450
+        let port = createSpyObj("Port", ["postMessage"]);
+        spyOn(chrome.runtime, "connect").and.returnValue(port);
+        this.tracker.register();
+
+        this.date = 450;
+        this.ev();
+        jasmine.clock().tick(400);
+        expect(port.postMessage).toHaveBeenCalledWith({
+            table: "window_resolution/",
+                data: {
+                    width: 400,
+                    height: 500,
+                    created_at: 450,
+                    session: ""
+                }
        });
     });
 
     it("should not send all resize events during a resize.", function() {
-       spyOn(this.tracker, "sendData");
-       this.date = 450;
-       this.ev();
-       jasmine.clock().tick(40);
-       this.date = 459;
-       this.ev();
-       jasmine.clock().tick(400);
-       expect(this.tracker.sendData).not.toHaveBeenCalledWith({
-           width: 400,
-           height: 500,
-           timestamp: 450
-       });
-       expect(this.tracker.sendData).toHaveBeenCalledWith({
-           width: 400,
-           height: 500,
-           timestamp: 459
-       });
+        let port = createSpyObj("Port", ["postMessage"]);
+        spyOn(chrome.runtime, "connect").and.returnValue(port);
+        this.tracker.register();
+
+        this.date = 450;
+        this.ev();
+        jasmine.clock().tick(40);
+        this.date = 459;
+        this.ev();
+        jasmine.clock().tick(400);
+
+        expect(port.postMessage).not.toHaveBeenCalledWith({
+            table: "window_resolution/",
+            data: {
+                width: 400,
+                height: 500,
+                created_at: 450,
+                session: ""
+            }
+        });
+        expect(port.postMessage).toHaveBeenCalledWith({
+            table: "window_resolution/",
+            data: {
+                width: 400,
+                height: 500,
+                created_at: 459,
+                session: ""
+            }
+        });
     });
 
     it("should send all resize events if they are different resizes.", function() {
-       spyOn(this.tracker, "sendData");
-       this.date = 450;
-       this.ev();
-       jasmine.clock().tick(3000);
-       this.date = 459;
-       this.ev();
-       jasmine.clock().tick(400);
-       expect(this.tracker.sendData).toHaveBeenCalledWith({
-           width: 400,
-           height: 500,
-           timestamp: 450
-       });
-       expect(this.tracker.sendData).toHaveBeenCalledWith({
-           width: 400,
-           height: 500,
-           timestamp: 459
-       });
+        let port = createSpyObj("Port", ["postMessage"]);
+        spyOn(chrome.runtime, "connect").and.returnValue(port);
+        this.tracker.register();
+
+        this.date = 450;
+        this.ev();
+        jasmine.clock().tick(3000);
+        this.date = 459;
+        this.ev();
+        jasmine.clock().tick(400);
+
+         expect(port.postMessage).toHaveBeenCalledWith({
+             table: "window_resolution/",
+             data: {
+                width: 400,
+                height: 500,
+                created_at: 450,
+                session: ""
+             }
+        });
+        expect(port.postMessage).toHaveBeenCalledWith({
+            table: "window_resolution/",
+            data: {
+                width: 400,
+                height: 500,
+                created_at: 459,
+                session: ""
+            }
+        });
     });
 
     afterEach(function() {
-       jasmine.clock().uninstall();
+        jasmine.clock().uninstall();
     });
 });
