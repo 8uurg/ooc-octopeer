@@ -42,7 +42,6 @@ describe("The ResizeTracker", function() {
 
     it("should send a resize if the screen got resized.", function() {
         this.tracker.register();
-
         this.date = 450;
         this.ev();
         jasmine.clock().tick(400);
@@ -59,7 +58,6 @@ describe("The ResizeTracker", function() {
 
     it("should not send all resize events during a resize.", function() {
         this.tracker.register();
-
         this.date = 450;
         this.ev();
         jasmine.clock().tick(40);
@@ -89,7 +87,6 @@ describe("The ResizeTracker", function() {
 
     it("should send all resize events if they are different resizes.", function() {
         this.tracker.register();
-
         this.date = 450;
         this.ev();
         jasmine.clock().tick(3000);
