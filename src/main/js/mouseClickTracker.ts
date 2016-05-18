@@ -27,7 +27,7 @@ export class MouseClickTracker {
     /**
      * Send mouse click data to centralized collector.
      */
-    sendData() {
+    public sendData() {
         this.port.postMessage({
             table: "mouse-click-events/",
             data: {

@@ -13,7 +13,6 @@ declare var UserIdTracker: any;
  * Created by larsstegman on 16-05-16.
  * This file is the starting point for each BitBucket page tracking.
  */
-
 // Log the current user name and repository id.
 (new UserIdTracker()).log();
 

@@ -33,7 +33,7 @@ export class MousePositionTracker {
      * @param cursorX The recorded x position of the cursor.
      * @param cursorY The recorded y position of the cursor.
      */
-    sendData(cursorX: number, cursorY: number) {
+    public sendData(cursorX: number, cursorY: number) {
         this.port.postMessage({
             table: "mouse-position-events/",
             data: {
