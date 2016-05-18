@@ -11,6 +11,7 @@ declare var UserIdTracker: any;
  * Created by larsstegman on 16-05-16.
  * This file is the starting point for each BitBucket page tracking.
  */
+
 // The needed settings. True is the default value if storage does not contain the key.
 let neededSettings: { [key: string]: boolean; } = {
     [OCTOPEER_CONSTANTS.track_key_strokes]: true,

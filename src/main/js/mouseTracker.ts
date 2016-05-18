@@ -28,7 +28,7 @@ export class MouseTracker {
     /**
      * Logs the current mouse position and sends it to the right data source.
      */
-    logMousePosition() {
+    public logMousePosition() {
         this.sendData(this.cursorX, this.cursorY);
         console.log("Mouse position at: " + this.cursorX + ", " + this.cursorY);
     }
@@ -38,7 +38,7 @@ export class MouseTracker {
      * @param cursorX The recorded x position of the cursor.
      * @param cursorY The recorded y position of the cursor.
      */
-    sendData(cursorX: number, cursorY: number) {
+    public sendData(cursorX: number, cursorY: number) {
         // TODO: Implement this.
         console.log("Called");
     }
