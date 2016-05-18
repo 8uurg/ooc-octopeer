@@ -6,6 +6,11 @@ declare let global: any;
 
 global.chrome = {
     runtime: {
+        connect: function() {
+            return {
+                postMessage: function() {}
+            };
+        },
         onConnect: {
             addListener: function() {
                 return {
