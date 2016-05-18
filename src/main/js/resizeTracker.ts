@@ -8,24 +8,24 @@ export class ResizeTracker {
      * Registers and hooks the instance into the environment.
      */
     public register() {
-        const current: ResizeTracker = this;
+        const _this: ResizeTracker = this;
 
-        current.port = chrome.runtime.connect({name: "requestSender"});
+        _this.port = chrome.runtime.connect({name: "requestSender"});
 
         // Registers all resize events (even during resize)
         window.addEventListener("resize", function (e) {
-            current.last = {
+            _this.last = {
                     width: window.innerWidth,
                     height: window.innerHeight,
                     timestamp: Date.now()
                 };
 
             // Stop the previous resize event from being sent.
-            clearTimeout(current.timer);
+            clearTimeout(_this.timer);
 
-            current.timer = setTimeout(function() {
-                current.sendData();
-                current.last = null;
+            _this.timer = setTimeout(function() {
+                _this.sendData();
+                _this.last = null;
             }, 400);
         });
     }
