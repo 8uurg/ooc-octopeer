@@ -3,10 +3,6 @@
  */
 
 interface ResolutionJSON {
-    /**
-     * The url of the page.
-     */
-    url: string;
 
     /**
      * The timestamp of when the keystroke was logged.
