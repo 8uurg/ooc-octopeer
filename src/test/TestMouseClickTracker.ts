@@ -47,19 +47,13 @@ describe("The Mouse Click Tracker", function() {
 
         // Verify that the send method has been called
         expect(this.tracker.sendData).toHaveBeenCalled();
-        expect(port.postMessage).toHaveBeenCalled();
     });
 
     it("should call sendData more often after multiple clicks", function() {
         this.tracker.register();
 
-        // Simulate a mouse click
+        // Simulate mouse clicks
         this.eventCall({MouseEvent: "click"});
-
-        // Verify that the send method has been called
-        expect(this.tracker.sendData).toHaveBeenCalledTimes(1);
-
-        // Simulate a mouse click
         this.eventCall({MouseEvent: "click"});
 
         // Verify that the send method has been called again

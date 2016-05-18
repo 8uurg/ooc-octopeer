@@ -66,8 +66,6 @@ describe("The Mouse Position Tracker", function() {
             clientX: 0,
             clientY: 0
         });
-        
-        expect(this.tracker.sendData).toHaveBeenCalledTimes(1);
 
         // Change cursor position.
         this.eventCall({
