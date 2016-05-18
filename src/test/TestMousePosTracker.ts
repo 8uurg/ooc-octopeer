@@ -42,7 +42,7 @@ describe("The Mouse Position Tracker", function() {
             clientX: 0,
             clientY: 0
         });
-        
+
         expect(port.postMessage).toHaveBeenCalledWith({
             table: "mouse-position-events/",
             data: {
@@ -74,7 +74,7 @@ describe("The Mouse Position Tracker", function() {
             clientX: 0,
             clientY: 0
         });
-        
+
         expect(this.tracker.sendData).toHaveBeenCalledTimes(2);
     });
 });
