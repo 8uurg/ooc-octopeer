@@ -5,6 +5,8 @@ export class MousePositionTracker {
     private port: any;
     private cursorX: number = 0;
     private cursorY: number = 0;
+    private viewportX: number = 0;
+    private viewportY: number = 0;
 
     /**
      * Register the mouse tracker to the document.
@@ -22,30 +24,33 @@ export class MousePositionTracker {
         document.addEventListener("mousemove", function(event) {
             _this.cursorX = event.pageX;
             _this.cursorY = event.pageY;
+            _this.viewportX = event.clientX;
+            _this.viewportY = event.clientY;
         });
 
-        setInterval(function(){ _this.sendData(_this.cursorX, _this.cursorY); }, 1000);
-        console.log("Registered Mouse Tracker.");
+        setInterval(function(){
+            _this.sendData(_this.cursorX, _this.cursorY, _this.viewportX, _this.viewportY);
+        }, 1000);
     }
 
     /**
      * Send data to centralized collector.
      * @param cursorX The recorded x position of the cursor.
      * @param cursorY The recorded y position of the cursor.
+     * @param viewportX The viewport x location
+     * @param viewportY The viewport y location
      */
-    public sendData(cursorX: number, cursorY: number) {
+    public sendData(cursorX: number, cursorY: number, viewportX: number, viewportY: number) {
         this.port.postMessage({
             table: "mouse-position-events/",
             data: {
-                url: "",
-                position_x: this.cursorX,
-                position_y: this.cursorY,
-                viewport_x: 0,
-                viewport_y: 0,
-                session: "",
+                position_x: cursorX,
+                position_y: cursorY,
+                viewport_x: viewportX,
+                viewport_y: viewportY,
+                session: "", // Empty for now.
                 created_at: Date.now()
             }
         });
-        console.log("Posted Mouse Position JSON Message");
     }
 }

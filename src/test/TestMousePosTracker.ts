@@ -46,15 +46,17 @@ describe("The MouseTracker", function() {
         this.tracker.register();
 
         jasmine.clock().tick(1000);
-        expect(this.tracker.sendData).toHaveBeenCalledWith(0, 0);
+        expect(this.tracker.sendData).toHaveBeenCalledWith(0, 0, 0, 0);
 
         // Change cursor position.
         this.eventCall({
             pageX: 50,
-            pageY: 100
+            pageY: 100,
+            clientX: 0,
+            clientY: 0
         });
         jasmine.clock().tick(1000);
-        expect(this.tracker.sendData).toHaveBeenCalledWith(50, 100);
+        expect(this.tracker.sendData).toHaveBeenCalledWith(50, 100, 0, 0);
         expect(port.postMessage).toHaveBeenCalled();
     });
 
