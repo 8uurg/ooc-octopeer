@@ -8,20 +8,23 @@ let original_setInterval = global.setInterval;
 global.setInterval = function() {};
 
 // Actual imports.
+import createSpyObj = jasmine.createSpyObj;
 import {KeystrokeTracker} from "../main/js/keystrokeTracker";
 global.setInterval = original_setInterval;
 
 describe("KeystrokeTracker", function() {
     let eventCall: (event: any) => void = null;
-    let tracker: KeystrokeTracker = null;
+    let port: any = null;
     beforeEach(function() {
         // Capture any added eventlisteners.
         global.document.addEventListener = function (ev: string, func: (event: any) => void) {
             eventCall = func;
         };
-        tracker = new KeystrokeTracker();
-        tracker.register();
-        spyOn(tracker, "sendData");
+        this.tracker = new KeystrokeTracker();
+        spyOn(this.tracker, "sendData").and.callThrough();
+
+        port = createSpyObj("Port", ["postMessage"]);
+        spyOn(chrome.runtime, "connect").and.returnValue(port);
     });
 
     let testArray = [
@@ -48,8 +51,19 @@ describe("KeystrokeTracker", function() {
 
     testArray.forEach( function(item) {
         it("should log a key press after the 'keyup' event with the '" + item.name + "' key.", function() {
+            this.tracker.register();
+
+            // Mock date, because of ms differences.
+            spyOn(Date, "now").and.returnValue(42);
             eventCall({keyBoardEvent: "keyup", keyCode: item.keyCode});
-            expect(tracker.sendData).toHaveBeenCalledWith(item.result);
+            expect(port.postMessage).toHaveBeenCalledWith({
+                table: "keystroke-events/",
+                data: {
+                    created_at: Date.now(),
+                    keyName: item.result,
+                    session: ""
+                }
+            });
         });
     });
 });

