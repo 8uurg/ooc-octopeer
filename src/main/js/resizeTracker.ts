@@ -2,36 +2,46 @@
 export class ResizeTracker {
     private last: WindowSize = null;
     private timer: any = null;
+    private port: any = null;
 
     /**
      * Registers and hooks the instance into the environment.
      */
     public register() {
-        const current: ResizeTracker = this;
+        const _this: ResizeTracker = this;
+
+        _this.port = chrome.runtime.connect({name: "requestSender"});
+
         // Registers all resize events (even during resize)
         window.addEventListener("resize", function (e) {
-            current.last = {
+            _this.last = {
                     width: window.innerWidth,
                     height: window.innerHeight,
                     timestamp: Date.now()
                 };
 
             // Stop the previous resize event from being sent.
-            clearTimeout(current.timer);
+            clearTimeout(_this.timer);
 
-            current.timer = setTimeout(function() {
-                current.sendData(current.last);
-                current.last = null;
+            _this.timer = setTimeout(function() {
+                _this.sendData();
+                _this.last = null;
             }, 400);
         });
-        console.log("Registered Resize Tracker.");
     }
 
     /**
-     * Sends data - somewhere.
+     * Sends data to the centralized collector.
      */
-    public sendData(window: WindowSize) {
-        // TODO: Send last to collector
-        console.log(window);
+    public sendData() {
+        this.port.postMessage({
+            table: "window_resolution/",
+            data: {
+                width: this.last.width,
+                height: this.last.height,
+                created_at: Date.now(),
+                session: "" // Empty for now
+            }
+        });
     }
 }

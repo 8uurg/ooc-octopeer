@@ -13,19 +13,42 @@ declare var UserIdTracker: any;
  * Created by larsstegman on 16-05-16.
  * This file is the starting point for each BitBucket page tracking.
  */
-// Log the current user name and repository id.
-(new UserIdTracker()).log();
 
-// Create an instance of the keystroke tracker.
-(new KeystrokeTracker).register();
+// The needed settings. True is the default value if storage does not contain the key.
+let neededSettings: { [key: string]: boolean; } = {
+    [OCTOPEER_CONSTANTS.track_key_strokes]: true,
+    [OCTOPEER_CONSTANTS.track_mouse_position]: true,
+    [OCTOPEER_CONSTANTS.track_page_resolution]: true,
+    [OCTOPEER_CONSTANTS.track_mouse_clicks]: true
+};
 
-// Register the resize tracker to the current document.
-(new ResizeTracker()).register();
+chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
+    // Log the current user name and repository id.
+    (new UserIdTracker()).log();
 
-// Register the mouse click tracker to the current document.
-(new MouseClickTracker()).register();
+    // Register the resize tracker to the current document.
+    if (items[OCTOPEER_CONSTANTS.track_page_resolution]) {
+        (new ResizeTracker()).register();
+    }
 
-// Register the mouse position tracker to the current document.
-(new MousePositionTracker()).register();
+    // Create an instance of the keystroke tracker.
+    if (items[OCTOPEER_CONSTANTS.track_key_strokes]) {
+        (new KeystrokeTracker()).register();
+    }
+
+    // Register the mousetracker to the current document.
+    if (items[OCTOPEER_CONSTANTS.track_mouse_position]) {
+        (new MousePositionTracker()).register();
+    }
+
+    // Register the mouse click tracker to the current document.
+    if (items[OCTOPEER_CONSTANTS.track_mouse_clicks]) {
+        (new MouseClickTracker()).register();
+    }
+});
+
+
+
+
 
 
