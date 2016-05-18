@@ -7,7 +7,7 @@
  */
 export class RARequestsSender {
 
-    api_location: string;
+    public api_location: string;
     private send: boolean = false;
 
     /**

@@ -6,6 +6,11 @@ declare let global: any;
 
 global.chrome = {
     runtime: {
+        connect: function() {
+            return {
+                postMessage: function() {}
+            };
+        },
         onConnect: {
             addListener: function() {
                 return {
@@ -17,7 +22,6 @@ global.chrome = {
 };
 
 import {RARequestsSender} from "../main/js/RARequestSender";
-
 
 describe("RARequestSender Tests", function() {
 
