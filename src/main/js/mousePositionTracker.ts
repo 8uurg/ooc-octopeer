@@ -26,11 +26,8 @@ export class MousePositionTracker {
             _this.cursorY = event.pageY;
             _this.viewportX = event.clientX;
             _this.viewportY = event.clientY;
-        });
-
-        setInterval(function(){
             _this.sendData();
-        }, 1000);
+        });
     }
 
     /**

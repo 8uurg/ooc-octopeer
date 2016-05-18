@@ -21,7 +21,6 @@ describe("The Mouse Click Tracker", function() {
             _this.eventCall = func;
         };
         this.tracker = new MouseClickTracker();
-
         spyOn(this.tracker, "sendData").and.callThrough();
     });
 

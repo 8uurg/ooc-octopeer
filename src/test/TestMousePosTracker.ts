@@ -18,7 +18,6 @@ import {MousePositionTracker} from "../main/js/mousePositionTracker";
 
 describe("The Mouse Position Tracker", function() {
     beforeEach(function(){
-        jasmine.clock().install();
         const _this = this;
         this.eventCall = <(event: any) => void> null;
 
@@ -27,36 +26,6 @@ describe("The Mouse Position Tracker", function() {
 
         this.tracker = new MousePositionTracker();
         spyOn(this.tracker, "sendData").and.callThrough();
-    });
-
-    it("should log the current position of the mouse regularily, even if the mouse hasn't moved.", function() {
-        this.tracker.register();
-
-        jasmine.clock().tick(1000);
-        expect(this.tracker.sendData).toHaveBeenCalledTimes(1);
-        jasmine.clock().tick(1000);
-        expect(this.tracker.sendData).toHaveBeenCalledTimes(2);
-    });
-
-    it("should call sendData with the initialized position of the mouse", function() {
-        let port = createSpyObj("Port", ["postMessage"]);
-        spyOn(chrome.runtime, "connect").and.returnValue(port);
-
-        // Create an instance of the tracker
-        this.tracker.register();
-
-        jasmine.clock().tick(1000);
-        expect(port.postMessage).toHaveBeenCalledWith({
-            table: "mouse-position-events/",
-            data: {
-                position_x: -1,
-                position_y: -1,
-                viewport_x: -1,
-                viewport_y: -1,
-                session: "",
-                created_at: Date.now()
-            }
-        });
     });
 
     it("should call sendData with the current position of the mouse after an update", function() {
@@ -73,8 +42,7 @@ describe("The Mouse Position Tracker", function() {
             clientX: 0,
             clientY: 0
         });
-
-        jasmine.clock().tick(1000);
+        
         expect(port.postMessage).toHaveBeenCalledWith({
             table: "mouse-position-events/",
             data: {
@@ -88,7 +56,27 @@ describe("The Mouse Position Tracker", function() {
         });
     });
 
-    afterEach(function() {
-        jasmine.clock().uninstall();
+    it("should log the current position of the mouse regularily, even if the mouse hasn't moved.", function() {
+        this.tracker.register();
+
+        // Change cursor position.
+        this.eventCall({
+            pageX: 50,
+            pageY: 100,
+            clientX: 0,
+            clientY: 0
+        });
+        
+        expect(this.tracker.sendData).toHaveBeenCalledTimes(1);
+
+        // Change cursor position.
+        this.eventCall({
+            pageX: 250,
+            pageY: 100,
+            clientX: 0,
+            clientY: 0
+        });
+        
+        expect(this.tracker.sendData).toHaveBeenCalledTimes(2);
     });
 });
