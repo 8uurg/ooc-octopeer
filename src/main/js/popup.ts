@@ -13,6 +13,7 @@ function registerCheckbox(storageName: string, checkboxId: string) {
         checkbox.addEventListener("click", function() {
             syncedStorage.set({[storageName]: this.checked});
             console.log(storageName + ": " + this.checked);
+            document.getElementById("refresh-page-message").style.setProperty("visibility", "visible");
         });
     });
 }
