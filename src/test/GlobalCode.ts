@@ -43,3 +43,8 @@ glob.document = {
 };
 
 glob.localStorage = function() {};
+glob.window = {
+    addEventListener: function() {}
+};
+glob.window.innerHeight = 500;
+glob.window.innerWidth = 400;

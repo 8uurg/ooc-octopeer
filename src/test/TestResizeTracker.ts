@@ -1,10 +1,4 @@
 ///<reference path="../../typings/index.d.ts" />
-declare var global: any;
-
-global.window = {
-    addEventListener: function() {}
-};
-
 import createSpyObj = jasmine.createSpyObj;
 import {ResizeTracker} from "../main/js/resizeTracker";
 
@@ -16,12 +10,8 @@ describe("The ResizeTracker", function() {
         this.tracker = new ResizeTracker();
         this.ev = <(e: any) => void> null;
         let _this = this;
-        global.window = {
-            addEventListener: function(eventName: string, callback: (e: any) => void) {
-                _this.ev = callback;
-            },
-            innerWidth: 400,
-            innerHeight: 500
+        window.addEventListener = function(eventName: string, callback: (e: any) => void) {
+            _this.ev = callback;
         };
         spyOn(this.tracker, "sendData").and.callThrough();
         port = createSpyObj("Port", ["postMessage"]);
