@@ -31,11 +31,9 @@ export class MouseClickTracker {
         this.port.postMessage({
             table: "mouse-click-events/",
             data: {
-                url: "",
-                session: "",
+                session: "", // Empty for now.
                 created_at: Date.now()
             }
         });
-        console.log("Posted Mouse Click JSON Message");
     }
 }
