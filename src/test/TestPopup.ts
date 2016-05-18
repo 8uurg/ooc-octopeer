@@ -1,5 +1,5 @@
 "use strict";
-///<reference path="../../typings/main.d.ts" />
+///<reference path="../../typings/index.d.ts" />
 
 import {registerCheckbox} from "../main/js/popup";
 declare var global: any;

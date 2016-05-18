@@ -1,9 +1,8 @@
 /**
- * Created by Gebruiker on 18-5-2016.
+ * Created by Cas on 18-5-2016.
  */
+var glob: any = global; // tslint:disable-line
 
-
-var glob: any = global;
 glob.chrome = {
     runtime: {
         connect: function() {
@@ -18,6 +17,12 @@ glob.chrome = {
                 };
             }
         }
+    },
+    storage: {
+        sync: {
+            set: function () {},
+            get: function () {}
+        }
     }
 };
 
@@ -29,5 +34,10 @@ glob.XMLHttpRequest = function() {
         this.onreadystatechange();
     };
 };
+
 glob.XMLHttpRequest.prototype.status = 0;
 glob.XMLHttpRequest.prototype.readyState = 0;
+
+glob.document = {
+    addEventListener:  function() {}
+};
