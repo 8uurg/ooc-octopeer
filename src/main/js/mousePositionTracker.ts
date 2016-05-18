@@ -3,10 +3,10 @@
  */
 export class MousePositionTracker {
     private port: any;
-    private cursorX: number = 0;
-    private cursorY: number = 0;
-    private viewportX: number = 0;
-    private viewportY: number = 0;
+    private cursorX: number = -1;
+    private cursorY: number = -1;
+    private viewportX: number = -1;
+    private viewportY: number = -1;
 
     /**
      * Register the mouse tracker to the document.
@@ -19,7 +19,7 @@ export class MousePositionTracker {
 
         /**
          * Update the mouse coordinates every time the cursor moves.
-         * @param event object that contains the required cursor information.
+         * @param event Object that contains the required cursor information.
          */
         document.addEventListener("mousemove", function(event) {
             _this.cursorX = event.pageX;
@@ -29,7 +29,7 @@ export class MousePositionTracker {
         });
 
         setInterval(function(){
-            _this.sendData(_this.cursorX, _this.cursorY, _this.viewportX, _this.viewportY);
+            _this.sendData();
         }, 1000);
     }
 
@@ -40,14 +40,14 @@ export class MousePositionTracker {
      * @param viewportX The viewport x location
      * @param viewportY The viewport y location
      */
-    public sendData(cursorX: number, cursorY: number, viewportX: number, viewportY: number) {
+    public sendData() {
         this.port.postMessage({
             table: "mouse-position-events/",
             data: {
-                position_x: cursorX,
-                position_y: cursorY,
-                viewport_x: viewportX,
-                viewport_y: viewportY,
+                position_x: this.cursorX,
+                position_y: this.cursorY,
+                viewport_x: this.viewportX,
+                viewport_y: this.viewportY,
                 session: "", // Empty for now.
                 created_at: Date.now()
             }

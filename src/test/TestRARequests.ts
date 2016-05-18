@@ -8,8 +8,7 @@ global.chrome = {
     runtime: {
         connect: function() {
             return {
-                postMessage: function() {
-                }
+                postMessage: function() {}
             };
         },
         onConnect: {

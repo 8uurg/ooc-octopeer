@@ -1,17 +1,20 @@
 ///<reference path="../../typings/index.d.ts" />
 
 // Nullroute the default creation of the mousetracker.
-import createSpyObj = jasmine.createSpyObj;
+
 declare var global: any;
 global.document = {
     addEventListener: function() {}
 };
+
 const original_setInterval = global.setInterval;
 global.setInterval = function() {};
+global.setInterval = original_setInterval;
 
 // Actual imports.
+import createSpyObj = jasmine.createSpyObj;
 import {MousePositionTracker} from "../main/js/mousePositionTracker";
-global.setInterval = original_setInterval;
+
 
 describe("The MouseTracker", function() {
     beforeEach(function(){
@@ -37,7 +40,6 @@ describe("The MouseTracker", function() {
     it("should call sendData with the current position of the mouse", function() {
         this.tracker = new MousePositionTracker();
 
-        // Create the spies 
         spyOn(this.tracker, "sendData").and.callThrough();
         let port = createSpyObj("Port", ["postMessage"]);
         spyOn(chrome.runtime, "connect").and.returnValue(port);
@@ -46,7 +48,29 @@ describe("The MouseTracker", function() {
         this.tracker.register();
 
         jasmine.clock().tick(1000);
-        expect(this.tracker.sendData).toHaveBeenCalledWith(0, 0, 0, 0);
+        expect(this.tracker.sendData).toHaveBeenCalled();
+        expect(port.postMessage).toHaveBeenCalledWith({
+            table: "mouse-position-events/",
+            data: {
+                position_x: -1,
+                position_y: -1,
+                viewport_x: -1,
+                viewport_y: -1,
+                session: "",
+                created_at: Date.now()
+            }
+        });
+    });
+
+    it("should call sendData with the current position of the mouse after an update", function() {
+        this.tracker = new MousePositionTracker();
+
+        spyOn(this.tracker, "sendData").and.callThrough();
+        let port = createSpyObj("Port", ["postMessage"]);
+        spyOn(chrome.runtime, "connect").and.returnValue(port);
+
+        // Create an instance of the tracker
+        this.tracker.register();
 
         // Change cursor position.
         this.eventCall({
@@ -55,9 +79,20 @@ describe("The MouseTracker", function() {
             clientX: 0,
             clientY: 0
         });
+
         jasmine.clock().tick(1000);
-        expect(this.tracker.sendData).toHaveBeenCalledWith(50, 100, 0, 0);
-        expect(port.postMessage).toHaveBeenCalled();
+        expect(this.tracker.sendData).toHaveBeenCalled();
+        expect(port.postMessage).toHaveBeenCalledWith({
+            table: "mouse-position-events/",
+            data: {
+                position_x: 50,
+                position_y: 100,
+                viewport_x: 0,
+                viewport_y: 0,
+                session: "",
+                created_at: Date.now()
+            }
+        });
     });
 
     afterEach(function() {

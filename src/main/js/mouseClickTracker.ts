@@ -17,7 +17,7 @@ export class MouseClickTracker {
 
         /**
          * Call the log function whenever a mouse click occurs.
-         * @param event object that contains the required cursor information.
+         * @param event Object that contains the required cursor information.
          */
         document.addEventListener("click", function (event) {
             _this.sendData();

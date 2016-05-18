@@ -1,13 +1,14 @@
 ///<reference path="../../typings/index.d.ts" />
 
 // Nullroute the default creation of the mousetracker.
-import createSpyObj = jasmine.createSpyObj;
+
 declare var global: any;
 global.document = {
     addEventListener: function() {}
 };
 
 // Actual imports.
+import createSpyObj = jasmine.createSpyObj;
 import {MouseClickTracker} from "../main/js/mouseClickTracker";
 
 describe("The MouseTracker", function() {
@@ -21,7 +22,6 @@ describe("The MouseTracker", function() {
         global.document.addEventListener = function(ev: string, func: (event: any) => void) { _this.eventCall = func; };
         this.tracker = new MouseClickTracker();
 
-        // Create the spies 
         spyOn(this.tracker, "sendData").and.callThrough();
         let port = createSpyObj("Port", ["postMessage"]);
         spyOn(chrome.runtime, "connect").and.returnValue(port);
@@ -39,5 +39,35 @@ describe("The MouseTracker", function() {
         // Verify that the send method has been called
         expect(this.tracker.sendData).toHaveBeenCalled();
         expect(port.postMessage).toHaveBeenCalled();
+    });
+
+    it("should call sendData more often after multiple clicks", function() {
+
+        const _this = this;
+        this.eventCall = <(event: any) => void> null;
+
+        // Capture any added eventlisteners.
+        global.document.addEventListener = function(ev: string, func: (event: any) => void) { _this.eventCall = func; };
+        this.tracker = new MouseClickTracker();
+
+        spyOn(this.tracker, "sendData").and.callThrough();
+
+        // Create an instance of the tracker
+        this.tracker.register();
+
+        // Verify that the send method has not been called yet
+        expect(this.tracker.sendData).not.toHaveBeenCalled();
+
+        // Simulate a mouse click
+        this.eventCall({MouseEvent: "click"});
+
+        // Verify that the send method has been called
+        expect(this.tracker.sendData).toHaveBeenCalledTimes(1);
+
+        // Simulate a mouse click
+        this.eventCall({MouseEvent: "click"});
+
+        // Verify that the send method has been called again
+        expect(this.tracker.sendData).toHaveBeenCalledTimes(2);
     });
 });

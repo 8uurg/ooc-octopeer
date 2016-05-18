@@ -19,12 +19,13 @@ declare var UserIdTracker: any;
 // Create an instance of the keystroke tracker.
 (new KeystrokeTracker).register();
 
+// Register the resize tracker to the current document.
+(new ResizeTracker()).register();
+
 // Register the mouse click tracker to the current document.
 (new MouseClickTracker()).register();
 
 // Register the mouse position tracker to the current document.
 (new MousePositionTracker()).register();
 
-// Register the resize tracker to the current document.
-(new ResizeTracker()).register();
 
