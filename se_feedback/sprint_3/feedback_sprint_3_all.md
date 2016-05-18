@@ -49,16 +49,18 @@ Total: ****
 
 | Continuous Integration | Score |
 |------------------------|-------|
-| Building               |      |
-| Testing                |      |
+| Building               |  10    |
+| Testing                |  10    |
 
 |         | Score |
 |---------|-------|
-| Tooling |      |
+| Tooling | 10     |
 
 | Pull-based Development | Score |
 |------------------------|-------|
-| Branching              |      |
-| Code Review            |      |
+| Branching              |  10    |
+| Code Review            |  10    |
 
 ##Notes
+* Excellent Tooling and Testing
+* Excellent Code Reviews
