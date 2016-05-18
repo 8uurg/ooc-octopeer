@@ -78,4 +78,10 @@ describe("UserIdTracker.ts tests", function () {
             repository : sampleRepoData.fullslug
         });
     });
+
+    it("should run on the document", function () {
+        console.log = jasmine.createSpy("log");
+        (new UserIdTracker()).log();
+        expect(console.log).toHaveBeenCalledWith("User id tracker: undefined");
+    });
 });
