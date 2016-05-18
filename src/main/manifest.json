@@ -18,9 +18,10 @@
           "https://bitbucket.org/*"
         ],
         "js": [
-          "js/KeystrokeTracker.js",
-          "js/mouseTracker.js",
           "js/interfaces/OctopeerConstants.js",
+          "js/KeystrokeTracker.js",
+          "js/mouseClickTracker.js",
+          "js/mousePositionTracker.js",
           "js/resizeTracker.js",
           "js/UserIdTracker.js",
           "js/main.js"

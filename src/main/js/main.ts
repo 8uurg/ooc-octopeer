@@ -1,9 +1,11 @@
 ///<reference path="./keystrokeTracker.ts" />
-///<reference path="./mouseTracker.ts" />
+///<reference path="./mouseClickTracker.ts" />
+///<reference path="./mousePositionTracker.ts" />
 ///<reference path="./resizeTracker.ts" />
 ///<reference path="./UserIdTracker.ts" />
 declare var KeystrokeTracker: any;
-declare var MouseTracker: any;
+declare var MouseClickTracker: any;
+declare var MousePositionTracker: any;
 declare var ResizeTracker: any;
 declare var UserIdTracker: any;
 
@@ -30,7 +32,8 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
 
     // Register the mousetracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_mouse_position]) {
-        (new MouseTracker()).register();
+        (new MousePositionTracker()).register();
+        (new MouseClickTracker()).register();
     }
 
     // Register the resize tracker to the current document.
@@ -38,4 +41,9 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
         (new ResizeTracker()).register();
     }
 });
+
+
+
+
+
 

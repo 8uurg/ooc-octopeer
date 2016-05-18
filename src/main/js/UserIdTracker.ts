@@ -1,4 +1,4 @@
-import {CurrentUserData} from "./interfaces/CurrentUserData";
+///<reference path="./interfaces/CurrentUserData.ts" />
 
 /**
  * This class tracks the user and repository data on BitBucket pages.

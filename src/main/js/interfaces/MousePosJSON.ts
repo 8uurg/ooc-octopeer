@@ -6,11 +6,6 @@
 interface MousePosJSON {
 
     /**
-     * The url of the page.
-     */
-    url: string;
-
-    /**
      * The timestamp of when the mouse position was logged.
      */
     created_at: Date;
@@ -36,7 +31,7 @@ interface MousePosJSON {
     viewport_y: number;
 
     /**
-     * The link to the session of the PR of this user.
+     * The link to the current session of the PR of this user.
      */
     session: string;
 }
