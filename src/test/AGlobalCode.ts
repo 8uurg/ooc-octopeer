@@ -41,3 +41,5 @@ glob.XMLHttpRequest.prototype.readyState = 0;
 glob.document = {
     addEventListener:  function() {}
 };
+
+glob.localStorage = function() {};
