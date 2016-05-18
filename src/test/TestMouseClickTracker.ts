@@ -11,18 +11,21 @@ global.document = {
 import createSpyObj = jasmine.createSpyObj;
 import {MouseClickTracker} from "../main/js/mouseClickTracker";
 
-describe("The MouseTracker", function() {
-
-    it("should call sendData on clicks", function() {
-
+describe("The Mouse Click Tracker", function() {
+    beforeEach(function() {
         const _this = this;
         this.eventCall = <(event: any) => void> null;
 
-        // Capture any added eventlisteners.
-        global.document.addEventListener = function(ev: string, func: (event: any) => void) { _this.eventCall = func; };
+         // Capture any added eventlisteners.
+        global.document.addEventListener = function (ev: string, func: (event: any) => void) {
+            _this.eventCall = func;
+        };
         this.tracker = new MouseClickTracker();
 
         spyOn(this.tracker, "sendData").and.callThrough();
+    });
+
+    it("should not call sendData on non clicks", function() {
         let port = createSpyObj("Port", ["postMessage"]);
         spyOn(chrome.runtime, "connect").and.returnValue(port);
 
@@ -32,6 +35,14 @@ describe("The MouseTracker", function() {
         // Verify that the send method has not been called yet
         expect(this.tracker.sendData).not.toHaveBeenCalled();
         expect(port.postMessage).not.toHaveBeenCalled();
+    });
+
+    it("should call sendData on clicks", function() {
+        let port = createSpyObj("Port", ["postMessage"]);
+        spyOn(chrome.runtime, "connect").and.returnValue(port);
+
+        // Create an instance of the tracker
+        this.tracker.register();
 
         // Simulate a mouse click
         this.eventCall({MouseEvent: "click"});
@@ -42,21 +53,7 @@ describe("The MouseTracker", function() {
     });
 
     it("should call sendData more often after multiple clicks", function() {
-
-        const _this = this;
-        this.eventCall = <(event: any) => void> null;
-
-        // Capture any added eventlisteners.
-        global.document.addEventListener = function(ev: string, func: (event: any) => void) { _this.eventCall = func; };
-        this.tracker = new MouseClickTracker();
-
-        spyOn(this.tracker, "sendData").and.callThrough();
-
-        // Create an instance of the tracker
         this.tracker.register();
-
-        // Verify that the send method has not been called yet
-        expect(this.tracker.sendData).not.toHaveBeenCalled();
 
         // Simulate a mouse click
         this.eventCall({MouseEvent: "click"});

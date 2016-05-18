@@ -16,7 +16,7 @@ import createSpyObj = jasmine.createSpyObj;
 import {MousePositionTracker} from "../main/js/mousePositionTracker";
 
 
-describe("The MouseTracker", function() {
+describe("The Mouse Position Tracker", function() {
     beforeEach(function(){
         jasmine.clock().install();
         const _this = this;
@@ -24,11 +24,12 @@ describe("The MouseTracker", function() {
 
         // Capture any added eventlisteners.
         global.document.addEventListener = function(ev: string, func: (event: any) => void) { _this.eventCall = func; };
+
+        this.tracker = new MousePositionTracker();
+        spyOn(this.tracker, "sendData").and.callThrough();
     });
 
     it("should log the current position of the mouse regularily, even if the mouse hasn't moved.", function() {
-        this.tracker = new MousePositionTracker();
-        spyOn(this.tracker, "sendData").and.callThrough();
         this.tracker.register();
 
         jasmine.clock().tick(1000);
@@ -37,10 +38,7 @@ describe("The MouseTracker", function() {
         expect(this.tracker.sendData).toHaveBeenCalledTimes(2);
     });
 
-    it("should call sendData with the current position of the mouse", function() {
-        this.tracker = new MousePositionTracker();
-
-        spyOn(this.tracker, "sendData").and.callThrough();
+    it("should call sendData with the initialized position of the mouse", function() {
         let port = createSpyObj("Port", ["postMessage"]);
         spyOn(chrome.runtime, "connect").and.returnValue(port);
 
@@ -63,9 +61,6 @@ describe("The MouseTracker", function() {
     });
 
     it("should call sendData with the current position of the mouse after an update", function() {
-        this.tracker = new MousePositionTracker();
-
-        spyOn(this.tracker, "sendData").and.callThrough();
         let port = createSpyObj("Port", ["postMessage"]);
         spyOn(chrome.runtime, "connect").and.returnValue(port);
 

@@ -35,10 +35,6 @@ export class MousePositionTracker {
 
     /**
      * Send data to centralized collector.
-     * @param cursorX The recorded x position of the cursor.
-     * @param cursorY The recorded y position of the cursor.
-     * @param viewportX The viewport x location
-     * @param viewportY The viewport y location
      */
     public sendData() {
         this.port.postMessage({
