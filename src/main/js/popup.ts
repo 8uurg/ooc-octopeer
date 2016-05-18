@@ -5,7 +5,7 @@
  */
 declare var OCTOPEER_CONSTANTS: any;
 
-function registerCheckbox(storageName: string, checkboxId: string) {
+export function registerCheckbox(storageName: string, checkboxId: string) {
     let checkbox = <HTMLInputElement> document.getElementById(checkboxId);
     let syncedStorage = chrome.storage.sync;
     syncedStorage.get({[storageName]: true}, (items: { [key: string]: any }) => {

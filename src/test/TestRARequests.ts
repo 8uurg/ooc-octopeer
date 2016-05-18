@@ -2,7 +2,7 @@
 /**
  * Created by Cas on 8-5-2016.
  */
-declare let global: any;
+declare var global: any;
 
 global.chrome = {
     runtime: {
@@ -12,6 +12,12 @@ global.chrome = {
                     onMessage: {}
                 };
             }
+        }
+    },
+    storage: {
+        sync: {
+            set: function () {},
+            get: function () {}
         }
     }
 };
