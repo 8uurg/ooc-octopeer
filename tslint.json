@@ -13,7 +13,6 @@
         ],
         "max-line-length": [true, 120],
         "member-access": [true, "check-accessor"],
-        "no-consecutive-blank-lines": true,
         "no-duplicate-variable": true,
         "no-eval": true,
         "no-internal-module": true,
