@@ -18,6 +18,7 @@
           "https://bitbucket.org/*"
         ],
         "js": [
+          "js/OctopeerConstants.js",
           "js/KeystrokeTracker.js",
           "js/mouseClickTracker.js",
           "js/mousePositionTracker.js",
@@ -35,6 +36,9 @@
   "permissions": [
     // Domain Permissions
     "https://bitbucket.org/*",
-    "https://localhost:8000/api/*"
+    "https://localhost:8000/api/*",
+
+    // API Permissions
+    "storage"
   ]
 }
