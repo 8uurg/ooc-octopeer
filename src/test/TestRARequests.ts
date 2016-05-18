@@ -18,7 +18,6 @@ global.chrome = {
 
 import {RARequestsSender} from "../main/js/RARequestSender";
 
-
 describe("RARequestSender Tests", function() {
 
     it("should create an object and call register", function() {
