@@ -1,9 +1,9 @@
 /**
  * Created by Cas on 18-5-2016.
  */
-var glob: any = global; // tslint:disable-line
+var _global: any = global; // tslint:disable-line
 
-glob.chrome = {
+_global.chrome = {
     runtime: {
         connect: function() {
             return {
@@ -26,7 +26,7 @@ glob.chrome = {
     }
 };
 
-glob.XMLHttpRequest = function() {
+_global.XMLHttpRequest = function() {
     this.open = function() {};
     this.setRequestHeader = function() {};
     this.onreadystatechange = function() {};
@@ -35,16 +35,16 @@ glob.XMLHttpRequest = function() {
     };
 };
 
-glob.XMLHttpRequest.prototype.status = 0;
-glob.XMLHttpRequest.prototype.readyState = 0;
+_global.XMLHttpRequest.prototype.status = 0;
+_global.XMLHttpRequest.prototype.readyState = 0;
 
-glob.document = {
+_global.document = {
     addEventListener:  function() {}
 };
 
-glob.localStorage = function() {};
-glob.window = {
+_global.localStorage = function() {};
+_global.window = {
     addEventListener: function() {}
 };
-glob.window.innerHeight = 500;
-glob.window.innerWidth = 400;
+_global.window.innerHeight = 500;
+_global.window.innerWidth = 400;
