@@ -7,6 +7,7 @@ export class MousePositionTracker {
     private cursorY: number = -1;
     private viewportX: number = -1;
     private viewportY: number = -1;
+    private lastCall: number = -1;
 
     /**
      * Register the mouse tracker to the document.
@@ -33,17 +34,22 @@ export class MousePositionTracker {
     /**
      * Send data to centralized collector.
      */
-    public sendData() {
-        this.port.postMessage({
-            table: "mouse-position-events/",
-            data: {
-                position_x: this.cursorX,
-                position_y: this.cursorY,
-                viewport_x: this.viewportX,
-                viewport_y: this.viewportY,
-                session: "", // Empty for now.
-                created_at: Date.now()
-            }
-        });
+    private sendData() {
+        let newCall: number = Date.now();
+
+        if ( newCall - this.lastCall >= 1000 ) {
+            this.lastCall = newCall;
+            this.port.postMessage({
+                table: "mouse-position-events/",
+                data: {
+                    position_x: this.cursorX,
+                    position_y: this.cursorY,
+                    viewport_x: this.viewportX,
+                    viewport_y: this.viewportY,
+                    session: "", // Empty for now.
+                    created_at: Date.now()
+                }
+            });
+        }
     }
 }
