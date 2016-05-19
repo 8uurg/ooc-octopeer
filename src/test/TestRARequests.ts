@@ -3,7 +3,7 @@
  * Created by Cas on 8-5-2016.
  */
 
-import {RARequestsSender} from "../main/js/rarequestSender";
+import {RARequestsSender} from "../main/js/RARequestSender";
 
 describe("RARequestSender Tests", function() {
 

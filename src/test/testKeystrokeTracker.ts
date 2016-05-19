@@ -2,7 +2,7 @@
 
 // Nullroute the default creation of the KeystrokeTracker.
 // Actual imports.
-import {KeystrokeTracker} from "../main/js/keystrokeTracker";
+import {KeystrokeTracker} from "../main/js/KeystrokeTracker";
 
 
 describe("KeystrokeTracker", function() {

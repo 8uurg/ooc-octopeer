@@ -3,7 +3,7 @@
 // Nullroute the default creation of the mousetracker.
 // Actual imports.
 import createSpyObj = jasmine.createSpyObj;
-import {MousePositionTracker} from "../main/js/mousePositionTracker";
+import {MousePositionTracker} from "../main/js/MousePositionTracker";
 
 
 describe("The Mouse Position Tracker", function() {

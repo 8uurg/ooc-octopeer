@@ -1,7 +1,7 @@
 "use strict";
 ///<reference path="../../typings/index.d.ts" />
 
-import {registerCheckbox} from "../main/js/popup";
+import {registerCheckbox} from "../main/js/Popup";
 
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
 let browser: any = new MockBrowser();
