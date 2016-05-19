@@ -20,11 +20,11 @@
         "js": [
           "js/OctopeerConstants.js",
           "js/KeystrokeTracker.js",
-          "js/mouseClickTracker.js",
-          "js/mousePositionTracker.js",
-          "js/resizeTracker.js",
+          "js/MouseClickTracker.js",
+          "js/MousePositionTracker.js",
+          "js/ResizeTracker.js",
           "js/UserIdTracker.js",
-          "js/main.js"
+          "js/Main.js"
         ]
       }
   ],
