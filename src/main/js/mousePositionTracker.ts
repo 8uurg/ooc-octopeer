@@ -37,7 +37,6 @@ export class MousePositionTracker {
     private sendData() {
         let newCall: number = Date.now();
 
-        // We don't want to flood the database with events, so we post a message once per second at most.
         if ( newCall - this.lastCall >= 1000 ) {
             this.lastCall = newCall;
             this.port.postMessage({
