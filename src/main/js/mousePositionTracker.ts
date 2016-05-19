@@ -27,35 +27,30 @@ export class MousePositionTracker {
             _this.cursorY = event.pageY;
             _this.viewportX = event.clientX;
             _this.viewportY = event.clientY;
-            _this.throttleCalls();
+            _this.sendData();
         });
-    }
-
-    /**
-     * Make sure the mouse position is only updated once per second or less frequent.
-     */
-    private throttleCalls() {
-        let newCall: number = Date.now();
-        if ( newCall - this.lastCall >= 1000 ) {
-            this.lastCall = newCall;
-            this.sendData();
-        }
     }
 
     /**
      * Send data to centralized collector.
      */
     private sendData() {
-        this.port.postMessage({
-            table: "mouse-position-events/",
-            data: {
-                position_x: this.cursorX,
-                position_y: this.cursorY,
-                viewport_x: this.viewportX,
-                viewport_y: this.viewportY,
-                session: "", // Empty for now.
-                created_at: Date.now()
-            }
-        });
+        let newCall: number = Date.now();
+
+        // We don't want to flood the database with events, so we post a message once per second at most.
+        if ( newCall - this.lastCall >= 1000 ) {
+            this.lastCall = newCall;
+            this.port.postMessage({
+                table: "mouse-position-events/",
+                data: {
+                    position_x: this.cursorX,
+                    position_y: this.cursorY,
+                    viewport_x: this.viewportX,
+                    viewport_y: this.viewportY,
+                    session: "", // Empty for now.
+                    created_at: Date.now()
+                }
+            });
+        }
     }
 }

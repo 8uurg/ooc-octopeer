@@ -17,6 +17,8 @@ import {MousePositionTracker} from "../main/js/mousePositionTracker";
 
 
 describe("The Mouse Position Tracker", function() {
+    let port: any = null;
+
     beforeEach(function(){
         jasmine.clock().install();
         const _this = this;
@@ -27,13 +29,11 @@ describe("The Mouse Position Tracker", function() {
 
         this.tracker = new MousePositionTracker();
         spyOn(this.tracker, "sendData").and.callThrough();
+        port = createSpyObj("Port", ["postMessage"]);
+        spyOn(chrome.runtime, "connect").and.returnValue(port);
     });
 
     it("should call sendData with the current position of the mouse after an update", function() {
-        let port = createSpyObj("Port", ["postMessage"]);
-        spyOn(chrome.runtime, "connect").and.returnValue(port);
-
-        // Create an instance of the tracker
         this.tracker.register();
 
         // Change cursor position.
@@ -69,7 +69,7 @@ describe("The Mouse Position Tracker", function() {
         });
 
         // First call should go through.
-        expect(this.tracker.sendData).toHaveBeenCalledTimes(1);
+        expect(port.postMessage).toHaveBeenCalledTimes(1);
 
         // Change cursor position.
         this.eventCall({
@@ -80,7 +80,7 @@ describe("The Mouse Position Tracker", function() {
         });
 
         // Second call should be throttled.
-        expect(this.tracker.sendData).toHaveBeenCalledTimes(1);
+        expect(port.postMessage).toHaveBeenCalledTimes(1);
     });
 
     it("should call sendData multiple times, if there is enough time between events.", function() {
@@ -106,7 +106,7 @@ describe("The Mouse Position Tracker", function() {
             clientY: 0
         });
 
-        expect(this.tracker.sendData).toHaveBeenCalledTimes(2);
+        expect(port.postMessage).toHaveBeenCalledTimes(2);
     });
 
     afterEach(function() {
