@@ -19,7 +19,7 @@ export class UserIdTracker {
         let currentRepositoryData: Repository = JSON.parse(bodyAttributes.getNamedItem("data-current-repo").value);
         let currentUserData: UserData = JSON.parse(bodyAttributes.getNamedItem("data-current-user").value);
 
-        return {userId: currentUserData.displayName, repository: currentRepositoryData.fullslug};
+        return {userId: currentUserData.username, repository: currentRepositoryData.fullslug};
     }
 
     /**
