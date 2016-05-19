@@ -34,7 +34,7 @@ export class MousePositionTracker {
     /**
      * Make sure the mouse position is only updated once per second or less frequent.
      */
-    public throttleCalls() {
+    private throttleCalls() {
         let newCall: number = Date.now();
         if ( newCall - this.lastCall >= 1000 ) {
             this.lastCall = newCall;
@@ -45,7 +45,7 @@ export class MousePositionTracker {
     /**
      * Send data to centralized collector.
      */
-    public sendData() {
+    private sendData() {
         this.port.postMessage({
             table: "mouse-position-events/",
             data: {

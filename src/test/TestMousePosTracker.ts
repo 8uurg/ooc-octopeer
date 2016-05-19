@@ -85,7 +85,6 @@ describe("The Mouse Position Tracker", function() {
 
     it("should call sendData multiple times, if there is enough time between events.", function() {
         this.tracker.register();
-
         jasmine.clock().mockDate(Date.prototype);
 
         // Change cursor position.
