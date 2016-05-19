@@ -44,7 +44,11 @@ describe("The ResizeTracker", function() {
         this.tracker.register();
         this.date = 450;
         this.ev();
-        jasmine.clock().tick(400);
+        jasmine.clock().tick(200);
+        // Ensure that the timestamp is the time of the event.
+        // And not the time of sending.
+        this.date = 650;
+        jasmine.clock().tick(200);
         expect(port.postMessage).toHaveBeenCalledWith({
             table: "window_resolution/",
                 data: {
@@ -61,7 +65,7 @@ describe("The ResizeTracker", function() {
         this.date = 450;
         this.ev();
         jasmine.clock().tick(40);
-        this.date = 459;
+        this.date = 490;
         this.ev();
         jasmine.clock().tick(400);
 
@@ -79,7 +83,7 @@ describe("The ResizeTracker", function() {
             data: {
                 width: 400,
                 height: 500,
-                created_at: 459,
+                created_at: 490,
                 session: ""
             }
         });
