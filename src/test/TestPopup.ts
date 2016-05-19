@@ -16,7 +16,6 @@ describe("popup.ts tests", function () {
     beforeEach(function () {
         browser = new MockBrowser();
         document = browser.getDocument();
-        localStorage = browser.getLocalStorage();
 
         // Create a checkbox to be used in the tests.
         let body = <Element> document.getElementsByTagName("body")[0];
