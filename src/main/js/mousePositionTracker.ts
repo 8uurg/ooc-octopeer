@@ -7,6 +7,7 @@ export class MousePositionTracker {
     private cursorY: number = -1;
     private viewportX: number = -1;
     private viewportY: number = -1;
+    private lastCall: number = -1;
 
     /**
      * Register the mouse tracker to the document.
@@ -26,8 +27,19 @@ export class MousePositionTracker {
             _this.cursorY = event.pageY;
             _this.viewportX = event.clientX;
             _this.viewportY = event.clientY;
-            _this.sendData();
+            _this.throttleCalls();
         });
+    }
+
+    /**
+     * Make sure the mouse position is only updated once per second or less frequent.
+     */
+    public throttleCalls() {
+        let newCall: number = Date.now();
+        if ( newCall - this.lastCall >= 1000 ) {
+            this.lastCall = newCall;
+            this.sendData();
+        }
     }
 
     /**

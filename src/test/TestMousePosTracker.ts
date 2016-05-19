@@ -18,6 +18,7 @@ import {MousePositionTracker} from "../main/js/mousePositionTracker";
 
 describe("The Mouse Position Tracker", function() {
     beforeEach(function(){
+        jasmine.clock().install();
         const _this = this;
         this.eventCall = <(event: any) => void> null;
 
@@ -56,7 +57,7 @@ describe("The Mouse Position Tracker", function() {
         });
     });
 
-    it("should log the current position of the mouse regularily, even if the mouse hasn't moved.", function() {
+    it("should throttle the amount of sendData calls, if events occur too fast.", function() {
         this.tracker.register();
 
         // Change cursor position.
@@ -67,6 +68,37 @@ describe("The Mouse Position Tracker", function() {
             clientY: 0
         });
 
+        // First call should go through.
+        expect(this.tracker.sendData).toHaveBeenCalledTimes(1);
+
+        // Change cursor position.
+        this.eventCall({
+            pageX: 250,
+            pageY: 100,
+            clientX: 0,
+            clientY: 0
+        });
+
+        // Second call should be throttled.
+        expect(this.tracker.sendData).toHaveBeenCalledTimes(1);
+    });
+
+    it("should call sendData multiple times, if there is enough time between events.", function() {
+        this.tracker.register();
+
+        jasmine.clock().mockDate(Date.prototype);
+
+        // Change cursor position.
+        this.eventCall({
+            pageX: 50,
+            pageY: 100,
+            clientX: 0,
+            clientY: 0
+        });
+
+        // Pass a sufficient amount of time.
+        jasmine.clock().tick(3000);
+
         // Change cursor position.
         this.eventCall({
             pageX: 250,
@@ -76,5 +108,9 @@ describe("The Mouse Position Tracker", function() {
         });
 
         expect(this.tracker.sendData).toHaveBeenCalledTimes(2);
+    });
+
+    afterEach(function() {
+        jasmine.clock().uninstall();
     });
 });
