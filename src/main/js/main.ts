@@ -2,7 +2,7 @@
 ///<reference path="./mouseClickTracker.ts" />
 ///<reference path="./mousePositionTracker.ts" />
 ///<reference path="./resizeTracker.ts" />
-///<reference path="./UserIdTracker.ts" />
+///<reference path="./userIdTracker.ts" />
 declare var KeystrokeTracker: any;
 declare var MouseClickTracker: any;
 declare var MousePositionTracker: any;

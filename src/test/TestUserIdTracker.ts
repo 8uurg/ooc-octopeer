@@ -3,7 +3,7 @@ let MockBrowser = require("mock-browser").mocks.MockBrowser;
 let browser: any = new MockBrowser();
 document = browser.getDocument();
 
-import {UserIdTracker} from "../main/js/UserIdTracker";
+import {UserIdTracker} from "../main/js/userIdTracker";
 
 /**
  * A data sample for a repo.

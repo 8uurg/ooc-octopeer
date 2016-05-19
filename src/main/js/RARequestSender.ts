@@ -57,7 +57,7 @@ export class RARequestsSender {
         xmlHTTP.open("POST", this.api_location + table, true);
         xmlHTTP.setRequestHeader("Content-Type", "application/json");
         xmlHTTP.onreadystatechange = function() {
-            if (xmlHTTP.status !== 200 && xmlHTTP.readyState === 4) {
+            if (xmlHTTP.status !== (200 || 201 || 202) && xmlHTTP.readyState === 4) {
                 console.error("An error occurred while sending data to the server: " + xmlHTTP.status);
             } else {
                 _this.send = true;

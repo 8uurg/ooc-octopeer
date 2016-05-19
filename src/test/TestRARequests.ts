@@ -3,7 +3,7 @@
  * Created by Cas on 8-5-2016.
  */
 
-import {RARequestsSender} from "../main/js/RARequestSender";
+import {RARequestsSender} from "../main/js/rarequestSender";
 
 describe("RARequestSender Tests", function() {
 
@@ -30,7 +30,7 @@ describe("RARequestSender Tests", function() {
     });
 
     it("gulp should send the request and set send to false if it fails.", function() {
-        XMLHttpRequest.prototype.status = 201;
+        XMLHttpRequest.prototype.status = 400;
         XMLHttpRequest.prototype.readyState = 4;
         let rarObject = new RARequestsSender("location");
         rarObject.sendRequest("table", {});
