@@ -1,12 +1,12 @@
 "use strict";
-///<reference path="../../typings/main.d.ts" />
+///<reference path="../../typings/index.d.ts" />
 
-import {registerCheckbox} from "../main/js/popup";
-declare var global: any;
+import {registerCheckbox} from "../main/js/Popup";
+
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
 let browser: any = new MockBrowser();
-global.document = browser.getDocument();
-global.localStorage = browser.getLocalStorage();
+document = browser.getDocument();
+localStorage = browser.getLocalStorage();
 
 /**
  * Tests for popup.
@@ -15,8 +15,7 @@ describe("popup.ts tests", function () {
     let checkbox: HTMLInputElement;
     beforeEach(function () {
         browser = new MockBrowser();
-        global.document = browser.getDocument();
-        global.localStorage = browser.getLocalStorage();
+        document = browser.getDocument();
 
         // Create a checkbox to be used in the tests.
         let body = <Element> document.getElementsByTagName("body")[0];

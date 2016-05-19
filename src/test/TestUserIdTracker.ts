@@ -1,9 +1,7 @@
 ///<reference path="../../typings/index.d.ts" />
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
-declare var global: any;
-
 let browser: any = new MockBrowser();
-global.document = browser.getDocument();
+document = browser.getDocument();
 
 import {UserIdTracker} from "../main/js/UserIdTracker";
 
@@ -54,7 +52,7 @@ describe("UserIdTracker.ts tests", function () {
     beforeEach(function () {
         browser = new MockBrowser();
         browser.getDocument().createElement("body");
-        global.document = browser.getDocument();
+        document = browser.getDocument();
     });
 
     it("reads data from non repository pages.", function () {
