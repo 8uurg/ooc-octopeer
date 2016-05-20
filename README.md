@@ -37,6 +37,8 @@ A few commands can be executed using gulp:
 
 - *Compile* convert typescript to javascript
 - *Test*: Run the test suite
+- *Lint*: Run the style-checker
+- *Build*: Build the code, it converts .ts files into .js files
 
 You can view the code coverage as measured in `target/assets/unit-test-coverage/html-report`
 
