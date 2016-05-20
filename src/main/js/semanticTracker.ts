@@ -52,7 +52,7 @@ class SemanticTracker {
             scroll_in_view: true,
             scroll_out_view: true
         };
-        
+
         // TODO: Make mappings work.
         this.mappings = [
             /* BUTTONS */
