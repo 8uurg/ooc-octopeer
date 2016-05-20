@@ -1,0 +1,58 @@
+------------------------------------------------------------------------------------------------------------------------------------
+VERSION 1
+------------------------------------------------------------------------------------------------------------------------------------
+As a user 
+	|User Story																		| Pull Request Numbers
+	|-------------------------------------------------------------------------------|
+	|I want the mouse positions to be stored in the database 						| #60
+	|-------------------------------------------------------------------------------|
+	|I want the mouse clicks to be stored in the database 							| #56 #60
+	|-------------------------------------------------------------------------------|
+	|I want the keystrokes to be stored in the database								|
+	|-------------------------------------------------------------------------------|
+	|I want functional preferences													| #57
+	|-------------------------------------------------------------------------------|
+	|I want to know why particulare choices for code has been made					|
+	|-------------------------------------------------------------------------------|
+	|I want sessions/pullrequests to be stored in the database						|
+	|-------------------------------------------------------------------------------|
+	|I want the resolutions to be stored in the database							| #51 #62
+	|-------------------------------------------------------------------------------|
+	|I want the event positions to be logged (semantic data) (if possible)			|
+	|-------------------------------------------------------------------------------|
+	|I want all code to be properly tested											| #57
+	|-------------------------------------------------------------------------------|
+	|I want tracking to be able to reach the server									|
+	|-------------------------------------------------------------------------------|
+
+As a developer
+	|User Story																		| Pull Request Numbers
+	|-------------------------------------------------------------------------------|
+	|I want to have a centralized place for all global level code 					| #54
+	|-------------------------------------------------------------------------------|
+	|I want to have a structured repository 										| #48			
+	|-------------------------------------------------------------------------------|
+	
+SE Requirements
+
+------------------------------------------------------------------------------------------------------------------------------------
+VERSION 2
+------------------------------------------------------------------------------------------------------------------------------------
+
+As a user 
+	#60 	I want the mouse positions to be stored in the database 
+	#56 #60	I want the mouse clicks to be stored in the database 
+			I want the keystrokes to be stored in the database
+	#57 	I want functional preferences
+			I want to know why particulare choices for code has been made
+			I want sessions/pullrequests to be stored in the database
+	#51 #62 I want the resolutions to be stored in the database
+			I want the event positions to be logged (semantic data) (if possible)
+	#57 	I want all code to be properly tested
+			I want tracking to be able to reach the server
+
+As a developer
+	#54 	I want to have a centralized place for all global level code
+	#48 	I want to have a structured repository
+	
+SE Requirements
