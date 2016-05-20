@@ -56,20 +56,20 @@ class SemanticTracker {
         // TODO: Make mappings work.
         this.mappings = [
             /* BUTTONS */
-            semanticElement("merge_pr_button", "", full),
-            semanticElement("close_pr_button", "", full),
-            semanticElement("cancel_inline_comment_button", "", full),
-            semanticElement("submit_inline_comment_button", "", full),
-            semanticElement("create_inline_comment_button", "", full),
-            semanticElement("edit_comment_button", "", full),
-            semanticElement("pr_comment_button", "", full),
+            semanticElement("merge_pr_button", "#fulfill-pullrequest", full),
+            semanticElement("close_pr_button", "#reject-pullrequest", full),
+            semanticElement("cancel_inline_comment_button", ".new-comment .aui-button-primary", full),
+            semanticElement("submit_inline_comment_button", ".new-comment .buttons a", full),
+            semanticElement("create_inline_comment_button", ".aui-iconfont-add-comment", full),
+            semanticElement("edit_comment_button", ".comment-actions .edit-link", full),
+            semanticElement("pr_comment_button", ".new-comment .buttons .aui-button-primary", full),
             /* TABS - NOTICE: almost no overlap with GitHub. */
-            semanticElement("commits_tab", "", full),
-            semanticElement("overview_tab", "", full),
-            semanticElement("activity_tab", "", full),
+            semanticElement("commits_tab", "#pr-menu-commits", full),
+            semanticElement("overview_tab", "#pr-menu-diff", full),
+            semanticElement("activity_tab", "#pr-menu-activity", full),
             /* TEXTFIELDS */
-            semanticElement("comment_textfield", "", full),
-            semanticElement("inline_comment_textfield", "", full)
+            semanticElement("comment_textfield", "#general-comments #id_new_comment", full),
+            semanticElement("inline_comment_textfield", ".comment-thread-container #id_new_comment", full)
         ];
     }
 
