@@ -66,7 +66,7 @@ Load the `dest` folder in chrome:
 
 
 ## Other documentation
-- Product Architecture C0.3, 13-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/43afdd333cc7f298ded90bb0c4fb26a470410e66/doc/Product%20Architectural%20Design%20C0.3.pdf?at=documentation_update&fileviewer=file-view-default)
+- Product Architecture C0.4, 20-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/ad6f5c15b9e81db3cdc4064a5e7bf9b0d1f21f88/doc/Product%20Architectural%20Design%20C0.4.pdf?at=master&fileviewer=file-view-default)
 - Product Planning V1.0, 03-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/f1625bae0961d75aebd905517f3f421888117857/doc/Product%20Planning%20V1.0.pdf?fileviewer=file-view-default)
 - Product Vision V1.0, 03-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/f1625bae0961d75aebd905517f3f421888117857/doc/Product%20Vision%20V1.0.pdf?fileviewer=file-view-default)
 - Coding Choices Motivation, 20-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/94eadfabe7df166e2022f970f5dc6abce526b7ef/doc/Coding%20Choices%20Clarification.pdf?at=master&fileviewer=file-view-default)
