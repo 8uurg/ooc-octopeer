@@ -1,18 +1,9 @@
-import {CurrentUserData} from "./interfaces/CurrentUserData";
+///<reference path="./interfaces/CurrentUserData.ts" />
 
 /**
  * This class tracks the user and repository data on BitBucket pages.
  */
 export class UserIdTracker {
-
-    /**
-     * Constants that are used in the local storage for Octopeer.
-     * @type {{user_id_key: string, current_repo_id_key: string}}
-     */
-    private static octopeer_constants = {
-        "user_id_key": "octopeer_user_id",
-        "current_repo_id_key": "octopeer_current_repo_id"
-    };
 
     /**
      * Reads user data from attributes in a bitbucket repo page.
@@ -28,7 +19,7 @@ export class UserIdTracker {
         let currentRepositoryData: Repository = JSON.parse(bodyAttributes.getNamedItem("data-current-repo").value);
         let currentUserData: UserData = JSON.parse(bodyAttributes.getNamedItem("data-current-user").value);
 
-        return {userId: currentUserData.displayName, repository: currentRepositoryData.fullslug};
+        return {userId: currentUserData.username, repository: currentRepositoryData.fullslug};
     }
 
     /**

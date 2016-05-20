@@ -2,19 +2,6 @@
 /**
  * Created by Cas on 8-5-2016.
  */
-declare let global: any;
-
-global.chrome = {
-    runtime: {
-        onConnect: {
-            addListener: function() {
-                return {
-                    onMessage: {}
-                };
-            }
-        }
-    }
-};
 
 import {RARequestsSender} from "../main/js/RARequestSender";
 
@@ -35,38 +22,16 @@ describe("RARequestSender Tests", function() {
     });
 
     it("should send the request and set send to true if it succeeds.", function() {
-        // Fake the XMLHttpRequest object so that the test can run.
-        global.XMLHttpRequest = function() {
-            this.open = function() {};
-            this.setRequestHeader = function() {};
-            this.onreadystatechange = function() {};
-            this.send = function() {
-                this.onreadystatechange();
-            };
-            // Force success
-            this.status = 200;
-            this.readyState = 4;
-        };
-
+        XMLHttpRequest.prototype.status = 200;
+        XMLHttpRequest.prototype.readyState = 4;
         let rarObject = new RARequestsSender("location");
         rarObject.sendRequest("table", {});
         expect(rarObject.isSent()).toBeTruthy();
     });
 
     it("gulp should send the request and set send to false if it fails.", function() {
-        // Fake the XMLHttpRequest object so that the test can run.
-        global.XMLHttpRequest = function() {
-            this.open = function() {};
-            this.setRequestHeader = function() {};
-            this.onreadystatechange = function() {};
-            this.send = function() {
-                this.onreadystatechange();
-            };
-            // Force failure
-            this.status = 201;
-            this.readyState = 4;
-        };
-
+        XMLHttpRequest.prototype.status = 400;
+        XMLHttpRequest.prototype.readyState = 4;
         let rarObject = new RARequestsSender("location");
         rarObject.sendRequest("table", {});
         expect(rarObject.isSent()).toBeFalsy();

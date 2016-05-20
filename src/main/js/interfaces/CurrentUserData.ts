@@ -1,7 +1,7 @@
 /**
  * An interface which stores the basic user id tracking.
  */
-export interface CurrentUserData {
+interface CurrentUserData {
     /**
      * The user's BitBucket id.
      */

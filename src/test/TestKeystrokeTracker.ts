@@ -1,22 +1,16 @@
 ///<reference path="../../typings/index.d.ts" />
 
 // Nullroute the default creation of the KeystrokeTracker.
-declare var global: any;
-global.document = {};
-global.document.addEventListener = function() {};
-let original_setInterval = global.setInterval;
-global.setInterval = function() {};
-
 // Actual imports.
-import {KeystrokeTracker} from "../main/js/keystrokeTracker";
-global.setInterval = original_setInterval;
+import {KeystrokeTracker} from "../main/js/KeystrokeTracker";
+
 
 describe("KeystrokeTracker", function() {
     let eventCall: (event: any) => void = null;
     let tracker: KeystrokeTracker = null;
     beforeEach(function() {
         // Capture any added eventlisteners.
-        global.document.addEventListener = function (ev: string, func: (event: any) => void) {
+        document.addEventListener = function (ev: string, func: (event: any) => void) {
             eventCall = func;
         };
         tracker = new KeystrokeTracker();
