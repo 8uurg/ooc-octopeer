@@ -1,70 +1,39 @@
-///<reference path="../../typings/main.d.ts" />
-import {RARequestsSender} from '../main/js/RARequestsSender';
-
+///<reference path="../../typings/index.d.ts" />
 /**
  * Created by Cas on 8-5-2016.
  */
-declare let global: any;
 
-describe('RESTFul API requests', function() {
+import {RARequestsSender} from "../main/js/RARequestSender";
 
-    it('should create an object', function() {
-        expect(new RARequestsSender("location")).not.toBeNull(true);
-        expect(new RARequestsSender("location").api_location).toEqual("location");
+describe("RARequestSender Tests", function() {
+
+    it("should create an object and call register", function() {
+        spyOn(chrome.runtime.onConnect, "addListener");
+        let rarObject = new RARequestsSender("location");
+        expect(rarObject.api_location).toEqual("location");
+        expect(chrome.runtime.onConnect.addListener).toHaveBeenCalled();
+        expect(rarObject.isSent()).toBeFalsy();
     });
 
-    it('should trigger the sendRequest when calling sendUsername', function() {
-        let rarObject = new RARequestsSender("someLocation");
-        spyOn(rarObject, "sendRequest").and.callFake(function() {
-            rarObject.setSend(true);
-        });
-
-        rarObject.sendUserName({"url":"someURL", "username":"someUsername"});
-
-        expect(rarObject.getTable()).toEqual("users");
-        expect(rarObject.getData()).toEqual({"url":"someURL", "username":"someUsername"});
-        expect(rarObject.isSent()).toEqual(true);
-    });
-
-    it('should have an api_location set', function() {
+    it("should have an api_location set", function() {
         let rarObject = new RARequestsSender(null);
-        rarObject.sendUserName({"url":"someURL", "username":"someUsername"});
-
-        expect(rarObject.isSent()).toEqual(false);
+        let returnValue = rarObject.sendRequest("table", {});
+        expect(returnValue).toEqual(undefined);
     });
-    
-    it('should send the request, and set send to true if it succeeds.', function() {
-        //Fake the XMLHttpRequest object so that the test can run.
-        global.XMLHttpRequest = function() {
-            this.open = function() {};
-            this.setRequestHeader = function() {};
-            this.onreadystatechange = function() {};
-            this.send = function() {this.onreadystatechange()};
-            // Force success
-            this.status = 200;
-        }
 
-        let rarObject = new RARequestsSender("Test");
-        rarObject.sendUserName({"url":"someURL", "username":"someUsername"});
-
+    it("should send the request and set send to true if it succeeds.", function() {
+        XMLHttpRequest.prototype.status = 200;
+        XMLHttpRequest.prototype.readyState = 4;
+        let rarObject = new RARequestsSender("location");
+        rarObject.sendRequest("table", {});
         expect(rarObject.isSent()).toBeTruthy();
     });
-    
-    it('should send the request, and keep send at false.', function() {
-        //Fake the XMLHttpRequest object so that the test can run.
-        global.XMLHttpRequest = function() {
-            this.open = function() {};
-            this.setRequestHeader = function() {};
-            this.onreadystatechange = function() {};
-            this.send = function() {this.onreadystatechange()};
-            // Force failure
-            this.status = 201;
-            this.readyState = 4;
-        }
 
-        let rarObject = new RARequestsSender("Test");
-        rarObject.sendUserName({"url":"someURL", "username":"someUsername"});
-
+    it("gulp should send the request and set send to false if it fails.", function() {
+        XMLHttpRequest.prototype.status = 400;
+        XMLHttpRequest.prototype.readyState = 4;
+        let rarObject = new RARequestsSender("location");
+        rarObject.sendRequest("table", {});
         expect(rarObject.isSent()).toBeFalsy();
     });
 });
