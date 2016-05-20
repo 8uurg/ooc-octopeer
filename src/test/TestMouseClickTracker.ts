@@ -1,15 +1,9 @@
 ///<reference path="../../typings/index.d.ts" />
 
 // Nullroute the default creation of the mousetracker.
-
-declare var global: any;
-global.document = {
-    addEventListener: function() {}
-};
-
 // Actual imports.
 import createSpyObj = jasmine.createSpyObj;
-import {MouseClickTracker} from "../main/js/mouseClickTracker";
+import {MouseClickTracker} from "../main/js/MouseClickTracker";
 
 describe("The Mouse Click Tracker", function() {
     beforeEach(function() {
@@ -17,7 +11,7 @@ describe("The Mouse Click Tracker", function() {
         this.eventCall = <(event: any) => void> null;
 
          // Capture any added eventlisteners.
-        global.document.addEventListener = function (ev: string, func: (event: any) => void) {
+        document.addEventListener = function (ev: string, func: (event: any) => void) {
             _this.eventCall = func;
         };
         this.tracker = new MouseClickTracker();

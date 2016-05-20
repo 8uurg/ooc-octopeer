@@ -1,12 +1,6 @@
 ///<reference path="../../typings/index.d.ts" />
-declare var global: any;
-
-global.window = {
-    addEventListener: function() {}
-};
-
 import createSpyObj = jasmine.createSpyObj;
-import {ResizeTracker} from "../main/js/resizeTracker";
+import {ResizeTracker} from "../main/js/ResizeTracker";
 
 describe("The ResizeTracker", function() {
     let port: any;
@@ -16,12 +10,8 @@ describe("The ResizeTracker", function() {
         this.tracker = new ResizeTracker();
         this.ev = <(e: any) => void> null;
         let _this = this;
-        global.window = {
-            addEventListener: function(eventName: string, callback: (e: any) => void) {
-                _this.ev = callback;
-            },
-            innerWidth: 400,
-            innerHeight: 500
+        window.addEventListener = function(eventName: string, callback: (e: any) => void) {
+            _this.ev = callback;
         };
         spyOn(this.tracker, "sendData").and.callThrough();
         port = createSpyObj("Port", ["postMessage"]);
@@ -44,7 +34,11 @@ describe("The ResizeTracker", function() {
         this.tracker.register();
         this.date = 450;
         this.ev();
-        jasmine.clock().tick(400);
+        jasmine.clock().tick(200);
+        // Ensure that the timestamp is the time of the event.
+        // And not the time of sending.
+        this.date = 650;
+        jasmine.clock().tick(200);
         expect(port.postMessage).toHaveBeenCalledWith({
             table: "window_resolution/",
                 data: {
@@ -61,7 +55,7 @@ describe("The ResizeTracker", function() {
         this.date = 450;
         this.ev();
         jasmine.clock().tick(40);
-        this.date = 459;
+        this.date = 490;
         this.ev();
         jasmine.clock().tick(400);
 
@@ -79,7 +73,7 @@ describe("The ResizeTracker", function() {
             data: {
                 width: 400,
                 height: 500,
-                created_at: 459,
+                created_at: 490,
                 session: ""
             }
         });
