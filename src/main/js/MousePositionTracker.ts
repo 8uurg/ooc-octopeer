@@ -37,7 +37,7 @@ export class MousePositionTracker {
      * Creates an object of type MousePosJSON.
      * @returns {MousePosJSON}
      */
-    public createMessage(): MousePosJSON {
+    private createMessage(): MousePosJSON {
         let mpData: MousePosJSON = {
             position_x: this.cursorX,
             position_y: this.cursorY,

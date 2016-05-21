@@ -37,7 +37,7 @@ export class ResizeTracker {
      * Creates a message of type WindowSize.
      * @returns {WindowSize}
      */
-    public createMessage(): WindowSize {
+    private createMessage(): WindowSize {
         let wsData: WindowSize = {
             width: this.width,
             height: this.height,
@@ -49,7 +49,7 @@ export class ResizeTracker {
     /**
      * Sends data to the centralized collector.
      */
-    public sendData(wsData: WindowSize) {
+    private sendData(wsData: WindowSize) {
         this.port.postMessage({
             table: "window_resolution/",
             data: wsData

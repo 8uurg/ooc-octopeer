@@ -79,7 +79,7 @@ export class KeystrokeTracker {
      * Creates a message using the Keystroke interface.
      * @returns {KeystrokeJSON}
      */
-    public createMessage(): KeystrokeJSON {
+    private createMessage(): KeystrokeJSON {
         let data: KeystrokeJSON = {
                 created_at: Date.now(),
                 keyName: this.keyName,
@@ -91,7 +91,7 @@ export class KeystrokeTracker {
     /**
      * Send data to the database
      */
-    public sendData(ksData: KeystrokeJSON) {
+    private sendData(ksData: KeystrokeJSON) {
         this.port.postMessage({
             table: "keystroke-events/",
             data: ksData

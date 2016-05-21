@@ -29,7 +29,7 @@ export class MouseClickTracker {
      * Creates a message using the MouseClick interface.
      * @returns {MouseClickJSON}
      */
-    public createMessage(): MouseClickJSON {
+    private createMessage(): MouseClickJSON {
         let data: MouseClickJSON = {
             session: "", // Empty for now.
             created_at: Date.now()
@@ -40,7 +40,7 @@ export class MouseClickTracker {
     /**
      * Send mouse click data to centralized collector.
      */
-    public sendData(mcData: MouseClickJSON) {
+    private sendData(mcData: MouseClickJSON) {
         this.port.postMessage({
             table: "mouse-click-events/",
             data: mcData
