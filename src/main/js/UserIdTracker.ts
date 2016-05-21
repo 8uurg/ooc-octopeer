@@ -1,3 +1,4 @@
+///<reference path="./interfaces/Message.ts" />
 ///<reference path="./interfaces/CurrentUserData.ts" />
 
 /**

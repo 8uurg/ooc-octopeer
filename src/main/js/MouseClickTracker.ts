@@ -1,4 +1,5 @@
-///<reference path="./interfaces/message.ts" />
+///<reference path="./interfaces/Message.ts" />
+///<reference path="./interfaces/MouseClickJSON.ts" />
 
 /**
  * Provides a tracker that tracks the mouse on the webpage.
@@ -20,20 +21,29 @@ export class MouseClickTracker {
          * @param event Object that contains the required cursor information.
          */
         document.addEventListener("click", function (event) {
-            _this.sendData();
+            _this.sendData(_this.createMessage());
         });
+    }
+
+    /**
+     * Creates a message using the MouseClick interface.
+     * @returns {MouseClickJSON}
+     */
+    public createMessage(): MouseClickJSON {
+        let data: MouseClickJSON = {
+            session: "", // Empty for now.
+            created_at: Date.now()
+        };
+        return data;
     }
 
     /**
      * Send mouse click data to centralized collector.
      */
-    public sendData() {
+    public sendData(mcData: MouseClickJSON) {
         this.port.postMessage({
             table: "mouse-click-events/",
-            data: {
-                session: "", // Empty for now.
-                created_at: Date.now()
-            }
+            data: mcData
         });
     }
 }

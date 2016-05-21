@@ -1,3 +1,4 @@
+///<reference path="./interfaces/Message.ts" />
 ///<reference path="./interfaces/KeystrokeJSON.ts" />
 export class KeystrokeTracker {
 
@@ -78,12 +79,13 @@ export class KeystrokeTracker {
      * Creates a message using the Keystroke interface.
      * @returns {KeystrokeJSON}
      */
-    public createMessage(): any {
-        return {
+    public createMessage(): KeystrokeJSON {
+        let data: KeystrokeJSON = {
                 created_at: Date.now(),
                 keyName: this.keyName,
                 session: "" // Empty for now.
         };
+        return data;
     }
 
     /**

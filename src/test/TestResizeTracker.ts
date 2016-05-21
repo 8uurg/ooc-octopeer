@@ -44,8 +44,7 @@ describe("The ResizeTracker", function() {
                 data: {
                     width: 400,
                     height: 500,
-                    created_at: 450,
-                    session: ""
+                    created_at: 450
                 }
        });
     });
@@ -64,8 +63,7 @@ describe("The ResizeTracker", function() {
             data: {
                 width: 400,
                 height: 500,
-                created_at: 450,
-                session: ""
+                created_at: 450
             }
         });
         expect(port.postMessage).toHaveBeenCalledWith({
@@ -73,8 +71,7 @@ describe("The ResizeTracker", function() {
             data: {
                 width: 400,
                 height: 500,
-                created_at: 490,
-                session: ""
+                created_at: 490
             }
         });
     });
@@ -93,8 +90,7 @@ describe("The ResizeTracker", function() {
              data: {
                 width: 400,
                 height: 500,
-                created_at: 450,
-                session: ""
+                created_at: 450
              }
         });
         expect(port.postMessage).toHaveBeenCalledWith({
@@ -102,8 +98,7 @@ describe("The ResizeTracker", function() {
             data: {
                 width: 400,
                 height: 500,
-                created_at: 459,
-                session: ""
+                created_at: 459
             }
         });
     });
