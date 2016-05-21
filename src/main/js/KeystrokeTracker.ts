@@ -1,3 +1,4 @@
+///<reference path="./interfaces/KeystrokeJSON.ts" />
 export class KeystrokeTracker {
 
     private keyCode: number = 0;
@@ -69,21 +70,29 @@ export class KeystrokeTracker {
                     _this.keyName = String.fromCharCode(_this.keyCode);
             }
 
-            _this.sendData();
+            _this.sendData(_this.createMessage());
         });
+    }
+
+    /**
+     * Creates a message using the Keystroke interface.
+     * @returns {KeystrokeJSON}
+     */
+    public createMessage(): any {
+        return {
+                created_at: Date.now(),
+                keyName: this.keyName,
+                session: "" // Empty for now.
+        };
     }
 
     /**
      * Send data to the database
      */
-    public sendData() {
+    public sendData(ksData: KeystrokeJSON) {
         this.port.postMessage({
             table: "keystroke-events/",
-            data: {
-                created_at: Date.now(),
-                keyName: this.keyName,
-                session: "" // Empty for now.
-            }
+            data: ksData
         });
     }
 }
