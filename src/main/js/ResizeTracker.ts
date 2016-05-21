@@ -42,6 +42,7 @@ export class ResizeTracker {
             width: this.width,
             height: this.height,
             created_at: this.timestamp,
+            session: ""
         };
         return wsData;
     }

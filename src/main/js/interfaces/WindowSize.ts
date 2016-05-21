@@ -17,4 +17,9 @@ interface WindowSize {
      * The height of the screen.
      */
     height: number;
+
+    /**
+     * The session of the user.
+     */
+    session: string;
 }
