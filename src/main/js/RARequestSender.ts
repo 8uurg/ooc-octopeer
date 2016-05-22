@@ -37,7 +37,7 @@ export class RARequestsSender {
      * Returns the location of the RESTful API set at creating this object. **For Test Purposes**
      * @returns {string}
      */
-    public getApi_location(): string {
+    public getApiLocation(): string {
         return this.api_location;
     }
 
