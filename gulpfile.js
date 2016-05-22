@@ -90,7 +90,7 @@ gulp.task('test-report-coveralls', ['test-report'], function() {
 
 gulp.task('test', ['test-report-coveralls']); 
 
-gulp.task('build', ['test'], function() {
+gulp.task('build', ['test', 'lint'], function() {
     return gulp.src('./target/src/main/**')
         .pipe(gulpif("**/*.js", replace(/.*exports[^\n;]*(;|\n)/g, "")))
         .pipe(gulp.dest('./dest'));

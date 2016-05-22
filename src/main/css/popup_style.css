@@ -1,11 +1,12 @@
 html,body {
-    height: 200px;
-    width: 500px;
+    height: 230px;
+    width: 450px;
     background-image: url("../bg_popup.jpg");
 }
 
 .page {
     width: 100%;
+    display: inline-block;
 }
 
 .block-track {
@@ -52,6 +53,7 @@ input[type=checkbox]::before {
 
     transition: 200ms background-color;
 }
+
 input[type=checkbox]:checked::before {
     border: 2px solid green;
     background-color: lightgreen;
@@ -70,6 +72,12 @@ input[type=checkbox]::after {
     background-color: white;
     transition: 200ms transform;
 }
+
 input[type=checkbox]:checked::after {
     transform: translateX(18px);
+}
+
+#refresh-page-message {
+    visibility: hidden;
+    margin-left: 40px;
 }

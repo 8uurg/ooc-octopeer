@@ -3,7 +3,7 @@
   
   "name": "Octopeer-BitBucket",
   "description": "Monitors peer-review behaviour on pull requests on BitBucket for acquiring peer review behaviour",
-  "version": "0.0.2",
+  "version": "0.0.4",
 
   "browser_action": {
     "default_title": "Octopeer",
@@ -18,21 +18,27 @@
           "https://bitbucket.org/*"
         ],
         "js": [
-          "js/KeystrokeTracker.js",
-          "js/mouseTracker.js",
-          "js/resizeTracker.js",
-          "js/UserIdTracker.js"
+          "js/OctopeerConstants.js",
+          "js/trackers/KeystrokeTracker.js",
+          "js/trackers/MouseClickTracker.js",
+          "js/trackers/MousePositionTracker.js",
+          "js/trackers/ResizeTracker.js",
+          "js/trackers/UserIdTracker.js",
+          "js/Main.js"
         ]
       }
   ],
 
   "background": {
-
+    "scripts": ["js/RARequestSender.js"]
   },
 
   "permissions": [
     // Domain Permissions
     "https://bitbucket.org/*",
-    "https://localhost:8000/api/*"
+    "https://localhost:8000/api/*",
+
+    // API Permissions
+    "storage"
   ]
 }
