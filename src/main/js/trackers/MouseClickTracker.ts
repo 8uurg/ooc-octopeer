@@ -1,4 +1,4 @@
-///<reference path="./interfaces/message.ts" />
+///<reference path="../interfaces/message.ts" />
 
 /**
  * Provides a tracker that tracks the mouse on the webpage.

@@ -1,6 +1,6 @@
 ///<reference path="../../typings/index.d.ts" />
 import createSpyObj = jasmine.createSpyObj;
-import {ResizeTracker} from "../main/js/ResizeTracker";
+import {ResizeTracker} from "../main/js/trackers/ResizeTracker";
 
 describe("The ResizeTracker", function() {
     let port: any;
