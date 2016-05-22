@@ -29,6 +29,10 @@ html,body {
     list-style-type: none;
 }
 
+.disabledCheckbox {
+    display: none;
+}
+
 /**
  * Replaces the normal checkbox with a slider.
  */
