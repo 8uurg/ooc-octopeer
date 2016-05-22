@@ -1,9 +1,7 @@
 /**
  * Provides a tracker that tracks the mouse on the webpage.
  */
-export class MousePositionTracker implements Sender {
-    private sendStrategy: SendStrategy;
-    private messageDelay: number = 1000;
+export class MousePositionTracker {
     private port: any;
     private cursorX: number = -1;
     private cursorY: number = -1;
@@ -13,12 +11,11 @@ export class MousePositionTracker implements Sender {
 
     /**
      * Register the mouse tracker to the document.
-     * @param sendStrategy Set a sendStrategy for the tracker to use.
      */
-    public register(sendStrategy: SendStrategy) {
+    public register() {
         // Store `this` for usage in functions.
         const _this: MousePositionTracker = this;
-        _this.sendStrategy = sendStrategy;
+
         _this.port = chrome.runtime.connect({name: "requestSender"});
 
         /**
@@ -40,7 +37,7 @@ export class MousePositionTracker implements Sender {
     private sendData() {
         let newCall: number = Date.now();
 
-        if ( newCall - this.lastCall >= this.messageDelay ) {
+        if ( newCall - this.lastCall >= 1000 ) {
             this.lastCall = newCall;
             this.port.postMessage({
                 table: "mouse-position-events/",
@@ -54,13 +51,5 @@ export class MousePositionTracker implements Sender {
                 }
             });
         }
-    }
-
-    /**
-     * Set the time between messages, when throttled.
-     * @param messageDelay Give a number with the time between messages.
-     */
-    setMessageDelay(messageDelay:number) {
-        this.messageDelay = messageDelay;
     }
 }
