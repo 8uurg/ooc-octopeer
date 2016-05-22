@@ -1,5 +1,5 @@
-///<reference path="./interfaces/Message.ts" />
-///<reference path="./interfaces/WindowSize.ts" />
+///<reference path="../interfaces/Message.ts" />
+///<reference path="../interfaces/WindowSize.ts" />
 export class ResizeTracker {
     private width: number = -1;
     private height: number = -1;
@@ -23,7 +23,7 @@ export class ResizeTracker {
             // Stop the previous resize event from being sent.
             clearTimeout(_this.timer);
 
-            _this.timer = setTimeout(function() {
+            _this.timer = setTimeout(function () {
                 _this.sendData(_this.createMessage());
             }, 400);
         };

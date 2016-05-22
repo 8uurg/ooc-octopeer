@@ -1,5 +1,5 @@
-///<reference path="./interfaces/Message.ts" />
-///<reference path="./interfaces/KeystrokeJSON.ts" />
+///<reference path="../interfaces/Message.ts" />
+///<reference path="../interfaces/KeystrokeJSON.ts" />
 export class KeystrokeTracker {
 
     private keyCode: number = 0;
