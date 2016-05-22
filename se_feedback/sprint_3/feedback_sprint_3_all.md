@@ -30,22 +30,22 @@ Total: **9.2**
 
 #Code Evolution Quality Feedback
 
-Total: ****
+Total: **9.05**
 
 | Architecture                       | Score |
 |------------------------------------|-------|
-| Changes                            |      |
-| Architecture Design Document (ADD) |      |
+| Changes                            |  8    |
+| Architecture Design Document (ADD) |  6    |
 
 |                     | Score |
 |---------------------|-------|
-| Code Change Quality |      |
+| Code Change Quality | 8     |
 
 | Code Readability | Score |
 |------------------|-------|
-| Formatting       |      |
-| Naming           |      |
-| Comments         |      |
+| Formatting       | 10     |
+| Naming           |  9    |
+| Comments         | 10     |
 
 | Continuous Integration | Score |
 |------------------------|-------|
