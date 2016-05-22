@@ -8,7 +8,7 @@
 #Sprint Feedback
 Feedback and Grades for Sprint 3.
 
-Total: ****
+Total: **9.2**
 
 | User Story | Score |
 |------------|-------|
@@ -50,7 +50,7 @@ Total: ****
 | Continuous Integration | Score |
 |------------------------|-------|
 | Building               |  10    |
-| Testing                |  10    |
+| Testing                |  9    |
 
 |         | Score |
 |---------|-------|
@@ -62,5 +62,24 @@ Total: ****
 | Code Review            |  10    |
 
 ##Notes
-* Excellent Tooling and Testing
+* ADD
+	* You have a list of design goals, how do you intend to meet these goals?
+		* I suggest subsections per goal, explaining what you've done so far to meet that particular goal		* 
+	* Sequence diagrams / flow charts of how to the tools starts up and user interactions with the tool should be added 
+	* Do you make use of AJAX calls? 
+		* If so, that's concurrency. How do you handle them?
+	* Good job on the coding + tooling choices documents, keep it up
+* Good splitting of TS, CSS, and HTML
+* Naming: JS folder contains TS code ...
+* `RARequestsSender`
+	* why is `api_location` not private as opposed to the rest of the attributes?
+* `keystrokeTracker`
+	* consider using a Map instead of a switch case
+		* The map will still need to be manually filled but if it's stored as constant somewhere it makes this code less complex
+* `Reader`
+	* Seems like this example can be removed now 
 * Excellent Code Reviews
+* Excellent Tooling and Testing
+* Note to increase the Testing grade you need to
+	* provide documentation and convince me you've tested to the max
+	* increase the coverage further if reasonable
