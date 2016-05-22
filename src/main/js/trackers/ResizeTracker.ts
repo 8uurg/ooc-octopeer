@@ -12,7 +12,7 @@ export class ResizeTracker {
     public register() {
         const _this: ResizeTracker = this;
 
-        _this.port = chrome.runtime.connect({name: "requestSender"});
+        _this.port = chrome.runtime.connect({name: OCTOPEER_CONSTANTS.chrome_message_sender_id});
 
         let prepareDatapoint = function () {
             _this.width = window.innerWidth;

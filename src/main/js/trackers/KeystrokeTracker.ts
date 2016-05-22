@@ -10,7 +10,7 @@ export class KeystrokeTracker {
     public register() {
         let _this: KeystrokeTracker = this;
 
-        _this.port = chrome.runtime.connect({name: "requestSender"});
+        _this.port = chrome.runtime.connect({name: OCTOPEER_CONSTANTS.chrome_message_sender_id});
 
         /**
          * Create an EventListener that fires each time a key is pressed. Log the key that is pressed in the console.
