@@ -6,7 +6,7 @@ interface KeystrokeJSON {
     /**
      * The timestamp of when the keystroke was logged.
      */
-    created_at: Date;
+    created_at: number;
 
     /**
      * The key name of the keystroke that was logged.
