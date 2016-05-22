@@ -3,19 +3,27 @@
         "class-name": true,
         "comment-format": [
             true,
-            "check-space"
+            "check-space",
+            "check-uppercase"
         ],
+        "curly": true,
         "indent": [
             true,
             "spaces"
         ],
+        "max-line-length": [true, 120],
+        "member-access": [true, "check-accessor"],
         "no-duplicate-variable": true,
         "no-eval": true,
         "no-internal-module": true,
         "no-trailing-whitespace": true,
+        "no-unreachable": true,
+        "no-unused-variable": true,
         "no-var-keyword": true,
         "one-line": [
             true,
+            "check-catch",
+            "check-else",
             "check-open-brace",
             "check-whitespace"
         ],
@@ -27,6 +35,7 @@
             true,
             "always"
         ],
+        "switch-default": true,
         "triple-equals": [
             true,
             "allow-null-check"

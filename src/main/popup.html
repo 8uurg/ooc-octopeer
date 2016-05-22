@@ -3,7 +3,8 @@
 <head>
     <title>Octopeer - Popup</title>
     <link rel="stylesheet" type="text/css" href="./css/popup_style.css">
-    <script type="text/javascript" src="./js/popup.js"></script>
+    <script src="./js/OctopeerConstants.js"></script>
+    <script src="./js/popup.js"></script>
 </head>
 <body>
 <div class="page">
@@ -11,7 +12,7 @@
         <ul>
             <li><h3>Tracking Settings</h3></li>
             <li><input type=checkbox id="checkboxMousPos" class="checkboxOptions"> Track Mouse Positions</li>
-            <li><input type=checkbox id="checkboxScreenRes" class="checkboxOptions"> Track Screen Resolution</li>
+            <li><input type=checkbox id="checkboxMouseClicks" class="checkboxOptions"> Track Mouse Clicks</li>
             <li><input type=checkbox id="checkboxPageRes" class="checkboxOptions"> Track Page Resolution</li>
             <li><input type=checkbox id="checkboxKeystrokes" class="checkboxOptions"> Track Keystrokes</li>
             <li><input type=checkbox id="checkboxPrMetaDta" class="checkboxOptions"> Track PR Meta Data</li>
@@ -26,6 +27,9 @@
             <li><input type=checkbox id="checkboxHashBrowserData" class="checkboxOptions"> Hash Browser Data</li>
         </ul>
     </div>
+</div>
+<div id="refresh-page-message">
+    <p>Please refresh your BitBucket pages to apply the settings</p>
 </div>
 </body>
 </html>
