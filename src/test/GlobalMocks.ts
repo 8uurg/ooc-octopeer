@@ -49,3 +49,5 @@ _global.window = {
 };
 _global.window.innerHeight = 500;
 _global.window.innerWidth = 400;
+
+_global.OCTOPEER_CONSTANTS = {};
