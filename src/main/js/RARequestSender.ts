@@ -7,7 +7,7 @@
  */
 export class RARequestsSender {
 
-    public api_location: string;
+    private api_location: string;
     private send: boolean = false;
 
     /**
@@ -31,6 +31,14 @@ export class RARequestsSender {
                 _this.sendRequest(msg.table, msg.data);
             });
         });
+    }
+
+    /**
+     * Returns the location of the RESTful API set at creating this object. **For Test Purposes**
+     * @returns {string}
+     */
+    public getApi_location(): string {
+        return this.api_location;
     }
 
     /**
