@@ -8,7 +8,7 @@ interface MousePosJSON {
     /**
      * The timestamp of when the mouse position was logged.
      */
-    created_at: Date;
+    created_at: number;
 
     /**
      * The x position of the mouse cursor.
