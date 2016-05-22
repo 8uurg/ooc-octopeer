@@ -4,6 +4,7 @@
 // Actual imports.
 import createSpyObj = jasmine.createSpyObj;
 import {MousePositionTracker} from "../main/js/trackers/MousePositionTracker";
+import {SendStrategy} from "../main/js/interfaces/Sender";
 
 
 describe("The Mouse Position Tracker", function() {

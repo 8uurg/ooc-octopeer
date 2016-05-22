@@ -1,7 +1,7 @@
 /**
  * This interfaces enforces a strategy that allows for enabling and disabling of throttling.
  */
-interface Sender {
+export interface Sender {
 
     /**
      * The strategy that will be used.
@@ -17,10 +17,10 @@ interface Sender {
      * Set the time between messages, when throttled.
      * @param messageDelay Give a number with the time between messages.
      */
-    setMessageDelay(messageDelay: number);
+    setMessageDelay(messageDelay: number): void;
 }
 
-enum SendStrategy {
+export enum SendStrategy {
     Throttle,
     Bulk
 }

@@ -1,9 +1,10 @@
+import {SendStrategy, Sender} from "../interfaces/Sender";
 /**
  * Provides a tracker that tracks the mouse on the webpage.
  */
 export class MousePositionTracker implements Sender {
-    private sendStrategy: SendStrategy;
-    private messageDelay: number = 1000;
+    sendStrategy: SendStrategy;
+    messageDelay: number = 1000;
     private port: any;
     private cursorX: number = -1;
     private cursorY: number = -1;
@@ -72,7 +73,8 @@ export class MousePositionTracker implements Sender {
      * Set the time between messages, when throttled.
      * @param messageDelay Give a number with the time between messages.
      */
-    setMessageDelay(messageDelay:number) {
+    setMessageDelay(messageDelay: number) {
         this.messageDelay = messageDelay;
     }
+    
 }
