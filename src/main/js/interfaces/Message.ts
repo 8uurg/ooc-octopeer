@@ -1,3 +1,7 @@
+///<reference path="./MouseClickJSON.ts" />
+///<reference path="./MousePosJSON.ts" />
+///<reference path="./SessionJSON.ts" />
+///<reference path="./UserJSON.ts" />
 /**
  * Created by Cas on 14-5-2016.
  */
