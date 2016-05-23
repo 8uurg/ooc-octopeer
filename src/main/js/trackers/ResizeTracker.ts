@@ -45,7 +45,7 @@ export class ResizeTracker {
 
     /**
      * Creates a message of type WindowSize.
-     * @returns {WindowSize}
+     * @returns {WindowResolutionJSON}
      */
     private createMessage(): WindowResolutionJSON {
         return {

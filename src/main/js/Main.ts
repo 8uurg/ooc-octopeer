@@ -36,7 +36,7 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
 
     // Create an instance of the keystroke tracker.
     if (items[OCTOPEER_CONSTANTS.track_key_strokes]) {
-        (new KeystrokeTracker()).register();
+        (new KeystrokeTracker()).withCollector(collector).register();
     }
 
     // Register the mousetracker to the current document.

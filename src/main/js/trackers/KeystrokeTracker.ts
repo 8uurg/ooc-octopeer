@@ -1,18 +1,18 @@
 ///<reference path="../interfaces/Message.ts" />
 ///<reference path="../interfaces/KeystrokeJSON.ts" />
+///<reference path="../interfaces/TrackingCollector.ts" />
+
 export class KeystrokeTracker {
 
     private keyCode: number = 0;
     private keyName: string = "";
-    private port: any = null;
+    private collector: any = null;
 
     /**
      * Register the keystroke tracker.
      */
     public register() {
         let _this: KeystrokeTracker = this;
-
-        _this.port = chrome.runtime.connect({name: OCTOPEER_CONSTANTS.chrome_message_sender_id});
 
         /**
          * Create an EventListener that fires each time a key is pressed. Log the key that is pressed in the console.
@@ -75,6 +75,11 @@ export class KeystrokeTracker {
         });
     }
 
+    public withCollector(collector: TrackingCollector): KeystrokeTracker {
+        this.collector = collector;
+        return this;
+    }
+
     /**
      * Creates a message using the Keystroke interface.
      * @returns {KeystrokeJSON}
@@ -90,7 +95,7 @@ export class KeystrokeTracker {
      * Send data to the database
      */
     private sendData(ksData: KeystrokeJSON) {
-        this.port.postMessage({
+        this.collector.sendMessage({
             table: "keystroke-events/",
             data: ksData
         });
