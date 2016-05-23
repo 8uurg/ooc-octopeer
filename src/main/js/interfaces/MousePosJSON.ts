@@ -6,9 +6,9 @@
 interface MousePosJSON {
 
     /**
-     * The timestamp of when the mouse position was logged.
+     * The session object of the current pull request.
      */
-    created_at: number;
+    session?: SessionJSON;
 
     /**
      * The x position of the mouse cursor.
@@ -31,7 +31,7 @@ interface MousePosJSON {
     viewport_y: number;
 
     /**
-     * The link to the current session of the PR of this user.
-     */
-    session: string;
+    * The timestamp of when the mouse position was logged.
+    */
+    created_at: number;
 }

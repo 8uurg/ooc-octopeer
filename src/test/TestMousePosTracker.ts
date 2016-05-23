@@ -41,7 +41,6 @@ describe("The Mouse Position Tracker", function() {
                 position_y: 100,
                 viewport_x: 0,
                 viewport_y: 0,
-                session: "",
                 created_at: Date.now()
             }
         });

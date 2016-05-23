@@ -3,10 +3,11 @@
  */
 
 interface KeystrokeJSON {
+
     /**
-     * The timestamp of when the keystroke was logged.
+     * The session object of the current pull request.
      */
-    created_at: number;
+    session?: SessionJSON;
 
     /**
      * The key name of the keystroke that was logged.
@@ -14,7 +15,7 @@ interface KeystrokeJSON {
     keyName: string;
 
     /**
-     * The link to the session of the PR of this user.
+     * The timestamp of when the keystroke was logged.
      */
-    session: string;
+    created_at: number;
 }

@@ -31,7 +31,6 @@ export class MouseClickTracker {
      */
     private createMessage(): MouseClickJSON {
         let data: MouseClickJSON = {
-            session: "", // Empty for now.
             created_at: Date.now()
         };
         return data;

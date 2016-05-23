@@ -82,8 +82,7 @@ export class KeystrokeTracker {
     private createMessage(): KeystrokeJSON {
         let data: KeystrokeJSON = {
                 created_at: Date.now(),
-                keyName: this.keyName,
-                session: "" // Empty for now.
+                keyName: this.keyName
         };
         return data;
     }
