@@ -30,7 +30,10 @@
   ],
 
   "background": {
-    "scripts": ["js/RARequestSender.js"]
+    "scripts": [
+        "js/OctopeerConstants.js",
+        "js/RARequestSender.js"
+      ]
   },
 
   "permissions": [
