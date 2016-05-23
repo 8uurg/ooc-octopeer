@@ -28,11 +28,11 @@ let neededSettings: { [key: string]: boolean; } = {
 
 chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
     // Create a collector.
-    let collector = new ChromeTrackingCollector(new DataGatherer());
+    let collector: TrackingCollector = new ChromeTrackingCollector(new DataGatherer());
 
     // Register the resize tracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_page_resolution]) {
-        (new ResizeTracker()).register();
+        (new ResizeTracker()).withCollector(collector).register();
     }
 
     // Create an instance of the keystroke tracker.

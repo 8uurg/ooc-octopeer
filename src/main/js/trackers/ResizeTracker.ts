@@ -1,19 +1,20 @@
 ///<reference path="../interfaces/Message.ts" />
 ///<reference path="../interfaces/WindowResolutionJSON.ts" />
+/// <reference path="../interfaces/TrackingCollector.ts" />
+/// <reference path="../OctopeerConstants.ts" />
+
 export class ResizeTracker {
     private width: number = -1;
     private height: number = -1;
     private timestamp: number = -1;
     private timer: any = null;
-    private port: any = null;
+    private collector: TrackingCollector = null;
 
     /**
      * Registers and hooks the instance into the environment.
      */
     public register() {
         const _this: ResizeTracker = this;
-
-        _this.port = chrome.runtime.connect({name: OCTOPEER_CONSTANTS.chrome_message_sender_id});
 
         let prepareDatapoint = function () {
             _this.width = window.innerWidth;
@@ -34,6 +35,15 @@ export class ResizeTracker {
     }
 
     /**
+     * Set the collector for this tracker.
+     * @return Itself for daisy chaining.
+     */
+    public withCollector(collector: TrackingCollector): ResizeTracker {
+        this.collector = collector;
+        return this;
+    }
+
+    /**
      * Creates a message of type WindowSize.
      * @returns {WindowSize}
      */
@@ -49,8 +59,8 @@ export class ResizeTracker {
      * Sends data to the centralized collector.
      */
     private sendData(wsData: WindowResolutionJSON) {
-        this.port.postMessage({
-            table: "window_resolution/",
+        this.collector.sendMessage({
+            table: "window-resolution-events/",
             data: wsData
         });
     }
