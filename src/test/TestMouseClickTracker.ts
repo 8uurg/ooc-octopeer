@@ -26,7 +26,7 @@ describe("The Mouse Click Tracker", function() {
         this.tracker.register();
 
         // Verify that the send method has not been called yet
-        expect(this.tracker.sendData).not.toHaveBeenCalled();
+        expect(port.postMessage).not.toHaveBeenCalled();
     });
 
     it("should call sendData on clicks", function() {
@@ -40,10 +40,13 @@ describe("The Mouse Click Tracker", function() {
         this.eventCall({MouseEvent: "click"});
 
         // Verify that the send method has been called
-        expect(this.tracker.sendData).toHaveBeenCalled();
+        expect(port.postMessage).toHaveBeenCalled();
     });
 
     it("should call sendData more often after multiple clicks", function() {
+        let port = createSpyObj("Port", ["postMessage"]);
+        spyOn(chrome.runtime, "connect").and.returnValue(port);
+
         this.tracker.register();
 
         // Simulate mouse clicks
@@ -51,6 +54,6 @@ describe("The Mouse Click Tracker", function() {
         this.eventCall({MouseEvent: "click"});
 
         // Verify that the send method has been called again
-        expect(this.tracker.sendData).toHaveBeenCalledTimes(2);
+        expect(port.postMessage).toHaveBeenCalledTimes(2);
     });
 });

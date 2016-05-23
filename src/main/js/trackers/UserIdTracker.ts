@@ -1,3 +1,4 @@
+///<reference path="../interfaces/Message.ts" />
 ///<reference path="../interfaces/CurrentUserData.ts" />
 
 /**
@@ -17,7 +18,7 @@ export class UserIdTracker {
         }
 
         let currentRepositoryData: Repository = JSON.parse(bodyAttributes.getNamedItem("data-current-repo").value);
-        let currentUserData: UserData = JSON.parse(bodyAttributes.getNamedItem("data-current-user").value);
+        let currentUserData: UserJSON = JSON.parse(bodyAttributes.getNamedItem("data-current-user").value);
 
         return {userId: currentUserData.username, repository: currentRepositoryData.fullslug};
     }
