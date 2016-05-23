@@ -13,7 +13,7 @@ const samplePrData = {
    "author": {
       "username": "breijm"
    }
-}
+};
 
 /**
  * A data sample for a repo.
@@ -60,7 +60,7 @@ const sampleSessionData: SessionJSON = {
     user: {
         username: "joesixpack"
     }
-}
+};
 
 /**
  * Tests for user Id tracking.
