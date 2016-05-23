@@ -1,4 +1,5 @@
-///<reference path="../interfaces/WindowSize.ts" />
+///<reference path="../interfaces/Message.ts" />
+///<reference path="../interfaces/WindowResolutionJSON.ts" />
 export class ResizeTracker {
     private width: number = -1;
     private height: number = -1;
@@ -22,8 +23,8 @@ export class ResizeTracker {
             // Stop the previous resize event from being sent.
             clearTimeout(_this.timer);
 
-            _this.timer = setTimeout(function() {
-                _this.sendData();
+            _this.timer = setTimeout(function () {
+                _this.sendData(_this.createMessage());
             }, 400);
         };
         // Send initial window size on page load.
@@ -33,17 +34,24 @@ export class ResizeTracker {
     }
 
     /**
+     * Creates a message of type WindowSize.
+     * @returns {WindowSize}
+     */
+    private createMessage(): WindowResolutionJSON {
+        return {
+            width: this.width,
+            height: this.height,
+            created_at: this.timestamp
+        };
+    }
+
+    /**
      * Sends data to the centralized collector.
      */
-    public sendData() {
+    private sendData(wsData: WindowResolutionJSON) {
         this.port.postMessage({
             table: "window_resolution/",
-            data: {
-                width: this.width,
-                height: this.height,
-                created_at: this.timestamp,
-                session: "" // Empty for now
-            }
+            data: wsData
         });
     }
 }
