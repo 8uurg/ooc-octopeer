@@ -38,12 +38,11 @@ export class ResizeTracker {
      * @returns {WindowSize}
      */
     private createMessage(): WindowResolutionJSON {
-        let wsData: WindowResolutionJSON = {
+        return {
             width: this.width,
             height: this.height,
             created_at: this.timestamp
         };
-        return wsData;
     }
 
     /**

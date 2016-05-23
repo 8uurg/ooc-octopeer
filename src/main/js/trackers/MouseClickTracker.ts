@@ -30,10 +30,9 @@ export class MouseClickTracker {
      * @returns {MouseClickJSON}
      */
     private createMessage(): MouseClickJSON {
-        let data: MouseClickJSON = {
+        return {
             created_at: Date.now()
         };
-        return data;
     }
 
     /**
