@@ -25,7 +25,8 @@
           "js/trackers/ResizeTracker.js",
           "js/trackers/UserIdTracker.js",
           "js/Main.js"
-        ]
+        ],
+        "run_at": "document_end"
       }
   ],
 

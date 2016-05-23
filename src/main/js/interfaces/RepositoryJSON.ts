@@ -7,7 +7,7 @@ interface RepositoryJSON {
     /**
      * The URL of the repository.
      */
-    url: string;
+    url?: string;
 
     /**
      * The owner of the repository.

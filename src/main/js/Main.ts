@@ -1,13 +1,17 @@
 ///<reference path="./trackers/KeystrokeTracker.ts" />
 ///<reference path="./trackers/MouseClickTracker.ts" />
 ///<reference path="./trackers/MousePositionTracker.ts" />
+///<reference path="./trackers/ChromeTrackingCollector.ts" />
 ///<reference path="./trackers/ResizeTracker.ts" />
 ///<reference path="./trackers/UserIdTracker.ts" />
+///<reference path="./interfaces/Sender.ts" />
+
 declare var KeystrokeTracker: any;
 declare var MouseClickTracker: any;
 declare var MousePositionTracker: any;
 declare var ResizeTracker: any;
-declare var UserIdTracker: any;
+declare var DataGatherer: any;
+declare var ChromeTrackingCollector: any;
 
 /**
  * Created by larsstegman on 16-05-16.
@@ -23,8 +27,8 @@ let neededSettings: { [key: string]: boolean; } = {
 };
 
 chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
-    // Log the current user name and repository id.
-    (new UserIdTracker()).log();
+    // Create a collector.
+    let collector = new ChromeTrackingCollector(new DataGatherer());
 
     // Register the resize tracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_page_resolution]) {
