@@ -3,13 +3,20 @@ let MockBrowser = require("mock-browser").mocks.MockBrowser;
 let browser: any = new MockBrowser();
 document = browser.getDocument();
 
-import {UserIdTracker} from "../main/js/trackers/UserIdTracker";
+import {BitBucketSessionDataGatherer} from "../main/js/BitBucketSessionDataGatherer";
+
+/**
+ * A data sample for a pr.
+ */
+const samplePrData = {
+   "localId": 71,
+   "author": {
+      "username": "breijm"
+   }
+}
 
 /**
  * A data sample for a repo.
- * @type {{scm: string, readOnly: boolean, mainbranch: {name: string}, language: string,
- *          owner: {username: string, isTeam: boolean}, fullslug: string, slug: string, id: number,
- *          pygmentsLanguage: string}}
  */
 const sampleRepoData = {
     "scm": "git",
@@ -25,9 +32,6 @@ const sampleRepoData = {
 
 /**
  * A data sample for user data.
- * @type {{username: string, displayName: string, uuid: string, firstName: string, avatarUrl: string, lastName: string,
- *          isTeam: boolean, isSshEnabled: boolean, isKbdShortcutsEnabled: boolean, id: number,
- *          isAuthenticated: boolean}}
  */
 const sampleUserData = {
     "username": "joesixpack",
@@ -44,10 +48,24 @@ const sampleUserData = {
     "isAuthenticated": true
 };
 
+const sampleSessionData: SessionJSON = {
+    pull_request: {
+        repository: {
+            owner: "Joe",
+            name: "octopeer",
+            platform: "bitbucket"
+        },
+        pull_request_number: 71
+    },
+    user: {
+        username: "joesixpack"
+    }
+}
+
 /**
  * Tests for user Id tracking.
  */
-describe("UserIdTracker.ts tests", function () {
+describe("BitBucketSessionDataGatherer", function () {
 
     beforeEach(function () {
         browser = new MockBrowser();
@@ -55,25 +73,32 @@ describe("UserIdTracker.ts tests", function () {
         document = browser.getDocument();
     });
 
-    it("reads data from non repository pages.", function () {
-        let attributes = document.getElementsByTagName("body")[0].attributes;
-        expect((new UserIdTracker()).readUserInformation(attributes)).toBe(undefined);
+    it("doesn't read data from non repository pages.", function () {
+        let bbc = new BitBucketSessionDataGatherer();
+        expect(bbc.getSessionData()).toBe(undefined);
     });
 
-    it("reads data from a repository page when a user is not logged in", function () {
+    it("doesn't read data from a repository page when a user is not logged in", function () {
         let body = <Element> document.getElementsByTagName("body")[0];
         body.setAttribute("data-current-repo", JSON.stringify(sampleRepoData));
-        let attributes = body.attributes;
-        expect((new UserIdTracker()).readUserInformation(attributes)).toBe(undefined);
+        let bbc = new BitBucketSessionDataGatherer();
+        expect(bbc.getSessionData()).toBe(undefined);
+    });
+
+    it("doesn't read data from a non pull request page.", function () {
+        let body = <Element> document.getElementsByTagName("body")[0];
+        body.setAttribute("data-current-repo", JSON.stringify(sampleRepoData));
+        body.setAttribute("data-current-user", JSON.stringify(sampleUserData));
+        let bbc = new BitBucketSessionDataGatherer();
+        expect(bbc.getSessionData()).toBe(undefined);
     });
 
     it("reads data from a repository page when a user is logged in", function () {
         let body = <Element> document.getElementsByTagName("body")[0];
+        body.setAttribute("data-current-pr", JSON.stringify(samplePrData));
         body.setAttribute("data-current-repo", JSON.stringify(sampleRepoData));
         body.setAttribute("data-current-user", JSON.stringify(sampleUserData));
-        expect((new UserIdTracker()).readUserInformation(body.attributes)).toEqual({
-            userId: sampleUserData.username,
-            repository : sampleRepoData.fullslug
-        });
+        let bbc = new BitBucketSessionDataGatherer();
+        expect(bbc.getSessionData()).toEqual(sampleSessionData);
     });
 });

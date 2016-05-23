@@ -1,10 +1,9 @@
 ///<reference path="./trackers/KeystrokeTracker.ts" />
 ///<reference path="./trackers/MouseClickTracker.ts" />
 ///<reference path="./trackers/MousePositionTracker.ts" />
-///<reference path="./trackers/ChromeTrackingCollector.ts" />
 ///<reference path="./trackers/ResizeTracker.ts" />
-///<reference path="./trackers/UserIdTracker.ts" />
-///<reference path="./interfaces/Sender.ts" />
+///<reference path="./ChromeTrackingCollector.ts" />
+///<reference path="./BitBucketSessionDataGatherer.ts" />
 
 declare var KeystrokeTracker: any;
 declare var MouseClickTracker: any;

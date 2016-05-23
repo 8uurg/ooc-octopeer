@@ -8,5 +8,5 @@ interface TrackingCollector {
     /**
      * Send a message through the collector.
      */
-    sendMessage(m: Message);
+    sendMessage(m: Message): void;
 }

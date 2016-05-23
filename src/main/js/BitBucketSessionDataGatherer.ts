@@ -19,7 +19,8 @@ export class BitBucketSessionDataGatherer implements SessionDataGatherer {
               data.hasOwnProperty("data-current-repo") &&
               data.hasOwnProperty("data-current-user"))
            ) {
-            return null;
+            this.sessionData = undefined;
+            return;
         }
 
         let pr: BitBucketPullRequest = JSON.parse(data.getNamedItem("data-current-pr").value);
