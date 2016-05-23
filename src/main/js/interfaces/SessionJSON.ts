@@ -6,22 +6,12 @@
 interface SessionJSON {
 
     /**
-     * The url of the bitbucket repository of the pull_request.
+     * The pull request object..
      */
-    url: string;
+    pull_request: PullRequestJSON;
 
     /**
-     * The platform of the pull_request, bitbucket in this case.
+     * The user object..
      */
-    platform: "bitbucket";
-
-    /**
-     * The link to the pull_request in the database.
-     */
-    pull_request: string;
-
-    /**
-     * The link to the userdata in the database.
-     */
-    user: string;
+    user: UserJSON;
 }

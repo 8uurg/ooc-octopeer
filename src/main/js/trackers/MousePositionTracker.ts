@@ -38,15 +38,13 @@ export class MousePositionTracker {
      * @returns {MousePosJSON}
      */
     private createMessage(): MousePosJSON {
-        let mpData: MousePosJSON = {
+        return {
             position_x: this.cursorX,
             position_y: this.cursorY,
             viewport_x: this.viewportX,
             viewport_y: this.viewportY,
-            session: "", // Empty for now.
             created_at: Date.now()
         };
-        return mpData;
     }
 
     /**

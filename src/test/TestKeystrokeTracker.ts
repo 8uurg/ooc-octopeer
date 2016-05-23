@@ -53,8 +53,7 @@ describe("KeystrokeTracker", function() {
                 table: "keystroke-events/",
                 data: {
                     created_at: Date.now(),
-                    keyName: item.result,
-                    session: ""
+                    keyName: item.result
                 }
             });
         });

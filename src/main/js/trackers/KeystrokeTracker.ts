@@ -80,12 +80,10 @@ export class KeystrokeTracker {
      * @returns {KeystrokeJSON}
      */
     private createMessage(): KeystrokeJSON {
-        let data: KeystrokeJSON = {
-                created_at: Date.now(),
-                keyName: this.keyName,
-                session: "" // Empty for now.
+        return {
+            created_at: Date.now(),
+            keyName: this.keyName
         };
-        return data;
     }
 
     /**

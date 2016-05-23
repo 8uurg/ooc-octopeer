@@ -6,12 +6,12 @@
 interface MouseClickJSON {
 
     /**
+     * The session object of the current pull request.
+     */
+    session?: SessionJSON;
+
+    /**
      * The timestamp of when the mouse position was logged.
      */
     created_at: number;
-
-    /**
-     * The link to the current session of the PR of this user.
-     */
-    session: string;
 }

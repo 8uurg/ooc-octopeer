@@ -1,5 +1,5 @@
 ///<reference path="../interfaces/Message.ts" />
-///<reference path="../interfaces/WindowSize.ts" />
+///<reference path="../interfaces/WindowResolutionJSON.ts" />
 export class ResizeTracker {
     private width: number = -1;
     private height: number = -1;
@@ -37,20 +37,18 @@ export class ResizeTracker {
      * Creates a message of type WindowSize.
      * @returns {WindowSize}
      */
-    private createMessage(): WindowSize {
-        let wsData: WindowSize = {
+    private createMessage(): WindowResolutionJSON {
+        return {
             width: this.width,
             height: this.height,
-            created_at: this.timestamp,
-            session: ""
+            created_at: this.timestamp
         };
-        return wsData;
     }
 
     /**
      * Sends data to the centralized collector.
      */
-    private sendData(wsData: WindowSize) {
+    private sendData(wsData: WindowResolutionJSON) {
         this.port.postMessage({
             table: "window_resolution/",
             data: wsData
