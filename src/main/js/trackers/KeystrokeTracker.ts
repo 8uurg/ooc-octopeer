@@ -75,6 +75,11 @@ export class KeystrokeTracker {
         });
     }
 
+    /**
+     * Add a collector to send the tracked data to.
+     * @param collector The collector to send to.
+     * @returns {KeystrokeTracker}
+     */
     public withCollector(collector: TrackingCollector): KeystrokeTracker {
         this.collector = collector;
         return this;

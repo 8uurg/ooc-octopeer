@@ -4,7 +4,7 @@
  * Provides a tracker that tracks the mouse on the webpage.
  */
 export class MousePositionTracker {
-    private port: any;
+    private collector: TrackingCollector;
     private cursorX: number = -1;
     private cursorY: number = -1;
     private viewportX: number = -1;
@@ -18,8 +18,6 @@ export class MousePositionTracker {
         // Store `this` for usage in functions.
         const _this: MousePositionTracker = this;
 
-        _this.port = chrome.runtime.connect({name: OCTOPEER_CONSTANTS.chrome_message_sender_id});
-
         /**
          * Update the mouse coordinates every time the cursor moves.
          * @param event Object that contains the required cursor information.
@@ -31,6 +29,16 @@ export class MousePositionTracker {
             _this.viewportY = event.clientY;
             _this.sendData(_this.createMessage());
         });
+    }
+
+    /**
+     * Add a collector to send the data to.
+     * @param collector The collector.
+     * @returns {MousePositionTracker}
+     */
+    public withCollector(collector: TrackingCollector): MousePositionTracker {
+        this.collector = collector;
+        return this;
     }
 
     /**
@@ -55,7 +63,7 @@ export class MousePositionTracker {
 
         if ( newCall - this.lastCall >= 1000 ) {
             this.lastCall = newCall;
-            this.port.postMessage({
+            this.collector.sendMessage({
                 table: "mouse-position-events/",
                 data: mpData
             });
