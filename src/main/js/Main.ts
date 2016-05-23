@@ -41,12 +41,12 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
 
     // Register the mousetracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_mouse_position]) {
-        (new MousePositionTracker()).register();
+        (new MousePositionTracker()).withCollector(collector).register();
     }
 
     // Register the mouse click tracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_mouse_clicks]) {
-        (new MouseClickTracker()).register();
+        (new MouseClickTracker()).withCollector(collector).register();
     }
 });
 
