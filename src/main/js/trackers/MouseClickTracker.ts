@@ -14,7 +14,7 @@ export class MouseClickTracker {
         // Store `this` for usage in functions.
         const _this: MouseClickTracker = this;
 
-        _this.port = chrome.runtime.connect({name: "requestSender"});
+        _this.port = chrome.runtime.connect({name: OCTOPEER_CONSTANTS.chrome_message_sender_id});
 
         /**
          * Call the log function whenever a mouse click occurs.

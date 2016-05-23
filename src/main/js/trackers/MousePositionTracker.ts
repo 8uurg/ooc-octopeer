@@ -18,7 +18,7 @@ export class MousePositionTracker {
         // Store `this` for usage in functions.
         const _this: MousePositionTracker = this;
 
-        _this.port = chrome.runtime.connect({name: "requestSender"});
+        _this.port = chrome.runtime.connect({name: OCTOPEER_CONSTANTS.chrome_message_sender_id});
 
         /**
          * Update the mouse coordinates every time the cursor moves.

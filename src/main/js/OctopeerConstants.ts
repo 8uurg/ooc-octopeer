@@ -6,6 +6,7 @@
 var OCTOPEER_CONSTANTS: any = { // tslint:disable-line
     "user_id_key":              "octopeer_user_id",
     "current_repo_id_key":      "octopeer_current_repo_id",
+    "chrome_message_sender_id": "requestSender",
 
     // The permissions/preferences
     "track_mouse_position":     "trackMousePos",
