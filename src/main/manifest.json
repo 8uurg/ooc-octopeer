@@ -40,6 +40,9 @@
     // Domain Permissions
     "https://bitbucket.org/*",
     "https://localhost:8000/api/*",
+    "https://cdnjs.cloudflare.com/*",
+    "https://code.jquery.com/*",
+    "https://fonts.googleapis.com/*",
 
     // API Permissions
     "storage"
