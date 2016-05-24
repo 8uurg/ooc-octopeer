@@ -36,6 +36,7 @@ export class ResizeTracker {
 
     /**
      * Set the collector for this tracker.
+     * @param collector The collector to send the tracking data to.
      * @return Itself for daisy chaining.
      */
     public withCollector(collector: TrackingCollector): ResizeTracker {
@@ -44,7 +45,7 @@ export class ResizeTracker {
     }
 
     /**
-     * Creates a message of type WindowSize.
+     * Creates a message of type WindowResolutionJSON.
      * @returns {WindowResolutionJSON}
      */
     private createMessage(): WindowResolutionJSON {
