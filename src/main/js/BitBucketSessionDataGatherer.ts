@@ -1,4 +1,3 @@
-///<reference path="./interfaces/Message.ts" />
 ///<reference path="./interfaces/CurrentUserData.ts" />
 /// <reference path="./interfaces/Repository.ts" />
 /// <reference path="./interfaces/SessionDataGatherer.ts" />
@@ -54,7 +53,7 @@ export class BitBucketSessionDataGatherer implements SessionDataGatherer {
 // Declare an alias for usage in main, for easy extension.
 var DataGatherer = BitBucketSessionDataGatherer; // tslint:disable-line - Block Scope not allowed in global but required.
 
-// Below are typings specifically used for bitbucket data extraction and convinience.
+// Below are typings specifically used for bitbucket data extraction and convenience.
 /**
  * BitBucket Pull Request data tag format.
  */
