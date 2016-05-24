@@ -73,12 +73,12 @@ describe("BitBucketSessionDataGatherer", function () {
         document = browser.getDocument();
     });
 
-    it("doesn't read data from non repository pages.", function () {
+    it("doesn't read data from non pull request pages.", function () {
         let bbc = new BitBucketSessionDataGatherer();
         expect(bbc.getSessionData()).toBe(undefined);
     });
 
-    it("doesn't read data from a repository page when a user is not logged in", function () {
+    it("doesn't read data from a pull request page when a user is not logged in", function () {
         let body = <Element> document.getElementsByTagName("body")[0];
         body.setAttribute("data-current-repo", JSON.stringify(sampleRepoData));
         let bbc = new BitBucketSessionDataGatherer();
