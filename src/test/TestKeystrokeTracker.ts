@@ -7,8 +7,7 @@ import {KeystrokeTracker} from "../main/js/trackers/KeystrokeTracker";
 
 describe("KeystrokeTracker", function() {
     let eventCall: (event: any) => void = null;
-
-
+    
     beforeEach(function() {
         jasmine.clock().mockDate();
         // Capture any added eventlisteners.
