@@ -6,7 +6,7 @@ export class KeystrokeTracker {
 
     private keyCode: number = 0;
     private keyName: string = "";
-    private collector: any = null;
+    private collector: TrackingCollector;
 
     /**
      * Register the keystroke tracker.
