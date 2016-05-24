@@ -8,7 +8,7 @@ export class ResizeTracker {
     private height: number = -1;
     private timestamp: number = -1;
     private timer: any = null;
-    private collector: TrackingCollector = null;
+    private collector: TrackingCollector;
 
     /**
      * Registers and hooks the instance into the environment.
