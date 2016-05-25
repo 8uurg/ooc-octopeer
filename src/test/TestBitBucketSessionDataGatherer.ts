@@ -39,7 +39,7 @@ const sampleUserData = {
     "uuid": "{897}",
     "firstName": "Joey",
     "avatarUrl":
-        "https://tctechcrunch2011.files.wordpress.com/2014/03/zap-the-bedhoppingest-characters-on-tv-from-do-017.jpeg",
+        "trololololo.jpeg",
     "lastName": "Tribbiani",
     "isTeam": false,
     "isSshEnabled": false,
