@@ -1,6 +1,10 @@
+/*
 
-
-/**has to be improved to not overrule the materialize rules*/
+!**has to be improved to not overrule the materialize rules*!
 #thisIsOurOwn {
     margin-bottom: auto;
+}*/
+
+#ourLogo {
+    fill: white;
 }
