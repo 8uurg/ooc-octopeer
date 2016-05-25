@@ -10,10 +10,6 @@
     "default_icon": "./favicon.png"
   },
 
-  "options_ui": {
-    "page": "./octopeer_interface.html"
-  },
-
   "content_scripts": [
       {
         "matches": [
