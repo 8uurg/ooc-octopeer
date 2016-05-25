@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="css/popup_style2.css" />
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-
+    <script src="js/Popup.js"></script>
 </head>
 <body>
 <header>
     <nav>
-        <div id="ourNavBar" class="nav-wrapper">
+        <div id="ourNavBar" class="nav-wrapper green darken-3">
             <div class="brand-logo center"><img src="octopeer2.svg" />Octopeer</div>
             <ul class="right hide-on-med-and-down">
                 <li><a href="#"><i class="material-icons">settings</i></a></li>
@@ -22,9 +22,9 @@
         </div>
     </nav>
 </header>
-<div class="container deep-orange lighten-5">
+<div class="container green lighten-4">
     <div id="ourSecondRow" class="row">
-        <div class="col s12 ">
+        <div class="col s12">
             <!-- Main settings container-->
             <div class="container">
                 <div class="row">
@@ -35,7 +35,7 @@
                         <div class="switch">
                             <label>
                                 Off
-                                <input type="checkbox">
+                                <input type="checkbox" id="checkboxMousePosition">
                                 <span class="lever"></span>
                                 On
                             </label>
@@ -48,7 +48,7 @@
                         <div class="switch">
                             <label>
                                 Off
-                                <input type="checkbox">
+                                <input type="checkbox" id="checkboxMouseClicks">
                                 <span class="lever"></span>
                                 On
                             </label>
@@ -61,7 +61,7 @@
                         <div class="switch">
                             <label>
                                 Off
-                                <input type="checkbox">
+                                <input type="checkbox" id="checkboxPageRes">
                                 <span class="lever"></span>
                                 On
                             </label>
@@ -74,7 +74,7 @@
                         <div class="switch">
                             <label>
                                 Off
-                                <input type="checkbox">
+                                <input type="checkbox" id="checkboxKeystrokes">
                                 <span class="lever"></span>
                                 On
                             </label>
@@ -86,46 +86,5 @@
         </div>
     </div>
 </div>
-<script>
-    $('.dropdown-button').dropdown({
-                inDuration: 300,
-                outDuration: 225,
-                hover: true, // Activate on hover
-                belowOrigin: true, // Displays dropdown below the button
-                alignment: 'right' // Displays dropdown with edge aligned to the left of button
-            }
-    );
-
-</script>
 </body>
 </html>
-
-<!--<div class="page">
-    <div class="block-track">
-        <ul>
-            <li><h3>Tracking Settings</h3></li>
-            <li><input type=checkbox id="checkboxMousPos" class="checkboxOptions"> Track Mouse Positions</li>
-            <li><input type=checkbox id="checkboxMouseClicks" class="checkboxOptions"> Track Mouse Clicks</li>
-            <li><input type=checkbox id="checkboxPageRes" class="checkboxOptions"> Track Page Resolution</li>
-            <li><input type=checkbox id="checkboxKeystrokes" class="checkboxOptions"> Track Keystrokes</li>
-            <li class="disab"><input type=checkbox id="checkboxPrMetaDta" class="checkboxOptions" disabled>
-                Track PR Meta Data</li>
-            <li class="disab"><input type=checkbox id="checkboxBrowserData" class="checkboxOptions" disabled>
-                Track Browser Data</li>
-        </ul>
-    </div>
-    <div class="block-privacy">
-        <ul>
-            <li><h3>Privacy Settings</h3></li>
-            <li class="disab"><input type=checkbox id="checkboxHUsername" class="checkboxOptions" disabled>
-                Hash Username</li>
-            <li class="disab"><input type=checkbox id="checkboxHPRData" class="checkboxOptions" disabled>
-                Hash PR Meta Data</li>
-            <li class="disab"><input type=checkbox id="checkboxHBrowserData" class="checkboxOptions" disabled>
-                Hash Browser Data</li>
-        </ul>
-    </div>
-</div>
-<div id="refresh-page-message">
-    <p>Please refresh your BitBucket pages to apply the settings</p>
-</div>-->
