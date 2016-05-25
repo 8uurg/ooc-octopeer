@@ -62,7 +62,7 @@ type BitBucketPullRequest = {
     author: {
         username: string;
     }
-}
+};
 
 /**
  * BitBucket Repository data tag format.
@@ -82,7 +82,7 @@ type BitBucketRepository = {
    "slug": string,
    "id": number,
    "pygmentsLanguage": string
-}
+};
 
 /**
  * BitBucket User data tag format 
@@ -99,4 +99,4 @@ type BitBucketUser = {
    "isKbdShortcutsEnabled": boolean,
    "id": number,
    "isAuthenticated": boolean
-}
+};
