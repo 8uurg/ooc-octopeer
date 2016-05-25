@@ -7,10 +7,9 @@ import {MousePositionTracker} from "../main/js/trackers/MousePositionTracker";
 
 
 describe("The Mouse Position Tracker", function() {
-    let port: any = null;
-
     beforeEach(function(){
         jasmine.clock().install();
+        jasmine.clock().mockDate();
         const _this = this;
         this.eventCall = <(event: any) => void> null;
 
@@ -19,8 +18,8 @@ describe("The Mouse Position Tracker", function() {
 
         this.tracker = new MousePositionTracker();
         spyOn(this.tracker, "sendData").and.callThrough();
-        port = createSpyObj("Port", ["postMessage"]);
-        spyOn(chrome.runtime, "connect").and.returnValue(port);
+        this.collector = createSpyObj("TrackingCollector", ["sendMessage"]);
+        this.tracker.withCollector(this.collector);
     });
 
     it("should call sendData with the current position of the mouse after an update", function() {
@@ -34,14 +33,14 @@ describe("The Mouse Position Tracker", function() {
             clientY: 0
         });
 
-        expect(port.postMessage).toHaveBeenCalledWith({
+        expect(this.collector.sendMessage).toHaveBeenCalledWith({
             table: "mouse-position-events/",
             data: {
                 position_x: 50,
                 position_y: 100,
                 viewport_x: 0,
                 viewport_y: 0,
-                created_at: Date.now()
+                created_at: Date.now() / 1000
             }
         });
     });
@@ -58,7 +57,7 @@ describe("The Mouse Position Tracker", function() {
         });
 
         // First call should go through.
-        expect(port.postMessage).toHaveBeenCalledTimes(1);
+        expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
 
         // Change cursor position.
         this.eventCall({
@@ -69,12 +68,11 @@ describe("The Mouse Position Tracker", function() {
         });
 
         // Second call should be throttled.
-        expect(port.postMessage).toHaveBeenCalledTimes(1);
+        expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
     });
 
     it("should call sendData multiple times, if there is enough time between events.", function() {
         this.tracker.register();
-        jasmine.clock().mockDate(Date.prototype);
 
         // Change cursor position.
         this.eventCall({
@@ -95,7 +93,7 @@ describe("The Mouse Position Tracker", function() {
             clientY: 0
         });
 
-        expect(port.postMessage).toHaveBeenCalledTimes(2);
+        expect(this.collector.sendMessage).toHaveBeenCalledTimes(2);
     });
 
     afterEach(function() {
