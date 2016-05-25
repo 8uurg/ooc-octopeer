@@ -13,19 +13,13 @@ export function registerCheckbox(storageName: string, checkboxId: string) {
         checkbox.addEventListener("click", function() {
             syncedStorage.set({[storageName]: this.checked});
             console.log(storageName + ": " + this.checked);
-            document.getElementById("refresh-page-message").style.setProperty("visibility", "visible");
         });
     });
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_position,       "checkboxMousPos");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_position,       "checkboxMousePosition");
     registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_clicks,         "checkboxMouseClicks");
     registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution,      "checkboxPageRes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,          "checkboxKeystrokes");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_pr_metadata,          "checkboxPrMetaDta");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_browser_data,         "checkboxBrowserData");
-    registerCheckbox(OCTOPEER_CONSTANTS.hash_username,              "checkboxHUsername");
-    registerCheckbox(OCTOPEER_CONSTANTS.hash_pr_metadata,           "checkboxHPRData");
-    registerCheckbox(OCTOPEER_CONSTANTS.hash_browser_data,          "checkboxHBrowserData");
 });
