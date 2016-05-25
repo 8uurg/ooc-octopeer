@@ -39,7 +39,7 @@ export class MouseClickTracker {
      */
     private createMessage(): MouseClickJSON {
         return {
-            created_at: Date.now()
+            created_at: Date.now() / 1000
         };
     }
 

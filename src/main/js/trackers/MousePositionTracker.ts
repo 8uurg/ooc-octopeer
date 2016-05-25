@@ -53,7 +53,7 @@ export class MousePositionTracker {
             position_y: this.cursorY,
             viewport_x: this.viewportX,
             viewport_y: this.viewportY,
-            created_at: Date.now()
+            created_at: Date.now() / 1000
         };
     }
 

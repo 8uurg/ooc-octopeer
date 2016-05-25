@@ -52,7 +52,7 @@ export class ResizeTracker {
         return {
             width: this.width,
             height: this.height,
-            created_at: this.timestamp
+            created_at: this.timestamp / 1000
         };
     }
 
