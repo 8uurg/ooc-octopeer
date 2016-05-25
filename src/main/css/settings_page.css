@@ -22,7 +22,7 @@ body > .container {
 }
 
 #refresh-pages-notification {
-    /*visibility: hidden;*/
+    visibility: hidden;
     width: 35%;
     margin-left: 64%;
     position: absolute;
