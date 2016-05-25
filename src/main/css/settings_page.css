@@ -22,7 +22,7 @@ body > .container {
 }
 
 #refresh-pages-notification {
-    visibility: hidden;
+    /*visibility: hidden;*/
     width: 35%;
     margin-left: 64%;
     position: absolute;
@@ -34,13 +34,13 @@ body > .container {
     border-top: 1px solid #B6B6B6 !important;
 }
 
-#refresh-pages-notification .card-action a i {
+#refresh-bitbucket-pages i {
     color: #C8E6C9 !important;
     -webkit-transition: -webkit-transform .8s ease-in-out;
     transition: transform 0.4s ease-in-out;
 }
 
-#refresh-pages-notification .card-action a i:hover {
+#refresh-bitbucket-pages i:hover {
     transform: rotate(180deg);
 }
 
