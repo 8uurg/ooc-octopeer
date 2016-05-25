@@ -36,7 +36,6 @@ body > .container {
 
 #refresh-bitbucket-pages i {
     color: #C8E6C9 !important;
-    -webkit-transition: -webkit-transform .8s ease-in-out;
     transition: transform 0.4s ease-in-out;
 }
 
