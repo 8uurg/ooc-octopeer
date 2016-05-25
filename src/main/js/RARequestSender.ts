@@ -67,4 +67,4 @@ export class RARequestsSender {
     }
 }
 
-new RARequestsSender("http://localhost:8000/api/");
+new RARequestsSender("http://10.0.22.6/api/");
