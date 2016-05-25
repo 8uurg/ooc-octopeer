@@ -6,11 +6,7 @@ var _global: any = global; // tslint:disable-line
 
 _global.chrome = {
     runtime: {
-        connect: function() {
-            return {
-                postMessage: function() {}
-            };
-        },
+        connect: function() {},
         onConnect: {
             addListener: function() {
                 return {

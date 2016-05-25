@@ -1,9 +1,9 @@
-///<reference path="../../typings/index.d.ts" />
+///<reference path="../../../typings/index.d.ts" />
 /**
  * Created by Cas on 8-5-2016.
  */
 
-import {RARequestsSender} from "../main/js/RARequestSender";
+import {RARequestsSender} from "../../main/js/RARequestSender";
 
 describe("RARequestSender Tests", function() {
 
