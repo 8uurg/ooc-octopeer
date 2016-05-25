@@ -1,3 +1,4 @@
+/// <reference path="../interfaces/TrackingCollector.ts" />
 /**
  * This file contains logic for registering semantic events.
  */
@@ -42,6 +43,7 @@ interface SemanticMapping {
 class SemanticTracker {
 
     private mappings: SemanticMapping[];
+    private collector: TrackingCollector;
 
     constructor() {
         const full: SemanticEnablingMapping = {
@@ -73,6 +75,16 @@ class SemanticTracker {
         ];
     }
 
+    /**
+     * Set the collector for this tracker.
+     * @param collector The collector to send the tracking data to.
+     * @return Itself for daisy chaining.
+     */
+    public withCollector(collector: TrackingCollector): SemanticTracker {
+        this.collector = collector;
+        return this;
+    }
+
     public register() {
         this.mappings.forEach((i) => {
            this.registerSemanticElement(i);
@@ -83,13 +95,13 @@ class SemanticTracker {
         let elements = document.querySelectorAll(sm.descriptor);
         for (let id = 0; id < elements.length; id++) {
             let element = <HTMLElement> elements.item(id);
-            if (sm.mapping.keystroke)       { this.registerKeystroke(sm.name, element); };
-            if (sm.mapping.click)           { this.registerClick(sm.name, element); };
-            if (sm.mapping.mouse_enter)     { this.registerMouseEnter(sm.name, element); };
-            if (sm.mapping.mouse_leave)     { this.registerMouseLeave(sm.name, element); };
-            if (sm.mapping.scroll_in_view)  { this.registerScrollInView(sm.name, element); };
-            if (sm.mapping.scroll_out_view) { this.registerScrollOutView(sm.name, element); };
-        };
+            if (sm.mapping.keystroke)       { this.registerKeystroke(sm.name, element); }
+            if (sm.mapping.click)           { this.registerClick(sm.name, element); }
+            if (sm.mapping.mouse_enter)     { this.registerMouseEnter(sm.name, element); }
+            if (sm.mapping.mouse_leave)     { this.registerMouseLeave(sm.name, element); }
+            if (sm.mapping.scroll_in_view)  { this.registerScrollInView(sm.name, element); }
+            if (sm.mapping.scroll_out_view) { this.registerScrollOutView(sm.name, element); }
+        }
     }
 
     public registerKeystroke(name: string, element: HTMLElement) {
