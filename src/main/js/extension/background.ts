@@ -1,6 +1,6 @@
 /**
- * Created by larsstegman on 25-05-16.
+ * Creates a page on a tab when the extension badge is clicked.
  */
 chrome.browserAction.onClicked.addListener(() => {
-    chrome.tabs.create({ url: "../../octopeer_interface.html" });
+    chrome.tabs.create({ url: "../../html/settings.html" });
 });
