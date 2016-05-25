@@ -2,20 +2,23 @@
 
 // Nullroute the default creation of the KeystrokeTracker.
 // Actual imports.
-import {KeystrokeTracker} from "../main/js/KeystrokeTracker";
-
+import createSpyObj = jasmine.createSpyObj;
+import {KeystrokeTracker} from "../main/js/trackers/KeystrokeTracker";
 
 describe("KeystrokeTracker", function() {
     let eventCall: (event: any) => void = null;
-    let tracker: KeystrokeTracker = null;
+
     beforeEach(function() {
+        jasmine.clock().mockDate();
         // Capture any added eventlisteners.
         document.addEventListener = function (ev: string, func: (event: any) => void) {
             eventCall = func;
         };
-        tracker = new KeystrokeTracker();
-        tracker.register();
-        spyOn(tracker, "sendData");
+        this.tracker = new KeystrokeTracker();
+        spyOn(this.tracker, "sendData").and.callThrough();
+
+        this.collector = createSpyObj("TrackingCollector", ["sendMessage"]);
+        this.tracker.withCollector(this.collector);
     });
 
     let testArray = [
@@ -42,8 +45,18 @@ describe("KeystrokeTracker", function() {
 
     testArray.forEach( function(item) {
         it("should log a key press after the 'keyup' event with the '" + item.name + "' key.", function() {
+            this.tracker.register();
+
+            // Mock date, because of ms differences.
+            let creationDate = Date.now() / 1000;
             eventCall({keyBoardEvent: "keyup", keyCode: item.keyCode});
-            expect(tracker.sendData).toHaveBeenCalledWith(item.result);
+            expect(this.collector.sendMessage).toHaveBeenCalledWith({
+                table: "keystroke-events/",
+                data: {
+                    created_at: creationDate,
+                    keystroke: item.result
+                }
+            });
         });
     });
 });
