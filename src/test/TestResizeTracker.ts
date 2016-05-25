@@ -29,7 +29,7 @@ describe("The ResizeTracker", function() {
     it("should send a resize if the screen got resized.", function() {
         this.tracker.register();
         this.ev();
-        let creationTime = Date.now();
+        let creationTime = Date.now() / 1000;
         // Ensure that the timestamp is the time of the event.
         // And not the time of sending.
         jasmine.clock().tick(400);
@@ -47,10 +47,10 @@ describe("The ResizeTracker", function() {
     it("should not send all resize events during a resize.", function() {
         this.tracker.register();
         this.ev();
-        let creationTime1 = Date.now();
+        let creationTime1 = Date.now() / 1000;
         jasmine.clock().tick(40);
         this.ev();
-        let creationTime2 = Date.now();
+        let creationTime2 = Date.now() / 1000;
         jasmine.clock().tick(400);
 
         expect(this.collector.sendMessage).not.toHaveBeenCalledWith({
@@ -74,10 +74,10 @@ describe("The ResizeTracker", function() {
     it("should send all resize events if they are different resizes.", function() {
         this.tracker.register();
         this.ev();
-        let creationTime1 = Date.now();
+        let creationTime1 = Date.now() / 1000;
         jasmine.clock().tick(3000);
         this.ev();
-        let creationTime2 = Date.now();
+        let creationTime2 = Date.now() / 1000;
         jasmine.clock().tick(400);
 
          expect(this.collector.sendMessage).toHaveBeenCalledWith({
