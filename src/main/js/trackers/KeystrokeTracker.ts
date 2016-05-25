@@ -92,7 +92,7 @@ export class KeystrokeTracker {
     private createMessage(): KeystrokeJSON {
         return {
             created_at: Date.now() / 1000,
-            keyName: this.keyName
+            keystroke: this.keyName
         };
     }
 
