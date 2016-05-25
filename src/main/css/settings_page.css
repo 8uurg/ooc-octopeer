@@ -15,3 +15,11 @@ body .container {
 #ourSecondRow .container {
     width: 85%;
 }
+
+#refresh-pages-notification {
+    visibility: hidden;
+    width: 35%;
+    margin-left: 64%;
+    position: absolute;
+    z-index: 1000;
+}
