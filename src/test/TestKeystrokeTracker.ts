@@ -50,6 +50,7 @@ describe("KeystrokeTracker", function() {
             // Mock date, because of ms differences.
             let creationDate = Date.now() / 1000;
             eventCall({keyBoardEvent: "keyup", keyCode: item.keyCode});
+            expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
             expect(this.collector.sendMessage).toHaveBeenCalledWith({
                 table: "keystroke-events/",
                 data: {
