@@ -54,7 +54,7 @@ describe("KeystrokeTracker", function() {
                 table: "keystroke-events/",
                 data: {
                     created_at: creationDate,
-                    keyName: item.result
+                    keystroke: item.result
                 }
             });
         });
