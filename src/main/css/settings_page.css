@@ -2,14 +2,19 @@ html, body {
     height: 100%;
 }
 
-body .container {
+body > .container {
     min-height: 100%;
+    background-color: #f2f2f2 !important;
 }
 
 .brand-logo img {
     height: 48px;
     margin-bottom: -12px;
     padding-right: 12px;
+}
+
+#ourNavBar {
+    background-color: #388E3C !important;
 }
 
 #ourSecondRow .container {
@@ -22,4 +27,23 @@ body .container {
     margin-left: 64%;
     position: absolute;
     z-index: 1000;
+    background-color: #009688 !important;
+}
+
+#refresh-pages-notification .card-action {
+    border-top: 1px solid #B6B6B6 !important;
+}
+
+#refresh-pages-notification .card-action a i {
+    color: #C8E6C9 !important;
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+    transition: transform 0.4s ease-in-out;
+}
+
+#refresh-pages-notification .card-action a i:hover {
+    transform: rotate(180deg);
+}
+
+.switch label::after {
+    content: "\00a0\00a0";
 }
