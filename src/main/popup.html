@@ -6,8 +6,7 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="./css/popup_style2.css">
-
+    <link rel="stylesheet" href="css/popup_style2.css" />
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 
@@ -16,81 +15,78 @@
 <header>
     <nav>
         <div id="ourNavBar" class="nav-wrapper">
-            <a href="#" class="brand-logo center"><img id="ourLogo" src="octopeer2.svg">Octopeer</a>
+            <div class="brand-logo center"><img src="octopeer2.svg" />Octopeer</div>
             <ul class="right hide-on-med-and-down">
                 <li><a href="#"><i class="material-icons">settings</i></a></li>
             </ul>
         </div>
     </nav>
 </header>
-<div class="container">
-<div id="ourSecondRow" class="row center-align"">
-    <div class="col s12 deep-orange lighten-5">
-        <div class="row">
-            <h3>Tracking Settings</h3>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                    Track Mouse Positions
+<div class="container deep-orange lighten-5">
+    <div id="ourSecondRow" class="row">
+        <div class="col s12 ">
+            <!-- Main settings container-->
+            <div class="container">
+                <div class="row">
+                    <h3>Tracking Settings</h3>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                    Track Mouse Clicks
+                <div class="row">
+                    <div class="col s12">
+                        <div class="switch">
+                            <label>
+                                Off
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                On
+                            </label>
+                            Track Mouse Positions
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                    Track Page Resolution
+                <div class="row">
+                    <div class="col s12">
+                        <div class="switch">
+                            <label>
+                                Off
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                On
+                            </label>
+                            Track Mouse Clicks
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                    Track Keystrokes
+                <div class="row">
+                    <div class="col s12">
+                        <div class="switch">
+                            <label>
+                                Off
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                On
+                            </label>
+                            Track Page Resolution
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="switch">
+                            <label>
+                                Off
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                On
+                            </label>
+                            Track Keystrokes
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
 <script>
-    // Has to be fixed as we have to use children
-    let h = $('#ourSecondRow').height();
-    let h2 = $('#ourNavBar').height();
-    $('#ourLogo').css('height', h2);
-    $('#ourSecondRow').children().css('height', h);
-    $('.col').css('padding', 0);
     $('.dropdown-button').dropdown({
                 inDuration: 300,
                 outDuration: 225,
