@@ -1,9 +1,8 @@
-html, body {
+html {
     height: 100%;
 }
 
-body > .container {
-    min-height: 100%;
+main.container {
     background-color: #f2f2f2 !important;
 }
 
@@ -24,7 +23,9 @@ body > .container {
 #refresh-pages-notification {
     visibility: hidden;
     width: 35%;
-    margin-left: 64%;
+    margin-top: 70px;
+    margin-right: 6px;
+    right: 0;
     position: absolute;
     z-index: 1000;
     background-color: #009688 !important;
@@ -45,4 +46,28 @@ body > .container {
 
 .switch label::after {
     content: "\00a0\00a0";
+}
+
+footer {
+    margin-top: 0px !important;
+    background-color: #4CAF50 !important;
+}
+
+footer .footer-copyright {
+    background-color: #388E3C !important;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    margin-top: -10px !important;
+}
+
+.acknowledgement {
+    font-size: xx-small;
 }
