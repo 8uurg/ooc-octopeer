@@ -24,7 +24,7 @@ describe("The Mouse Position Tracker", function() {
 
     it("should call sendData with the current position of the mouse after an update", function() {
         this.tracker.register();
-
+        jasmine.clock().mockDate();
         // Change cursor position.
         this.eventCall({
             pageX: 50,
@@ -73,6 +73,7 @@ describe("The Mouse Position Tracker", function() {
 
     it("should call sendData multiple times, if there is enough time between events.", function() {
         this.tracker.register();
+        jasmine.clock().mockDate();
 
         // Change cursor position.
         this.eventCall({
