@@ -1,9 +1,9 @@
-///<reference path="../../typings/index.d.ts" />
+///<reference path="../../../../typings/index.d.ts" />
 
 // Nullroute the default creation of the mousetracker.
 // Actual imports.
 import createSpyObj = jasmine.createSpyObj;
-import {MouseClickTracker} from "../main/js/MouseClickTracker";
+import {MouseClickTracker} from "../../../main/js/trackers/MouseClickTracker";
 
 describe("The Mouse Click Tracker", function() {
     beforeEach(function() {
@@ -16,23 +16,19 @@ describe("The Mouse Click Tracker", function() {
         };
         this.tracker = new MouseClickTracker();
         spyOn(this.tracker, "sendData").and.callThrough();
+        this.collector = createSpyObj("TrackingCollector", ["sendMessage"]);
+        this.tracker.withCollector(this.collector);
     });
 
     it("should not call sendData on non clicks", function() {
-        let port = createSpyObj("Port", ["postMessage"]);
-        spyOn(chrome.runtime, "connect").and.returnValue(port);
-
         // Create an instance of the tracker
         this.tracker.register();
 
         // Verify that the send method has not been called yet
-        expect(this.tracker.sendData).not.toHaveBeenCalled();
+        expect(this.collector.sendMessage).not.toHaveBeenCalled();
     });
 
     it("should call sendData on clicks", function() {
-        let port = createSpyObj("Port", ["postMessage"]);
-        spyOn(chrome.runtime, "connect").and.returnValue(port);
-
         // Create an instance of the tracker
         this.tracker.register();
 
@@ -40,7 +36,7 @@ describe("The Mouse Click Tracker", function() {
         this.eventCall({MouseEvent: "click"});
 
         // Verify that the send method has been called
-        expect(this.tracker.sendData).toHaveBeenCalled();
+        expect(this.collector.sendMessage).toHaveBeenCalled();
     });
 
     it("should call sendData more often after multiple clicks", function() {
@@ -51,6 +47,6 @@ describe("The Mouse Click Tracker", function() {
         this.eventCall({MouseEvent: "click"});
 
         // Verify that the send method has been called again
-        expect(this.tracker.sendData).toHaveBeenCalledTimes(2);
+        expect(this.collector.sendMessage).toHaveBeenCalledTimes(2);
     });
 });

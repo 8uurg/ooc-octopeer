@@ -1,12 +1,13 @@
-///<reference path="../../typings/index.d.ts" />
+///<reference path="../../../../typings/index.d.ts" />
 import createSpyObj = jasmine.createSpyObj;
-import {ResizeTracker} from "../main/js/ResizeTracker";
+import {ResizeTracker} from "../../../main/js/trackers/ResizeTracker";
 
 describe("The ResizeTracker", function() {
-    let port: any;
 
     beforeEach(function () {
         jasmine.clock().install();
+        // Mock current date for repeatable tests. 
+        jasmine.clock().mockDate();
         this.tracker = new ResizeTracker();
         this.ev = <(e: any) => void> null;
         let _this = this;
@@ -14,13 +15,8 @@ describe("The ResizeTracker", function() {
             _this.ev = callback;
         };
         spyOn(this.tracker, "sendData").and.callThrough();
-        port = createSpyObj("Port", ["postMessage"]);
-        spyOn(chrome.runtime, "connect").and.returnValue(port);
-        // Mock current date for repeatable tests. 
-        _this.date = 0;
-        spyOn(Date, "now").and.callFake(function () {
-            return _this.date;
-        });
+        this.collector = createSpyObj("TrackingCollector", ["sendMessage"]);
+        this.tracker.withCollector(this.collector);
     });
 
     it("should not start sending without being triggered first.", function() {
@@ -32,78 +28,72 @@ describe("The ResizeTracker", function() {
 
     it("should send a resize if the screen got resized.", function() {
         this.tracker.register();
-        this.date = 450;
         this.ev();
-        jasmine.clock().tick(200);
+        let creationTime = Date.now() / 1000;
         // Ensure that the timestamp is the time of the event.
         // And not the time of sending.
-        this.date = 650;
-        jasmine.clock().tick(200);
-        expect(port.postMessage).toHaveBeenCalledWith({
-            table: "window_resolution/",
+        jasmine.clock().tick(400);
+
+        expect(this.collector.sendMessage).toHaveBeenCalledWith({
+            table: "window-resolution-events/",
                 data: {
                     width: 400,
                     height: 500,
-                    created_at: 450,
-                    session: ""
+                    created_at: creationTime
                 }
        });
     });
 
     it("should not send all resize events during a resize.", function() {
         this.tracker.register();
-        this.date = 450;
         this.ev();
+        let creationTime1 = Date.now() / 1000;
         jasmine.clock().tick(40);
-        this.date = 490;
         this.ev();
+        let creationTime2 = Date.now() / 1000;
         jasmine.clock().tick(400);
 
-        expect(port.postMessage).not.toHaveBeenCalledWith({
-            table: "window_resolution/",
+        expect(this.collector.sendMessage).not.toHaveBeenCalledWith({
+            table: "window-resolution-events/",
             data: {
                 width: 400,
                 height: 500,
-                created_at: 450,
-                session: ""
+                created_at: creationTime1
             }
         });
-        expect(port.postMessage).toHaveBeenCalledWith({
-            table: "window_resolution/",
+        expect(this.collector.sendMessage).toHaveBeenCalledWith({
+            table: "window-resolution-events/",
             data: {
                 width: 400,
                 height: 500,
-                created_at: 490,
-                session: ""
+                created_at: creationTime2
             }
         });
     });
 
     it("should send all resize events if they are different resizes.", function() {
         this.tracker.register();
-        this.date = 450;
         this.ev();
+        let creationTime1 = Date.now() / 1000;
         jasmine.clock().tick(3000);
-        this.date = 459;
         this.ev();
+        let creationTime2 = Date.now() / 1000;
         jasmine.clock().tick(400);
 
-         expect(port.postMessage).toHaveBeenCalledWith({
-             table: "window_resolution/",
+         expect(this.collector.sendMessage).toHaveBeenCalledWith({
+             table: "window-resolution-events/",
              data: {
                 width: 400,
                 height: 500,
-                created_at: 450,
-                session: ""
+                created_at: creationTime1
              }
         });
-        expect(port.postMessage).toHaveBeenCalledWith({
-            table: "window_resolution/",
+        expect(this.collector.sendMessage).toHaveBeenCalledWith({
+            table: "window-resolution-events/",
             data: {
                 width: 400,
                 height: 500,
-                created_at: 459,
-                session: ""
+                created_at: creationTime2
             }
         });
     });
