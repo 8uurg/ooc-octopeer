@@ -1,3 +1,10 @@
+# Notice: Our maintained repository is on BitBucket.
+This repository is here for the Software Improvement Group (SIG for short) to do their code analysis.
+
+Things such as CI and Coveralls can be seen below and refer to the statistics on BitBucket.
+
+Besides this, the master already contains the result of sprint-5, which is as of yet, still missing its documentation and might yet get some small hotfixes - though no new features or something major.
+
 # Octopeer for Bitbucket
 **Latest Build**
 
