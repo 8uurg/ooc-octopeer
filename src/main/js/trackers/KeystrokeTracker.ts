@@ -4,9 +4,23 @@
 
 export class KeystrokeTracker {
 
-    private keyCode: number = 0;
     private keyName: string = "";
     private collector: TrackingCollector;
+    private keyMap: any = {8: "[Backspace]",
+                           9: "[Tab]",
+                           13: "[Enter]",
+                           16: "[Shift]",
+                           17: "[Control]",
+                           18: "[Alt]",
+                           20: "[Caps Lock]",
+                           27: "[Escape]",
+                           32: "[Space]",
+                           33: "[Page Up]",
+                           34: "[Page Down]",
+                           35: "[End]",
+                           36: "[Home]",
+                           45: "[Insert]",
+                           46: "[Delete]"};
 
     /**
      * Register the keystroke tracker.
@@ -19,56 +33,11 @@ export class KeystrokeTracker {
          * @param event object that contains the required key information.
          */
         document.addEventListener("keyup", function (event) {
-            _this.keyCode = event.keyCode;
 
-            switch (_this.keyCode) {
-                case  8:
-                    _this.keyName = "[Backspace]";
-                    break;
-                case  9:
-                    _this.keyName = "[Tab]";
-                    break;
-                case 13:
-                    _this.keyName = "[Enter]";
-                    break;
-                case 16:
-                    _this.keyName = "[Shift]";
-                    break;
-                case 17:
-                    _this.keyName = "[Control]";
-                    break;
-                case 18:
-                    _this.keyName = "[Alt]";
-                    break;
-                case 20:
-                    _this.keyName = "[Caps Lock]";
-                    break;
-                case 27:
-                    _this.keyName = "[Escape]";
-                    break;
-                case 32:
-                    _this.keyName = "[Space]";
-                    break;
-                case 33:
-                    _this.keyName = "[Page Up]";
-                    break;
-                case 34:
-                    _this.keyName = "[Page Down]";
-                    break;
-                case 35:
-                    _this.keyName = "[End]";
-                    break;
-                case 36:
-                    _this.keyName = "[Home]";
-                    break;
-                case 45:
-                    _this.keyName = "[Insert]";
-                    break;
-                case 46:
-                    _this.keyName = "[Delete]";
-                    break;
-                default:
-                    _this.keyName = String.fromCharCode(_this.keyCode);
+            if (_this.keyMap[event.keyCode] != null) {
+                _this.keyName = _this.keyMap[ event.keyCode ];
+            } else {
+                _this.keyName = String.fromCharCode(event.keyCode);
             }
 
             _this.sendData(_this.createMessage());
