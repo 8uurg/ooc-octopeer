@@ -1,4 +1,3 @@
-///<reference path="../../typings/index.d.ts" />
 /**
  * Created by Cas on 8-5-2016.
  */
