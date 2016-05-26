@@ -1,7 +1,5 @@
-<<<<<<< HEAD:src/test/js/TestRARequests.ts
 ///<reference path="../../../typings/index.d.ts" />
-=======
->>>>>>> origin/develop:src/test/TestRARequests.ts
+
 /**
  * Created by Cas on 8-5-2016.
  */
