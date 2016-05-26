@@ -58,6 +58,7 @@ describe("The Mouse Position Tracker", function() {
 
         // First call should go through.
         expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
+        jasmine.clock().tick(999);
 
         // Change cursor position.
         this.eventCall({
@@ -83,7 +84,7 @@ describe("The Mouse Position Tracker", function() {
         });
 
         // Pass a sufficient amount of time.
-        jasmine.clock().tick(3000);
+        jasmine.clock().tick(1000);
 
         // Change cursor position.
         this.eventCall({

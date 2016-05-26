@@ -7,8 +7,9 @@
  */
 export class RARequestsSender {
 
-    public api_location: string;
+    private api_location: string;
     private send: boolean = false;
+    private allowedStates: number[] = new Array(200, 201, 202);
 
     /**
      * The constructor for setting the location of the database.
@@ -42,6 +43,14 @@ export class RARequestsSender {
     }
 
     /**
+     * Returns the string value of api_location.
+     * @returns {string}
+     */
+    public getApiLocation(): string {
+        return this.api_location;
+    }
+
+    /**
      * Sends the data to the database if a database location is set.
      * @param table  The table to put the information in.
      * @param data   The data in an object..
@@ -57,7 +66,7 @@ export class RARequestsSender {
         xmlHTTP.open("POST", this.api_location + table, true);
         xmlHTTP.setRequestHeader("Content-Type", "application/json");
         xmlHTTP.onreadystatechange = function() {
-            if (xmlHTTP.status !== (200 || 201 || 202) && xmlHTTP.readyState === 4) {
+            if (_this.allowedStates.indexOf(xmlHTTP.status) === -1  && xmlHTTP.readyState === 4) {
                 console.error("An error occurred while sending data to the server: " + xmlHTTP.status);
             } else {
                 _this.send = true;

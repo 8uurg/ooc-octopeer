@@ -1,15 +1,14 @@
-///<reference path="../../../../typings/index.d.ts" />
+///<reference path="../../typings/index.d.ts" />
 
 // Nullroute the default creation of the KeystrokeTracker.
 // Actual imports.
 import createSpyObj = jasmine.createSpyObj;
-import {KeystrokeTracker} from "../../../main/js/trackers/KeystrokeTracker";
+import {KeystrokeTracker} from "../main/js/trackers/KeystrokeTracker";
 
 describe("KeystrokeTracker", function() {
     let eventCall: (event: any) => void = null;
-
+    let port: any = null;
     beforeEach(function() {
-        jasmine.clock().mockDate();
         // Capture any added eventlisteners.
         document.addEventListener = function (ev: string, func: (event: any) => void) {
             eventCall = func;
@@ -17,8 +16,8 @@ describe("KeystrokeTracker", function() {
         this.tracker = new KeystrokeTracker();
         spyOn(this.tracker, "sendData").and.callThrough();
 
-        this.collector = createSpyObj("TrackingCollector", ["sendMessage"]);
-        this.tracker.withCollector(this.collector);
+        port = createSpyObj("Port", ["postMessage"]);
+        spyOn(chrome.runtime, "connect").and.returnValue(port);
     });
 
     let testArray = [
@@ -48,14 +47,14 @@ describe("KeystrokeTracker", function() {
             this.tracker.register();
 
             // Mock date, because of ms differences.
-            let creationDate = Date.now() / 1000;
+            spyOn(Date, "now").and.returnValue(42);
             eventCall({keyBoardEvent: "keyup", keyCode: item.keyCode});
-            expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
-            expect(this.collector.sendMessage).toHaveBeenCalledWith({
+            expect(port.postMessage).toHaveBeenCalledWith({
                 table: "keystroke-events/",
                 data: {
-                    created_at: creationDate,
-                    keystroke: item.result
+                    created_at: Date.now(),
+                    keyName: item.result,
+                    session: ""
                 }
             });
         });

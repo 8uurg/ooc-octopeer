@@ -1,4 +1,7 @@
+<<<<<<< HEAD:src/test/js/TestRARequests.ts
 ///<reference path="../../../typings/index.d.ts" />
+=======
+>>>>>>> origin/develop:src/test/TestRARequests.ts
 /**
  * Created by Cas on 8-5-2016.
  */
@@ -10,7 +13,7 @@ describe("RARequestSender Tests", function() {
     it("should create an object and call register", function() {
         spyOn(chrome.runtime.onConnect, "addListener");
         let rarObject = new RARequestsSender("location");
-        expect(rarObject.api_location).toEqual("location");
+        expect(rarObject.getApiLocation()).toEqual("location");
         expect(chrome.runtime.onConnect.addListener).toHaveBeenCalled();
         expect(rarObject.isSent()).toBeFalsy();
     });
@@ -21,12 +24,20 @@ describe("RARequestSender Tests", function() {
         expect(returnValue).toEqual(undefined);
     });
 
-    it("should send the request and set send to true if it succeeds.", function() {
-        XMLHttpRequest.prototype.status = 200;
-        XMLHttpRequest.prototype.readyState = 4;
-        let rarObject = new RARequestsSender("location");
-        rarObject.sendRequest("table", {});
-        expect(rarObject.isSent()).toBeTruthy();
+    let testArray = [
+        {status: 200},
+        {status: 201},
+        {status: 202}
+    ];
+
+    testArray.forEach( function(item) {
+        it("should send the request and set send to true if it succeeds.", function () {
+            XMLHttpRequest.prototype.status = item.status;
+            XMLHttpRequest.prototype.readyState = 4;
+            let rarObject = new RARequestsSender("location");
+            rarObject.sendRequest("table", {});
+            expect(rarObject.isSent()).toBeTruthy();
+        });
     });
 
     it("gulp should send the request and set send to false if it fails.", function() {
