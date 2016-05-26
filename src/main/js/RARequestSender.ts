@@ -7,7 +7,7 @@
  */
 export class RARequestsSender {
 
-    public api_location: string;
+    private api_location: string;
     private send: boolean = false;
 
     /**
@@ -39,6 +39,14 @@ export class RARequestsSender {
      */
     public isSent(): boolean {
         return this.send;
+    }
+
+    /**
+     * Returns the string value of api_location.
+     * @returns {string}
+     */
+    public getApiLocation(): string {
+        return this.api_location;
     }
 
     /**
