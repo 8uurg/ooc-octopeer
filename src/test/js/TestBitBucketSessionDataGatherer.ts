@@ -1,9 +1,9 @@
-///<reference path="../../typings/index.d.ts" />
+///<reference path="../../../typings/index.d.ts" />
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
 let browser: any = new MockBrowser();
 document = browser.getDocument();
 
-import {BitBucketSessionDataGatherer} from "../main/js/BitBucketSessionDataGatherer";
+import {BitBucketSessionDataGatherer} from "../../main/js/BitBucketSessionDataGatherer";
 
 /**
  * A data sample for a pr.
