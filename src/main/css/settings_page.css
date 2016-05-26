@@ -67,3 +67,7 @@ main {
     flex: 1 0 auto;
     margin-top: -10px !important;
 }
+
+.acknowledgement {
+    font-size: xx-small;
+}
