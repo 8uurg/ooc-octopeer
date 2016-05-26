@@ -6,21 +6,21 @@ export class KeystrokeTracker {
 
     private keyName: string = "";
     private collector: TrackingCollector;
-    private keyMap: any = {"8": "[Backspace]",
-                           "9": "[Tab]",
-                           "13": "[Enter]",
-                           "16": "[Shift]",
-                           "17": "[Control]",
-                           "18": "[Alt]",
-                           "20": "[Caps Lock]",
-                           "27": "[Escape]",
-                           "32": "[Space]",
-                           "33": "[Page Up]",
-                           "34": "[Page Down]",
-                           "35": "[End]",
-                           "36": "[Home]",
-                           "45": "[Insert]",
-                           "46": "[Delete]"};
+    private keyMap: any = {8: "[Backspace]",
+                           9: "[Tab]",
+                           13: "[Enter]",
+                           16: "[Shift]",
+                           17: "[Control]",
+                           18: "[Alt]",
+                           20: "[Caps Lock]",
+                           27: "[Escape]",
+                           32: "[Space]",
+                           33: "[Page Up]",
+                           34: "[Page Down]",
+                           35: "[End]",
+                           36: "[Home]",
+                           45: "[Insert]",
+                           46: "[Delete]"};
 
     /**
      * Register the keystroke tracker.
