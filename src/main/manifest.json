@@ -7,8 +7,7 @@
 
   "browser_action": {
     "default_title": "Octopeer",
-    "default_icon": "./favicon.png",
-    "default_popup": "./popup.html"
+    "default_icon": "./favicon.png"
   },
 
   "content_scripts": [
@@ -19,26 +18,37 @@
         ],
         "js": [
           "js/OctopeerConstants.js",
-          "js/KeystrokeTracker.js",
-          "js/MouseClickTracker.js",
-          "js/MousePositionTracker.js",
-          "js/ResizeTracker.js",
-          "js/UserIdTracker.js",
+          "js/trackers/KeystrokeTracker.js",
+          "js/trackers/MouseClickTracker.js",
+          "js/trackers/MousePositionTracker.js",
+          "js/trackers/ResizeTracker.js",
+          "js/BitBucketSessionDataGatherer.js",
+          "js/ChromeTrackingCollector.js",
           "js/Main.js"
-        ]
+        ],
+        "run_at": "document_end"
       }
   ],
 
   "background": {
-    "scripts": ["js/RARequestSender.js"]
+    "scripts": [
+        "js/extension/background.js",
+        "js/OctopeerConstants.js",
+        "js/RARequestSender.js"
+      ]
   },
 
   "permissions": [
     // Domain Permissions
     "https://bitbucket.org/*",
     "https://localhost:8000/api/*",
+    "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css",
+    "https://code.jquery.com/jquery-2.1.1.min.js",
+    "https://fonts.googleapis.com/icon?family=Material+Icons",
 
     // API Permissions
-    "storage"
+    "storage",
+    "tabs"
   ]
 }

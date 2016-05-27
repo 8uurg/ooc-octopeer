@@ -1,3 +1,7 @@
+///<reference path="../interfaces/KeystrokeJSON.ts" />
+///<reference path="../interfaces/MouseClickJSON.ts" />
+///<reference path="../interfaces/MousePosJSON.ts" />
+///<reference path="../interfaces/WindowResolutionJSON.ts" />
 /**
  * Created by Cas on 14-5-2016.
  */
@@ -12,5 +16,5 @@ interface Message {
     /**
      * The data object which adheres one interface.
      */
-    data: MouseClickJSON|MousePosJSON|SessionJSON|UserJSON;
+    data: KeystrokeJSON|MouseClickJSON|MousePosJSON|WindowResolutionJSON;
 }

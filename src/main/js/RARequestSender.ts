@@ -7,8 +7,9 @@
  */
 export class RARequestsSender {
 
-    public api_location: string;
+    private api_location: string;
     private send: boolean = false;
+    private allowedStates: number[] = new Array(200, 201, 202);
 
     /**
      * The constructor for setting the location of the database.
@@ -26,7 +27,7 @@ export class RARequestsSender {
         const _this: RARequestsSender = this;
 
         chrome.runtime.onConnect.addListener(function(port) {
-            console.assert(port.name === "requestSender");
+            console.assert(port.name === OCTOPEER_CONSTANTS.chrome_message_sender_id);
             port.onMessage.addListener(function(msg: Message) {
                 _this.sendRequest(msg.table, msg.data);
             });
@@ -39,6 +40,14 @@ export class RARequestsSender {
      */
     public isSent(): boolean {
         return this.send;
+    }
+
+    /**
+     * Returns the string value of api_location.
+     * @returns {string}
+     */
+    public getApiLocation(): string {
+        return this.api_location;
     }
 
     /**
@@ -57,7 +66,7 @@ export class RARequestsSender {
         xmlHTTP.open("POST", this.api_location + table, true);
         xmlHTTP.setRequestHeader("Content-Type", "application/json");
         xmlHTTP.onreadystatechange = function() {
-            if (xmlHTTP.status !== (200 || 201 || 202) && xmlHTTP.readyState === 4) {
+            if (_this.allowedStates.indexOf(xmlHTTP.status) === -1  && xmlHTTP.readyState === 4) {
                 console.error("An error occurred while sending data to the server: " + xmlHTTP.status);
             } else {
                 _this.send = true;
@@ -67,4 +76,4 @@ export class RARequestsSender {
     }
 }
 
-new RARequestsSender("http://localhost:8000/api/");
+new RARequestsSender("http://10.0.22.6/api/");
