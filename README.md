@@ -68,6 +68,7 @@ Load the `dest` folder in chrome:
 
 
 ## Other documentation
+- Class Diagram: [here](https://drive.google.com/file/d/0Byx_cnrHIK23TXktNjRQYVNXOHM/view?usp=sharing)
 - Product Architecture C0.4, 20-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/ad6f5c15b9e81db3cdc4064a5e7bf9b0d1f21f88/doc/Product%20Architectural%20Design%20C0.4.pdf?at=master&fileviewer=file-view-default)
 - Product Planning V1.0, 03-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/f1625bae0961d75aebd905517f3f421888117857/doc/Product%20Planning%20V1.0.pdf?fileviewer=file-view-default)
 - Product Vision V1.0, 03-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/f1625bae0961d75aebd905517f3f421888117857/doc/Product%20Vision%20V1.0.pdf?fileviewer=file-view-default)
