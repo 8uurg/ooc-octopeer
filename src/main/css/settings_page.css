@@ -1,0 +1,73 @@
+html {
+    height: 100%;
+}
+
+main.container {
+    background-color: #f2f2f2 !important;
+}
+
+.brand-logo img {
+    height: 48px;
+    margin-bottom: -12px;
+    padding-right: 12px;
+}
+
+#ourNavBar {
+    background-color: #388E3C !important;
+}
+
+#ourSecondRow .container {
+    width: 85%;
+}
+
+#refresh-pages-notification {
+    visibility: hidden;
+    width: 35%;
+    margin-top: 70px;
+    margin-right: 6px;
+    right: 0;
+    position: absolute;
+    z-index: 1000;
+    background-color: #009688 !important;
+}
+
+#refresh-pages-notification .card-action {
+    border-top: 1px solid #B6B6B6 !important;
+}
+
+#refresh-bitbucket-pages i {
+    color: #C8E6C9 !important;
+    transition: transform 0.4s ease-in-out;
+}
+
+#refresh-bitbucket-pages i:hover {
+    transform: rotate(180deg);
+}
+
+.switch label::after {
+    content: "\00a0\00a0";
+}
+
+footer {
+    margin-top: 0px !important;
+    background-color: #4CAF50 !important;
+}
+
+footer .footer-copyright {
+    background-color: #388E3C !important;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    margin-top: -10px !important;
+}
+
+.acknowledgement {
+    font-size: xx-small;
+}

@@ -1,9 +1,9 @@
-///<reference path="../../typings/index.d.ts" />
+///<reference path="../../../../typings/index.d.ts" />
 
 // Nullroute the default creation of the mousetracker.
 // Actual imports.
 import createSpyObj = jasmine.createSpyObj;
-import {MousePositionTracker} from "../main/js/trackers/MousePositionTracker";
+import {MousePositionTracker} from "../../../main/js/trackers/MousePositionTracker";
 
 
 describe("The Mouse Position Tracker", function() {
@@ -24,7 +24,7 @@ describe("The Mouse Position Tracker", function() {
 
     it("should call sendData with the current position of the mouse after an update", function() {
         this.tracker.register();
-
+        jasmine.clock().mockDate();
         // Change cursor position.
         this.eventCall({
             pageX: 50,
@@ -58,6 +58,7 @@ describe("The Mouse Position Tracker", function() {
 
         // First call should go through.
         expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
+        jasmine.clock().tick(999);
 
         // Change cursor position.
         this.eventCall({
@@ -73,6 +74,7 @@ describe("The Mouse Position Tracker", function() {
 
     it("should call sendData multiple times, if there is enough time between events.", function() {
         this.tracker.register();
+        jasmine.clock().mockDate();
 
         // Change cursor position.
         this.eventCall({
@@ -83,7 +85,7 @@ describe("The Mouse Position Tracker", function() {
         });
 
         // Pass a sufficient amount of time.
-        jasmine.clock().tick(3000);
+        jasmine.clock().tick(1000);
 
         // Change cursor position.
         this.eventCall({

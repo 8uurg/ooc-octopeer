@@ -1,6 +1,6 @@
-///<reference path="../../typings/index.d.ts" />
+///<reference path="../../../typings/index.d.ts" />
 
-import {ChromeTrackingCollector} from "../main/js/ChromeTrackingCollector";
+import {ChromeTrackingCollector} from "../../main/js/ChromeTrackingCollector";
 
 describe("ChromeTrackingCollector", function () {
 

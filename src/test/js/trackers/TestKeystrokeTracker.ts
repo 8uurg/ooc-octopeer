@@ -1,9 +1,9 @@
-///<reference path="../../typings/index.d.ts" />
+///<reference path="../../../../typings/index.d.ts" />
 
 // Nullroute the default creation of the KeystrokeTracker.
 // Actual imports.
 import createSpyObj = jasmine.createSpyObj;
-import {KeystrokeTracker} from "../main/js/trackers/KeystrokeTracker";
+import {KeystrokeTracker} from "../../../main/js/trackers/KeystrokeTracker";
 
 describe("KeystrokeTracker", function() {
     let eventCall: (event: any) => void = null;
@@ -50,6 +50,7 @@ describe("KeystrokeTracker", function() {
             // Mock date, because of ms differences.
             let creationDate = Date.now() / 1000;
             eventCall({keyBoardEvent: "keyup", keyCode: item.keyCode});
+            expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
             expect(this.collector.sendMessage).toHaveBeenCalledWith({
                 table: "keystroke-events/",
                 data: {
