@@ -13,6 +13,7 @@ var OCTOPEER_CONSTANTS: any = { // tslint:disable-line
     "track_mouse_clicks":       "checkboxMouseClicks",
     "track_page_resolution":    "trackPageRes",
     "track_key_strokes":        "trackKeystrokes",
+    "track_semantic_events":    "trackSMEvents",
     "track_pr_metadata":        "trackPRMetaData",
     "track_browser_data":       "trackBrowserData",
     "hash_username":            "hashUsername",
