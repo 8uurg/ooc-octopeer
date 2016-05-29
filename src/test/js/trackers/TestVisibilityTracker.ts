@@ -41,13 +41,16 @@ describe("The Visibility Tracker", function() {
     it("should call sendData with the current visibility after an update (case true)", function() {
         this.tracker.register();
         jasmine.clock().mockDate();
+
         const mockglobal: any = global;
         const olddoc = mockglobal.document;
+
         mockglobal.document = {
             hidden: false
         };
-        this.eventCall({
-        });
+
+        this.eventCall();
+
         mockglobal.document = olddoc;
 
         expect(this.collector.sendMessage).toHaveBeenCalledWith({
