@@ -47,7 +47,7 @@ interface SemanticMapping {
  * Implments semantic tracking
  * For given elements tracks specific events.
  */
-class semanticTracker {
+class SemanticTracker {
 
     private mappings: SemanticMapping[];
     private collector: TrackingCollector;
@@ -95,7 +95,7 @@ class semanticTracker {
      * @param collector The collector to send the tracking data to.
      * @return Itself for daisy chaining.
      */
-    public withCollector(collector: TrackingCollector): semanticTracker {
+    public withCollector(collector: TrackingCollector): SemanticTracker {
         this.collector = collector;
         return this;
     }
@@ -104,6 +104,7 @@ class semanticTracker {
         this.mappings.forEach((i) => {
            this.registerSemanticElement(i);
         });
+        console.log("Performed!");
     }
 
     public registerSemanticElement(sm: SemanticMapping) {
@@ -135,6 +136,7 @@ class semanticTracker {
         element.addEventListener("click", function() {
             _this.sendData(_this.createMessage(_this.createEventType(1, "Click"), element_type_id, 1));
         });
+        console.log("Checked: " + name + "!");
     }
 
     public registerMouseEnter(name: string, element: HTMLElement) {
@@ -160,6 +162,7 @@ class semanticTracker {
      * @returns {{id: number, name: string}}
      */
     private createEventType(id: number, name: string): EventTypeJSON {
+        console.log("EventType!");
         return {
             id: id,
             name: name
@@ -173,6 +176,7 @@ class semanticTracker {
      * @returns {{id: number, name: string}}
      */
     private createElementType(id: number, name: string): ElementTypeJSON {
+        console.log("ElementType!");
         return {
             id: id,
             name: name
@@ -184,6 +188,7 @@ class semanticTracker {
      * @returns {KeystrokeJSON}
      */
     private createMessage(event_type: EventTypeJSON, element_type_id: number, duration: number): SemanticEventJSON {
+        console.log("Message!");
         return {
             event_type: event_type,
             element_type: this.createElementType(element_type_id, this.element_types_mapping(element_type_id)),

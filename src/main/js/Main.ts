@@ -10,7 +10,6 @@ declare var KeystrokeTracker: any;
 declare var MouseClickTracker: any;
 declare var MousePositionTracker: any;
 declare var ResizeTracker: any;
-declare var semanticTracker: any;
 declare var DataGatherer: any;
 declare var ChromeTrackingCollector: any;
 
@@ -54,7 +53,7 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
 
     // Register the semantic event tracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_semantic_events]) {
-        (new semanticTracker()).withCollector(collector).register();
+        (new SemanticTracker()).withCollector(collector).register();
     }
 });
 
