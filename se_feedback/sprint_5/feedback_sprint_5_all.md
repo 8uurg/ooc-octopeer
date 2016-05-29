@@ -23,6 +23,10 @@ Total: ****
 | reflection            |      |
 
 ## Notes
+* I took a closer look at you're point system and am now correcting earlier feedback:
+	* You're point system is ambiguous when it comes to the total time each team member spent.
+	* See the pdf in the sprint_5 folder for details
+* Good reflection except I don't see mention of SIG and creating a GitHub clone
 
 #Code Evolution Quality Feedback
 
