@@ -24,7 +24,7 @@ export class VisibilityTracker {
          */
         document.addEventListener("visibilitychange", function(event) {
             _this.pageVisible = !document.hidden;
-            _this.startTime = Date.now() / 1000;
+            _this.startTime = Date.now();
             _this.sendData(_this.createMessage());
         });
     }
@@ -45,10 +45,10 @@ export class VisibilityTracker {
      */
     private createMessage(): SemanticEventJSON {
         return {
-            event_type: "", // Empty for now until it's known what kind of event the visibility is.
-            element_type: "", // Empty for now until it's known what kind of event the visibility is.
+            event_type: this.pageVisible ? 401 : 402,
+            element_type: -1, // -1 for now since there is no element type associated with visibility.
             started_at: this.startTime,
-            duration: Date.now() / 1000 - this.startTime
+            duration: Date.now() - this.startTime
         };
     }
 

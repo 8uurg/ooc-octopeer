@@ -12,12 +12,12 @@ interface SemanticEventJSON {
     /**
      * The type of event used.
      */
-    event_type: string;
+    event_type: number;
 
     /**
      * Type of element.
      */
-    element_type: string;
+    element_type: number;
 
     /**
      * A unix timestamp at which the event started.
