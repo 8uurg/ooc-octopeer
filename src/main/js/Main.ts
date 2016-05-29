@@ -30,7 +30,6 @@ let neededSettings: { [key: string]: boolean; } = {
 chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
     // Create a collector.
     let collector: TrackingCollector = new ChromeTrackingCollector(new DataGatherer());
-
     // Register the resize tracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_page_resolution]) {
         (new ResizeTracker()).withCollector(collector).register();

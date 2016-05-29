@@ -16,5 +16,5 @@ interface Message {
     /**
      * The data object which adheres one interface.
      */
-    data: KeystrokeJSON|MouseClickJSON|MousePosJSON|WindowResolutionJSON;
+    data: KeystrokeJSON|MouseClickJSON|MousePosJSON|WindowResolutionJSON|SemanticEventJSON;
 }

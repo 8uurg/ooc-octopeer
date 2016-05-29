@@ -3,7 +3,7 @@
   
   "name": "Octopeer-BitBucket",
   "description": "Monitors peer-review behaviour on pull requests on BitBucket for acquiring peer review behaviour",
-  "version": "0.0.4",
+  "version": "0.0.5",
 
   "browser_action": {
     "default_title": "Octopeer",

@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
     registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_clicks,         "checkboxMouseClicks");
     registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution,      "checkboxPageRes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,          "checkboxKeystrokes");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_events,      "checkboxSMEvents");
 
     document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
         chrome.tabs.query({
