@@ -19,8 +19,8 @@ export class VisibilityTracker {
         const _this: VisibilityTracker = this;
 
         /**
-         * Update the mouse coordinates every time the cursor moves.
-         * @param event Object that contains the required cursor information.
+         * Update the visibility every time document hidden is changed.
+         * @param event Object that contains the required semantic event information.
          */
         document.addEventListener("visibilitychange", function(event) {
             _this.pageVisible = !document.hidden;
@@ -40,8 +40,8 @@ export class VisibilityTracker {
     }
 
     /**
-     * Creates an object of type MousePosJSON.
-     * @returns {MousePosJSON}
+     * Creates an object of type VisibilityJSON.
+     * @returns {VisibilityJSON}
      */
     private createMessage(): SemanticEventJSON {
         return {
