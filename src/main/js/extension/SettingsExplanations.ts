@@ -6,7 +6,8 @@ var explanations = [ // tslint:disable-line A var is required in global code.
     {"settingSelector" : "#mouse-position-setting", "title" : "Mouse Position Tracking",
         "bodyText" : [
             "Mouse position tracking tracks the position of your mouse on Bitbucket pages. " +
-            "The extension tracks the X and Y coordinates of the mouse on your screen, and sends them to a database."
+            "The extension tracks the X and Y coordinates of the mouse on your screen, and sends them to a database.",
+            "You can see a demo of the data that is tracked below. Move that mouse!"
         ],
         "sampleData" : () => {
             let title = document.createElement("span");
@@ -24,7 +25,8 @@ var explanations = [ // tslint:disable-line A var is required in global code.
     {"settingSelector" : "#mouse-click-setting", "title" : "Mouse Click Tracking",
         "bodyText" : [
             "Mouse click tracking tracks mouse clicks that occur on Bitbucket pages.",
-            "Whenever a click occurs the timestamp and coordinates of the mouse click are sent to the database. "
+            "Whenever a click occurs the timestamp and coordinates of the mouse click are sent to the database. ",
+            "You can see a demo of the data that is tracked below. Click here!"
         ],
         "sampleData" : () => {
             let title = document.createElement("span");
@@ -41,7 +43,8 @@ var explanations = [ // tslint:disable-line A var is required in global code.
     {"settingSelector" : "#page-resolution-setting", "title" : "Page Resolution Tracking",
         "bodyText" : [
             "Page resolution tracking monitors the resolution of your browser. When the screen resolution " +
-            "changes, an update is sent and the data is stored in the database."
+            "changes, an update is sent and the data is stored in the database.",
+            "You can see a demo of the data that is tracked below. Try resizing your browser!"
         ],
         "sampleData" : () => {
             let title = document.createElement("span");
@@ -61,13 +64,15 @@ var explanations = [ // tslint:disable-line A var is required in global code.
     {"settingSelector" : "#keystroke-setting", "title" : "Keystroke Tracking",
         "bodyText" : [
             "Keystroke tracking tracks what keys you press when on Bitbucket pages. This includes " +
-            "short keys and comments for instance. Whenever a key is pressed this data is stored in the database."
+            "short keys and comments for instance. Whenever a key is pressed this data is stored in the database.",
+            "You can see a demo of the data that is tracked below. Try typing a bit!"
         ],
         "sampleData" : () => {
             let title = document.createElement("span");
             title.className += " card-sub-title";
             title.innerHTML = "The last keys you pressed are:";
             let keys = document.createElement("div");
+            keys.innerHTML = " ";
             document.addEventListener("keypress", (event) => {
                 keys.innerHTML += String.fromCharCode(event.keyCode);
                 keys.innerHTML = keys.innerHTML.substring(keys.innerHTML.length - 50, keys.innerHTML.length);
