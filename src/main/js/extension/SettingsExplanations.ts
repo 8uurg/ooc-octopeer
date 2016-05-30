@@ -25,7 +25,7 @@ var explanations = [ // tslint:disable-line A var is required in global code.
     {"settingSelector" : "#mouse-click-setting", "title" : "Mouse Click Tracking",
         "bodyText" : [
             "Mouse click tracking tracks mouse clicks that occur on Bitbucket pages.",
-            "Whenever a click occurs the timestamp and coordinates of the mouse click are sent to the database. ",
+            "Whenever a click occurs the timestamp and coordinates of the mouse click will be sent to the database. ",
             "You can see a demo of the data that is tracked below. Click here!"
         ],
         "sampleData" : () => {
@@ -42,8 +42,8 @@ var explanations = [ // tslint:disable-line A var is required in global code.
     },
     {"settingSelector" : "#page-resolution-setting", "title" : "Page Resolution Tracking",
         "bodyText" : [
-            "Page resolution tracking monitors the resolution of your browser. When the screen resolution " +
-            "changes, an update is sent and the data is stored in the database.",
+            "Page resolution tracking monitors the resolution of your browser. When the page resolution " +
+            "changes, an update is sent and the resolution is stored in the database.",
             "You can see a demo of the data that is tracked below. Try resizing your browser!"
         ],
         "sampleData" : () => {
