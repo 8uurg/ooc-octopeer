@@ -2,10 +2,11 @@
 ///<reference path="./trackers/MouseClickTracker.ts" />
 ///<reference path="./trackers/MousePositionTracker.ts" />
 ///<reference path="./trackers/ResizeTracker.ts" />
+///<reference path="./trackers/VisibilityTracker.ts" />
 ///<reference path="./ChromeTrackingCollector.ts" />
 ///<reference path="./BitBucketSessionDataGatherer.ts" />
 
-import {VisibilityTracker} from "./trackers/VisibilityTracker";
+declare var VisibilityTracker: any;
 declare var KeystrokeTracker: any;
 declare var MouseClickTracker: any;
 declare var MousePositionTracker: any;
