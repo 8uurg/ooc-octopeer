@@ -2,9 +2,19 @@
  * Created by larsstegman on 30-05-16.
  */
 
-var explanations = [
+var explanations = [ // tslint:disable-line A var is required in global code.
     {"settingSelector" : "#mouse-position-setting", "title" : "Mouse Position Tracking",
-        "bodyText" : "Mouse position tracking tracks the position of your mouse on certain pages."}
+        "bodyText" : "Mouse position tracking tracks the position of your mouse on Bitbucket pages. " +
+        "The extension tracks the X and Y coordinates of the mouse on your screen, and sends them to a database."},
+    {"settingSelector" : "#mouse-click-setting", "title" : "Mouse Click Tracking",
+        "bodyText" : "Mouse click tracking tracks mouse clicks that occur on Bitbucket pages." +
+        "Whenever a click occurs the timestamp and coordinates of the mouse click are sent to the database. "},
+    {"settingSelector" : "#page-resolution-setting", "title" : "Page Resolution Tracking",
+        "bodyText" : "Page resolution tracking monitors the resolution of your browser. When the screen resolution " +
+        "changes, an update is sent and the data is stored in the database."},
+    {"settingSelector" : "#keystroke-setting", "title" : "Keystroke Tracking",
+        "bodyText" : "Keystroke tracking tracks what keys you press when on Bitbucket pages. This includes " +
+        "short keys and comments for instance. Whenever a key is pressed this data is stored in the database."}
     // {"settingSelector" : "", "title" : "", "bodyText" : ""}
 ];
 
