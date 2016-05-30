@@ -36,6 +36,10 @@ main.container {
     margin: 5px 10px 5px 5px;
 }
 
+.notification .card-content-text p:not(:last-child) {
+    margin-bottom: 10px;
+}
+
 .card-action {
     border-top: 1px solid #B6B6B6 !important;
 }
@@ -48,6 +52,11 @@ main.container {
 .card i {
     color: #C8E6C9 !important;
     transition: transform 0.4s ease-in-out;
+}
+
+.card-sub-title {
+    margin-top: 30px;
+    font-size: 18px;
 }
 
 #refresh-bitbucket-pages i:hover {
