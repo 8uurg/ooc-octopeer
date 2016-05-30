@@ -32,7 +32,7 @@ export class VisibilityTracker {
     /**
      * Add a collector to send the data to.
      * @param collector The collector.
-     * @returns {MousePositionTracker}
+     * @returns {VisibilityTracker}
      */
     public withCollector(collector: TrackingCollector): VisibilityTracker {
         this.collector = collector;
@@ -40,8 +40,8 @@ export class VisibilityTracker {
     }
 
     /**
-     * Creates an object of type VisibilityJSON.
-     * @returns {VisibilityJSON}
+     * Creates an object of type SemanticEventJSON.
+     * @returns {SemanticEventJSON}
      */
     private createMessage(): SemanticEventJSON {
         return {
