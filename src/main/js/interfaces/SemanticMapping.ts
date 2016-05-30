@@ -5,5 +5,4 @@ interface SemanticMapping {
     name: string;
     descriptor: string;
     mapping: SemanticEnablingMapping;
-    element_type_id: number;
 }

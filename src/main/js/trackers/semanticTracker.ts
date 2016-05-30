@@ -13,13 +13,11 @@
 /**
  * Generate a semantic element.
  */
-function semanticElement(name: string, descriptor: string, mapping: SemanticEnablingMapping,
-                         id: number ): SemanticMapping {
+function semanticElement(name: string, descriptor: string, mapping: SemanticEnablingMapping): SemanticMapping {
     return {
         name: name,
         descriptor: descriptor,
         mapping: mapping,
-        element_type_id: id
     };
 }
 
@@ -31,22 +29,22 @@ export class SemanticTracker {
 
     private mappings: SemanticMapping[];
     private collector: TrackingCollector;
-    private element_types_mapping: any = {1: "Merge Pull Request",
-                                          2: "Close Pull Request",
-                                          3: "Cancel inline comment",
-                                          4: "Comment inline comment",
-                                          5: "Inline Comment",
-                                          9: "Edit comment",
-                                         10: "Add reaction"
+    private element_types_mapping: any = {"Merge Pull Request": 1,
+                                          "Close Pull Request": 2,
+                                          "Cancel inline comment": 3,
+                                          "Comment inline comment": 4,
+                                          "Inline Comment": 5,
+                                          "Edit comment": 9,
+                                          "Add reaction": 10
                                          };
-    private event_types_mapping: any = {1: "Keystroke",
-                                        2: "Click",
-                                        3: "Mouseenter",
-                                        4: "Mouseleave",
-                                        5: "Scroll into view",
-                                        6: "Scroll out of view",
-                                        7: "Start watching pull request",
-                                        8: "Stop watching pull request"
+    private event_types_mapping: any = {"Keystroke": 1,
+                                        "Click": 2,
+                                        "Mouseenter": 3,
+                                        "Mouseleave": 4,
+                                        "Scroll into view": 5,
+                                        "Scroll out of view": 6,
+                                        "Start watching pull request": 7,
+                                        "Stop watching pull request": 8
                                         };
 
     constructor() {
@@ -57,23 +55,23 @@ export class SemanticTracker {
             scroll: true
         };
 
-        // TODO: Create mappings outside of class and pass them in instead.
+        // TODO: Alter the names of the elements to the names they actually have for Tabs and Textfields.
         this.mappings = [
             /* BUTTONS */
-            semanticElement("merge_pr_button", "#fulfill-pullrequest", full, 1),
-            semanticElement("close_pr_button", "#reject-pullrequest", full, 2),
-            semanticElement("cancel_inline_comment_button", ".new-comment .aui-button-primary", full, 3),
-            semanticElement("submit_inline_comment_button", ".new-comment .buttons a", full, 4),
-            semanticElement("create_inline_comment_button", ".aui-iconfont-add-comment", full, 5),
-            semanticElement("edit_comment_button", ".comment-actions .edit-link", full, 6),
-            semanticElement("pr_comment_button", ".new-comment .buttons .aui-button-primary", full, 10),
+            semanticElement("Merge Pull Request", "#fulfill-pullrequest", full),
+            semanticElement("Close Pull Request", "#reject-pullrequest", full),
+            semanticElement("Cancel inline comment", ".new-comment .aui-button-primary", full),
+            semanticElement("Comment inline comment", ".new-comment .buttons a", full),
+            semanticElement("Inline Comment", ".aui-iconfont-add-comment", full),
+            semanticElement("Edit comment", ".comment-actions .edit-link", full),
+            semanticElement("Add reaction", ".new-comment .buttons .aui-button-primary", full),
             /* TABS - NOTICE: almost no overlap with GitHub. */
-            semanticElement("commits_tab", "#pr-menu-commits", full, -1),
-            semanticElement("overview_tab", "#pr-menu-diff", full, -1),
-            semanticElement("activity_tab", "#pr-menu-activity", full, -1),
+            semanticElement("commits_tab", "#pr-menu-commits", full),
+            semanticElement("overview_tab", "#pr-menu-diff", full),
+            semanticElement("activity_tab", "#pr-menu-activity", full),
             /* TEXTFIELDS */
-            semanticElement("comment_textfield", "#general-comments #id_new_comment", full, -1),
-            semanticElement("inline_comment_textfield", ".comment-thread-container #id_new_comment", full, -1)
+            semanticElement("comment_textfield", "#general-comments #id_new_comment", full),
+            semanticElement("inline_comment_textfield", ".comment-thread-container #id_new_comment", full)
         ];
     }
 
@@ -98,9 +96,9 @@ export class SemanticTracker {
         for (let id = 0; id < elements.length; id++) {
             let element = <HTMLElement> elements.item(id);
             if (sm.mapping.keystroke)       { this.registerKeystroke(sm.name, element); }
-            if (sm.mapping.click)           { this.registerClick(element, sm.element_type_id); }
-            if (sm.mapping.hover)           { this.registerHover(sm.name, element, sm.element_type_id); }
-            if (sm.mapping.scroll)          { this.registerScroll(sm.name, element, sm.element_type_id); }
+            if (sm.mapping.click)           { this.registerClick(sm.name, element); }
+            if (sm.mapping.hover)           { this.registerHover(sm.name, element); }
+            if (sm.mapping.scroll)          { this.registerScroll(sm.name, element); }
         }
     }
 
@@ -114,22 +112,22 @@ export class SemanticTracker {
      * @param element          The element.
      * @param element_type_id  The type ID of the element.
      */
-    public registerClick(element: HTMLElement, element_type_id: number) {
+    public registerClick(name: string, element: HTMLElement) {
         let _this = this;
 
         element.addEventListener("click", function() {
-            let event_type: EventTypeJSON = _this.createEventType(1);
-            let element_type: ElementTypeJSON = _this.createElementType(element_type_id);
+            let event_type: EventTypeJSON = _this.createEventType("Click");
+            let element_type: ElementTypeJSON = _this.createElementType(name);
             let message: SemanticEventJSON = _this.createMessage(event_type, element_type, 1);
             _this.sendData(message);
         });
     }
 
-    public registerHover(name: string, element: HTMLElement, element_type_id: number) {
+    public registerHover(name: string, element: HTMLElement) {
 
     }
 
-    public registerScroll(name: string, element: HTMLElement, element_type_id: number) {
+    public registerScroll(name: string, element: HTMLElement) {
 
     }
 
@@ -139,10 +137,10 @@ export class SemanticTracker {
      * @param name  The name of the event-type.
      * @returns {{id: number, name: string}}
      */
-    private createEventType(id: number): EventTypeJSON {
+    private createEventType(name: string): EventTypeJSON {
         return {
-            id: id,
-            name: this.event_types_mapping[id]
+            id: this.event_types_mapping[name],
+            name: name
         };
     }
 
@@ -152,10 +150,10 @@ export class SemanticTracker {
      * @param name  The name of the element-type
      * @returns {{id: number, name: string}}
      */
-    private createElementType(id: number): ElementTypeJSON {
+    private createElementType(name: string): ElementTypeJSON {
         return {
-            id: id,
-            name: this.element_types_mapping[id]
+            id: this.element_types_mapping[name],
+            name: name
         };
     }
 
