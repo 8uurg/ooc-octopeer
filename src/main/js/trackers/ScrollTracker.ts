@@ -21,8 +21,9 @@ export class ScrollTracker {
         window.addEventListener("scroll", sendWindowPosition);
     }
 
-    public withCollector(collector: TrackingCollector) {
+    public withCollector(collector: TrackingCollector): ScrollTracker {
         this.collector = collector;
+        return this;
     }
 
     public createMessage(): ScrollJSON {
