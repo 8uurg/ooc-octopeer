@@ -5,6 +5,8 @@
 /// <reference path="../interfaces/SemanticEventJSON.ts" />
 /// <reference path="../interfaces/SemanticMapping.ts" />
 /// <reference path="../interfaces/TrackingCollector.ts" />
+declare var scrollMonitor: any;
+
 /**
  * This file contains logic for registering semantic events.
  */
@@ -43,13 +45,11 @@ export class SemanticTracker {
         const full: SemanticEnablingMapping = {
             keystroke: true,
             click: true,
-            mouse_enter: true,
-            mouse_leave: true,
-            scroll_in_view: true,
-            scroll_out_view: true
+            hover: true,
+            scroll: true
         };
 
-        // TODO: Make mappings work.
+        // TODO: Create mappings outside of class and pass them in instead.
         this.mappings = [
             /* BUTTONS */
             semanticElement("merge_pr_button", "#fulfill-pullrequest", full, 1),
@@ -91,10 +91,8 @@ export class SemanticTracker {
             let element = <HTMLElement> elements.item(id);
             if (sm.mapping.keystroke)       { this.registerKeystroke(sm.name, element); }
             if (sm.mapping.click)           { this.registerClick(sm.name, element, sm.element_type_id); }
-            if (sm.mapping.mouse_enter)     { this.registerMouseEnter(sm.name, element); }
-            if (sm.mapping.mouse_leave)     { this.registerMouseLeave(sm.name, element); }
-            if (sm.mapping.scroll_in_view)  { this.registerScrollInView(sm.name, element); }
-            if (sm.mapping.scroll_out_view) { this.registerScrollOutView(sm.name, element); }
+            if (sm.mapping.hover)           { this.registerHover(sm.name, element); }
+            if (sm.mapping.scroll)          { this.registerScroll(sm.name, element); }
         }
     }
 
@@ -116,19 +114,11 @@ export class SemanticTracker {
         });
     }
 
-    public registerMouseEnter(name: string, element: HTMLElement) {
+    public registerHover(name: string, element: HTMLElement) {
 
     }
 
-    public registerMouseLeave(name: string, element: HTMLElement) {
-
-    }
-
-    public registerScrollInView(name: string, element: HTMLElement) {
-
-    }
-
-    public registerScrollOutView(name: string, element: HTMLElement) {
+    public registerScroll(name: string, element: HTMLElement) {
 
     }
 
