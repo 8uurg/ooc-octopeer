@@ -14,16 +14,32 @@
     <script src="../js/extension/Settings.js"></script>
 </head>
 <body>
-<!-- The notification telling the user that settings can will be applied after a page refresh. -->
-<div id="refresh-pages-notification" class="card z-depth-5">
-    <div class="card-content white-text">
-        <span class="card-title">Settings Changed</span>
-        <p>You've changed the Octopeer settings. The settings will be applied after refreshing your
-            Bitbucket pages.</p>
-        <p>Be aware, refreshing the pages may throw away unfinished work.</p>
+
+<div id="notification-container">
+    <!-- The notification telling the user that settings can will be applied after a page refresh. -->
+    <div id="refresh-pages-notification" class="card z-depth-5 notification">
+        <div class="card-content white-text">
+            <span class="card-title">Settings Changed</span>
+            <p>You've changed the Octopeer settings. The settings will be applied after refreshing your
+                Bitbucket pages.</p>
+            <p>Be aware, refreshing the pages may throw away unfinished work.</p>
+        </div>
+        <div class="card-action ">
+            <a id="refresh-bitbucket-pages" href="#"><i class="material-icons">autorenew</i></a>
+        </div>
     </div>
-    <div class="card-action ">
-        <a id="refresh-bitbucket-pages" href="#"><i class="material-icons">autorenew</i></a>
+    <!-- Notification explaining what is being tracked -->
+    <div id="tracking-explanation" class="card z-depth-5 notification">
+        <div class="card-content white-text">
+            <span class="card-title">Tracking Explanation</span>
+            <span class="card-content-text">
+                <p>This is where the explanation will be.</p>
+                <p>It will be quite long and very eloquent.</p>
+            </span>
+        </div>
+        <div class="card-action ">
+            <a id="hide-explanation-button" href="#"><i class="material-icons">close</i></a>
+        </div>
     </div>
 </div>
 <header>
@@ -41,12 +57,17 @@
 <div id="ourSecondRow" class="row">
     <div class="col s12">
         <!-- Main settings container-->
-        <div class="container">
+        <div class="container privacy-settings">
             <div class="row">
                 <h3>Tracking Settings</h3>
             </div>
-            <div class="row">
-                <div class="col s12">
+            <div class="row" id="mouse-position-setting">
+                <div class="col s1">
+                    <div class="chip explain-tracking-button">
+                        ?
+                    </div>
+                </div>
+                <div class="col s11">
                     <div class="switch">
                         <label>
                             Off
@@ -59,7 +80,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col s12">
+                <div class="col s1">
+                    <div class="chip explain-tracking-button">
+                        ?
+                    </div>
+                </div>
+                <div class="col s11">
                     <div class="switch">
                         <label>
                             Off
@@ -72,7 +98,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col s12">
+                <div class="col s1">
+                    <div class="chip explain-tracking-button">
+                        ?
+                    </div>
+                </div>
+                <div class="col s11">
                     <div class="switch">
                         <label>
                             Off
@@ -85,7 +116,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col s12">
+                <div class="col s1">
+                    <div class="chip explain-tracking-button">
+                        ?
+                    </div>
+                </div>
+                <div class="col s11">
                     <div class="switch">
                         <label>
                             Off

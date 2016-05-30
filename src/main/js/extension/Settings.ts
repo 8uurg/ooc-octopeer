@@ -13,7 +13,7 @@ export function registerCheckbox(storageName: string, checkboxId: string) {
         checkbox.addEventListener("click", function() {
             syncedStorage.set({[storageName]: this.checked});
             console.log(storageName + ": " + this.checked);
-            document.getElementById("refresh-pages-notification").style.setProperty("visibility", "visible");
+            document.getElementById("refresh-pages-notification").style.setProperty("display", "inherit");
         });
     });
 }
@@ -34,8 +34,19 @@ document.addEventListener("DOMContentLoaded", function() {
             tabs.forEach((tab) => {
                 chrome.tabs.reload(tab.id);
             });
-            document.getElementById("refresh-pages-notification").style.setProperty("visibility", "hidden");
+            document.getElementById("refresh-pages-notification").style.setProperty("display", "none");
         });
+    });
+
+    document.getElementById("hide-explanation-button").addEventListener("click", () => {
+       document.getElementById("tracking-explanation").style.setProperty("display", "none");
+    });
+
+    document.querySelector("#mouse-position-setting .explain-tracking-button").addEventListener("click", () => {
+        document.querySelector("#tracking-explanation .card-content .card-title").innerHTML = "Mouse Position Tracking";
+        document.querySelector("#tracking-explanation .card-content .card-content-text").innerHTML =
+            "<p>Mouse position tracking tracks the position of your mouse on certain pages.</p>";
+        document.getElementById("tracking-explanation").style.setProperty("display", "inherit");
     });
 });
 
