@@ -58,7 +58,8 @@ export class SemanticTracker {
             scroll: true
         };
 
-        // TODO: Alter the names of the elements to the names they actually have for Tabs and Textfields.
+        // TODO: Create mappings outside of class and pass them in instead.
+        // TODO: Alter the names of the elements, to the names they actually have for Tabs and Textfields.
         this.mappings = [
             /* BUTTONS */
             semanticElement("Merge Pull Request", "#fulfill-pullrequest", full),
