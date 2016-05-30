@@ -5,6 +5,7 @@
 ///<reference path="./ChromeTrackingCollector.ts" />
 ///<reference path="./BitBucketSessionDataGatherer.ts" />
 
+import {VisibilityTracker} from "./trackers/VisibilityTracker";
 declare var KeystrokeTracker: any;
 declare var MouseClickTracker: any;
 declare var MousePositionTracker: any;
@@ -47,6 +48,11 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
     // Register the mouse click tracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_mouse_clicks]) {
         (new MouseClickTracker()).withCollector(collector).register();
+    }
+
+    // Register the visibility tracker to the current document.
+    if (items[OCTOPEER_CONSTANTS.track_visibility]) {
+        (new VisibilityTracker()).withCollector(collector).register();
     }
 });
 
