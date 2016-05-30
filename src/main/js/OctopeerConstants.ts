@@ -17,5 +17,8 @@ var OCTOPEER_CONSTANTS: any = { // tslint:disable-line
     "track_browser_data":       "trackBrowserData",
     "hash_username":            "hashUsername",
     "hash_pr_metadata":         "hashPRMetaData",
-    "hash_browser_data":        "hashBrowserData"
+    "hash_browser_data":        "hashBrowserData",
+
+    // The database constants
+    "database_location_key":     "databaseLocation"
 };
