@@ -5,7 +5,6 @@
 /// <reference path="../interfaces/SemanticEventJSON.ts" />
 /// <reference path="../interfaces/SemanticMapping.ts" />
 /// <reference path="../interfaces/TrackingCollector.ts" />
-declare var scrollMonitor: any;
 
 /**
  * This file contains logic for registering semantic events.
@@ -40,6 +39,15 @@ export class SemanticTracker {
                                           9: "Edit comment",
                                          10: "Add reaction"
                                          };
+    private event_types_mapping: any = {1: "Keystroke",
+                                        2: "Click",
+                                        3: "Mouseenter",
+                                        4: "Mouseleave",
+                                        5: "Scroll into view",
+                                        6: "Scroll out of view",
+                                        7: "Start watching pull request",
+                                        8: "Stop watching pull request"
+                                        };
 
     constructor() {
         const full: SemanticEnablingMapping = {
@@ -90,7 +98,7 @@ export class SemanticTracker {
         for (let id = 0; id < elements.length; id++) {
             let element = <HTMLElement> elements.item(id);
             if (sm.mapping.keystroke)       { this.registerKeystroke(sm.name, element); }
-            if (sm.mapping.click)           { this.registerClick(sm.name, element, sm.element_type_id); }
+            if (sm.mapping.click)           { this.registerClick(element, sm.element_type_id); }
             if (sm.mapping.hover)           { this.registerHover(sm.name, element, sm.element_type_id); }
             if (sm.mapping.scroll)          { this.registerScroll(sm.name, element, sm.element_type_id); }
         }
@@ -106,11 +114,11 @@ export class SemanticTracker {
      * @param element          The element.
      * @param element_type_id  The type ID of the element.
      */
-    public registerClick(name: string, element: HTMLElement, element_type_id: number) {
+    public registerClick(element: HTMLElement, element_type_id: number) {
         let _this = this;
 
         element.addEventListener("click", function() {
-            let event_type: EventTypeJSON = _this.createEventType(1, "Click");
+            let event_type: EventTypeJSON = _this.createEventType(1);
             let element_type: ElementTypeJSON = _this.createElementType(element_type_id);
             let message: SemanticEventJSON = _this.createMessage(event_type, element_type, 1);
             _this.sendData(message);
@@ -131,10 +139,10 @@ export class SemanticTracker {
      * @param name  The name of the event-type.
      * @returns {{id: number, name: string}}
      */
-    private createEventType(id: number, name: string): EventTypeJSON {
+    private createEventType(id: number): EventTypeJSON {
         return {
             id: id,
-            name: name
+            name: this.event_types_mapping[id]
         };
     }
 
