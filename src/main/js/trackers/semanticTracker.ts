@@ -35,7 +35,10 @@ export class SemanticTracker {
                                           "Comment inline comment": 4,
                                           "Inline Comment": 5,
                                           "Edit comment": 9,
-                                          "Add reaction": 10
+                                          "Add reaction": 10,
+                                          "Comment textfield": 26,
+                                          "Inline comment textfield": 27
+
                                          };
     private event_types_mapping: any = {"Keystroke": 1,
                                         "Click": 2,
@@ -70,8 +73,8 @@ export class SemanticTracker {
             semanticElement("overview_tab", "#pr-menu-diff", full),
             semanticElement("activity_tab", "#pr-menu-activity", full),
             /* TEXTFIELDS */
-            semanticElement("comment_textfield", "#general-comments #id_new_comment", full),
-            semanticElement("inline_comment_textfield", ".comment-thread-container #id_new_comment", full)
+            semanticElement("Comment textfield", "#general-comments #id_new_comment", full),
+            semanticElement("Inline comment textfield", ".comment-thread-container #id_new_comment", full)
         ];
     }
 
