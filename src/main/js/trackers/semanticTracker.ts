@@ -1,4 +1,6 @@
 /// <reference path="../interfaces/TrackingCollector.ts" />
+declare var scrollMonitor: any;
+
 /**
  * This file contains logic for registering semantic events.
  */
@@ -10,18 +12,18 @@
 interface SemanticEnablingMapping {
     keystroke: boolean;
     click: boolean;
-    mouse_enter: boolean;
-    mouse_leave: boolean;
-    scroll_in_view: boolean;
-    scroll_out_view: boolean;
+    hover: boolean;
+    scroll: boolean;
 }
 
 /**
  * Generate a semantic element.
  */
-function semanticElement(name: string, descriptor: string, mapping: SemanticEnablingMapping ): SemanticMapping {
+function semanticElement(name: string, id: number, descriptor: string,
+                         mapping: SemanticEnablingMapping ): SemanticMapping {
     return {
         name: name,
+        id: id,
         descriptor: descriptor,
         mapping: mapping
     };
@@ -32,6 +34,7 @@ function semanticElement(name: string, descriptor: string, mapping: SemanticEnab
  */
 interface SemanticMapping {
     name: string;
+    id: number;
     descriptor: string;
     mapping: SemanticEnablingMapping;
 }
@@ -49,29 +52,27 @@ class SemanticTracker {
         const full: SemanticEnablingMapping = {
             keystroke: true,
             click: true,
-            mouse_enter: true,
-            mouse_leave: true,
-            scroll_in_view: true,
-            scroll_out_view: true
+            hover: true,
+            scroll: true
         };
 
-        // TODO: Make mappings work.
+        // TODO: Create mappings outside of class and pass them in instead.
         this.mappings = [
             /* BUTTONS */
-            semanticElement("merge_pr_button", "#fulfill-pullrequest", full),
-            semanticElement("close_pr_button", "#reject-pullrequest", full),
-            semanticElement("cancel_inline_comment_button", ".new-comment .aui-button-primary", full),
-            semanticElement("submit_inline_comment_button", ".new-comment .buttons a", full),
-            semanticElement("create_inline_comment_button", ".aui-iconfont-add-comment", full),
-            semanticElement("edit_comment_button", ".comment-actions .edit-link", full),
-            semanticElement("pr_comment_button", ".new-comment .buttons .aui-button-primary", full),
+            semanticElement("merge_pr_button", 101, "#fulfill-pullrequest", full),
+            semanticElement("close_pr_button", 102, "#reject-pullrequest", full),
+            semanticElement("cancel_inline_comment_button", 103, ".new-comment .aui-button-primary", full),
+            semanticElement("submit_inline_comment_button", 104, ".new-comment .buttons a", full),
+            semanticElement("create_inline_comment_button", 105, ".aui-iconfont-add-comment", full),
+            semanticElement("edit_comment_button", 109, ".comment-actions .edit-link", full),
+            semanticElement("pr_comment_button", 113, ".new-comment .buttons .aui-button-primary", full),
             /* TABS - NOTICE: almost no overlap with GitHub. */
-            semanticElement("commits_tab", "#pr-menu-commits", full),
-            semanticElement("overview_tab", "#pr-menu-diff", full),
-            semanticElement("activity_tab", "#pr-menu-activity", full),
+            semanticElement("commits_tab", 202, "#pr-menu-commits", full),
+            semanticElement("overview_tab", 204, "#pr-menu-diff", full),
+            semanticElement("activity_tab", 205, "#pr-menu-activity", full),
             /* TEXTFIELDS */
-            semanticElement("comment_textfield", "#general-comments #id_new_comment", full),
-            semanticElement("inline_comment_textfield", ".comment-thread-container #id_new_comment", full)
+            semanticElement("comment_textfield", 501, "#general-comments #id_new_comment", full),
+            semanticElement("inline_comment_textfield", 502, ".comment-thread-container #id_new_comment", full)
         ];
     }
 
@@ -95,36 +96,26 @@ class SemanticTracker {
         let elements = document.querySelectorAll(sm.descriptor);
         for (let id = 0; id < elements.length; id++) {
             let element = <HTMLElement> elements.item(id);
-            if (sm.mapping.keystroke)       { this.registerKeystroke(sm.name, element); }
-            if (sm.mapping.click)           { this.registerClick(sm.name, element); }
-            if (sm.mapping.mouse_enter)     { this.registerMouseEnter(sm.name, element); }
-            if (sm.mapping.mouse_leave)     { this.registerMouseLeave(sm.name, element); }
-            if (sm.mapping.scroll_in_view)  { this.registerScrollInView(sm.name, element); }
-            if (sm.mapping.scroll_out_view) { this.registerScrollOutView(sm.name, element); }
+            if (sm.mapping.keystroke)       { this.registerKeystroke(sm.name, sm.id, element); }
+            if (sm.mapping.click)           { this.registerClick(sm.name, sm.id, element); }
+            if (sm.mapping.hover)           { this.registerHover(sm.name, sm.id, element); }
+            if (sm.mapping.scroll)          { this.registerScroll(sm.name, sm.id, element); }
         }
     }
 
-    public registerKeystroke(name: string, element: HTMLElement) {
+    public registerKeystroke(name: string, id: number, element: HTMLElement) {
 
     }
 
-    public registerClick(name: string, element: HTMLElement) {
+    public registerClick(name: string, id: number, element: HTMLElement) {
 
     }
 
-    public registerMouseEnter(name: string, element: HTMLElement) {
+    public registerHover(name: string, id: number, element: HTMLElement) {
 
     }
 
-    public registerMouseLeave(name: string, element: HTMLElement) {
-
-    }
-
-    public registerScrollInView(name: string, element: HTMLElement) {
-
-    }
-
-    public registerScrollOutView(name: string, element: HTMLElement) {
+    public registerScroll(name: string, id: number, element: HTMLElement) {
 
     }
 
