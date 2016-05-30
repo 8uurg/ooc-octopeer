@@ -64,21 +64,6 @@ describe("The Visibility Tracker", function() {
         });
     });
 
-    it("should throttle the amount of sendData calls, if events occur too fast.", function() {
-        this.tracker.register();
-
-        this.eventCall();
-
-        // First call should go through.
-        expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
-        jasmine.clock().tick(999);
-
-        this.eventCall();
-
-        // Second call should be throttled.
-        expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
-    });
-
     afterEach(function() {
         jasmine.clock().uninstall();
     });

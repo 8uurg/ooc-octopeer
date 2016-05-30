@@ -8,8 +8,6 @@
 export class VisibilityTracker {
     private collector: TrackingCollector;
     private pageVisible: boolean = false;
-    private lastCall: number = -1;
-    private startTime: number = -1;
 
     /**
      * Register the visibility tracker to the document.
@@ -24,7 +22,6 @@ export class VisibilityTracker {
          */
         document.addEventListener("visibilitychange", function(event) {
             _this.pageVisible = !document.hidden;
-            _this.startTime = Date.now();
             _this.sendData(_this.createMessage());
         });
     }
@@ -47,8 +44,8 @@ export class VisibilityTracker {
         return {
             event_type: this.pageVisible ? 401 : 402,
             element_type: -1, // -1 for now since there is no element type associated with visibility.
-            started_at: this.startTime,
-            duration: Date.now() - this.startTime
+            started_at: Date.now(),
+            duration: 0
         };
     }
 
@@ -56,14 +53,9 @@ export class VisibilityTracker {
      * Send data to centralized collector.
      */
     private sendData(vtData: SemanticEventJSON) {
-        let newCall: number = Date.now();
-
-        if ( newCall - this.lastCall >= 1000 ) {
-            this.lastCall = newCall;
             this.collector.sendMessage({
                 table: "semantic-events/",
                 data: vtData
             });
-        }
     }
 }
