@@ -91,8 +91,8 @@ export class SemanticTracker {
             let element = <HTMLElement> elements.item(id);
             if (sm.mapping.keystroke)       { this.registerKeystroke(sm.name, element); }
             if (sm.mapping.click)           { this.registerClick(sm.name, element, sm.element_type_id); }
-            if (sm.mapping.hover)           { this.registerHover(sm.name, element); }
-            if (sm.mapping.scroll)          { this.registerScroll(sm.name, element); }
+            if (sm.mapping.hover)           { this.registerHover(sm.name, element, sm.element_type_id); }
+            if (sm.mapping.scroll)          { this.registerScroll(sm.name, element, sm.element_type_id); }
         }
     }
 
@@ -110,15 +110,18 @@ export class SemanticTracker {
         let _this = this;
 
         element.addEventListener("click", function() {
-            _this.sendData(_this.createMessage(_this.createEventType(1, "Click"), element_type_id, 1));
+            let event_type: EventTypeJSON = _this.createEventType(1, "Click");
+            let element_type: ElementTypeJSON = _this.createElementType(element_type_id);
+            let message: SemanticEventJSON = _this.createMessage(event_type, element_type, 1);
+            _this.sendData(message);
         });
     }
 
-    public registerHover(name: string, element: HTMLElement) {
+    public registerHover(name: string, element: HTMLElement, element_type_id: number) {
 
     }
 
-    public registerScroll(name: string, element: HTMLElement) {
+    public registerScroll(name: string, element: HTMLElement, element_type_id: number) {
 
     }
 
@@ -141,10 +144,10 @@ export class SemanticTracker {
      * @param name  The name of the element-type
      * @returns {{id: number, name: string}}
      */
-    private createElementType(id: number, name: string): ElementTypeJSON {
+    private createElementType(id: number): ElementTypeJSON {
         return {
             id: id,
-            name: name
+            name: this.element_types_mapping[id]
         };
     }
 
@@ -152,10 +155,11 @@ export class SemanticTracker {
      * Creates a message using the Keystroke interface.
      * @returns {KeystrokeJSON}
      */
-    private createMessage(event_type: EventTypeJSON, element_type_id: number, duration: number): SemanticEventJSON {
+    private createMessage(event_type: EventTypeJSON, element_type: ElementTypeJSON,
+                          duration: number): SemanticEventJSON {
         return {
             event_type: event_type,
-            element_type: this.createElementType(element_type_id, this.element_types_mapping[element_type_id]),
+            element_type: element_type,
             created_at: Date.now() / 1000,
             duration: duration
         };
