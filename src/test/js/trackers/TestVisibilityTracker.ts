@@ -24,7 +24,6 @@ describe("The Visibility Tracker", function() {
 
     it("should call sendData with the current visibility after an update (case false)", function() {
         this.tracker.register();
-        jasmine.clock().mockDate();
         this.eventCall();
 
         expect(this.collector.sendMessage).toHaveBeenCalledWith({
@@ -40,7 +39,6 @@ describe("The Visibility Tracker", function() {
 
     it("should call sendData with the current visibility after an update (case true)", function() {
         this.tracker.register();
-        jasmine.clock().mockDate();
 
         const mockglobal: any = global;
         const olddoc = mockglobal.document;
