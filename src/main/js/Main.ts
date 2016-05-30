@@ -24,7 +24,8 @@ let neededSettings: { [key: string]: boolean; } = {
     [OCTOPEER_CONSTANTS.track_key_strokes]: true,
     [OCTOPEER_CONSTANTS.track_mouse_position]: true,
     [OCTOPEER_CONSTANTS.track_page_resolution]: true,
-    [OCTOPEER_CONSTANTS.track_mouse_clicks]: true
+    [OCTOPEER_CONSTANTS.track_mouse_clicks]: true,
+    [OCTOPEER_CONSTANTS.track_visibility]: true
 };
 
 chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
