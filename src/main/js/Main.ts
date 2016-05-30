@@ -10,6 +10,7 @@ declare var KeystrokeTracker: any;
 declare var MouseClickTracker: any;
 declare var MousePositionTracker: any;
 declare var ResizeTracker: any;
+declare var SemanticTracker: any;
 declare var DataGatherer: any;
 declare var ChromeTrackingCollector: any;
 

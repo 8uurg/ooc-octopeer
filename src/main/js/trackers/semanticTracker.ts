@@ -1,24 +1,13 @@
 /// <reference path="../interfaces/EventTypeJSON.ts" />
 /// <reference path="../interfaces/ElementTypeJSON.ts" />
 /// <reference path="../interfaces/Message.ts" />
+/// <reference path="../interfaces/SemanticEnablingMapping.ts" />
 /// <reference path="../interfaces/SemanticEventJSON.ts" />
+/// <reference path="../interfaces/SemanticMapping.ts" />
 /// <reference path="../interfaces/TrackingCollector.ts" />
 /**
  * This file contains logic for registering semantic events.
  */
-
-/**
- * This interface is the mapping for enabling and disabling
- * semantic trackers for a certain semantic element.
- */
-interface SemanticEnablingMapping {
-    keystroke: boolean;
-    click: boolean;
-    mouse_enter: boolean;
-    mouse_leave: boolean;
-    scroll_in_view: boolean;
-    scroll_out_view: boolean;
-}
 
 /**
  * Generate a semantic element.
@@ -34,20 +23,10 @@ function semanticElement(name: string, descriptor: string, mapping: SemanticEnab
 }
 
 /**
- * This interface combines the enabled mapping.
- */
-interface SemanticMapping {
-    name: string;
-    descriptor: string;
-    mapping: SemanticEnablingMapping;
-    element_type_id: number;
-}
-
-/**
- * Implments semantic tracking
+ * Implements semantic tracking
  * For given elements tracks specific events.
  */
-class SemanticTracker {
+export class SemanticTracker {
 
     private mappings: SemanticMapping[];
     private collector: TrackingCollector;
@@ -106,7 +85,7 @@ class SemanticTracker {
         });
     }
 
-    public registerSemanticElement(sm: SemanticMapping) {
+    private registerSemanticElement(sm: SemanticMapping) {
         let elements = document.querySelectorAll(sm.descriptor);
         for (let id = 0; id < elements.length; id++) {
             let element = <HTMLElement> elements.item(id);
