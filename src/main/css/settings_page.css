@@ -54,6 +54,10 @@ main.container {
     transform: rotate(180deg);
 }
 
+#tracking-explanation i:hover {
+    color: red !important;
+}
+
 .switch label::after {
     content: "\00a0\00a0";
 }
