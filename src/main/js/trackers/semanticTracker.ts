@@ -120,15 +120,23 @@ export class SemanticTracker {
         let _this = this;
 
         element.addEventListener("click", function() {
-            let event_type: EventTypeJSON = _this.createEventType("Click");
-            let element_type: ElementTypeJSON = _this.createElementType(name);
-            let message: SemanticEventJSON = _this.createMessage(event_type, element_type, 1);
+            let message: SemanticEventJSON = _this.createMessage("Click", name, 1);
             _this.sendData(message);
         });
     }
 
     public registerHover(name: string, element: HTMLElement) {
+        let _this = this;
 
+        element.addEventListener("mouseenter", function() {
+            let message: SemanticEventJSON = _this.createMessage("Mouseenter", name, 1);
+            _this.sendData(message);
+        });
+
+        element.addEventListener("mouseleave", function() {
+            let message: SemanticEventJSON = _this.createMessage("Mouseleave", name, 1);
+            _this.sendData(message);
+        });
     }
 
     public registerScroll(name: string, element: HTMLElement) {
@@ -136,40 +144,14 @@ export class SemanticTracker {
     }
 
     /**
-     * This method creates an event-type object.
-     * @param id    The ID of the event-type.
-     * @param name  The name of the event-type.
-     * @returns {{id: number, name: string}}
-     */
-    private createEventType(name: string): EventTypeJSON {
-        return {
-            id: this.event_types_mapping[name],
-            name: name
-        };
-    }
-
-    /**
-     * This method creates an element-type object.
-     * @param id    The ID of the element-type.
-     * @param name  The name of the element-type
-     * @returns {{id: number, name: string}}
-     */
-    private createElementType(name: string): ElementTypeJSON {
-        return {
-            id: this.element_types_mapping[name],
-            name: name
-        };
-    }
-
-    /**
      * Creates a message using the Keystroke interface.
      * @returns {KeystrokeJSON}
      */
-    private createMessage(event_type: EventTypeJSON, element_type: ElementTypeJSON,
+    private createMessage(event_name: string, element_name: string,
                           duration: number): SemanticEventJSON {
         return {
-            event_type: event_type,
-            element_type: element_type,
+            event_type: this.event_types_mapping[event_name],
+            element_type: this.element_types_mapping[element_name],
             created_at: Date.now() / 1000,
             duration: duration
         };
@@ -184,5 +166,4 @@ export class SemanticTracker {
             data: seData
         });
     }
-
 }
