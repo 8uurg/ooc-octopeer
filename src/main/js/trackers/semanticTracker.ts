@@ -110,17 +110,16 @@ export class SemanticTracker {
 
     /**
      * A tracker for keystrokes on elements. 
-     * TODO: Clean up the map after a certain time.
-     * @param name
-     * @param element
+     * @param name      The element name.
+     * @param element   The element.
      */
     public registerKeystroke(name: string, element: HTMLElement) {
         let _this = this;
         let pressedKeys = <[number]> [];
 
         let cleanup = () => {
-            for ( var key in pressedKeys ) {
-                if ( pressedKeys.hasOwnProperty(key) 
+            for ( let key in pressedKeys ) {
+                if ( pressedKeys.hasOwnProperty(key)
                     && Date.now() - pressedKeys[key] > 10000) {
                     pressedKeys[key] = undefined;
                 }
@@ -151,7 +150,6 @@ export class SemanticTracker {
      * This method adds an click-event-listener to an element.
      * @param name             The element name.
      * @param element          The element.
-     * @param element_type_id  The type ID of the element.
      */
     public registerClick(name: string, element: HTMLElement) {
         let _this = this;
