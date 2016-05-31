@@ -18,6 +18,7 @@ describe("The key stroke semantic tracker", () => {
         semanticTracker = new SemanticTracker().withCollector(collector);
         htmlElement = jasmine.createSpyObj("elem", ["addEventListener"]);
         jasmine.clock().install();
+        jasmine.clock().mockDate();
     });
 
     afterEach(() => {
@@ -102,6 +103,28 @@ describe("The key stroke semantic tracker", () => {
 
         expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
             data: jasmine.objectContaining({ duration: secondEndTime - secondTime })
+        }));
+    });
+    
+    it("should remove key event if they are older than a certain time.", () => {
+        let eventListenerClosureKeydown: (event: { keyCode: number }) => void = null;
+        let eventListenerClosureKeyup:   (event: { keyCode: number }) => void = null;
+        htmlElement.addEventListener.and.callFake((eventString: string, fireEvent: any) => {
+            switch (eventString) {
+                case "keydown": eventListenerClosureKeydown = fireEvent; break;
+                case "keyup": eventListenerClosureKeyup = fireEvent; break;
+                default: break;
+            }
+        });
+
+        semanticTracker.registerKeystroke("Inline Comment", htmlElement);
+
+        eventListenerClosureKeydown({ keyCode: 42 });
+        jasmine.clock().tick(10001);
+        eventListenerClosureKeyup({ keyCode: 42 });
+
+        expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
+            data: jasmine.objectContaining({ duration: 1})
         }));
     });
 });

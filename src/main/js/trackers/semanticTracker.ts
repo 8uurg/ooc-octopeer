@@ -118,11 +118,22 @@ export class SemanticTracker {
         let _this = this;
         let pressedKeys = <[number]> [];
 
+        let cleanup = () => {
+            for ( var key in pressedKeys ) {
+                if ( pressedKeys.hasOwnProperty(key) 
+                    && Date.now() - pressedKeys[key] > 10000) {
+                    pressedKeys[key] = undefined;
+                }
+            }
+        };
+
         element.addEventListener("keydown", (ev) => {
             pressedKeys[ev.keyCode] = Date.now();
+            cleanup();
         });
 
         element.addEventListener("keyup", (ev) => {
+            cleanup();
             let duration = 1;
             if ( pressedKeys[ev.keyCode] !== undefined ) {
                 duration = Date.now() - pressedKeys[ev.keyCode];
