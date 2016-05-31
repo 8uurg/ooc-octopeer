@@ -8,11 +8,11 @@
 
 /**
  * This file contains logic for registering semantic events.
- */
+*/
 
 /**
  * Generate a semantic element.
- */
+*/
 function semanticElement(name: string, descriptor: string, mapping: SemanticEnablingMapping): SemanticMapping {
     return {
         name: name,
@@ -99,7 +99,6 @@ export class SemanticTracker {
         let elements = document.querySelectorAll(sm.descriptor);
         for (let id = 0; id < elements.length; id++) {
             let element = <HTMLElement> elements[id];
-            console.log(element);
             if (sm.mapping.keystroke)       { this.registerKeystroke(sm.name, element); }
             if (sm.mapping.click)           { this.registerClick(sm.name, element); }
             if (sm.mapping.hover)           { this.registerHover(sm.name, element); }

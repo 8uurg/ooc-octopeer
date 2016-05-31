@@ -1,9 +1,8 @@
 /**
  * Created by Cas on 18-5-2016.
  */
-import createSpyObj = jasmine.createSpyObj;
 
- // Linting is disabled as var is required here. Let has not the proper functionality yet.
+// Linting is disabled as var is required here. Let has not the proper functionality yet.
 var _global: any = global; // tslint:disable-line
 
 _global.chrome = {
