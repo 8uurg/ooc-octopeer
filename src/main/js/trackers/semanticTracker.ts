@@ -69,10 +69,12 @@ export class SemanticTracker {
             semanticElement("Inline Comment", ".aui-iconfont-add-comment", full),
             semanticElement("Edit comment", ".comment-actions .edit-link", full),
             semanticElement("Add reaction", ".new-comment .buttons .aui-button-primary", full),
+
             /* TABS - NOTICE: almost no overlap with GitHub. */
             semanticElement("commits_tab", "#pr-menu-commits", full),
             semanticElement("overview_tab", "#pr-menu-diff", full),
             semanticElement("activity_tab", "#pr-menu-activity", full),
+
             /* TEXTFIELDS */
             semanticElement("Comment textfield", "#general-comments #id_new_comment", full),
             semanticElement("Inline comment textfield", ".comment-thread-container #id_new_comment", full)
@@ -107,7 +109,25 @@ export class SemanticTracker {
     }
 
     public registerKeystroke(name: string, element: HTMLElement) {
+        let _this = this;
+        let pressedKeys = <[number]> [];
 
+        element.addEventListener("keydown", (ev) => {
+            pressedKeys[ev.keyCode] = Date.now();
+        });
+
+        element.addEventListener("keyup", (ev) => {
+            let duration = 1;
+            if ( pressedKeys[ev.keyCode] !== undefined ) {
+                duration = Date.now() - pressedKeys[ev.keyCode];
+                pressedKeys[ev.keyCode] = undefined;
+            }
+
+            let event_type: EventTypeJSON = _this.createElementType("Keystroke");
+            let element_type: ElementTypeJSON = _this.createElementType(name);
+            let message: SemanticEventJSON = _this.createMessage(event_type, element_type, duration);
+            _this.sendData(message);
+        });
     }
 
     /**
@@ -137,7 +157,6 @@ export class SemanticTracker {
 
     /**
      * This method creates an event-type object.
-     * @param id    The ID of the event-type.
      * @param name  The name of the event-type.
      * @returns {{id: number, name: string}}
      */
