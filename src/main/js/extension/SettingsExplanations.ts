@@ -125,7 +125,7 @@ export class SettingsExplanations {
                             document.getElementById("#tracking-explanation .card-content .card-sample-data")
                                 .appendChild(dataElement);
                         });
-                        document.getElementById("tracking-explanation").style.setProperty("display", "inherit");
+                        document.getElementById("tracking-explanation").style.setProperty("display", "block");
                     });
             });
         });

@@ -88,6 +88,38 @@ describe("Setting explanation cards", function() {
         expect(document.getElementById("card-title").innerHTML).toEqual("Keystroke Tracking");
     });
 
+    it("an explanation should be visibile after clicking a question mark", function() {
+        this.element.id = "keystroke-setting";
+        this.dummy.innerHTML = "<div id='mouse-click-setting'><div class='explain-tracking-button'>?</div></div>";
+        this.dummy.innerHTML += "<div id='page-resolution-setting'><div class='explain-tracking-button'>?</div></div>";
+        this.dummy.innerHTML += "<div id='mouse-position-setting'><div class='explain-tracking-button'>?</div></div>";
+
+        document.body.insertBefore(this.element, document.body.firstChild);
+        document.body.insertBefore(this.dummy, document.body.firstChild);
+        this.tracker.configureExplanations();
+        document.dispatchEvent(this.evt);
+        this.element.dispatchEvent(this.event);
+        expect(document.defaultView.getComputedStyle(document.getElementById("tracking-explanation"), null)
+            .getPropertyValue("display")).toEqual("block");
+    });
+
+    it("an explanation should be hidden after clicking close", function() {
+        this.element.id = "keystroke-setting";
+        this.dummy.innerHTML = "<div id='mouse-click-setting'><div class='explain-tracking-button'>?</div></div>";
+        this.dummy.innerHTML += "<div id='page-resolution-setting'><div class='explain-tracking-button'>?</div></div>";
+        this.dummy.innerHTML += "<div id='mouse-position-setting'><div class='explain-tracking-button'>?</div></div>";
+
+        document.body.insertBefore(this.element, document.body.firstChild);
+        document.body.insertBefore(this.dummy, document.body.firstChild);
+
+        this.tracker.configureExplanations();
+        document.dispatchEvent(this.evt);
+        document.getElementById("hide-explanation-button").dispatchEvent(this.event);
+
+        expect(document.defaultView.getComputedStyle(document.getElementById("tracking-explanation"), null)
+            .getPropertyValue("display")).toEqual("none");
+    });
+
     afterEach(function() {
         document.body.innerHTML = "";
     });
