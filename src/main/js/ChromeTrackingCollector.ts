@@ -1,10 +1,10 @@
-/// <reference path="./interfaces/SessionJSON.ts" />
 /// <reference path="./interfaces/Message.ts" />
-/// <reference path="./interfaces/TrackingCollector.ts" />
-/// <reference path="./OctopeerConstants.ts" />
 /// <reference path="./interfaces/SessionDataGatherer.ts" />
+/// <reference path="./interfaces/TrackingCollector.ts" />
+/// <reference path="./interfaces/JSON/SessionJSON.ts" />
 
 /// <reference path="../../../typings/index.d.ts" />
+/// <reference path="./OctopeerConstants.ts" />
 
 /**
  * ChromeTrackingCollector
