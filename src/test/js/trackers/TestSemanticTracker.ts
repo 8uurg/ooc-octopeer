@@ -25,9 +25,9 @@ describe("The key stroke semantic tracker", () => {
     });
 
     it("should make an event with duration 1, when no keydown event was registered.", () => {
-        htmlElement.addEventListener.and.callFake((eventString: string, eventFiredCallback: any) => {
+        htmlElement.addEventListener.and.callFake((eventString: string, fireEvent: any) => {
             if (eventString === "keyup") {
-                eventFiredCallback({ keyCode: 42 });
+                fireEvent({ keyCode: 42 });
             }
         });
 
@@ -41,10 +41,10 @@ describe("The key stroke semantic tracker", () => {
     it("should no longer register a time longer than 1 after one keydown and 2 keyups", () => {
         let eventListenerClosureKeydown: (event: { keyCode: number }) => void = null;
         let eventListenerClosureKeyup:   (event: { keyCode: number }) => void = null;
-        htmlElement.addEventListener.and.callFake((eventString: string, callback: any) => {
+        htmlElement.addEventListener.and.callFake((eventString: string, fireEvent: any) => {
             switch (eventString) {
-                case "keydown": eventListenerClosureKeydown = callback; break;
-                case "keyup": eventListenerClosureKeyup = callback; break;
+                case "keydown": eventListenerClosureKeydown = fireEvent; break;
+                case "keyup": eventListenerClosureKeyup = fireEvent; break;
                 default: break;
             }
         });
@@ -65,6 +65,43 @@ describe("The key stroke semantic tracker", () => {
         }));
         expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
             data: jasmine.objectContaining({ duration: end - start })
+        }));
+    });
+
+    it("shouldn't send any data before a key up event is registered.", () => {
+        htmlElement.addEventListener.and.callFake((eventString: string, fireEvent: any) => {
+            if ( eventString === "keydown" ) {
+                fireEvent({ keyCode : 42 });
+            }
+        });
+
+        semanticTracker.registerKeystroke("Inline Comment", htmlElement);
+        expect(collector.sendMessage).not.toHaveBeenCalled();
+    });
+
+    it("should only register the last key stroke", () => {
+        let eventListenerClosureKeydown: (event: { keyCode: number }) => void = null;
+        let eventListenerClosureKeyup:   (event: { keyCode: number }) => void = null;
+        htmlElement.addEventListener.and.callFake((eventString: string, fireEvent: any) => {
+            switch (eventString) {
+                case "keydown": eventListenerClosureKeydown = fireEvent; break;
+                case "keyup": eventListenerClosureKeyup = fireEvent; break;
+                default: break;
+            }
+        });
+
+        semanticTracker.registerKeystroke("Inline Comment", htmlElement);
+
+        eventListenerClosureKeydown({ keyCode: 42 });
+        jasmine.clock().tick(1000);
+        let secondTime = Date.now();
+        eventListenerClosureKeydown({ keyCode: 42 });
+        jasmine.clock().tick(1000);
+        let secondEndTime = Date.now();
+        eventListenerClosureKeyup({ keyCode: 42 });
+
+        expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
+            data: jasmine.objectContaining({ duration: secondEndTime - secondTime })
         }));
     });
 });

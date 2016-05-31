@@ -108,6 +108,12 @@ export class SemanticTracker {
         }
     }
 
+    /**
+     * A tracker for keystrokes on elements. 
+     * TODO: Clean up the map after a certain time.
+     * @param name
+     * @param element
+     */
     public registerKeystroke(name: string, element: HTMLElement) {
         let _this = this;
         let pressedKeys = <[number]> [];
