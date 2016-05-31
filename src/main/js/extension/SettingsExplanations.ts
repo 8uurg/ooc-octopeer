@@ -9,7 +9,7 @@ export class SettingsExplanations {
     public configureExplanations() {
 
         this.title.className += " card-sub-title";
-        let explanations = [ // tslint:disable-line A var is required in global code.
+        let explanations = [
             {
                 "settingSelector": "mouse-position-setting", "title": "Mouse Position Tracking",
                 "bodyText": [
