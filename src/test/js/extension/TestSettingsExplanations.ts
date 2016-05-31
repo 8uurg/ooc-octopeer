@@ -19,7 +19,9 @@ describe("Setting explanation cards", function() {
         this.element.innerHTML += "<div class='chip explain-tracking-button'>?</div>";
 
         this.evt = document.createEvent("MutationEvents");
+        this.evt.initMutationEvent("DOMContentLoaded", true, true, document, "", "", "", 0);
         this.event = document.createEvent("HTMLEvents");
+        this.event.initEvent("click", false, true);
     });
 
     it("a card should be empty before a question mark has been clicked", function() {
@@ -36,11 +38,8 @@ describe("Setting explanation cards", function() {
         document.body.insertBefore(this.dummy, document.body.firstChild);
 
         this.tracker.configureExplanations();
-        this.evt.initMutationEvent("DOMContentLoaded", true, true, document, "", "", "", 0);
         document.dispatchEvent(this.evt);
-        this.event.initEvent("click", false, true);
         this.element.dispatchEvent(this.event);
-
         expect(document.getElementById("card-title").innerHTML).toEqual("Mouse Position Tracking");
     });
 
@@ -54,11 +53,8 @@ describe("Setting explanation cards", function() {
         document.body.insertBefore(this.dummy, document.body.firstChild);
 
         this.tracker.configureExplanations();
-        this.evt.initMutationEvent("DOMContentLoaded", true, true, document, "", "", "", 0);
         document.dispatchEvent(this.evt);
-        this.event.initEvent("click", false, true);
         this.element.dispatchEvent(this.event);
-
         expect(document.getElementById("card-title").innerHTML).toEqual("Mouse Click Tracking");
     });
 
@@ -72,11 +68,8 @@ describe("Setting explanation cards", function() {
         document.body.insertBefore(this.dummy, document.body.firstChild);
 
         this.tracker.configureExplanations();
-        this.evt.initMutationEvent("DOMContentLoaded", true, true, document, "", "", "", 0);
         document.dispatchEvent(this.evt);
-        this.event.initEvent("click", false, true);
         this.element.dispatchEvent(this.event);
-
         expect(document.getElementById("card-title").innerHTML).toEqual("Page Resolution Tracking");
     });
 
@@ -90,12 +83,8 @@ describe("Setting explanation cards", function() {
         document.body.insertBefore(this.dummy, document.body.firstChild);
 
         this.tracker.configureExplanations();
-
-        this.evt.initMutationEvent("DOMContentLoaded", true, true, document, "", "", "", 0);
         document.dispatchEvent(this.evt);
-        this.event.initEvent("click", false, true);
         this.element.dispatchEvent(this.event);
-
         expect(document.getElementById("card-title").innerHTML).toEqual("Keystroke Tracking");
     });
 
