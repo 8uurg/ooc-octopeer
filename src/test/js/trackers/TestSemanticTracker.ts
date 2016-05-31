@@ -1,5 +1,3 @@
-"use strict";
-
 import {SemanticTracker} from "../../../main/js/trackers/semanticTracker";
 
 /**
@@ -11,21 +9,25 @@ describe("The key stroke semantic tracker", () => {
 
     let collector: TrackingCollector;
     let semanticTracker: SemanticTracker;
-    let htmlElement: any;
+    let htmlElement: any; // Using the real type, HTMLElement, causes issues when spying on it.
 
     beforeEach(() => {
+        jasmine.clock().install();
+        jasmine.clock().mockDate();
         collector = jasmine.createSpyObj("collector", ["sendMessage"]);
         semanticTracker = new SemanticTracker().withCollector(collector);
         htmlElement = jasmine.createSpyObj("elem", ["addEventListener"]);
-        jasmine.clock().install();
-        jasmine.clock().mockDate();
     });
 
     afterEach(() => {
         jasmine.clock().uninstall();
     });
 
-    it("should make an event with duration 1, when no keydown event was registered.", () => {
+    /*
+     * A keydown event might not have been received, e.g. when using shortcuts to change the active tab/program.
+     */
+    it("should make an event with duration 1, when no keydown event was registered, but a " +
+        "keyup event was registered.", () => {
         htmlElement.addEventListener.and.callFake((eventString: string, fireEvent: any) => {
             if (eventString === "keyup") {
                 fireEvent({ keyCode: 42 });
@@ -39,7 +41,8 @@ describe("The key stroke semantic tracker", () => {
         }));
     });
 
-    it("should no longer register a time longer than 1 after one keydown and 2 keyups", () => {
+    it("should register the second key up event with a duration of 1, when the first keydown event has " +
+        "been followed by a key up event.", () => {
         let eventListenerClosureKeydown: (event: { keyCode: number }) => void = null;
         let eventListenerClosureKeyup:   (event: { keyCode: number }) => void = null;
         htmlElement.addEventListener.and.callFake((eventString: string, fireEvent: any) => {
