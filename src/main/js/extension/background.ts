@@ -8,7 +8,7 @@ chrome.browserAction.onClicked.addListener(() => {
 
 let urlWithIcon = [
     {
-        urlMatcher: new RegExp("(http|https):\/\/bitbucket\.org\/.*\/pull-requests\/.*"),
+        urlMatcher: new RegExp("(http|https):\/\/bitbucket\.org\/.*\/pull-requests\/[0-9]+\/.*"),
         path: {
             "48" : "../../img/icons/icon_active48.png",
             "64" : "../../img/icons/icon_active64.png",
