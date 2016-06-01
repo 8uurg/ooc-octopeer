@@ -36,7 +36,7 @@ chrome.tabs.onActivated.addListener((tabInfo) => {
     chrome.tabs.get(tabInfo.tabId, (tab) => {
         for (let i = 0; i < urlWithIcon.length; i++) {
             let urlAndPath = urlWithIcon[i];
-            if (tab.urlComponent.indexOf(urlAndPath.urlComponent) !== -1) {
+            if (tab.url.indexOf(urlAndPath.urlComponent) !== -1) {
                 chrome.browserAction.setIcon({ path: urlAndPath.path });
                 break;
             }
