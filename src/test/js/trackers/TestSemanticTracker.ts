@@ -108,8 +108,8 @@ describe("The key stroke semantic tracker", () => {
             data: jasmine.objectContaining({ duration: secondEndTime - secondTime })
         }));
     });
-    
-    it("should remove key event if they are older than a certain time.", () => {
+
+    it("should prevent a key from being registered if the press are older than a certain time.", () => {
         let eventListenerClosureKeydown: (event: { keyCode: number }) => void = null;
         let eventListenerClosureKeyup:   (event: { keyCode: number }) => void = null;
         htmlElement.addEventListener.and.callFake((eventString: string, fireEvent: any) => {

@@ -109,6 +109,11 @@ export class SemanticTracker {
     }
 
     /**
+     * The time in milliseconds before a keydown event is discarded.
+     */
+    private keyTimeOut = 10000;
+
+    /**
      * A tracker for keystrokes on elements. 
      * @param name      The element name.
      * @param element   The element.
@@ -120,7 +125,7 @@ export class SemanticTracker {
         let cleanup = () => {
             for ( let key in pressedKeys ) {
                 if ( pressedKeys.hasOwnProperty(key)
-                    && Date.now() - pressedKeys[key] > 10000) {
+                    && Date.now() - pressedKeys[key] > this.keyTimeOut) {
                     pressedKeys[key] = undefined;
                 }
             }
