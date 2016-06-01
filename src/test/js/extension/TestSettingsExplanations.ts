@@ -28,10 +28,10 @@ describe("Setting explanation cards", function() {
     });
 
     let testArray = [
-        {id: "mouse-position-setting", title: "Mouse Position Tracking"},
-        {id: "mouse-click-setting", title: "Mouse Click Tracking"},
-        {id: "page-resolution-setting",  title: "Page Resolution Tracking"},
-        {id: "keystroke-setting", title: "Keystroke Tracking"}
+        {id: "mouse-position-setting-question", title: "Mouse Position Tracking"},
+        {id: "mouse-click-setting-question", title: "Mouse Click Tracking"},
+        {id: "page-resolution-setting-question",  title: "Page Resolution Tracking"},
+        {id: "keystroke-setting-question", title: "Keystroke Tracking"}
     ];
 
     testArray.forEach( function(item) {

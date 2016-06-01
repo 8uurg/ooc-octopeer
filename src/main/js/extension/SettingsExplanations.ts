@@ -7,7 +7,7 @@ export class SettingsExplanations {
     private title = document.createElement("span");
     private explanations = [
         {
-            "settingSelector": "mouse-position-setting", "title": "Mouse Position Tracking",
+            "settingSelector": "mouse-position-setting-question", "title": "Mouse Position Tracking",
             "bodyText": [
                 "Mouse position tracking tracks the position of your mouse on Bitbucket pages. The extension " +
                 "tracks the X and Y coordinates of the mouse on your screen, and sends them to a database.",
@@ -25,7 +25,7 @@ export class SettingsExplanations {
             }
         },
         {
-            "settingSelector": "mouse-click-setting", "title": "Mouse Click Tracking",
+            "settingSelector": "mouse-click-setting-question", "title": "Mouse Click Tracking",
             "bodyText": [
                 "Mouse click tracking tracks mouse clicks that occur on Bitbucket pages.",
                 "Whenever a click occurs the timestamp and coordinates of the mouse click will be sent " +
@@ -44,7 +44,7 @@ export class SettingsExplanations {
             }
         },
         {
-            "settingSelector": "page-resolution-setting", "title": "Page Resolution Tracking",
+            "settingSelector": "page-resolution-setting-question", "title": "Page Resolution Tracking",
             "bodyText": [
                 "Page resolution tracking monitors the resolution of your browser. When the page resolution " +
                 "changes, an update is sent and the resolution is stored in the database.",
@@ -64,7 +64,7 @@ export class SettingsExplanations {
             }
         },
         {
-            "settingSelector": "keystroke-setting", "title": "Keystroke Tracking",
+            "settingSelector": "keystroke-setting-question", "title": "Keystroke Tracking",
             "bodyText": [
                 "Keystroke tracking tracks what keys you press when on Bitbucket pages. This includes " +
                 "short keys and comments for instance. Whenever a key is pressed this data is stored " +
