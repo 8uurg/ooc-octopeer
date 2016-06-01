@@ -35,7 +35,7 @@ describe("Setting explanation cards", function() {
     ];
 
     testArray.forEach( function(item) {
-            it("a card should be filled when a question mark is clicked -- " +  item.id, function() {
+            it("a card should be filled when a question mark is clicked -- " +  item.title, function() {
                 element.id = item.id;
                 testArray.forEach(function(dummyItem) {
                     if (item.id !== dummyItem.id) {
@@ -52,7 +52,7 @@ describe("Setting explanation cards", function() {
             });
         });
 
-    it("an explanation should be visibile after clicking a question mark", function() {
+    it("an explanation should be visible after clicking a question mark", function() {
         testArray.forEach(function(dummyItem) {
             dummy.innerHTML +=
                 "<div id='" + dummyItem + "'><div class='explain-tracking-button'>?</div></div>";
