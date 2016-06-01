@@ -8,7 +8,7 @@ chrome.browserAction.onClicked.addListener(() => {
 
 let urlWithIcon = [
     {
-        urlComponent: "bitbucket.org",
+        urlComponent: "://bitbucket.org",
         path: {
             "48" : "../../img/icons/icon_active48.png",
             "64" : "../../img/icons/icon_active64.png",
