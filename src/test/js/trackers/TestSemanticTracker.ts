@@ -83,7 +83,7 @@ describe("The key stroke semantic tracker", () => {
         expect(collector.sendMessage).not.toHaveBeenCalled();
     });
 
-    it("should only register the last key stroke", () => {
+    it("should only register a duplicate keystroke if both have sent a keyup event.", () => {
         let eventListenerClosureKeydown: (event: { keyCode: number }) => void = null;
         let eventListenerClosureKeyup:   (event: { keyCode: number }) => void = null;
         htmlElement.addEventListener.and.callFake((eventString: string, fireEvent: any) => {
