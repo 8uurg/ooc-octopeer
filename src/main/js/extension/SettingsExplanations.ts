@@ -117,12 +117,11 @@ export class SettingsExplanations {
                         explanation.bodyText.forEach((paragraph) => {
                             let p = document.createElement("p");
                             p.innerText = paragraph;
-                            document.getElementById("card-content-text")
-                                .appendChild(p);
+                            document.getElementById("card-content-text").appendChild(p);
                         });
                         document.getElementById("card-sample-data").innerHTML = "";
                         explanation.sampleData().forEach((dataElement) => {
-                            document.getElementById("#tracking-explanation .card-content .card-sample-data")
+                            document.getElementById("card-sample-data")
                                 .appendChild(dataElement);
                         });
                         document.getElementById("tracking-explanation").style.setProperty("display", "block");
