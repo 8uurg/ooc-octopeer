@@ -90,43 +90,61 @@ export class SettingsExplanations {
         ];
 
         document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
-                chrome.tabs.query({
-                    "url": [
-                        "http://bitbucket.org/*",
-                        "https://bitbucket.org/*"
-                    ]
-                }, (tabs: [chrome.tabs.Tab]) => {
-                    tabs.forEach((tab) => {
-                        chrome.tabs.reload(tab.id);
-                    });
-                    document.getElementById("refresh-pages-notification").style.setProperty("display", "none");
-                });
-            });
+            this.refreshPages();
 
             document.getElementById("hide-explanation-button").addEventListener("click", () => {
                 document.getElementById("tracking-explanation").style.setProperty("display", "none");
             });
 
             explanations.forEach((explanation) => {
-                document.getElementById(explanation.settingSelector)
-                    .addEventListener("click", () => {
-                        document.getElementById("card-title").innerHTML =
-                            explanation.title;
-                        document.getElementById("card-content-text").innerHTML = "";
-                        explanation.bodyText.forEach((paragraph) => {
-                            let p = document.createElement("p");
-                            p.innerText = paragraph;
-                            document.getElementById("card-content-text").appendChild(p);
-                        });
-                        document.getElementById("card-sample-data").innerHTML = "";
-                        explanation.sampleData().forEach((dataElement) => {
-                            document.getElementById("card-sample-data")
-                                .appendChild(dataElement);
-                        });
-                        document.getElementById("tracking-explanation").style.setProperty("display", "block");
+                document.getElementById(explanation.settingSelector).addEventListener("click", () => {
+                        this.setCard(explanation);
                     });
             });
+        });
+    }
+
+    private refreshPages() {
+        document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
+            chrome.tabs.query({
+                "url": [
+                    "http://bitbucket.org/*",
+                    "https://bitbucket.org/*"
+                ]
+            }, (tabs: [chrome.tabs.Tab]) => {
+                tabs.forEach((tab) => {
+                    chrome.tabs.reload(tab.id);
+                });
+                document.getElementById("refresh-pages-notification").style.setProperty("display", "none");
+            });
+        });
+    }
+
+    private setCard(explanation: any) {
+        this.setCardTitle(explanation.title);
+        this.setCardContentText(explanation.bodyText);
+        this.setCardSampleData(explanation.sampleData());
+        document.getElementById("tracking-explanation").style.setProperty("display", "block");
+    }
+
+    private setCardTitle(title: string) {
+        document.getElementById("card-title").innerHTML = title;
+    }
+
+    private setCardContentText(paragraphs: Array<any>) {
+        document.getElementById("card-content-text").innerHTML = "";
+        paragraphs.forEach((paragraph) => {
+            let p = document.createElement("p");
+            p.innerText = paragraph;
+            document.getElementById("card-content-text").appendChild(p);
+        });
+    }
+
+    private setCardSampleData(data: Array<any>) {
+        document.getElementById("card-sample-data").innerHTML = "";
+        data.forEach((dataElement) => {
+            document.getElementById("card-sample-data")
+                .appendChild(dataElement);
         });
     }
 }
