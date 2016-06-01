@@ -1,3 +1,4 @@
+import Tab = chrome.tabs.Tab;
 /**
  * Creates a page on a tab when the extension badge is clicked.
  */
@@ -7,7 +8,7 @@ chrome.browserAction.onClicked.addListener(() => {
 
 let urlWithIcon = [
     {
-        urlComponent: "bitbucket",
+        urlComponent: "bitbucket.org",
         path: {
             "48" : "../../img/icons/icon_active48.png",
             "64" : "../../img/icons/icon_active64.png",
@@ -32,14 +33,24 @@ let urlWithIcon = [
     }
 ];
 
+let updateBrowserActionIcon = (tab: Tab) => {
+    for (let i = 0; i < urlWithIcon.length; i++) {
+        let urlAndPath = urlWithIcon[i];
+        if (tab.url.indexOf(urlAndPath.urlComponent) !== -1) {
+            chrome.browserAction.setIcon({ path: urlAndPath.path });
+            break;
+        }
+    }
+};
+
+chrome.tabs.onUpdated.addListener((tabId, _, tab) => {
+    if (tab.active) {
+        updateBrowserActionIcon(tab);
+    }
+});
+
 chrome.tabs.onActivated.addListener((tabInfo) => {
     chrome.tabs.get(tabInfo.tabId, (tab) => {
-        for (let i = 0; i < urlWithIcon.length; i++) {
-            let urlAndPath = urlWithIcon[i];
-            if (tab.url.indexOf(urlAndPath.urlComponent) !== -1) {
-                chrome.browserAction.setIcon({ path: urlAndPath.path });
-                break;
-            }
-        }
+        updateBrowserActionIcon(tab);
     });
 });
