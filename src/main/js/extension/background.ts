@@ -8,7 +8,7 @@ chrome.browserAction.onClicked.addListener(() => {
 
 let urlWithIcon = [
     {
-        urlComponent: "://bitbucket.org",
+        urlMatcher: new RegExp("(http|https):\/\/bitbucket\.org\/.*\/pull-requests\/.*"),
         path: {
             "48" : "../../img/icons/icon_active48.png",
             "64" : "../../img/icons/icon_active64.png",
@@ -16,7 +16,7 @@ let urlWithIcon = [
         }
     },
     {
-        urlComponent: "chrome-extension",
+        urlMatcher: new RegExp("(chrome-extension|chrome\:\/\/extensions\/)"),
         path: {
             "48" : "../../img/icons/icon48.png",
             "64" : "../../img/icons/icon64.png",
@@ -24,7 +24,7 @@ let urlWithIcon = [
         }
     },
     {
-        urlComponent: "", // Is always in a string.
+        urlMatcher: new RegExp(".*"), // Any url
         path: {
             "48" : "../../img/icons/icon_inactive48.png",
             "64" : "../../img/icons/icon_inactive64.png",
@@ -36,7 +36,7 @@ let urlWithIcon = [
 let updateBrowserActionIcon = (tab: Tab) => {
     for (let i = 0; i < urlWithIcon.length; i++) {
         let urlAndPath = urlWithIcon[i];
-        if (tab.url.indexOf(urlAndPath.urlComponent) !== -1) {
+        if (tab.url.match(urlAndPath.urlMatcher) !== null) {
             chrome.browserAction.setIcon({ path: urlAndPath.path });
             break;
         }
