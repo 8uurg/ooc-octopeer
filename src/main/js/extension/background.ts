@@ -7,7 +7,7 @@ chrome.browserAction.onClicked.addListener(() => {
 
 let urlWithIcon = [
     {
-        url: "bitbucket",
+        site: "bitbucket",
         path: {
             "48" : "../../img/icons/icon_active48.png",
             "64" : "../../img/icons/icon_active64.png",
@@ -15,7 +15,7 @@ let urlWithIcon = [
         }
     },
     {
-        url: "chrome-extension",
+        site: "chrome-extension",
         path: {
             "48" : "../../img/icons/icon48.png",
             "64" : "../../img/icons/icon64.png",
@@ -23,7 +23,7 @@ let urlWithIcon = [
         }
     },
     {
-        url: "", // Is always in a string.
+        site: "", // Is always in a string.
         path: {
             "48" : "../../img/icons/icon_inactive48.png",
             "64" : "../../img/icons/icon_inactive64.png",
@@ -36,7 +36,7 @@ chrome.tabs.onActivated.addListener((tabInfo) => {
     chrome.tabs.get(tabInfo.tabId, (tab) => {
         for (let i = 0; i < urlWithIcon.length; i++) {
             let urlAndPath = urlWithIcon[i];
-            if (tab.url.indexOf(urlAndPath.url) !== -1) {
+            if (tab.site.indexOf(urlAndPath.site) !== -1) {
                 chrome.browserAction.setIcon({ path: urlAndPath.path });
                 break;
             }
