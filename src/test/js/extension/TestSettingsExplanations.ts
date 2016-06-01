@@ -5,19 +5,17 @@ import {SettingsExplanations} from "../../../main/js/extension/SettingsExplanati
 describe("Setting explanation cards", function() {
     let fixture: HTMLElement = document.createElement("div");
 
+    let element = document.createElement("div");
+    element.innerHTML += "<div class='chip explain-tracking-button'>?</div>";
+    let dummy = document.createElement("div");
+
     beforeEach(function() {
         this.tracker = new SettingsExplanations();
-        fixture.innerHTML = "<div id='refresh-bitbucket-pages'></div>";
-        fixture.innerHTML += "<div id='hide-explanation-button'></div>";
-        fixture.innerHTML += "<div id='tracking-explanation'>";
-        fixture.innerHTML += "<div class='card-content white-text'><span id='card-title'></span>";
-        fixture.innerHTML += "<div id='card-content-text'></div><div id='card-sample-data'></div></div></div>";
         document.body.insertBefore(fixture, document.body.firstChild);
-
-        this.element = document.createElement("div");
-        this.dummy = document.createElement("div");
-        this.element.innerHTML += "<div class='chip explain-tracking-button'>?</div>";
-
+        fixture.innerHTML = "<div id='refresh-bitbucket-pages'></div><div id='hide-explanation-button'></div>";
+        fixture.innerHTML += "<div id='tracking-explanation'><div class='card-content white-text'>";
+        fixture.innerHTML += "<span id='card-title'></span><div id='card-content-text'></div>";
+        fixture.innerHTML += "<div id='card-sample-data'></div></div></div>";
         this.evt = document.createEvent("MutationEvents");
         this.evt.initMutationEvent("DOMContentLoaded", true, true, document, "", "", "", 0);
         this.event = document.createEvent("HTMLEvents");
@@ -29,98 +27,60 @@ describe("Setting explanation cards", function() {
         expect(document.getElementById("card-title").innerHTML).toEqual("");
     });
 
-    it("a card should be filled when a question mark is clicked -- mouse position", function() {
-        this.element.id = "mouse-position-setting";
-        this.dummy.innerHTML = "<div id='mouse-click-setting'><div class='explain-tracking-button'>?</div></div>";
-        this.dummy.innerHTML += "<div id='page-resolution-setting'><div class='explain-tracking-button'>?</div></div>";
-        this.dummy.innerHTML += "<div id='keystroke-setting'><div class='explain-tracking-button'>?</div></div>";
-        document.body.insertBefore(this.element, document.body.firstChild);
-        document.body.insertBefore(this.dummy, document.body.firstChild);
+    let testArray = [
+        {id: "mouse-position-setting", title: "Mouse Position Tracking"},
+        {id: "mouse-click-setting", title: "Mouse Click Tracking"},
+        {id: "page-resolution-setting",  title: "Page Resolution Tracking"},
+        {id: "keystroke-setting", title: "Keystroke Tracking"}
+    ];
 
-        this.tracker.configureExplanations();
-        document.dispatchEvent(this.evt);
-        this.element.dispatchEvent(this.event);
-        expect(document.getElementById("card-title").innerHTML).toEqual("Mouse Position Tracking");
-    });
-
-    it("a card should be filled when a question mark is clicked -- mouse clicks", function() {
-        this.element.id = "mouse-click-setting";
-        this.dummy.innerHTML = "<div id='mouse-position-setting'><div class='explain-tracking-button'>?</div></div>";
-        this.dummy.innerHTML += "<div id='page-resolution-setting'><div class='explain-tracking-button'>?</div></div>";
-        this.dummy.innerHTML += "<div id='keystroke-setting'><div class='explain-tracking-button'>?</div></div>";
-
-        document.body.insertBefore(this.element, document.body.firstChild);
-        document.body.insertBefore(this.dummy, document.body.firstChild);
-
-        this.tracker.configureExplanations();
-        document.dispatchEvent(this.evt);
-        this.element.dispatchEvent(this.event);
-        expect(document.getElementById("card-title").innerHTML).toEqual("Mouse Click Tracking");
-    });
-
-    it("a card should be filled when a question mark is clicked -- window resize", function() {
-        this.element.id = "page-resolution-setting";
-        this.dummy.innerHTML = "<div id='mouse-click-setting'><div class='explain-tracking-button'>?</div></div>";
-        this.dummy.innerHTML += "<div id='mouse-position-setting'><div class='explain-tracking-button'>?</div></div>";
-        this.dummy.innerHTML += "<div id='keystroke-setting'><div class='explain-tracking-button'>?</div></div>";
-
-        document.body.insertBefore(this.element, document.body.firstChild);
-        document.body.insertBefore(this.dummy, document.body.firstChild);
-
-        this.tracker.configureExplanations();
-        document.dispatchEvent(this.evt);
-        this.element.dispatchEvent(this.event);
-        expect(document.getElementById("card-title").innerHTML).toEqual("Page Resolution Tracking");
-    });
-
-    it("a card should be filled when a question mark is clicked -- keystrokes", function() {
-        this.element.id = "keystroke-setting";
-        this.dummy.innerHTML = "<div id='mouse-click-setting'><div class='explain-tracking-button'>?</div></div>";
-        this.dummy.innerHTML += "<div id='page-resolution-setting'><div class='explain-tracking-button'>?</div></div>";
-        this.dummy.innerHTML += "<div id='mouse-position-setting'><div class='explain-tracking-button'>?</div></div>";
-
-        document.body.insertBefore(this.element, document.body.firstChild);
-        document.body.insertBefore(this.dummy, document.body.firstChild);
-
-        this.tracker.configureExplanations();
-        document.dispatchEvent(this.evt);
-        this.element.dispatchEvent(this.event);
-        expect(document.getElementById("card-title").innerHTML).toEqual("Keystroke Tracking");
-    });
+    testArray.forEach( function(item) {
+            it("a card should be filled when a question mark is clicked -- " +  item.id, function() {
+                element.id = item.id;
+                testArray.forEach(function(dummyItem) {
+                    if (item.id !== dummyItem.id) {
+                        dummy.innerHTML +=
+                            "<div id='" + dummyItem.id + "'><div class='explain-tracking-button'>?</div></div>";
+                    }
+                });
+                document.body.insertBefore(dummy, document.body.firstChild);
+                document.body.insertBefore(element, document.body.firstChild);
+                this.tracker.configureExplanations();
+                document.dispatchEvent(this.evt);
+                element.dispatchEvent(this.event);
+                expect(document.getElementById("card-title").innerHTML).toEqual(item.title);
+            });
+        });
 
     it("an explanation should be visibile after clicking a question mark", function() {
-        this.element.id = "keystroke-setting";
-        this.dummy.innerHTML = "<div id='mouse-click-setting'><div class='explain-tracking-button'>?</div></div>";
-        this.dummy.innerHTML += "<div id='page-resolution-setting'><div class='explain-tracking-button'>?</div></div>";
-        this.dummy.innerHTML += "<div id='mouse-position-setting'><div class='explain-tracking-button'>?</div></div>";
-
-        document.body.insertBefore(this.element, document.body.firstChild);
-        document.body.insertBefore(this.dummy, document.body.firstChild);
+        testArray.forEach(function(dummyItem) {
+            dummy.innerHTML +=
+                "<div id='" + dummyItem + "'><div class='explain-tracking-button'>?</div></div>";
+        });
+        document.body.insertBefore(dummy, document.body.firstChild);
         this.tracker.configureExplanations();
         document.dispatchEvent(this.evt);
-        this.element.dispatchEvent(this.event);
+        element.dispatchEvent(this.event);
         expect(document.defaultView.getComputedStyle(document.getElementById("tracking-explanation"), null)
             .getPropertyValue("display")).toEqual("block");
     });
 
     it("an explanation should be hidden after clicking close", function() {
-        this.element.id = "keystroke-setting";
-        this.dummy.innerHTML = "<div id='mouse-click-setting'><div class='explain-tracking-button'>?</div></div>";
-        this.dummy.innerHTML += "<div id='page-resolution-setting'><div class='explain-tracking-button'>?</div></div>";
-        this.dummy.innerHTML += "<div id='mouse-position-setting'><div class='explain-tracking-button'>?</div></div>";
-
-        document.body.insertBefore(this.element, document.body.firstChild);
-        document.body.insertBefore(this.dummy, document.body.firstChild);
-
+        testArray.forEach(function(dummyItem) {
+            dummy.innerHTML +=
+                "<div id='" + dummyItem + "'><div class='explain-tracking-button'>?</div></div>";
+        });
+        document.body.insertBefore(dummy, document.body.firstChild);
         this.tracker.configureExplanations();
         document.dispatchEvent(this.evt);
         document.getElementById("hide-explanation-button").dispatchEvent(this.event);
-
         expect(document.defaultView.getComputedStyle(document.getElementById("tracking-explanation"), null)
             .getPropertyValue("display")).toEqual("none");
     });
 
     afterEach(function() {
         document.body.innerHTML = "";
+        fixture.innerHTML = "";
+        dummy.innerHTML = "";
     });
 });
