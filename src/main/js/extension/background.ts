@@ -33,7 +33,7 @@ let urlWithIcon = [
     }
 ];
 
-let updateBrowserActionIcon = (tab: Tab) => {
+const updateBrowserActionIcon = (tab: Tab) => {
     for (let i = 0; i < urlWithIcon.length; i++) {
         let urlAndPath = urlWithIcon[i];
         if (tab.url.match(urlAndPath.urlMatcher) !== null) {
