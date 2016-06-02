@@ -1,7 +1,6 @@
 /**
- * Created by larsstegman on 30-05-16.
+ * Configures the explanations on the settings page of Octopeer.
  */
-
 export class SettingsExplanations {
 
     private title = document.createElement("span");
@@ -82,7 +81,6 @@ export class SettingsExplanations {
                 return [this.title, keys];
             }
         }
-        // {"settingSelector" : "", "title" : "", "bodyText" : ""}
     ];
 
     public configureExplanations() {
