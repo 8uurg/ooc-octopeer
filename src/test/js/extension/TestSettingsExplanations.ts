@@ -23,6 +23,7 @@ describe("Setting explanation cards", function() {
     beforeEach(function() {
         browser = new MockBrowser();
         browser.getDocument().createElement("body");
+        this.oldDocument = document;
         document = browser.getDocument();
 
         this.fixture = document.createElement("div");
@@ -99,5 +100,6 @@ describe("Setting explanation cards", function() {
         document.body.innerHTML = "";
         this.fixture.innerHTML = "";
         this.dummy.innerHTML = "";
+        document = this.oldDocument;
     });
 });
