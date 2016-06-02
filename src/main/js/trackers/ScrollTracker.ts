@@ -1,8 +1,7 @@
-"use strict";
 /// <reference path="../interfaces/Message.ts" />
 /// <reference path="../interfaces/TrackingCollector.ts" />
 /// <reference path="../interfaces/ScrollJSON.ts" />
-/// <reference path="../TrackingCollector.ts" />
+/// <reference path="../interfaces/TrackingCollector.ts" />
 
 /**
  * ScrollTracker, Tracks the current viewport position in comparison to the page origin.
