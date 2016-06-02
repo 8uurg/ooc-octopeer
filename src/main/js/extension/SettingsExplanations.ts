@@ -56,7 +56,7 @@ export class SettingsExplanations {
                 let height = document.createElement("div");
                 width.innerHTML = "Page width: " + window.innerWidth;
                 height.innerHTML = "Page height: " + window.innerHeight;
-                window.addEventListener("resize", (event) => {
+                window.addEventListener("resize", () => {
                     width.innerHTML = "page width: " + window.innerWidth;
                     height.innerHTML = "Page height: " + window.innerHeight;
                 });
@@ -86,9 +86,7 @@ export class SettingsExplanations {
     ];
 
     public configureExplanations() {
-
         this.title.className += " card-sub-title";
-
 
         document.addEventListener("DOMContentLoaded", () => {
             this.refreshPages();
@@ -123,14 +121,10 @@ export class SettingsExplanations {
 
     private setCard(explanation: {settingSelector: string, title: string, bodyText: string[],
             sampleData: () => HTMLElement[]}) {
-        this.setCardTitle(explanation.title);
+        document.getElementById("card-title").innerHTML = explanation.title;
         this.setCardContentText(explanation.bodyText);
         this.setCardSampleData(explanation.sampleData());
         document.getElementById("tracking-explanation").style.setProperty("display", "block");
-    }
-
-    private setCardTitle(title: string) {
-        document.getElementById("card-title").innerHTML = title;
     }
 
     private setCardContentText(paragraphs: string[]) {
