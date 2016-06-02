@@ -10,12 +10,12 @@ interface SemanticEventJSON {
     /**
      * The event-type object.
      */
-    event_type: EventTypeJSON;
+    event_type: string;
 
     /**
      * The element-type object.
      */
-    element_type: ElementTypeJSON;
+    element_type: string;
 
     /**
      * The timestamp of the event.
