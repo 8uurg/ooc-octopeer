@@ -1,7 +1,7 @@
-///<reference path="../interfaces/KeystrokeJSON.ts" />
-///<reference path="../interfaces/MouseClickJSON.ts" />
-///<reference path="../interfaces/MousePosJSON.ts" />
-///<reference path="../interfaces/WindowResolutionJSON.ts" />
+///<reference path="../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
+///<reference path="../interfaces/DatabaseSchemes/MouseClickJSON.ts" />
+///<reference path="../interfaces/DatabaseSchemes/MousePosJSON.ts" />
+///<reference path="../interfaces/DatabaseSchemes/WindowResolutionJSON.ts" />
 /**
  * Created by Cas on 14-5-2016.
  */
