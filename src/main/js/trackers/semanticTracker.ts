@@ -8,11 +8,11 @@
 
 /**
  * This file contains logic for registering semantic events.
-*/
+ */
 
 /**
  * Generate a semantic element.
-*/
+ */
 function semanticElement(name: string, descriptor: string, mapping: SemanticEnablingMapping): SemanticMapping {
     return {
         name: name,
