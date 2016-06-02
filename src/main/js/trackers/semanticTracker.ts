@@ -11,7 +11,7 @@
 /**
  * Generate a semantic element.
  */
-function semanticElement(name: string, descriptor: string, mapping: SemanticEnablingMapping): SemanticMapping {
+function createSemanticElement(name: string, descriptor: string, mapping: SemanticEnablingMapping): SemanticMapping {
     return {
         name: name,
         descriptor: descriptor,
@@ -25,27 +25,31 @@ function semanticElement(name: string, descriptor: string, mapping: SemanticEnab
  */
 export class SemanticTracker {
 
+    /**
+    * The time in milliseconds before a keydown event is discarded.
+    */
+    private keyTimeOut = 10000;
     private mappings: SemanticMapping[];
     private collector: TrackingCollector;
-    private element_types_mapping: any = {"Merge Pull Request": 101,
-                                          "Close Pull Request": 102,
-                                          "Cancel inline comment": 103,
-                                          "Comment inline comment": 104,
-                                          "Inline Comment": 105,
-                                          "Edit comment": 109,
-                                          "Add reaction": 10,
-                                          "Comment textfield": 501,
-                                          "Inline comment textfield": 502
+    private element_types_mapping: any = {"Merge Pull Request":        101,
+                                          "Close Pull Request":        102,
+                                          "Cancel inline comment":     103,
+                                          "Comment inline comment":    104,
+                                          "Inline Comment":            105,
+                                          "Edit comment":              109,
+                                          "Add reaction":              110,
+                                          "Comment textfield":         501,
+                                          "Inline comment textfield":  502
 
                                          };
-    private event_types_mapping: any = {"Keystroke": 101,
-                                        "Click": 201,
-                                        "Mouseenter": 202,
-                                        "Mouseleave": 203,
-                                        "Scroll into view": 301,
-                                        "Scroll out of view": 302,
+    private event_types_mapping: any = {"Keystroke":                   101,
+                                        "Click":                       201,
+                                        "Mouseenter":                  202,
+                                        "Mouseleave":                  203,
+                                        "Scroll into view":            301,
+                                        "Scroll out of view":          302,
                                         "Start watching pull request": 401,
-                                        "Stop watching pull request": 402
+                                        "Stop watching pull request":  402
                                         };
 
     constructor() {
@@ -60,22 +64,22 @@ export class SemanticTracker {
         // TODO: Alter the names of the elements, to the names they actually have for Tabs and Textfields.
         this.mappings = [
             /* BUTTONS */
-            semanticElement("Merge Pull Request", "#fulfill-pullrequest", full),
-            semanticElement("Close Pull Request", "#reject-pullrequest", full),
-            semanticElement("Cancel inline comment", ".new-comment .aui-button-primary", full),
-            semanticElement("Comment inline comment", ".new-comment .buttons a", full),
-            semanticElement("Inline Comment", ".aui-iconfont-add-comment", full),
-            semanticElement("Edit comment", ".comment-actions .edit-link", full),
-            semanticElement("Add reaction", ".new-comment .buttons .aui-button-primary", full),
+            createSemanticElement("Merge Pull Request", "#fulfill-pullrequest", full),
+            createSemanticElement("Close Pull Request", "#reject-pullrequest", full),
+            createSemanticElement("Cancel inline comment", ".new-comment .aui-button-primary", full),
+            createSemanticElement("Comment inline comment", ".new-comment .buttons a", full),
+            createSemanticElement("Inline Comment", ".aui-iconfont-add-comment", full),
+            createSemanticElement("Edit comment", ".comment-actions .edit-link", full),
+            createSemanticElement("Add reaction", ".new-comment .buttons .aui-button-primary", full),
 
             /* TABS - NOTICE: almost no overlap with GitHub. */
-            semanticElement("commits_tab", "#pr-menu-commits", full),
-            semanticElement("overview_tab", "#pr-menu-diff", full),
-            semanticElement("activity_tab", "#pr-menu-activity", full),
+            createSemanticElement("commits_tab", "#pr-menu-commits", full),
+            createSemanticElement("overview_tab", "#pr-menu-diff", full),
+            createSemanticElement("activity_tab", "#pr-menu-activity", full),
 
             /* TEXTFIELDS */
-            semanticElement("Comment textfield", "#general-comments #id_new_comment", full),
-            semanticElement("Inline comment textfield", ".comment-thread-container #id_new_comment", full)
+            createSemanticElement("Comment textfield", "#general-comments #id_new_comment", full),
+            createSemanticElement("Inline comment textfield", ".comment-thread-container #id_new_comment", full)
         ];
     }
 
@@ -89,9 +93,12 @@ export class SemanticTracker {
         return this;
     }
 
+    /**
+     * This method registers the trackers for each semantic element.
+     */
     public register() {
-        this.mappings.forEach((i) => {
-           this.registerSemanticElement(i);
+        this.mappings.forEach((semanticElement) => {
+           this.registerSemanticElement(semanticElement);
         });
     }
 
@@ -112,10 +119,35 @@ export class SemanticTracker {
     }
 
     /**
-     * The time in milliseconds before a keydown event is discarded.
+     * This method is used for the cleaning of the internal data structure used in the registering keystrokes method.
+     * @param pressedKeys      An array of pressed keys.
+     * @returns {number[]}
      */
-    private keyTimeOut = 10000;
+    private registerKeystrokeCleanup(pressedKeys: number[]): number[] {
+        for ( let key in pressedKeys ) {
+            if ( pressedKeys.hasOwnProperty(key) && (Date.now() - pressedKeys[key] > this.keyTimeOut)) {
+                pressedKeys[key] = undefined;
+            }
+        }
+        return pressedKeys;
+    }
 
+    /**
+     * This method is used to set the duration of the keystroke.
+     * @param pressedKeys  The array with all current registered keys.
+     * @param ev           The event.
+     * @returns {number}
+     */
+    private registerKeystrokeSetDuration(pressedKeys: number[], ev: any): number {
+        let duration = 1;
+
+        if ( pressedKeys[ev.keyCode] !== undefined ) {
+            duration = Date.now() - pressedKeys[ev.keyCode];
+            pressedKeys[ev.keyCode] = undefined;
+        }
+
+        return duration;
+    }
     /**
      * A tracker for keystrokes on elements. 
      * @param name      The element name.
@@ -125,28 +157,14 @@ export class SemanticTracker {
         let _this = this;
         let pressedKeys = <number[]> [];
 
-        let cleanup = function() {
-            for ( let key in pressedKeys ) {
-                if ( pressedKeys.hasOwnProperty(key)
-                    && Date.now() - pressedKeys[key] > _this.keyTimeOut) {
-                    pressedKeys[key] = undefined;
-                }
-            }
-        };
-
         element.addEventListener("keydown", (ev) => {
             pressedKeys[ev.keyCode] = Date.now();
-            cleanup();
+            pressedKeys = this.registerKeystrokeCleanup(pressedKeys);
         });
 
         element.addEventListener("keyup", (ev) => {
-            cleanup();
-            let duration = 1;
-            if ( pressedKeys[ev.keyCode] !== undefined ) {
-                duration = Date.now() - pressedKeys[ev.keyCode];
-                pressedKeys[ev.keyCode] = undefined;
-            }
-
+            pressedKeys = this.registerKeystrokeCleanup(pressedKeys);
+            let duration = this.registerKeystrokeSetDuration(pressedKeys, ev);
             let message: SemanticEventJSON = _this.createMessage(this.event_types_mapping["Keystroke"],
                                                                  this.element_types_mapping[name], duration);
             _this.sendData(message);
@@ -195,6 +213,7 @@ export class SemanticTracker {
         });
     }
 
+    // TODO: Create scrolling tracker.
     public registerScroll(name: string, element: HTMLElement) {
 
     }
