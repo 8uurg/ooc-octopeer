@@ -93,13 +93,18 @@ export class SemanticTracker {
         });
     }
 
+    /**
+     * This method registers the trackers for all semantic elements.
+     * @param sm  The name of the semantic element.
+     */
     private registerSemanticElement(sm: SemanticMapping) {
         let elements = document.querySelectorAll(sm.descriptor);
         for (let id = 0; id < elements.length; id++) {
             let element = <HTMLElement> elements.item(id);
             if (sm.mapping.keystroke)       { this.registerKeystroke(sm.name, element); }
             if (sm.mapping.click)           { this.registerClick(sm.name, element); }
-            if (sm.mapping.hover)           { this.registerHover(sm.name, element); }
+            if (sm.mapping.hover)           { this.registerMouseEnter(sm.name, element);
+                                              this.registerMouseLeave(sm.name, element); }
             if (sm.mapping.scroll)          { this.registerScroll(sm.name, element); }
         }
     }
@@ -112,7 +117,6 @@ export class SemanticTracker {
      * This method adds an click-event-listener to an element.
      * @param name             The element name.
      * @param element          The element.
-     * @param element_type_id  The type ID of the element.
      */
     public registerClick(name: string, element: HTMLElement) {
         let _this = this;
@@ -123,13 +127,27 @@ export class SemanticTracker {
         });
     }
 
-    public registerHover(name: string, element: HTMLElement) {
+    /**
+     * This method adds a mouse-enter-event-listener to an element.
+     * @param name             The element name.
+     * @param element          The element.
+     */
+    public registerMouseEnter(name: string, element: HTMLElement) {
         let _this = this;
 
         element.addEventListener("mouseenter", function() {
             let message: SemanticEventJSON = _this.createMessage("Mouseenter", name, 1);
             _this.sendData(message);
         });
+    }
+
+    /**
+     * This method adds a mouse-leave-event-listener to an element.
+     * @param name             The element name.
+     * @param element          The element.
+     */
+    public registerMouseLeave(name: string, element: HTMLElement) {
+        let _this = this;
 
         element.addEventListener("mouseleave", function() {
             let message: SemanticEventJSON = _this.createMessage("Mouseleave", name, 1);
