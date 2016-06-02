@@ -1,5 +1,3 @@
-/// <reference path="../interfaces/EventTypeJSON.ts" />
-/// <reference path="../interfaces/ElementTypeJSON.ts" />
 /// <reference path="../interfaces/Message.ts" />
 /// <reference path="../interfaces/SemanticEnablingMapping.ts" />
 /// <reference path="../interfaces/SemanticEventJSON.ts" />
@@ -29,25 +27,25 @@ export class SemanticTracker {
 
     private mappings: SemanticMapping[];
     private collector: TrackingCollector;
-    private element_types_mapping: any = {"Merge Pull Request": 1,
-                                          "Close Pull Request": 2,
-                                          "Cancel inline comment": 3,
-                                          "Comment inline comment": 4,
-                                          "Inline Comment": 5,
-                                          "Edit comment": 9,
+    private element_types_mapping: any = {"Merge Pull Request": 101,
+                                          "Close Pull Request": 102,
+                                          "Cancel inline comment": 103,
+                                          "Comment inline comment": 104,
+                                          "Inline Comment": 105,
+                                          "Edit comment": 109,
                                           "Add reaction": 10,
-                                          "Comment textfield": 26,
-                                          "Inline comment textfield": 27
+                                          "Comment textfield": 501,
+                                          "Inline comment textfield": 502
 
                                          };
-    private event_types_mapping: any = {"Keystroke": 1,
-                                        "Click": 2,
-                                        "Mouseenter": 3,
-                                        "Mouseleave": 4,
-                                        "Scroll into view": 5,
-                                        "Scroll out of view": 6,
-                                        "Start watching pull request": 7,
-                                        "Stop watching pull request": 8
+    private event_types_mapping: any = {"Keystroke": 101,
+                                        "Click": 201,
+                                        "Mouseenter": 202,
+                                        "Mouseleave": 203,
+                                        "Scroll into view": 301,
+                                        "Scroll out of view": 302,
+                                        "Start watching pull request": 401,
+                                        "Stop watching pull request": 402
                                         };
 
     constructor() {
@@ -120,8 +118,8 @@ export class SemanticTracker {
         let _this = this;
 
         element.addEventListener("click", function() {
-            let event_type: EventTypeJSON = _this.createEventType("Click");
-            let element_type: ElementTypeJSON = _this.createElementType(name);
+            let event_type: number = _this.event_types_mapping["Click"];
+            let element_type: number = _this.element_types_mapping[name];
             let message: SemanticEventJSON = _this.createMessage(event_type, element_type, 1);
             _this.sendData(message);
         });
@@ -136,40 +134,14 @@ export class SemanticTracker {
     }
 
     /**
-     * This method creates an event-type object.
-     * @param id    The ID of the event-type.
-     * @param name  The name of the event-type.
-     * @returns {{id: number, name: string}}
-     */
-    private createEventType(name: string): EventTypeJSON {
-        return {
-            id: this.event_types_mapping[name],
-            name: name
-        };
-    }
-
-    /**
-     * This method creates an element-type object.
-     * @param id    The ID of the element-type.
-     * @param name  The name of the element-type
-     * @returns {{id: number, name: string}}
-     */
-    private createElementType(name: string): ElementTypeJSON {
-        return {
-            id: this.element_types_mapping[name],
-            name: name
-        };
-    }
-
-    /**
      * Creates a message using the Keystroke interface.
      * @returns {KeystrokeJSON}
      */
-    private createMessage(event_type: EventTypeJSON, element_type: ElementTypeJSON,
+    private createMessage(event_type: number, element_type: number,
                           duration: number): SemanticEventJSON {
         return {
-            event_type: event_type,
-            element_type: element_type,
+            event_type: "http://10.0.22.6/api/event-types/" + event_type,
+            element_type: "http://10.0.22.6/api/element-types/" + element_type,
             created_at: Date.now() / 1000,
             duration: duration
         };
@@ -184,5 +156,4 @@ export class SemanticTracker {
             data: seData
         });
     }
-
 }
