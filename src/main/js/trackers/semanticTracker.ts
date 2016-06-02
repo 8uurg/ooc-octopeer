@@ -140,8 +140,8 @@ export class SemanticTracker {
     private createMessage(event_type: number, element_type: number,
                           duration: number): SemanticEventJSON {
         return {
-            event_type: event_type,
-            element_type: element_type,
+            event_type: "http://10.0.22.6/api/event-types/" + event_type,
+            element_type: "http://10.0.22.6/api/element-types/" + element_type,
             created_at: Date.now() / 1000,
             duration: duration
         };
