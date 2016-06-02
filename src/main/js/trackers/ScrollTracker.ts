@@ -25,6 +25,7 @@ export class ScrollTracker {
 
     /**
      * Make tracker use this collector.
+     * @param collector The collector to use.
      */
     public withCollector(collector: TrackingCollector): ScrollTracker {
         this.collector = collector;
@@ -44,6 +45,7 @@ export class ScrollTracker {
 
     /**
      * Send the scroll message.
+     * @param message The message to send.
      */
     public sendMessage(message: ScrollJSON) {
         this.collector.sendMessage({
