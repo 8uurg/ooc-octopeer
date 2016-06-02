@@ -1,7 +1,7 @@
 ///<reference path="./interfaces/CurrentUserData.ts" />
 /// <reference path="./interfaces/Repository.ts" />
 /// <reference path="./interfaces/SessionDataGatherer.ts" />
-/// <reference path="./interfaces/JSON/SessionJSON.ts" />
+/// <reference path="./interfaces/DatabaseSchemes/SessionJSON.ts" />
 
 /**
  * This class tracks the user and repository data on BitBucket pages.

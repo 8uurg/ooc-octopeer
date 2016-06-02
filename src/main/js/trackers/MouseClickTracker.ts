@@ -1,5 +1,5 @@
 ///<reference path="../interfaces/Message.ts" />
-///<reference path="../interfaces/JSON/MouseClickJSON.ts" />
+///<reference path="../interfaces/DatabaseSchemes/MouseClickJSON.ts" />
 ///<reference path="../interfaces/TrackingCollector.ts" />
 /**
  * Provides a tracker that tracks the mouse on the webpage.
