@@ -1,5 +1,4 @@
 ///<reference path="../../../../typings/index.d.ts" />
-"use strict";
 import {ScrollTracker} from "../../../main/js/trackers/ScrollTracker";
 
 describe("The ScrollTracker", function() {
