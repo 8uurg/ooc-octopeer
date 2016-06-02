@@ -2,7 +2,13 @@
 
 import {SettingsExplanations} from "../../../main/js/extension/SettingsExplanations";
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
+let browser: any = new MockBrowser();
 
+/**
+ * Takes an array with elements and creates dummy elemements with the ID's.
+ * @param dummyArray An array with items that need dummy HTML elements
+ * @returns {HTMLDivElement|HTMLElement} An HTML element with the dummy ID's.
+ */
 function buildDummy(dummyArray: {id: string; title: string}[]) {
     let dummyObject = document.createElement("div");
     dummyArray.forEach(function(dummyItem) {
@@ -15,7 +21,10 @@ function buildDummy(dummyArray: {id: string; title: string}[]) {
 describe("Setting explanation cards", function() {
 
     beforeEach(function() {
-        document = new MockBrowser().getDocument();
+        browser = new MockBrowser();
+        browser.getDocument().createElement("body");
+        document = browser.getDocument();
+
         this.fixture = document.createElement("div");
         this.element = document.createElement("div");
         this.dummy = document.createElement("div");
@@ -31,7 +40,6 @@ describe("Setting explanation cards", function() {
         this.evt.initMutationEvent("DOMContentLoaded", true, true, document, "", "", "", 0);
         this.event = document.createEvent("HTMLEvents");
         this.event.initEvent("click", false, true);
-        this.document = new MockBrowser().getDocument();
     });
 
     it("a card should be empty before a question mark has been clicked", function() {
@@ -71,7 +79,8 @@ describe("Setting explanation cards", function() {
         this.tracker.configureExplanations();
         document.dispatchEvent(this.evt);
         this.element.dispatchEvent(this.event);
-        expect(document.defaultView.getComputedStyle(document.getElementById("tracking-explanation"), null)
+        expect(document.defaultView
+            .getComputedStyle(document.getElementById("tracking-explanation"), null)
             .getPropertyValue("display")).toEqual("block");
     });
 
@@ -81,7 +90,8 @@ describe("Setting explanation cards", function() {
         this.tracker.configureExplanations();
         document.dispatchEvent(this.evt);
         document.getElementById("hide-explanation-button").click();
-        expect(document.defaultView.getComputedStyle(document.getElementById("tracking-explanation"), null)
+        expect(document.defaultView.getComputedStyle(document
+            .getElementById("tracking-explanation"), null)
             .getPropertyValue("display")).toEqual("none");
     });
 
