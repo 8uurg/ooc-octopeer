@@ -1,6 +1,5 @@
 /// <reference path="SessionJSON.ts" />
 
-
 /**
  * This is the format for the scroll event.
  */

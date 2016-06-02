@@ -5,11 +5,14 @@
 /// <reference path="../TrackingCollector.ts" />
 
 /**
- * ScrollTracker
+ * ScrollTracker, Tracks the current viewport position in comparison to the page origin.
  */
 export class ScrollTracker {
     private collector: TrackingCollector;
 
+    /**
+     * Register the ScrollTracker to the current page.
+     */
     public register() {
         const _this = this;
 
@@ -21,11 +24,17 @@ export class ScrollTracker {
         window.addEventListener("scroll", sendWindowPosition);
     }
 
+    /**
+     * Make tracker use this collector.
+     */
     public withCollector(collector: TrackingCollector): ScrollTracker {
         this.collector = collector;
         return this;
     }
 
+    /**
+     * Create scroll message.
+     */
     public createMessage(): ScrollJSON {
         return {
             viewport_x: window.scrollX,
@@ -34,6 +43,9 @@ export class ScrollTracker {
         };
     }
 
+    /**
+     * Send the scroll message.
+     */
     public sendMessage(message: ScrollJSON) {
         this.collector.sendMessage({
             table: "mouse-scroll-events/",
