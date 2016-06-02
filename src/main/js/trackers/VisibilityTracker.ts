@@ -1,5 +1,5 @@
 ///<reference path="../interfaces/Message.ts" />
-///<reference path="../interfaces/SemanticEventJSON.ts" />
+///<reference path="../interfaces/DatabaseSchemes/SemanticEventJSON.ts" />
 ///<reference path="../interfaces/TrackingCollector.ts" />
 
 /**

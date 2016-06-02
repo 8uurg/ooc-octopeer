@@ -1,4 +1,4 @@
-/// <reference path="./SessionJSON.ts" />
+/// <reference path="./DatabaseSchemes/SessionJSON.ts" />
 
 /**
  * Gathers session data from the page.
