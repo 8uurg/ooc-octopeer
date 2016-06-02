@@ -10,6 +10,10 @@
 
 /**
  * Generate a semantic element.
+ * @param name         The name of the element.
+ * @param descriptor   The descriptors of the element.
+ * @param mapping      The mapping of which trackers should be registered.
+ * @returns {{name: string, descriptor: string, mapping: SemanticEnablingMapping}}
  */
 function createSemanticElement(name: string, descriptor: string, mapping: SemanticEnablingMapping): SemanticMapping {
     return {
@@ -233,7 +237,8 @@ export class SemanticTracker {
     }
 
     /**
-     * Send data to the database
+     * Send data to the database.
+     * @param seData  The data in JSON format.
      */
     private sendData(seData: SemanticEventJSON) {
         this.collector.sendMessage({
