@@ -121,37 +121,7 @@ export class SemanticTracker {
             if (sm.mapping.scroll)          { this.registerScroll(sm.name, element); }
         }
     }
-
-    /**
-     * This method is used for the cleaning of the internal data structure used in the registering keystrokes method.
-     * @param pressedKeys      An array of pressed keys.
-     * @returns {number[]}
-     */
-    private registerKeystrokeCleanup(pressedKeys: number[]): number[] {
-        for ( let key in pressedKeys ) {
-            if ( pressedKeys.hasOwnProperty(key) && (Date.now() - pressedKeys[key] > this.keyTimeOut)) {
-                pressedKeys[key] = undefined;
-            }
-        }
-        return pressedKeys;
-    }
-
-    /**
-     * This method is used to set the duration of the keystroke.
-     * @param pressedKeys  The array with all current registered keys.
-     * @param ev           The event.
-     * @returns {number}
-     */
-    private registerKeystrokeSetDuration(pressedKeys: number[], ev: any): number {
-        let duration = 1;
-
-        if ( pressedKeys[ev.keyCode] !== undefined ) {
-            duration = Date.now() - pressedKeys[ev.keyCode];
-            pressedKeys[ev.keyCode] = undefined;
-        }
-
-        return duration;
-    }
+    
     /**
      * A tracker for keystrokes on elements. 
      * @param name      The element name.
@@ -160,15 +130,29 @@ export class SemanticTracker {
     public registerKeystroke(name: string, element: HTMLElement) {
         let _this = this;
         let pressedKeys = <number[]> [];
-
+        
+        let cleanup = function() {
+            for ( let key in pressedKeys ) {
+                if ( pressedKeys.hasOwnProperty(key) && (Date.now() - pressedKeys[key] > _this.keyTimeOut)) {
+                    pressedKeys[key] = undefined;
+                }
+            }
+        };
+        
         element.addEventListener("keydown", (ev) => {
             pressedKeys[ev.keyCode] = Date.now();
-            pressedKeys = this.registerKeystrokeCleanup(pressedKeys);
+            cleanup();
         });
 
         element.addEventListener("keyup", (ev) => {
-            pressedKeys = this.registerKeystrokeCleanup(pressedKeys);
-            let duration = this.registerKeystrokeSetDuration(pressedKeys, ev);
+            cleanup();
+            
+            let duration = 1;
+            if ( pressedKeys[ev.keyCode] !== undefined ) {
+                duration = Date.now() - pressedKeys[ev.keyCode];
+                pressedKeys[ev.keyCode] = undefined;
+            }
+
             let message: SemanticEventJSON = _this.createMessage(this.event_types_mapping["Keystroke"],
                                                                  this.element_types_mapping[name], duration);
             _this.sendData(message);
@@ -229,8 +213,8 @@ export class SemanticTracker {
     private createMessage(event_name: string, element_name: string,
                           duration: number): SemanticEventJSON {
         return {
-            event_type: "http://10.0.22.6/api/event-types/" + this.event_types_mapping[event_name] + "/",
-            element_type: "http://10.0.22.6/api/event-types/" + this.element_types_mapping[element_name] + "/",
+            event_types: "http://10.0.22.6/api/event-types/" + this.event_types_mapping[event_name] + "/",
+            element_types: "http://10.0.22.6/api/event-types/" + this.element_types_mapping[element_name] + "/",
             created_at: Date.now() / 1000,
             duration: duration
         };
