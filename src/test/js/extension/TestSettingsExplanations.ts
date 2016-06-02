@@ -13,27 +13,20 @@ function buildDummy(dummyArray: {id: string; title: string}[]) {
 }
 
 describe("Setting explanation cards", function() {
-    document = new MockBrowser().getDocument();
-
-    let fixture: HTMLElement = document.createElement("div");
-    let element = document.createElement("div");
-    element.innerHTML += "<div class='chip explain-tracking-button'>?</div>";
-    let dummy = document.createElement("div");
 
     beforeEach(function() {
         document = new MockBrowser().getDocument();
-
-        fixture = document.createElement("div");
-        element = document.createElement("div");
-        element.innerHTML += "<div class='chip explain-tracking-button'>?</div>";
-        dummy = document.createElement("div");
-
+        this.fixture = document.createElement("div");
+        this.element = document.createElement("div");
+        this.dummy = document.createElement("div");
+        this.element.innerHTML = "<div class='chip explain-tracking-button'>?</div>";
+        this.dummy.innerHTML = "";
         this.tracker = new SettingsExplanations();
-        document.body.insertBefore(fixture, document.body.firstChild);
-        fixture.innerHTML = "<div id='refresh-bitbucket-pages'></div><div id='hide-explanation-button'></div>";
-        fixture.innerHTML += "<div id='tracking-explanation'><div class='card-content white-text'>";
-        fixture.innerHTML += "<span id='card-title'></span><div id='card-content-text'></div>";
-        fixture.innerHTML += "<div id='card-sample-data'></div></div></div>";
+        document.body.insertBefore(this.fixture, document.body.firstChild);
+        this.fixture.innerHTML = "<div id='refresh-bitbucket-pages'></div><div id='hide-explanation-button'></div>";
+        this.fixture.innerHTML += "<div id='tracking-explanation'><div class='card-content white-text'>";
+        this.fixture.innerHTML += "<span id='card-title'></span><div id='card-content-text'></div>";
+        this.fixture.innerHTML += "<div id='card-sample-data'></div></div></div>";
         this.evt = document.createEvent("MutationEvents");
         this.evt.initMutationEvent("DOMContentLoaded", true, true, document, "", "", "", 0);
         this.event = document.createEvent("HTMLEvents");
@@ -55,35 +48,36 @@ describe("Setting explanation cards", function() {
 
     testArray.forEach( function(item) {
         it("a card should be filled when a question mark is clicked -- " +  item.title, function() {
-            element.id = item.id;
+            this.element.id = item.id;
+            let localDummy = this.dummy;
             testArray.forEach(function(dummyItem) {
                 if (item.id !== dummyItem.id) {
-                    dummy.innerHTML +=
+                    localDummy.innerHTML +=
                         "<div id='" + dummyItem.id + "'><div class='explain-tracking-button'>?</div></div>";
                 }
             });
-            document.body.insertBefore(dummy, document.body.firstChild);
-            document.body.insertBefore(element, document.body.firstChild);
+            document.body.insertBefore(localDummy, document.body.firstChild);
+            document.body.insertBefore(this.element, document.body.firstChild);
             this.tracker.configureExplanations();
             document.dispatchEvent(this.evt);
-            element.dispatchEvent(this.event);
+            this.element.dispatchEvent(this.event);
             expect(document.getElementById("card-title").innerHTML).toEqual(item.title);
         });
     });
 
     it("an explanation should be visible after clicking a question mark", function() {
-        dummy.innerHTML += buildDummy(testArray);
-        document.body.insertBefore(dummy, document.body.firstChild);
+        this.dummy.innerHTML += buildDummy(testArray);
+        document.body.insertBefore(this.dummy, document.body.firstChild);
         this.tracker.configureExplanations();
         document.dispatchEvent(this.evt);
-        element.dispatchEvent(this.event);
+        this.element.dispatchEvent(this.event);
         expect(document.defaultView.getComputedStyle(document.getElementById("tracking-explanation"), null)
             .getPropertyValue("display")).toEqual("block");
     });
 
     it("an explanation should be hidden after clicking close", function() {
-        dummy.innerHTML += buildDummy(testArray);
-        document.body.insertBefore(dummy, document.body.firstChild);
+        this.dummy.innerHTML += buildDummy(testArray);
+        document.body.insertBefore(this.dummy, document.body.firstChild);
         this.tracker.configureExplanations();
         document.dispatchEvent(this.evt);
         document.getElementById("hide-explanation-button").click();
@@ -93,7 +87,7 @@ describe("Setting explanation cards", function() {
 
     afterEach(function() {
         document.body.innerHTML = "";
-        fixture.innerHTML = "";
-        dummy.innerHTML = "";
+        this.fixture.innerHTML = "";
+        this.dummy.innerHTML = "";
     });
 });
