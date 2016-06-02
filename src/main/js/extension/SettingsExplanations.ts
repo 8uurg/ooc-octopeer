@@ -148,8 +148,8 @@ export class SettingsExplanations {
     }
 
     /**
-     * Sets the explantion text on the card.
-     * @param paragraphs
+     * Sets the explanation text on the card.
+     * @param paragraphs The paragraphs for the explanation text.
      */
     private setCardContentText(paragraphs: string[]) {
         document.getElementById("card-content-text").innerHTML = "";
