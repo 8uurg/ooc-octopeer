@@ -121,7 +121,7 @@ export class SemanticTracker {
             if (sm.mapping.scroll)          { this.registerScroll(sm.name, element); }
         }
     }
-    
+
     /**
      * A tracker for keystrokes on elements. 
      * @param name      The element name.
@@ -130,7 +130,7 @@ export class SemanticTracker {
     public registerKeystroke(name: string, element: HTMLElement) {
         let _this = this;
         let pressedKeys = <number[]> [];
-        
+
         let cleanup = function() {
             for ( let key in pressedKeys ) {
                 if ( pressedKeys.hasOwnProperty(key) && (Date.now() - pressedKeys[key] > _this.keyTimeOut)) {
@@ -138,7 +138,7 @@ export class SemanticTracker {
                 }
             }
         };
-        
+
         element.addEventListener("keydown", (ev) => {
             pressedKeys[ev.keyCode] = Date.now();
             cleanup();
@@ -146,7 +146,7 @@ export class SemanticTracker {
 
         element.addEventListener("keyup", (ev) => {
             cleanup();
-            
+
             let duration = 1;
             if ( pressedKeys[ev.keyCode] !== undefined ) {
                 duration = Date.now() - pressedKeys[ev.keyCode];
