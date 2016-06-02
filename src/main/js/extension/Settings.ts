@@ -13,7 +13,7 @@ export function registerCheckbox(storageName: string, checkboxId: string) {
         checkbox.addEventListener("click", function() {
             syncedStorage.set({[storageName]: this.checked});
             console.log(storageName + ": " + this.checked);
-            document.getElementById("refresh-pages-notification").style.setProperty("visibility", "visible");
+            document.getElementById("refresh-pages-notification").style.setProperty("display", "inherit");
         });
     });
 }
@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
     registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution,      "checkboxPageRes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,          "checkboxKeystrokes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_events,      "checkboxSemanticEvents");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_visibility,           "checkboxVisibility");
 
     document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
         chrome.tabs.query({

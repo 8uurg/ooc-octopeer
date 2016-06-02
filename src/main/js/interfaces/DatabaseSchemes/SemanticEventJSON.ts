@@ -1,29 +1,33 @@
+/// <reference path="./SessionJSON.ts" />
+
 /**
- * This interface is used to define the structure of a semantic event in the RESTful API.
+ * This interface is used to define the structure for a semantic event accepted by the RESTFul API.
  */
+
 interface SemanticEventJSON {
+
     /**
      * The session object of the current pull request.
      */
     session?: SessionJSON;
 
     /**
-     * The event-type object.
+     * The type of event used.
      */
     event_type: string;
 
     /**
-     * The element-type object.
+     * Type of element.
      */
     element_type: string;
 
     /**
-     * The timestamp of the event.
+     * A unix timestamp at which the event started.
      */
     created_at: number;
 
     /**
-     * How long the event took.
+     * The duration.
      */
     duration: number;
 }

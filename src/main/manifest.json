@@ -29,6 +29,7 @@
           "js/trackers/MousePositionTracker.js",
           "js/trackers/ResizeTracker.js",
           "js/trackers/semanticTracker.js",
+          "js/trackers/VisibilityTracker.js",
           "js/BitBucketSessionDataGatherer.js",
           "js/ChromeTrackingCollector.js",
           "js/Main.js"

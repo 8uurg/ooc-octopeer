@@ -20,28 +20,60 @@ main.container {
     width: 85%;
 }
 
-#refresh-pages-notification {
-    visibility: hidden;
+#notification-container {
     width: 35%;
-    margin-top: 70px;
-    margin-right: 6px;
+    min-width: 330px;
+    max-width: 500px;
+    margin-top: 64px;
+    margin-right: 10px;
     right: 0;
     position: absolute;
     z-index: 1000;
-    background-color: #009688 !important;
 }
 
-#refresh-pages-notification .card-action {
+.notification {
+    display: none;
+    width: 100%;
+    background-color: #009688 !important;
+    margin: 5px 10px 5px 5px;
+}
+
+.notification #card-content-text p:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.card-action {
     border-top: 1px solid #B6B6B6 !important;
 }
 
-#refresh-bitbucket-pages i {
+.card-action a {
+    display: block;
+    height: 24px;
+}
+
+.card i {
     color: #C8E6C9 !important;
     transition: transform 0.4s ease-in-out;
 }
 
+#card-title {
+    font-size: 22px;
+}
+
+.card-sub-title {
+    font-size: 18px;
+}
+
+.card-sample-data {
+    margin-top: 10px;
+}
+
 #refresh-bitbucket-pages i:hover {
     transform: rotate(180deg);
+}
+
+#tracking-explanation i:hover {
+    color: red !important;
 }
 
 .switch label::after {
@@ -70,4 +102,14 @@ main {
 
 .acknowledgement {
     font-size: xx-small;
+}
+
+.explain-tracking-button {
+    font-weight: bold;
+    font-size: 12pt;
+    cursor: pointer;
+}
+
+.privacy-settings .col {
+    line-height: 32px;
 }

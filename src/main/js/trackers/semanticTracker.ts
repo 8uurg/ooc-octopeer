@@ -1,6 +1,6 @@
 /// <reference path="../interfaces/Message.ts" />
 /// <reference path="../interfaces/SemanticEnablingMapping.ts" />
-/// <reference path="../interfaces/SemanticEventJSON.ts" />
+/// <reference path="../interfaces/DatabaseSchemes/SemanticEventJSON.ts" />
 /// <reference path="../interfaces/SemanticMapping.ts" />
 /// <reference path="../interfaces/TrackingCollector.ts" />
 
