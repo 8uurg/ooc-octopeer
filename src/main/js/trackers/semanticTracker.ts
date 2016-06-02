@@ -76,10 +76,11 @@ export class SemanticTracker {
             createSemanticElement("Edit comment", ".comment-actions .edit-link", full),
             createSemanticElement("Add reaction", ".new-comment .buttons .aui-button-primary", full),
 
-            /* TABS - NOTICE: almost no overlap with GitHub. */
+            // TODO: Give the tabas database id's.
+            /*/!* TABS - NOTICE: almost no overlap with GitHub. *!/
             createSemanticElement("commits_tab", "#pr-menu-commits", full),
             createSemanticElement("overview_tab", "#pr-menu-diff", full),
-            createSemanticElement("activity_tab", "#pr-menu-activity", full),
+            createSemanticElement("activity_tab", "#pr-menu-activity", full),*/
 
             /* TEXTFIELDS */
             createSemanticElement("Comment textfield", "#general-comments #id_new_comment", full),

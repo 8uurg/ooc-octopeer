@@ -125,13 +125,13 @@ describe("SemanticTracker", function() {
         spyOn(this.tracker, "registerClick");
         this.tracker.register();
 
-        expect(this.tracker.registerClick).toHaveBeenCalledTimes(12);
+        expect(this.tracker.registerClick).toHaveBeenCalledTimes(9);
     });
 
     it("should send the data when a click on a tracked element occurs.", function() {
         this.tracker.register();
         this.fakeElement.click();
 
-        expect(this.collector.sendMessage).toHaveBeenCalledTimes(12);
+        expect(this.collector.sendMessage).toHaveBeenCalledTimes(9);
     });
 });
