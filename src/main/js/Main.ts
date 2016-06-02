@@ -9,6 +9,7 @@ declare var KeystrokeTracker: any;
 declare var MouseClickTracker: any;
 declare var MousePositionTracker: any;
 declare var ResizeTracker: any;
+declare var ScrollTracker: any;
 declare var DataGatherer: any;
 declare var ChromeTrackingCollector: any;
 
@@ -22,7 +23,8 @@ let neededSettings: { [key: string]: boolean; } = {
     [OCTOPEER_CONSTANTS.track_key_strokes]: true,
     [OCTOPEER_CONSTANTS.track_mouse_position]: true,
     [OCTOPEER_CONSTANTS.track_page_resolution]: true,
-    [OCTOPEER_CONSTANTS.track_mouse_clicks]: true
+    [OCTOPEER_CONSTANTS.track_mouse_clicks]: true,
+    [OCTOPEER_CONSTANTS.track_scroll]: true
 };
 
 chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
@@ -42,6 +44,11 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
     // Register the mousetracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_mouse_position]) {
         (new MousePositionTracker()).withCollector(collector).register();
+    }
+
+    // Register the scroll tracker to the current document.
+    if (items[OCTOPEER_CONSTANTS.track_scroll]) {
+        (new ScrollTracker()).withCollector(collector).register();
     }
 
     // Register the mouse click tracker to the current document.
