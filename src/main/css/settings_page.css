@@ -113,3 +113,7 @@ main {
 .privacy-settings .col {
     line-height: 32px;
 }
+
+.hidden-explain-button {
+    visibility: hidden;
+}
