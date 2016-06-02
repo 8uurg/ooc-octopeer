@@ -3,7 +3,19 @@
  */
 export class SettingsExplanations {
 
+    /**
+     * The title for the explanations.
+     * @type {HTMLElement}
+     */
     private title = document.createElement("span");
+
+    /**
+     * The explanations for trackers.
+     * We need a selector for the activation button
+     * A title
+     * An array of explanation text, one element per paragraph
+     * and a closure which generates demo elements, this can be an empty array.
+     */
     private explanations = [
         {
             "settingSelector": "mouse-position-setting-question", "title": "Mouse Position Tracking",
@@ -83,6 +95,9 @@ export class SettingsExplanations {
         }
     ];
 
+    /**
+     * Sets the notification contents and add event listeners to them.
+     */
     public configureExplanations() {
         this.title.className += " card-sub-title";
 
@@ -101,6 +116,9 @@ export class SettingsExplanations {
         });
     }
 
+    /**
+     * Makes the refresh button functional.
+     */
     private refreshPages() {
         document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
             chrome.tabs.query({
@@ -117,6 +135,10 @@ export class SettingsExplanations {
         });
     }
 
+    /**
+     * Sets the contents for an explanation card.
+     * @param explanation The data for on the card.
+     */
     private setCard(explanation: {settingSelector: string, title: string, bodyText: string[],
             sampleData: () => HTMLElement[]}) {
         document.getElementById("card-title").innerHTML = explanation.title;
@@ -125,6 +147,10 @@ export class SettingsExplanations {
         document.getElementById("tracking-explanation").style.setProperty("display", "block");
     }
 
+    /**
+     * Sets the explantion text on the card.
+     * @param paragraphs
+     */
     private setCardContentText(paragraphs: string[]) {
         document.getElementById("card-content-text").innerHTML = "";
         paragraphs.forEach((paragraph) => {
@@ -134,6 +160,10 @@ export class SettingsExplanations {
         });
     }
 
+    /**
+     * Sets the sample data on the card.
+     * @param data The HTMLElements for on the card.
+     */
     private setCardSampleData(data: HTMLElement[]) {
         document.getElementById("card-sample-data").innerHTML = "";
         data.forEach((dataElement) => {
