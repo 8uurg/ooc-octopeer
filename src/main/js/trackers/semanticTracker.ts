@@ -95,13 +95,18 @@ export class SemanticTracker {
         });
     }
 
+    /**
+     * This method registers the trackers for all semantic elements.
+     * @param sm  The name of the semantic element.
+     */
     private registerSemanticElement(sm: SemanticMapping) {
         let elements = document.querySelectorAll(sm.descriptor);
         for (let id = 0; id < elements.length; id++) {
-            let element = <HTMLElement> elements.item(id);
+            let element = <HTMLElement> elements[id];
             if (sm.mapping.keystroke)       { this.registerKeystroke(sm.name, element); }
             if (sm.mapping.click)           { this.registerClick(sm.name, element); }
-            if (sm.mapping.hover)           { this.registerHover(sm.name, element); }
+            if (sm.mapping.hover)           { this.registerMouseEnter(sm.name, element);
+                                              this.registerMouseLeave(sm.name, element); }
             if (sm.mapping.scroll)          { this.registerScroll(sm.name, element); }
         }
     }
@@ -157,15 +162,37 @@ export class SemanticTracker {
         let _this = this;
 
         element.addEventListener("click", function() {
-            let event_type: number = _this.event_types_mapping["Click"];
-            let element_type: number = _this.element_types_mapping[name];
-            let message: SemanticEventJSON = _this.createMessage(event_type, element_type, 1);
+            let message: SemanticEventJSON = _this.createMessage("Click", name, 1);
             _this.sendData(message);
         });
     }
 
-    public registerHover(name: string, element: HTMLElement) {
+    /**
+     * This method adds a mouse-enter-event-listener to an element.
+     * @param name             The element name.
+     * @param element          The element.
+     */
+    public registerMouseEnter(name: string, element: HTMLElement) {
+        let _this = this;
 
+        element.addEventListener("mouseenter", function() {
+            let message: SemanticEventJSON = _this.createMessage("Mouseenter", name, 1);
+            _this.sendData(message);
+        });
+    }
+
+    /**
+     * This method adds a mouse-leave-event-listener to an element.
+     * @param name             The element name.
+     * @param element          The element.
+     */
+    public registerMouseLeave(name: string, element: HTMLElement) {
+        let _this = this;
+
+        element.addEventListener("mouseleave", function() {
+            let message: SemanticEventJSON = _this.createMessage("Mouseleave", name, 1);
+            _this.sendData(message);
+        });
     }
 
     public registerScroll(name: string, element: HTMLElement) {
@@ -176,11 +203,11 @@ export class SemanticTracker {
      * Creates a message using the Keystroke interface.
      * @returns {KeystrokeJSON}
      */
-    private createMessage(event_type: number, element_type: number,
+    private createMessage(event_name: string, element_name: string,
                           duration: number): SemanticEventJSON {
         return {
-            event_type: "http://10.0.22.6/api/event-types/" + event_type,
-            element_type: "http://10.0.22.6/api/element-types/" + element_type,
+            event_type: "http://10.0.22.6/api/event-types/" + this.event_types_mapping[event_name],
+            element_type: "http://10.0.22.6/api/event-types/" + this.element_types_mapping[element_name],
             created_at: Date.now() / 1000,
             duration: duration
         };
