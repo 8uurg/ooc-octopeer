@@ -214,7 +214,7 @@ export class SemanticTracker {
                           duration: number): SemanticEventJSON {
         return {
             event_type: "http://10.0.22.6/api/event-types/" + this.event_types_mapping[event_name] + "/",
-            element_type: "http://10.0.22.6/api/event-types/" + this.element_types_mapping[element_name] + "/",
+            element_type: "http://10.0.22.6/api/element-types/" + this.element_types_mapping[element_name] + "/",
             created_at: Date.now() / 1000,
             duration: duration
         };
