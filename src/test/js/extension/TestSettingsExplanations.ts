@@ -3,6 +3,15 @@
 import {SettingsExplanations} from "../../../main/js/extension/SettingsExplanations";
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
 
+function buildDummy(dummyArray: {id: string; title: string}[]) {
+    let dummyObject = document.createElement("div");
+    dummyArray.forEach(function(dummyItem) {
+        dummyObject.innerHTML +=
+            "<div id='" + dummyItem + "'><div class='explain-tracking-button'>?</div></div>";
+    });
+    return dummyObject;
+}
+
 describe("Setting explanation cards", function() {
     document = new MockBrowser().getDocument();
 
@@ -38,10 +47,10 @@ describe("Setting explanation cards", function() {
     });
 
     let testArray = [
-        {id: "mouse-position-setting-question", title: "Mouse Position Tracking"},
-        {id: "mouse-click-setting-question", title: "Mouse Click Tracking"},
-        {id: "page-resolution-setting-question",  title: "Page Resolution Tracking"},
-        {id: "keystroke-setting-question", title: "Keystroke Tracking"}
+        {id: "mouse-position-setting-question",     title: "Mouse Position Tracking"},
+        {id: "mouse-click-setting-question",        title: "Mouse Click Tracking"},
+        {id: "page-resolution-setting-question",    title: "Page Resolution Tracking"},
+        {id: "keystroke-setting-question",          title: "Keystroke Tracking"}
     ];
 
     testArray.forEach( function(item) {
@@ -63,10 +72,7 @@ describe("Setting explanation cards", function() {
     });
 
     it("an explanation should be visible after clicking a question mark", function() {
-        testArray.forEach(function(dummyItem) {
-            dummy.innerHTML +=
-                "<div id='" + dummyItem + "'><div class='explain-tracking-button'>?</div></div>";
-        });
+        dummy.innerHTML += buildDummy(testArray);
         document.body.insertBefore(dummy, document.body.firstChild);
         this.tracker.configureExplanations();
         document.dispatchEvent(this.evt);
@@ -76,10 +82,7 @@ describe("Setting explanation cards", function() {
     });
 
     it("an explanation should be hidden after clicking close", function() {
-        testArray.forEach(function(dummyItem) {
-            dummy.innerHTML +=
-                "<div id='" + dummyItem + "'><div class='explain-tracking-button'>?</div></div>";
-        });
+        dummy.innerHTML += buildDummy(testArray);
         document.body.insertBefore(dummy, document.body.firstChild);
         this.tracker.configureExplanations();
         document.dispatchEvent(this.evt);
