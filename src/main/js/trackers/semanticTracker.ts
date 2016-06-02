@@ -67,10 +67,12 @@ export class SemanticTracker {
             semanticElement("Inline Comment", ".aui-iconfont-add-comment", full),
             semanticElement("Edit comment", ".comment-actions .edit-link", full),
             semanticElement("Add reaction", ".new-comment .buttons .aui-button-primary", full),
+
             /* TABS - NOTICE: almost no overlap with GitHub. */
             semanticElement("commits_tab", "#pr-menu-commits", full),
             semanticElement("overview_tab", "#pr-menu-diff", full),
             semanticElement("activity_tab", "#pr-menu-activity", full),
+
             /* TEXTFIELDS */
             semanticElement("Comment textfield", "#general-comments #id_new_comment", full),
             semanticElement("Inline comment textfield", ".comment-thread-container #id_new_comment", full)
@@ -109,8 +111,46 @@ export class SemanticTracker {
         }
     }
 
-    public registerKeystroke(name: string, element: HTMLElement) {
+    /**
+     * The time in milliseconds before a keydown event is discarded.
+     */
+    private keyTimeOut = 10000;
 
+    /**
+     * A tracker for keystrokes on elements. 
+     * @param name      The element name.
+     * @param element   The element.
+     */
+    public registerKeystroke(name: string, element: HTMLElement) {
+        let _this = this;
+        let pressedKeys = <number[]> [];
+
+        let cleanup = function() {
+            for ( let key in pressedKeys ) {
+                if ( pressedKeys.hasOwnProperty(key)
+                    && Date.now() - pressedKeys[key] > _this.keyTimeOut) {
+                    pressedKeys[key] = undefined;
+                }
+            }
+        };
+
+        element.addEventListener("keydown", (ev) => {
+            pressedKeys[ev.keyCode] = Date.now();
+            cleanup();
+        });
+
+        element.addEventListener("keyup", (ev) => {
+            cleanup();
+            let duration = 1;
+            if ( pressedKeys[ev.keyCode] !== undefined ) {
+                duration = Date.now() - pressedKeys[ev.keyCode];
+                pressedKeys[ev.keyCode] = undefined;
+            }
+
+            let message: SemanticEventJSON = _this.createMessage(this.event_types_mapping["Keystroke"],
+                                                                 this.element_types_mapping[name], duration);
+            _this.sendData(message);
+        });
     }
 
     /**
