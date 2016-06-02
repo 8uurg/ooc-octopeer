@@ -112,7 +112,7 @@ export class SettingsExplanations {
                     "http://bitbucket.org/*",
                     "https://bitbucket.org/*"
                 ]
-            }, (tabs: [chrome.tabs.Tab]) => {
+            }, (tabs: chrome.tabs.Tab[]) => {
                 tabs.forEach((tab) => {
                     chrome.tabs.reload(tab.id);
                 });
@@ -121,7 +121,8 @@ export class SettingsExplanations {
         });
     }
 
-    private setCard(explanation: any) {
+    private setCard(explanation: {settingSelector: string, title: string, bodyText: string[],
+            sampleData: () => HTMLElement[]}) {
         this.setCardTitle(explanation.title);
         this.setCardContentText(explanation.bodyText);
         this.setCardSampleData(explanation.sampleData());
@@ -132,7 +133,7 @@ export class SettingsExplanations {
         document.getElementById("card-title").innerHTML = title;
     }
 
-    private setCardContentText(paragraphs: Array<any>) {
+    private setCardContentText(paragraphs: string[]) {
         document.getElementById("card-content-text").innerHTML = "";
         paragraphs.forEach((paragraph) => {
             let p = document.createElement("p");
@@ -141,7 +142,7 @@ export class SettingsExplanations {
         });
     }
 
-    private setCardSampleData(data: Array<any>) {
+    private setCardSampleData(data: HTMLElement[]) {
         document.getElementById("card-sample-data").innerHTML = "";
         data.forEach((dataElement) => {
             document.getElementById("card-sample-data")
