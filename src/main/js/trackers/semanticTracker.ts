@@ -120,12 +120,12 @@ export class SemanticTracker {
      */
     public registerKeystroke(name: string, element: HTMLElement) {
         let _this = this;
-        let pressedKeys = <[number]> [];
+        let pressedKeys = <number[]> [];
 
-        let cleanup = () => {
+        let cleanup = function() {
             for ( let key in pressedKeys ) {
                 if ( pressedKeys.hasOwnProperty(key)
-                    && Date.now() - pressedKeys[key] > this.keyTimeOut) {
+                    && Date.now() - pressedKeys[key] > _this.keyTimeOut) {
                     pressedKeys[key] = undefined;
                 }
             }

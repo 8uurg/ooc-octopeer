@@ -5,13 +5,13 @@ import {SemanticTracker} from "../../../main/js/trackers/semanticTracker";
  * 
  * A test suite for the semantic keystroke tracker.
  */
-describe("The key stroke semantic tracker", () => {
+describe("The key stroke semantic tracker", function() {
 
     let collector: TrackingCollector;
     let semanticTracker: SemanticTracker;
     let htmlElement: any; // Using the real type, HTMLElement, causes issues when spying on it.
 
-    beforeEach(() => {
+    beforeEach(function() {
         jasmine.clock().install();
         jasmine.clock().mockDate();
         collector = jasmine.createSpyObj("collector", ["sendMessage"]);
@@ -19,7 +19,7 @@ describe("The key stroke semantic tracker", () => {
         htmlElement = jasmine.createSpyObj("elem", ["addEventListener"]);
     });
 
-    afterEach(() => {
+    afterEach(function() {
         jasmine.clock().uninstall();
     });
 
@@ -27,7 +27,7 @@ describe("The key stroke semantic tracker", () => {
      * A keydown event might not have been received, e.g. when using shortcuts to change the active tab/program.
      */
     it("should make an event with duration 1, when no keydown event was registered, but a " +
-        "keyup event was registered.", () => {
+        "keyup event was registered.", function() {
         htmlElement.addEventListener.and.callFake((eventString: string, fireEvent: any) => {
             if (eventString === "keyup") {
                 fireEvent({ keyCode: 42 });
@@ -42,7 +42,7 @@ describe("The key stroke semantic tracker", () => {
     });
 
     it("should register the second key up event with a duration of 1, when the first keydown event has " +
-        "been followed by a key up event.", () => {
+        "been followed by a key up event.", function() {
         let eventListenerClosureKeydown: (event: { keyCode: number }) => void = null;
         let eventListenerClosureKeyup:   (event: { keyCode: number }) => void = null;
         htmlElement.addEventListener.and.callFake((eventString: string, fireEvent: any) => {
@@ -72,7 +72,8 @@ describe("The key stroke semantic tracker", () => {
         }));
     });
 
-    it("shouldn't send any data before a key up event is registered.", () => {
+    it("shouldn't send any data after a keydown event is registered, but before a key up event " +
+            "is registered.", function() {
         htmlElement.addEventListener.and.callFake((eventString: string, fireEvent: any) => {
             if ( eventString === "keydown" ) {
                 fireEvent({ keyCode : 42 });
@@ -83,7 +84,7 @@ describe("The key stroke semantic tracker", () => {
         expect(collector.sendMessage).not.toHaveBeenCalled();
     });
 
-    it("should only register a duplicate keystroke if both have sent a keyup event.", () => {
+    it("should only register a duplicate keystroke if both have sent a keyup event.", function() {
         let eventListenerClosureKeydown: (event: { keyCode: number }) => void = null;
         let eventListenerClosureKeyup:   (event: { keyCode: number }) => void = null;
         htmlElement.addEventListener.and.callFake((eventString: string, fireEvent: any) => {
@@ -109,7 +110,7 @@ describe("The key stroke semantic tracker", () => {
         }));
     });
 
-    it("should prevent a key from being registered if the press are older than a certain time.", () => {
+    it("should prevent a key from being registered if the press is older than a certain time.", function() {
         let eventListenerClosureKeydown: (event: { keyCode: number }) => void = null;
         let eventListenerClosureKeyup:   (event: { keyCode: number }) => void = null;
         htmlElement.addEventListener.and.callFake((eventString: string, fireEvent: any) => {
