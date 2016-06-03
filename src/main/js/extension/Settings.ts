@@ -13,7 +13,7 @@ export function registerCheckbox(storageName: string, checkboxId: string) {
         checkbox.addEventListener("click", function() {
             syncedStorage.set({[storageName]: this.checked});
             console.log(storageName + ": " + this.checked);
-            document.getElementById("refresh-pages-notification").style.setProperty("visibility", "visible");
+            document.getElementById("refresh-pages-notification").style.setProperty("display", "block");
         });
     });
 }
@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", function() {
     registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_clicks,         "checkboxMouseClicks");
     registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution,      "checkboxPageRes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,          "checkboxKeystrokes");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_events,      "checkboxSemanticEvents");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_visibility,           "checkboxVisibility");
 
     document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
         chrome.tabs.query({
@@ -34,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
             tabs.forEach((tab) => {
                 chrome.tabs.reload(tab.id);
             });
-            document.getElementById("refresh-pages-notification").style.setProperty("visibility", "hidden");
+            document.getElementById("refresh-pages-notification").style.setProperty("display", "none");
         });
     });
 });

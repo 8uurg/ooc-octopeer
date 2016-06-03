@@ -1,11 +1,10 @@
 "use strict";
-///<reference path="../../typings/index.d.ts" />
+///<reference path="../../../../typings/index.d.ts" />
 
-import {registerCheckbox} from "../main/js/extension/Settings";
+import {registerCheckbox} from "../../../main/js/extension/Settings";
 
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
 let browser: any = new MockBrowser();
-document = browser.getDocument();
 localStorage = browser.getLocalStorage();
 
 /**
@@ -14,6 +13,7 @@ localStorage = browser.getLocalStorage();
 describe("Settings.ts tests", function () {
     let checkbox: HTMLInputElement;
     beforeEach(function () {
+        this.oldDocument = document;
         browser = new MockBrowser();
         document = browser.getDocument();
 
@@ -24,6 +24,10 @@ describe("Settings.ts tests", function () {
         checkbox.setAttribute("type", "checkbox");
         checkbox.setAttribute("id", "some_value");
         body.appendChild(checkbox);
+    });
+
+    afterEach(function() {
+        document = this.oldDocument;
     });
 
     it("should restore state on registration when saved state is false.", function () {

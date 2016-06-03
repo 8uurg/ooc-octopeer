@@ -1,5 +1,5 @@
 ///<reference path="../interfaces/Message.ts" />
-///<reference path="../interfaces/MousePosJSON.ts" />
+///<reference path="../interfaces/DatabaseSchemes/MousePosJSON.ts" />
 ///<reference path="../interfaces/TrackingCollector.ts" />
 
 /**

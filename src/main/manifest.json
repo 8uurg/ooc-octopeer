@@ -7,7 +7,13 @@
 
   "browser_action": {
     "default_title": "Octopeer",
-    "default_icon": "./favicon.png"
+    "default_icon": "./img/icons/icon1024.png"
+  },
+
+  "icons" : {
+    "16": "./img/icons/icon16.png",
+    "48": "./img/icons/icon48.png",
+    "128": "./img/icons/icon128.png"
   },
 
   "content_scripts": [
@@ -22,6 +28,8 @@
           "js/trackers/MouseClickTracker.js",
           "js/trackers/MousePositionTracker.js",
           "js/trackers/ResizeTracker.js",
+          "js/trackers/semanticTracker.js",
+          "js/trackers/VisibilityTracker.js",
           "js/BitBucketSessionDataGatherer.js",
           "js/ChromeTrackingCollector.js",
           "js/Main.js"
