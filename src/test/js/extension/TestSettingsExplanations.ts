@@ -25,6 +25,8 @@ describe("Setting explanation cards", function() {
     beforeEach(function() {
         browser = new MockBrowser();
         browser.getDocument().createElement("body");
+
+        oldDocument = document;
         document = browser.getDocument();
 
         this.fixture = document.createElement("div");
