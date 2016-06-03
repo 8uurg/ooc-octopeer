@@ -5,6 +5,7 @@ import {SemanticTracker} from "../../../main/js/trackers/semanticTracker";
  * Created by larsstegman on 31-05-16.
  * 
  * A test suite for the semantic keystroke tracker.
+ */
 describe("The key stroke semantic tracker", function() {
 
     let collector: TrackingCollector;
@@ -28,77 +29,22 @@ describe("The key stroke semantic tracker", function() {
         jasmine.clock().uninstall();
     });
 
-    /!*
-     * A keydown event might not have been received, e.g. when using shortcuts to change the active tab/program.
-     *!/
-    it("should make an event with duration 1, when no keydown event was registered, but a " +
-        "keyup event was registered.", function () {
+    it("should register the keystroke for a certain element and key.", function () {
         semanticTracker.registerKeystroke("Inline Comment", htmlElement);
 
+        let now = Date.now() / 1000;
         fireEvent["keyup"]({keyCode: 42});
 
         expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
-            data: jasmine.objectContaining({duration: 1})
+            data: {
+                created_at: now,
+                event_type: "http://10.0.22.6/api/event-types/" + 101 + "/",
+                element_type: "http://10.0.22.6/api/element-types/" + 105 + "/"
+            }
         }));
     });
 
-    it("should register the second key up event with a duration of 1, when the first keydown event has " +
-        "been followed by a key up event.", function () {
-        semanticTracker.registerKeystroke("Inline Comment", htmlElement);
-
-        fireEvent["keydown"]({keyCode: 42});
-        let start = Date.now();
-        jasmine.clock().tick(4000);
-        fireEvent["keyup"]({keyCode: 42});
-        let end = Date.now();
-        jasmine.clock().tick(4000);
-        fireEvent["keyup"]({keyCode: 42});
-
-        expect(collector.sendMessage).toHaveBeenCalledTimes(2);
-        expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
-            data: jasmine.objectContaining({duration: 1})
-        }));
-        expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
-            data: jasmine.objectContaining({duration: end - start})
-        }));
-    });
-
-    it("shouldn't send any data after a keydown event is registered, but before a key up event " +
-        "is registered.", function () {
-        semanticTracker.registerKeystroke("Inline Comment", htmlElement);
-
-        fireEvent["keydown"]({keyCode: 42});
-        expect(collector.sendMessage).not.toHaveBeenCalled();
-    });
-
-    it("should only register a duplicate keystroke if both have sent a keyup event.", function () {
-        semanticTracker.registerKeystroke("Inline Comment", htmlElement);
-
-        fireEvent["keydown"]({keyCode: 42});
-        jasmine.clock().tick(1000);
-        let secondTime = Date.now();
-        fireEvent["keydown"]({keyCode: 42});
-        jasmine.clock().tick(1000);
-        let secondEndTime = Date.now();
-        fireEvent["keyup"]({keyCode: 42});
-
-        expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
-            data: jasmine.objectContaining({duration: secondEndTime - secondTime})
-        }));
-    });
-
-    it("should prevent a key from being registered if the press is older than a certain time.", function () {
-        semanticTracker.registerKeystroke("Inline Comment", htmlElement);
-
-        fireEvent["keydown"]({keyCode: 42});
-        jasmine.clock().tick(10001);
-        fireEvent["keyup"]({keyCode: 42});
-
-        expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
-            data: jasmine.objectContaining({duration: 1})
-        }));
-    });
-});*/
+});
 
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
 let browser: any = new MockBrowser();

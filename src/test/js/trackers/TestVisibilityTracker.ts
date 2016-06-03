@@ -22,8 +22,7 @@ describe("The Visibility Tracker", function() {
         this.tracker.withCollector(this.collector);
     });
 
-    // TODO: Fix this test.
-    /*it("should call sendData with the current visibility after an update (case false)", function() {
+    xit("should call sendData with the current visibility after an update (case false)", function() {
         this.tracker.register();
         this.eventCall();
 
@@ -36,7 +35,7 @@ describe("The Visibility Tracker", function() {
                 duration: 0
             }
         });
-    });*/
+    });
 
     it("should call sendData with the current visibility after an update (case true)", function() {
         this.tracker.register();

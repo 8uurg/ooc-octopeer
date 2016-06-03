@@ -29,10 +29,6 @@ function createSemanticElement(name: string, descriptor: string, mapping: Semant
  */
 export class SemanticTracker {
 
-    /**
-    * The time in milliseconds before a keydown event is discarded.
-    */
-    private keyTimeOut = 10000;
     private mappings: SemanticMapping[];
     private collector: TrackingCollector;
     private element_types_mapping: any = {"Merge Pull Request":        101,
@@ -129,34 +125,10 @@ export class SemanticTracker {
      * @param element   The element.
      */
     public registerKeystroke(name: string, element: HTMLElement) {
-        let _this = this;
-        let pressedKeys = <number[]> [];
-
-        let cleanup = function() {
-            for ( let key in pressedKeys ) {
-                if ( pressedKeys.hasOwnProperty(key) && (Date.now() - pressedKeys[key] > _this.keyTimeOut)) {
-                    pressedKeys[key] = undefined;
-                }
-            }
-        };
-
-        element.addEventListener("keydown", (ev) => {
-            pressedKeys[ev.keyCode] = Date.now();
-            cleanup();
-        });
-
-        element.addEventListener("keyup", (ev) => {
-            cleanup();
-
-            let duration = 1;
-            if ( pressedKeys[ev.keyCode] !== undefined ) {
-                duration = Date.now() - pressedKeys[ev.keyCode];
-                pressedKeys[ev.keyCode] = undefined;
-            }
-
-            let message: SemanticEventJSON = _this.createMessage(this.event_types_mapping["Keystroke"],
-                                                                 this.element_types_mapping[name], duration);
-            _this.sendData(message);
+        element.addEventListener("keyup", () => {
+            let message: SemanticEventJSON = this.createMessage("Keystroke",
+                                                                 name);
+            this.sendData(message);
         });
     }
 
@@ -169,7 +141,7 @@ export class SemanticTracker {
         let _this = this;
 
         element.addEventListener("click", function() {
-            let message: SemanticEventJSON = _this.createMessage("Click", name, 1);
+            let message: SemanticEventJSON = _this.createMessage("Click", name);
             _this.sendData(message);
         });
     }
@@ -183,7 +155,7 @@ export class SemanticTracker {
         let _this = this;
 
         element.addEventListener("mouseenter", function() {
-            let message: SemanticEventJSON = _this.createMessage("Mouseenter", name, 1);
+            let message: SemanticEventJSON = _this.createMessage("Mouseenter", name);
             _this.sendData(message);
         });
     }
@@ -197,7 +169,7 @@ export class SemanticTracker {
         let _this = this;
 
         element.addEventListener("mouseleave", function() {
-            let message: SemanticEventJSON = _this.createMessage("Mouseleave", name, 1);
+            let message: SemanticEventJSON = _this.createMessage("Mouseleave", name);
             _this.sendData(message);
         });
     }
@@ -211,8 +183,7 @@ export class SemanticTracker {
      * Creates a message using the Keystroke interface.
      * @returns {KeystrokeJSON}
      */
-    private createMessage(event_name: string, element_name: string,
-                          duration: number): SemanticEventJSON {
+    private createMessage(event_name: string, element_name: string): SemanticEventJSON {
         return {
             event_type: "http://10.0.22.6/api/event-types/" + this.event_types_mapping[event_name] + "/",
             element_type: "http://10.0.22.6/api/element-types/" + this.element_types_mapping[element_name] + "/",
