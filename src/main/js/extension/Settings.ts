@@ -13,7 +13,7 @@ export function registerCheckbox(storageName: string, checkboxId: string) {
         checkbox.addEventListener("click", function() {
             syncedStorage.set({[storageName]: this.checked});
             console.log(storageName + ": " + this.checked);
-            document.getElementById("refresh-pages-notification").style.setProperty("display", "inherit");
+            document.getElementById("refresh-pages-notification").style.setProperty("display", "block");
         });
     });
 }
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
             tabs.forEach((tab) => {
                 chrome.tabs.reload(tab.id);
             });
-            document.getElementById("refresh-pages-notification").style.setProperty("visibility", "hidden");
+            document.getElementById("refresh-pages-notification").style.setProperty("display", "none");
         });
     });
 });
