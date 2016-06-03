@@ -9,6 +9,7 @@ describe("KeystrokeTracker", function() {
     let eventCall: (event: any) => void = null;
 
     beforeEach(function() {
+        jasmine.clock().install();
         jasmine.clock().mockDate();
         // Capture any added eventlisteners.
         document.addEventListener = function (ev: string, func: (event: any) => void) {
@@ -19,6 +20,10 @@ describe("KeystrokeTracker", function() {
 
         this.collector = createSpyObj("TrackingCollector", ["sendMessage"]);
         this.tracker.withCollector(this.collector);
+    });
+
+    afterEach(function() {
+       jasmine.clock().uninstall();
     });
 
     let testArray = [

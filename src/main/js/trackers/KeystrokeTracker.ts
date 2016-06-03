@@ -21,7 +21,7 @@ export class KeystrokeTracker {
                            45: "[Insert]",
                            46: "[Delete]"};
 
-    private pressedKeys: number[] = [];
+    private pressedKeys: number[];
 
     /**
      * Register the keystroke tracker.
@@ -29,12 +29,14 @@ export class KeystrokeTracker {
     public register() {
         let _this: KeystrokeTracker = this;
 
+        this.pressedKeys = [];
         /**
          * Create an EventListener that fires each time a key is pressed. Log the key that is pressed in the console.
          * @param event object that contains the required key information.
          */
         document.addEventListener("keydown", (event) => {
             this.pressedKeys[event.keyCode] = Date.now() / 1000;
+            this.sendUnsentKeyDowns();
         });
 
         document.addEventListener("keyup", (event) => {
@@ -44,9 +46,8 @@ export class KeystrokeTracker {
             this.pressedKeys[event.keyCode] = undefined;
 
             this.sendData(_this.createMessage(event.keyCode, key_down_time, key_up_time));
+            this.sendUnsentKeyDowns();
         });
-
-        setInterval(this.sendUnsentKeyDowns, 10000);
     }
 
     /**
