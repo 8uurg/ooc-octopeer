@@ -57,8 +57,7 @@ describe("The Visibility Tracker", function() {
             data: {
                 event_type: "http://10.0.22.6/api/event-types/" + 401 + "/",
                 element_type: "http://10.0.22.6/api/element-types/" + 101 + "/",
-                created_at: Date.now() / 1000,
-                duration: 0
+                created_at: Date.now() / 1000
             }
         });
     });

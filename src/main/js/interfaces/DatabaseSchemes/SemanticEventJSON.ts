@@ -25,9 +25,4 @@ interface SemanticEventJSON {
      * A unix timestamp at which the event started.
      */
     created_at: number;
-
-    /**
-     * The duration.
-     */
-    duration: number;
 }

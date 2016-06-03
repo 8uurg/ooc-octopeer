@@ -5,7 +5,6 @@ import {SemanticTracker} from "../../../main/js/trackers/semanticTracker";
  * Created by larsstegman on 31-05-16.
  * 
  * A test suite for the semantic keystroke tracker.
- */
 describe("The key stroke semantic tracker", function() {
 
     let collector: TrackingCollector;
@@ -29,9 +28,9 @@ describe("The key stroke semantic tracker", function() {
         jasmine.clock().uninstall();
     });
 
-    /*
+    /!*
      * A keydown event might not have been received, e.g. when using shortcuts to change the active tab/program.
-     */
+     *!/
     it("should make an event with duration 1, when no keydown event was registered, but a " +
         "keyup event was registered.", function () {
         semanticTracker.registerKeystroke("Inline Comment", htmlElement);
@@ -99,7 +98,7 @@ describe("The key stroke semantic tracker", function() {
             data: jasmine.objectContaining({duration: 1})
         }));
     });
-});
+});*/
 
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
 let browser: any = new MockBrowser();
