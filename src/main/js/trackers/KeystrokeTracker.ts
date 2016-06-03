@@ -38,12 +38,12 @@ export class KeystrokeTracker {
         });
 
         document.addEventListener("keyup", (event) => {
-            let start_time = this.pressedKeys[event.keyCode];
-            let end_time = Date.now() / 1000;
+            let key_down_time = this.pressedKeys[event.keyCode];
+            let key_up_time = Date.now() / 1000;
 
             this.pressedKeys[event.keyCode] = undefined;
 
-            this.sendData(_this.createMessage(event.keyCode, start_time, end_time));
+            this.sendData(_this.createMessage(event.keyCode, key_down_time, key_up_time));
         });
 
         setInterval(this.sendUnsentKeyDowns, 10000);
@@ -55,9 +55,9 @@ export class KeystrokeTracker {
     private sendUnsentKeyDowns() {
         for ( let key in this.pressedKeys ) {
             if (this.pressedKeys.hasOwnProperty(key) && Date.now() - this.pressedKeys[key] > 10000) {
-                let start_time = this.pressedKeys[key];
+                let key_down_time = this.pressedKeys[key];
                 this.pressedKeys[key] = undefined;
-                this.sendData(this.createMessage(Number(key), start_time, undefined));
+                this.sendData(this.createMessage(Number(key), key_down_time, undefined));
             }
         }
     }
@@ -76,7 +76,7 @@ export class KeystrokeTracker {
      * Creates a message using the Keystroke interface.
      * @returns {KeystrokeJSON}
      */
-    private createMessage(keyCode: number, up_time: number, down_time: number): KeystrokeJSON {
+    private createMessage(keyCode: number, key_down_time: number, key_up_time: number): KeystrokeJSON {
         let keyName: string;
         if (this.keyMap[keyCode] != null) {
             keyName = this.keyMap[keyCode];
@@ -87,8 +87,8 @@ export class KeystrokeTracker {
         return {
             created_at: Date.now() / 1000,
             keystroke: keyName,
-            key_down_at: down_time,
-            key_up_at: up_time
+            key_down_at: key_down_time,
+            key_up_at: key_up_time
         };
     }
 

@@ -44,7 +44,7 @@ describe("KeystrokeTracker", function() {
     ];
 
     testArray.forEach( function(item) {
-        xit("should log a key press after the 'keyup' event with the '" + item.name + "' key.", function() {
+        it("should log a key press after the 'keyup' event with the '" + item.name + "' key.", function() {
             this.tracker.register();
 
             // Mock date, because of ms differences.
@@ -55,7 +55,9 @@ describe("KeystrokeTracker", function() {
                 table: "keystroke-events/",
                 data: {
                     created_at: creationDate,
-                    keystroke: item.result
+                    keystroke: item.result,
+                    key_down_at: undefined,
+                    key_up_at: creationDate
                 }
             });
         });
