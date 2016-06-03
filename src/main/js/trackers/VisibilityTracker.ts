@@ -43,7 +43,6 @@ export class VisibilityTracker {
     private createMessage(): SemanticEventJSON {
         return {
             event_type: "http://10.0.22.6/api/event-types/" + (this.pageVisible ? 401 : 402) + "/",
-            // -1 for now since there is no element type associated with visibility.
             element_type: "http://10.0.22.6/api/element-types/" + 101 + "/",
             created_at: Date.now() / 1000
         };

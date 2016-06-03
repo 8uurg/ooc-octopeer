@@ -22,7 +22,7 @@ describe("The Visibility Tracker", function() {
         this.tracker.withCollector(this.collector);
     });
 
-    xit("should call sendData with the current visibility after an update (case false)", function() {
+    it("should call sendData with the current visibility after an update (case false)", function() {
         this.tracker.register();
         this.eventCall();
 
@@ -31,8 +31,7 @@ describe("The Visibility Tracker", function() {
             data: {
                 event_type: "http://10.0.22.6/api/event-types/" + 402 + "/",
                 element_type: "http://10.0.22.6/api/element-types/" + 101 + "/",
-                created_at: Date.now(),
-                duration: 0
+                created_at: Date.now() / 1000
             }
         });
     });

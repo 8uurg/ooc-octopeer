@@ -44,6 +44,13 @@ describe("Setting explanation cards", function() {
         this.event.initEvent("click", false, true);
     });
 
+    afterEach(function() {
+        document.body.innerHTML = "";
+        this.fixture.innerHTML = "";
+        this.dummy.innerHTML = "";
+        document = oldDocument;
+    });
+
     it("a card should be empty before a question mark has been clicked", function() {
         this.tracker.configureExplanations();
         expect(document.getElementById("card-title").innerHTML).toEqual("");
@@ -95,12 +102,5 @@ describe("Setting explanation cards", function() {
         expect(document.defaultView.getComputedStyle(document
             .getElementById("tracking-explanation"), null)
             .getPropertyValue("display")).toEqual("none");
-    });
-
-    afterEach(function() {
-        document.body.innerHTML = "";
-        this.fixture.innerHTML = "";
-        this.dummy.innerHTML = "";
-        document = oldDocument;
     });
 });

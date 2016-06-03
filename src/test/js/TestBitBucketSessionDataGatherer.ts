@@ -1,6 +1,8 @@
 ///<reference path="../../../typings/index.d.ts" />
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
 let browser: any = new MockBrowser();
+let oldDocument = document;
+document = browser.getDocument();
 
 import {BitBucketSessionDataGatherer} from "../../main/js/BitBucketSessionDataGatherer";
 
@@ -67,14 +69,14 @@ const sampleSessionData: SessionJSON = {
 describe("BitBucketSessionDataGatherer", function () {
 
     beforeEach(function () {
-        this.oldDocument = document;
+        oldDocument = document;
         browser = new MockBrowser();
         browser.getDocument().createElement("body");
         document = browser.getDocument();
     });
 
     afterEach(function() {
-        document = this.oldDocument;
+        document = oldDocument;
     });
 
     it("doesn't read data from non pull request pages.", function () {
