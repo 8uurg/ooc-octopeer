@@ -4,7 +4,6 @@
 
 export class KeystrokeTracker {
 
-    private keyName: string = "";
     private collector: TrackingCollector;
     private keyMap: any = {8: "[Backspace]",
                            9: "[Tab]",
@@ -22,6 +21,8 @@ export class KeystrokeTracker {
                            45: "[Insert]",
                            46: "[Delete]"};
 
+    private pressedKeys: number[] = [];
+
     /**
      * Register the keystroke tracker.
      */
@@ -32,16 +33,33 @@ export class KeystrokeTracker {
          * Create an EventListener that fires each time a key is pressed. Log the key that is pressed in the console.
          * @param event object that contains the required key information.
          */
-        document.addEventListener("keyup", function (event) {
-
-            if (_this.keyMap[event.keyCode] != null) {
-                _this.keyName = _this.keyMap[ event.keyCode ];
-            } else {
-                _this.keyName = String.fromCharCode(event.keyCode);
-            }
-
-            _this.sendData(_this.createMessage());
+        document.addEventListener("keydown", (event) => {
+            this.pressedKeys[event.keyCode] = Date.now() / 1000;
         });
+
+        document.addEventListener("keyup", (event) => {
+            let start_time = this.pressedKeys[event.keyCode];
+            let end_time = Date.now() / 1000;
+
+            this.pressedKeys[event.keyCode] = undefined;
+
+            this.sendData(_this.createMessage(event.keyCode, start_time, end_time));
+        });
+
+        setInterval(this.sendUnsentKeyDowns, 10000);
+    }
+
+    /**
+     * Sends the keys which have had no keyup event.
+     */
+    private sendUnsentKeyDowns() {
+        for ( let key in this.pressedKeys ) {
+            if (this.pressedKeys.hasOwnProperty(key) && Date.now() - this.pressedKeys[key] > 10000) {
+                let start_time = this.pressedKeys[key];
+                this.pressedKeys[key] = undefined;
+                this.sendData(this.createMessage(Number(key), start_time, undefined));
+            }
+        }
     }
 
     /**
@@ -58,10 +76,19 @@ export class KeystrokeTracker {
      * Creates a message using the Keystroke interface.
      * @returns {KeystrokeJSON}
      */
-    private createMessage(): KeystrokeJSON {
+    private createMessage(keyCode: number, up_time: number, down_time: number): KeystrokeJSON {
+        let keyName: string;
+        if (this.keyMap[keyCode] != null) {
+            keyName = this.keyMap[keyCode];
+        } else {
+            keyName = String.fromCharCode(keyCode);
+        }
+
         return {
             created_at: Date.now() / 1000,
-            keystroke: this.keyName
+            keystroke: keyName,
+            key_down_at: down_time,
+            key_up_at: up_time
         };
     }
 
