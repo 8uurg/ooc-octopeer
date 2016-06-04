@@ -61,3 +61,18 @@ Total: ****
 | Code Review            |      |
 
 ##Notes
+* ADD
+	* Thanks for adding the diagrams!
+	* Add text to the database design section, not everyone is a visual learner
+	* Thanks for the extra glossary terms
+	* Section Titles in English have all Words Capitalised except for Stop Words
+	* System Decomposition diagram seems like an older version
+	* Label your diagrams and use them in the text
+* Good job keeping the motivation documents up to date
+	* Since there is a trade-off is between type-checking to make the interfaces easier to debug and modifiability + extensibility, it can't be perfect; you motivate your choices well so it's as close as it's going to get.
+* Magic numbers see, comments from feedback 5
+* `semanticTracker.ts` 
+	* has inconsistent coding styles with respect to anaonymous functions
+		* `registerKeystroke` vs `registerClick`
+	* todo's and commented code
+	* `"http://10.0.22.6/api/event-types/"` should be saved a const or a setting
