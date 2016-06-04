@@ -23,6 +23,9 @@ Total: ****
 | reflection            |      |
 
 ## Notes
+* **Thanks for adding the total hours!!**
+	* Some hours seem on the low side since they don't include other hours (like you mentioned in the comment), you could include a column where everyone also fills in an estimated time spent on other items (meetings, lectures, etc)
+* Well done
 
 #Code Evolution Quality Feedback
 
