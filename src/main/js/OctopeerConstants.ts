@@ -17,6 +17,7 @@ var OCTOPEER_CONSTANTS: any = { // tslint:disable-line
     "track_pr_metadata":        "trackPRMetaData",
     "track_browser_data":       "trackBrowserData",
     "track_visibility":         "trackVisibility",
+    "track_visible_elements":   "trackVisibleElements",
     "hash_username":            "hashUsername",
     "hash_pr_metadata":         "hashPRMetaData",
     "hash_browser_data":        "hashBrowserData"
