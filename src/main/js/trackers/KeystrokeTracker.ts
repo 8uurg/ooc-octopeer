@@ -27,8 +27,6 @@ export class KeystrokeTracker {
      * Register the keystroke tracker.
      */
     public register() {
-        let _this: KeystrokeTracker = this;
-
         this.pressedKeys = [];
         /**
          * Create an EventListener that fires each time a key is pressed. Log the key that is pressed in the console.
@@ -45,7 +43,7 @@ export class KeystrokeTracker {
 
             this.pressedKeys[event.keyCode] = undefined;
 
-            this.sendData(_this.createMessage(event.keyCode, key_down_time, key_up_time));
+            this.sendData(this.createMessage(event.keyCode, key_down_time, key_up_time));
             this.sendUnsentKeyDowns();
         });
     }
