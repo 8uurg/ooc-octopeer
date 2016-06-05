@@ -1,12 +1,12 @@
 ///<reference path="../interfaces/Message.ts" />
 ///<reference path="../interfaces/DatabaseSchemes/SemanticEventJSON.ts" />
 ///<reference path="../interfaces/TrackingCollector.ts" />
+/// <reference path="./Tracker.d.ts" />
 
 /**
  * Provides a tracker that tracks the visibility on the webpage.
  */
-export class VisibilityTracker {
-    private collector: TrackingCollector;
+export class VisibilityTracker extends Tracker {
     private pageVisible: boolean = false;
 
     /**
@@ -27,16 +27,6 @@ export class VisibilityTracker {
     }
 
     /**
-     * Add a collector to send the data to.
-     * @param collector The collector.
-     * @returns {VisibilityTracker}
-     */
-    public withCollector(collector: TrackingCollector): VisibilityTracker {
-        this.collector = collector;
-        return this;
-    }
-
-    /**
      * Creates an object of type SemanticEventJSON.
      * @returns {SemanticEventJSON}
      */
@@ -52,7 +42,7 @@ export class VisibilityTracker {
      * Send data to centralized collector.
      */
     private sendData(vtData: SemanticEventJSON) {
-            this.collector.sendMessage({
+            this.sendMessage({
                 table: "semantic-events/",
                 data: vtData
             });
