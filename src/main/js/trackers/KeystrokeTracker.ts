@@ -1,10 +1,10 @@
 ///<reference path="../interfaces/Message.ts" />
 ///<reference path="../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
 ///<reference path="../interfaces/TrackingCollector.ts" />
+/// <reference path="./Tracker.d.ts" />
 
-export class KeystrokeTracker {
+export class KeystrokeTracker extends Tracker {
 
-    private collector: TrackingCollector;
     private keyMap: any = {8: "[Backspace]",
                            9: "[Tab]",
                            13: "[Enter]",
@@ -62,16 +62,6 @@ export class KeystrokeTracker {
     }
 
     /**
-     * Add a collector to send the tracked data to.
-     * @param collector The collector to send to.
-     * @returns {KeystrokeTracker}
-     */
-    public withCollector(collector: TrackingCollector): KeystrokeTracker {
-        this.collector = collector;
-        return this;
-    }
-
-    /**
      * Creates a message using the Keystroke interface.
      * @returns {KeystrokeJSON}
      */
@@ -95,7 +85,7 @@ export class KeystrokeTracker {
      * Send data to the database
      */
     private sendData(ksData: KeystrokeJSON) {
-        this.collector.sendMessage({
+        this.sendMessage({
             table: "keystroke-events/",
             data: ksData
         });
