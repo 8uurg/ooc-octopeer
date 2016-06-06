@@ -1,3 +1,5 @@
+/// <reference path="../interfaces/DatabaseSchemes/VisibleElementJSON.ts" />
+
 /**
  * This tracker was created for tracking all coordinates of visible elements on the webpage.
  * As these coordinates combined with mouse positions can give a lot of information.
@@ -6,45 +8,26 @@
 export class VisibleElementsTracker {
     private collector: TrackingCollector;
 
-    private mapping_of_element_types: string[] = 
-        new Array("LI",
-                                             "A",
-                                             "BUTTON",
-                                             "INPUT",
-                                             "IMG",
-                                             "DT",
-                                             "DD",
-                                             "PRE",
-                                             "SPAN",
-                                             "H1");
-
     /**
-     *
+     * Register the VisibleElementsTracker.
      */
     public register() {
-        let _this: VisibleElementsTracker = this;
-
-        let allDOMElements = document.getElementsByTagName("*");
+        let allDOMElements: NodeListOf<Element> = document.getElementsByTagName("*");
 
         for(let i = 0; i < allDOMElements.length; i++) {
             let element: Element = allDOMElements.item(i);
-            if(this.mapping_of_element_types.indexOf(element.nodeName) !== -1) {
-                let elementCoords = element.getBoundingClientRect();
-                let elementWidth: number = elementCoords.width;
-                let elementHeight: number = elementCoords.height;
-                let elementLeft: number = elementCoords.left;
-                let elementRight: number = elementCoords.right;
-                let elementTop: number = elementCoords.top;
-                let elementBottom: number = elementCoords.bottom;
-                console.log(element);
-                console.log("Width: " + elementWidth);
-                console.log("Height: " + elementHeight);
-                console.log("Left: " + elementLeft);
-                console.log("Right: " + elementRight);
-                console.log("Top: " + elementTop);
-                console.log("Bottom: " + elementBottom);
+            let elementCoords: ClientRect = element.getBoundingClientRect();
+            let elementStyle: CSSStyleDeclaration = window.document.defaultView.getComputedStyle(element);
+            element.setAttribute("data-octopeer-x",         (elementCoords.left + window.scrollX).toString());
+            element.setAttribute("data-octopeer-y",         (elementCoords.top + window.scrollY).toString());
+            element.setAttribute("data-octopeer-width",     elementCoords.width.toString());
+            element.setAttribute("data-octopeer-height",    elementCoords.height.toString());
+            if(elementStyle.getPropertyValue("z-index") !== "") {
+                element.setAttribute("data-octopeer-z", elementStyle.getPropertyValue("z-index"));
             }
         }
+
+        this.sendData(this.createMessage(allDOMElements));
     }
 
     /**
@@ -58,16 +41,25 @@ export class VisibleElementsTracker {
     }
 
     /**
-     *
+     * Creates a message using the VisibleElementJSON interface.
+     * @param Dom  The modified dom with data elements added.
+     * @returns {{Dom: NodeListOf<Element>, created_at: number}}
      */
-    public createMessage() {
-
+    public createMessage(Dom: NodeListOf<Element>): VisibleElementJSON {
+        return {
+            Dom: Dom,
+            created_at: Date.now() / 1000
+        };
     }
 
     /**
-     *
+     * Sends data to the database.
+     * @param veData   The VisibleElementJSON object.
      */
-    private sendData() {
-
+    private sendData(veData: VisibleElementJSON) {
+        this.collector.sendMessage({
+            table: "html-pages/",
+            data: veData
+        });
     }
 }
