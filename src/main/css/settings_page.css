@@ -46,3 +46,21 @@ body > .container {
 .switch label::after {
     content: "\00a0\00a0";
 }
+
+#changeDatabaseLocation {
+    margin-top: 25px;
+    background-color: #388E3C;
+
+}
+
+.input-field i {
+    color: #388E3C !important;
+}
+
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: #4CAF50 !important;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: #388E3C;
+}
