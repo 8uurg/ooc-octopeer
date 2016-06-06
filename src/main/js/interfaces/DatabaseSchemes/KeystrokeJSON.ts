@@ -22,12 +22,12 @@ interface KeystrokeJSON {
     created_at: number;
 
     /**
-     * The timestamp of key down
+     * The timestamp of key down.
      */
     key_down_at?: number;
 
     /**
-     * The timestamp of key up
+     * The timestamp of key up.
      */
     key_up_at?: number;
 }
