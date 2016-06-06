@@ -14,7 +14,7 @@ export class VisibleElementsTracker {
     public register() {
         let allDOMElements: NodeListOf<Element> = document.getElementsByTagName("*");
 
-        for(let i = 0; i < allDOMElements.length; i++) {
+        for (let i = 0; i < allDOMElements.length; i++) {
             let element: Element = allDOMElements.item(i);
             let elementCoords: ClientRect = element.getBoundingClientRect();
             let elementStyle: CSSStyleDeclaration = window.document.defaultView.getComputedStyle(element);
@@ -22,7 +22,7 @@ export class VisibleElementsTracker {
             element.setAttribute("data-octopeer-y",         (elementCoords.top + window.scrollY).toString());
             element.setAttribute("data-octopeer-width",     elementCoords.width.toString());
             element.setAttribute("data-octopeer-height",    elementCoords.height.toString());
-            if(elementStyle.getPropertyValue("z-index") !== "") {
+            if (elementStyle.getPropertyValue("z-index") !== "") {
                 element.setAttribute("data-octopeer-z", elementStyle.getPropertyValue("z-index"));
             }
         }
