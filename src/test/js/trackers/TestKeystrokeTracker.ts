@@ -6,17 +6,18 @@ import createSpyObj = jasmine.createSpyObj;
 import {KeystrokeTracker} from "../../../main/js/trackers/KeystrokeTracker";
 
 describe("KeystrokeTracker", function() {
-    let eventCall: (event: any) => void = null;
+    let eventCalls: any = {};
 
     beforeEach(function() {
         jasmine.clock().install();
         jasmine.clock().mockDate();
+
+        eventCalls = {};
         // Capture any added eventlisteners.
         document.addEventListener = function (ev: string, func: (event: any) => void) {
-            eventCall = func;
+            eventCalls[ev] = func;
         };
         this.tracker = new KeystrokeTracker();
-        spyOn(this.tracker, "sendData").and.callThrough();
 
         this.collector = createSpyObj("TrackingCollector", ["sendMessage"]);
         this.tracker.withCollector(this.collector);
@@ -49,20 +50,38 @@ describe("KeystrokeTracker", function() {
     ];
 
     testArray.forEach( function(item) {
-        it("should log a key press after the 'keyup' event with the '" + item.name + "' key.", function() {
+        it("should key up event with the '" + item.name + "' key.", function() {
             this.tracker.register();
 
             // Mock date, because of ms differences.
             let creationDate = Date.now() / 1000;
-            eventCall({keyBoardEvent: "keyup", keyCode: item.keyCode});
+            eventCalls["keyup"]({ keyCode: item.keyCode });
             expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
             expect(this.collector.sendMessage).toHaveBeenCalledWith({
                 table: "keystroke-events/",
                 data: {
                     created_at: creationDate,
                     keystroke: item.result,
-                    key_down_at: undefined,
-                    key_up_at: creationDate
+                    keystroke_type: 2
+                }
+            });
+        });
+    });
+
+    testArray.forEach( function(item) {
+        it("should log a key down event with the '" + item.name + "' key.", function() {
+            this.tracker.register();
+
+            // Mock date, because of ms differences.
+            let creationDate = Date.now() / 1000;
+            eventCalls["keydown"]({ keyCode: item.keyCode });
+            expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
+            expect(this.collector.sendMessage).toHaveBeenCalledWith({
+                table: "keystroke-events/",
+                data: {
+                    created_at: creationDate,
+                    keystroke: item.result,
+                    keystroke_type: 1
                 }
             });
         });
