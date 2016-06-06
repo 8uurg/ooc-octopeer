@@ -6,8 +6,6 @@
  * Declaration / header.
  */
 declare abstract class Tracker {
-    private collector: TrackingCollector;
-
     /**
      * Register a tracker into the current environment.
      */
@@ -22,5 +20,5 @@ declare abstract class Tracker {
      * Send a message over the collector.
      */
     public sendMessage(message: Message): void;
-    
-} 
+
+}
