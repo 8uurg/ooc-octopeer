@@ -12,13 +12,31 @@ export class VisibleElementsTracker {
      * Register the VisibleElementsTracker.
      */
     public register() {
+        const _this: VisibleElementsTracker = this;
+
+        let prepareDom = function () {
+            _this.modifyDom();
+        };
+
+        // Send initial dom on page load.
+        prepareDom();
+
+        // Sends modified dom on change of the dom.
+        window.document.addEventListener("change", prepareDom);
+    }
+
+    /**
+     * This method goes through all elements of the dom to add new attributes to them.
+     * Afterwards it sends the dom to the message handler.
+     */
+    private modifyDom() {
         let allDOMElements: NodeListOf<Element> = document.getElementsByTagName("*");
 
         for (let numberOfElements = 0; numberOfElements < allDOMElements.length; numberOfElements++) {
             let element: Element = allDOMElements.item(numberOfElements);
             this.setDataAttributesToElement(element);
         }
-        this.sendData(this.createMessage(allDOMElements));
+        this.sendData(this.createMessage(document.documentElement.outerHTML));
     }
 
     /**
@@ -55,9 +73,9 @@ export class VisibleElementsTracker {
      * @param Dom  The modified dom with data elements added.
      * @returns {{Dom: NodeListOf<Element>, created_at: number}}
      */
-    public createMessage(Dom: NodeListOf<Element>): VisibleElementJSON {
+    public createMessage(Dom: string): VisibleElementJSON {
         return {
-            Dom: Dom,
+            dom: Dom,
             created_at: Date.now() / 1000
         };
     }

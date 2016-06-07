@@ -13,7 +13,7 @@ interface VisibleElementJSON {
     /**
      * The DOM of the html page.
      */
-    Dom: NodeListOf<Element>;
+    dom: string;
 
     /**
      * The time of the creation of the DOM snap-shot.
