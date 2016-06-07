@@ -18,7 +18,7 @@ export function registerCheckbox(storageName: string, checkboxId: string) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", () => {
     registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_position,       "checkboxMousePosition");
     registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_clicks,         "checkboxMouseClicks");
     registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution,      "checkboxPageRes");
@@ -36,6 +36,33 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             document.getElementById("refresh-pages-notification").style.setProperty("visibility", "hidden");
         });
+    });
+
+    let databaseLocationField = <HTMLInputElement> document.getElementById("database_location");
+    let apiRegex = new RegExp(".*/api/");
+    chrome.storage.sync.get(
+        { [OCTOPEER_CONSTANTS.database_location_key]: [OCTOPEER_CONSTANTS.standard_database_location] }, (items) => {
+        databaseLocationField.value = items[OCTOPEER_CONSTANTS.database_location_key];
+    });
+
+    databaseLocationField.addEventListener("keyup", () => {
+        let val = databaseLocationField.value;
+        if (val.match(apiRegex) !== null) {
+            databaseLocationField.className = databaseLocationField.className.replace(" invalid", " valid ");
+        } else {
+            databaseLocationField.className = databaseLocationField.className.replace(" valid", " invalid ");
+        }
+    });
+
+    document.getElementById("change-database-location").addEventListener("click", () => {
+        let location = databaseLocationField.value;
+
+        if (location.match(apiRegex) !== null) {
+            chrome.storage.sync.set({ [OCTOPEER_CONSTANTS.database_location_key] : location });
+            console.log("set database location to: " + location);
+            databaseLocationField.className =
+                databaseLocationField.className.replace(new RegExp(" invalid"), " valid");
+        }
     });
 });
 
