@@ -76,4 +76,4 @@ export class RARequestsSender {
     }
 }
 
-new RARequestsSender("http://146.185.128.124/api/");
+new RARequestsSender("http://10.0.22.6/api/");
