@@ -1,3 +1,5 @@
+/// <reference path="./SessionJSON.ts" />
+
 /**
  * Created by Thomas on 17-5-2016.
  * This interface is used to define the structure for a mouse click accepted by the RESTFul API.

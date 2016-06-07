@@ -31,8 +31,7 @@ describe("The Visibility Tracker", function() {
             data: {
                 event_type: "http://10.0.22.6/api/event-types/" + 402 + "/",
                 element_type: "http://10.0.22.6/api/element-types/" + 101 + "/",
-                started_at: Date.now(),
-                duration: 0
+                created_at: Date.now() / 1000
             }
         });
     });
@@ -56,8 +55,7 @@ describe("The Visibility Tracker", function() {
             data: {
                 event_type: "http://10.0.22.6/api/event-types/" + 401 + "/",
                 element_type: "http://10.0.22.6/api/element-types/" + 101 + "/",
-                started_at: Date.now(),
-                duration: 0
+                created_at: Date.now() / 1000
             }
         });
     });

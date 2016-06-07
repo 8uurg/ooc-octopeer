@@ -1,8 +1,10 @@
 ///<reference path="../../../../typings/index.d.ts" />
 
-import {SettingsExplanations} from "../../../main/js/extension/SettingsExplanations";
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
 let browser: any = new MockBrowser();
+let oldDocument = document;
+document = browser.getDocument();
+import {SettingsExplanations} from "../../../main/js/extension/SettingsExplanations";
 
 /**
  * Takes an array with elements and creates dummy elemements with the ID's.
@@ -23,7 +25,8 @@ describe("Setting explanation cards", function() {
     beforeEach(function() {
         browser = new MockBrowser();
         browser.getDocument().createElement("body");
-        this.oldDocument = document;
+
+        oldDocument = document;
         document = browser.getDocument();
 
         this.fixture = document.createElement("div");
@@ -41,6 +44,13 @@ describe("Setting explanation cards", function() {
         this.evt.initMutationEvent("DOMContentLoaded", true, true, document, "", "", "", 0);
         this.event = document.createEvent("HTMLEvents");
         this.event.initEvent("click", false, true);
+    });
+
+    afterEach(function() {
+        document.body.innerHTML = "";
+        this.fixture.innerHTML = "";
+        this.dummy.innerHTML = "";
+        document = oldDocument;
     });
 
     it("a card should be empty before a question mark has been clicked", function() {
@@ -94,12 +104,5 @@ describe("Setting explanation cards", function() {
         expect(document.defaultView.getComputedStyle(document
             .getElementById("tracking-explanation"), null)
             .getPropertyValue("display")).toEqual("none");
-    });
-
-    afterEach(function() {
-        document.body.innerHTML = "";
-        this.fixture.innerHTML = "";
-        this.dummy.innerHTML = "";
-        document = this.oldDocument;
     });
 });

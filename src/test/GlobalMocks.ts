@@ -1,7 +1,8 @@
 /**
  * Created by Cas on 18-5-2016.
  */
- // Linting is disabled as var is required here. Let has not the proper functionality yet.
+
+// Linting is disabled as var is required here. Let has not the proper functionality yet.
 var _global: any = global; // tslint:disable-line
 
 _global.chrome = {
@@ -40,7 +41,8 @@ _global.XMLHttpRequest.prototype.status = 0;
 _global.XMLHttpRequest.prototype.readyState = 0;
 
 _global.document = {
-    addEventListener:  function() {}
+    addEventListener:  function() {},
+    querySelectorAll: function() {}
 };
 
 _global.localStorage = function() {};

@@ -1,3 +1,5 @@
+/// <reference path="./SessionJSON.ts" />
+
 /**
  * This interface is used to define the structure for a semantic event accepted by the RESTFul API.
  */
@@ -22,10 +24,5 @@ interface SemanticEventJSON {
     /**
      * A unix timestamp at which the event started.
      */
-    started_at: number;
-
-    /**
-     * The duration.
-     */
-    duration: number;
+    created_at: number;
 }
