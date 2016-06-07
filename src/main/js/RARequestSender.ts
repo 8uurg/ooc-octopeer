@@ -51,6 +51,14 @@ export class RARequestsSender {
     }
 
     /**
+     * Allows setting the api location.
+     * @param loc The api location
+     */
+    public setApiLocation(loc: string) {
+        this.api_location = loc;
+    }
+
+    /**
      * Sends the data to the database if a database location is set.
      * @param table  The table to put the information in.
      * @param data   The data in an object..
@@ -75,5 +83,3 @@ export class RARequestsSender {
         xmlHTTP.send(JSON.stringify(data));
     }
 }
-
-new RARequestsSender("http://10.0.22.6/api/");

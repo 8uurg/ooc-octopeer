@@ -40,9 +40,9 @@
 
   "background": {
     "scripts": [
-        "js/extension/background.js",
         "js/OctopeerConstants.js",
-        "js/RARequestSender.js"
+        "js/RARequestSender.js",
+        "js/extension/background.js"
       ]
   },
 

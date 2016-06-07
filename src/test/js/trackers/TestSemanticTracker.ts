@@ -38,8 +38,8 @@ describe("The key stroke semantic tracker", function() {
         expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
             data: {
                 created_at: now,
-                event_type: "http://10.0.22.6/api/event-types/" + 101 + "/",
-                element_type: "http://10.0.22.6/api/element-types/" + 105 + "/"
+                event_type: 101,
+                element_type: 105
             }
         }));
     });

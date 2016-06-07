@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     let databaseLocationField = <HTMLInputElement> document.getElementById("database_location");
-    let apiRegex = new RegExp(".*/api/");
+    let apiRegex = new RegExp("http://.*/api/");
     chrome.storage.sync.get(
         { [OCTOPEER_CONSTANTS.database_location_key]: [OCTOPEER_CONSTANTS.standard_database_location] }, (items) => {
         databaseLocationField.value = items[OCTOPEER_CONSTANTS.database_location_key];

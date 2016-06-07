@@ -23,5 +23,5 @@ var OCTOPEER_CONSTANTS: any = { // tslint:disable-line
 
     // The database constants
     "database_location_key":     "databaseLocation",
-    "standard_database_location": "10.0.22.6/api"
+    "standard_database_location": "http://10.0.22.6/api/"
 };

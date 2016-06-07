@@ -54,3 +54,15 @@ chrome.tabs.onActivated.addListener((tabInfo) => {
         updateBrowserActionIcon(tab);
     });
 });
+
+chrome.storage.sync.get({ [OCTOPEER_CONSTANTS.database_location_key]: OCTOPEER_CONSTANTS.standard_database_location },
+    (items) => {
+        let requestSender = new RARequestsSender(items[OCTOPEER_CONSTANTS.database_location_key]);
+        chrome.storage.onChanged.addListener((changedItems: any) => {
+            if (items.hasOwnProperty(OCTOPEER_CONSTANTS.database_location_key)) {
+                requestSender.setApiLocation(changedItems[OCTOPEER_CONSTANTS.database_location_key]);
+            }
+        });
+    });
+
+
