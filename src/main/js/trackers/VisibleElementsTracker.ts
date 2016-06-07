@@ -14,20 +14,30 @@ export class VisibleElementsTracker {
     public register() {
         let allDOMElements: NodeListOf<Element> = document.getElementsByTagName("*");
 
-        for (let i = 0; i < allDOMElements.length; i++) {
-            let element: Element = allDOMElements.item(i);
-            let elementCoords: ClientRect = element.getBoundingClientRect();
-            let elementStyle: CSSStyleDeclaration = window.document.defaultView.getComputedStyle(element);
-            element.setAttribute("data-octopeer-x",         (elementCoords.left + window.scrollX).toString());
-            element.setAttribute("data-octopeer-y",         (elementCoords.top + window.scrollY).toString());
-            element.setAttribute("data-octopeer-width",     elementCoords.width.toString());
-            element.setAttribute("data-octopeer-height",    elementCoords.height.toString());
-            if (elementStyle.getPropertyValue("z-index") !== "") {
-                element.setAttribute("data-octopeer-z", elementStyle.getPropertyValue("z-index"));
-            }
+        for (let numberOfElements = 0; numberOfElements < allDOMElements.length; numberOfElements++) {
+            let element: Element = allDOMElements.item(numberOfElements);
+            this.setDataAttributesToElement(element);
         }
-
         this.sendData(this.createMessage(allDOMElements));
+    }
+
+    /**
+     * This method adds data attributes to an element.
+     * @param element   The element the data attributes should be added to.
+     */
+    private setDataAttributesToElement(element: Element) {
+        let elementCoords: ClientRect = element.getBoundingClientRect();
+        let elementStyle: CSSStyleDeclaration = window.document.defaultView.getComputedStyle(element);
+
+        element.setAttribute("data-octopeer-x",         (elementCoords.left + window.scrollX).toString());
+        element.setAttribute("data-octopeer-y",         (elementCoords.top + window.scrollY).toString());
+        element.setAttribute("data-octopeer-width",     elementCoords.width.toString());
+        element.setAttribute("data-octopeer-height",    elementCoords.height.toString());
+
+        if (elementStyle.getPropertyValue("z-index") !== "" &&
+            elementStyle.getPropertyValue("z-index") !== "auto") {
+            element.setAttribute("data-octopeer-z", elementStyle.getPropertyValue("z-index"));
+        }
     }
 
     /**
