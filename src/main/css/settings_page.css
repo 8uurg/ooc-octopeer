@@ -1,9 +1,8 @@
-html, body {
+html {
     height: 100%;
 }
 
-body > .container {
-    min-height: 100%;
+main.container {
     background-color: #f2f2f2 !important;
 }
 
@@ -21,26 +20,60 @@ body > .container {
     width: 85%;
 }
 
-#refresh-pages-notification {
-    visibility: hidden;
+#notification-container {
     width: 35%;
-    margin-left: 64%;
+    min-width: 330px;
+    max-width: 500px;
+    margin-top: 64px;
+    margin-right: 10px;
+    right: 0;
     position: absolute;
     z-index: 1000;
-    background-color: #009688 !important;
 }
 
-#refresh-pages-notification .card-action {
+.notification {
+    display: none;
+    width: 100%;
+    background-color: #009688 !important;
+    margin: 5px 10px 5px 5px;
+}
+
+.notification #card-content-text p:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.card-action {
     border-top: 1px solid #B6B6B6 !important;
 }
 
-#refresh-bitbucket-pages i {
+.card-action a {
+    display: block;
+    height: 24px;
+}
+
+.card i {
     color: #C8E6C9 !important;
     transition: transform 0.4s ease-in-out;
 }
 
+#card-title {
+    font-size: 22px;
+}
+
+.card-sub-title {
+    font-size: 18px;
+}
+
+.card-sample-data {
+    margin-top: 10px;
+}
+
 #refresh-bitbucket-pages i:hover {
     transform: rotate(180deg);
+}
+
+#tracking-explanation i:hover {
+    color: red !important;
 }
 
 .switch label::after {
@@ -53,6 +86,10 @@ body > .container {
 
 }
 
+#databaseLocationRow {
+    margin-top: 20px;
+}
+
 .input-field i {
     color: #388E3C !important;
 }
@@ -63,4 +100,42 @@ body > .container {
 
 .switch label input[type=checkbox]:checked+.lever:after {
     background-color: #388E3C;
+}
+
+footer {
+    margin-top: 0px !important;
+    background-color: #4CAF50 !important;
+}
+
+footer .footer-copyright {
+    background-color: #388E3C !important;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    margin-top: -10px !important;
+}
+
+.acknowledgement {
+    font-size: xx-small;
+}
+
+.explain-tracking-button {
+    font-weight: bold;
+    font-size: 12pt;
+    cursor: pointer;
+}
+
+.privacy-settings .col {
+    line-height: 32px;
+}
+
+.hidden-explain-button {
+    visibility: hidden;
 }
