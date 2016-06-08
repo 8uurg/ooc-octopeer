@@ -102,6 +102,15 @@ export class SettingsExplanations {
             "sampleData": () => { let emptyArray: Array<HTMLElement> = []; return emptyArray; }
         },
         {
+            "settingSelector": "dom-setting-question", "title": "DOM Element Tracking",
+            "bodyText": [
+                "The DOM element tracker tracks all HTML elements on Bitbucket. The x and y coordinates of each " +
+                "element are tracked, along with the width and height. This way elements can be tied to other " +
+                "events such as mouse clicks on a certain position."
+            ],
+            "sampleData": () => { let emptyArray: Array<HTMLElement> = []; return emptyArray; }
+        },
+        {
             "settingSelector": "semantic-position-setting-question", "title": "Semantic Position Tracking",
             "bodyText": [
                 "The semantic position tracker tracks the position of your mouse in relation to elements on " +

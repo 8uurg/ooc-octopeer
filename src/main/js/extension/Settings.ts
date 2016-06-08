@@ -40,7 +40,6 @@ export function setupCheckboxes() {
  * Adds the functionality to the refresh notification.
  */
 export function setUpRefreshNotificationElements() {
-
     document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
         chrome.tabs.query({
             "url" : [
