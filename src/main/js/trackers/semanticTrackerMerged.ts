@@ -88,7 +88,7 @@ export class SemanticTrackerMerged {
      * @param collector The collector to send the tracking data to.
      * @return Itself for daisy chaining.
      */
-    public withCollector(collector: TrackingCollector): SemanticTracker {
+    public withCollector(collector: TrackingCollector): SemanticTrackerMerged {
         this.collector = collector;
         return this;
     }

@@ -11,7 +11,7 @@ export class ClickSemanticTracker
      * @param element The element to monitor
      * @param eventName The name of the event.
      */
-    public registerElement(element: Element, eventName: string) {
+    public registerElement(element: Element, eventName: string): void {
         element.addEventListener("click", () => {
             this.sendData(this.createMessage("Click", eventName));
         });

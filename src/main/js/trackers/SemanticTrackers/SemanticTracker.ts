@@ -49,13 +49,20 @@ export abstract class SemanticTracker {
 
     /**
      * Create a semantic event json.
-     * @param event_name The name of the event
+     * @param event_type_name The name of the event type
      * @param element_name The name of the element
      * @returns {SemanticEventJSON}
      */
-    protected createMessage(event_name: string, element_name: string): SemanticEventJSON {
+    protected createMessage(event_type_name: string, element_name: string): SemanticEventJSON {
+        if (!this.event_types_mapping.hasOwnProperty(event_type_name)) {
+            throw new TypeError("Illegal semantic event type name: " + event_type_name);
+        }
+        if (!this.element_types_mapping.hasOwnProperty(element_name)) {
+            throw new TypeError("Illegal semantic element type name: " + element_name);
+        }
+
         return {
-            event_type: this.event_types_mapping[event_name],
+            event_type: this.event_types_mapping[event_type_name],
             element_type: this.element_types_mapping[element_name],
             created_at: Date.now() / 1000
         };

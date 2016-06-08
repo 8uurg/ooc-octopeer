@@ -11,7 +11,7 @@ export class MouseSemanticTracker
      * @param element The element to monitor
      * @param eventName The name of the event.
      */
-    public registerElement(element: Element, eventName: string) {
+    public registerElement(element: Element, eventName: string): void {
         element.addEventListener("mouseenter", () => {
             this.sendData(this.createMessage("Mouseenter", eventName));
         });
