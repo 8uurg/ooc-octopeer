@@ -60,6 +60,7 @@ Load the `dest` folder in chrome:
 - Sprint backlog 4, 13-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/1dfb0a9efb1f193434ee81f8fc007b321540fadd/doc/Backlogs/Sprint%20Backlog%20%234.pdf?at=release%2Fsprint-5&fileviewer=file-view-default)
 - Sprint backlog 5, 20-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/1dfb0a9efb1f193434ee81f8fc007b321540fadd/doc/Backlogs/Sprint%20Backlog%20%235.pdf?at=release%2Fsprint-5&fileviewer=file-view-default)
 - Sprint backlog 6, 27-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/1dfb0a9efb1f193434ee81f8fc007b321540fadd/doc/Backlogs/Sprint%20Backlog%20%236.pdf?at=release%2Fsprint-5&fileviewer=file-view-default)
+- Sprint backlog 7, 03-06-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/7c9deaa57dff51126b384b49d313284b07ac410a/doc/Backlogs/Sprint%20Backlog%20%237.pdf?at=release%2Fsprint-6&fileviewer=file-view-default)
 
 ## Sprint retrospectives
 - Sprint retrospective 1, 29-04-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/1dfb0a9efb1f193434ee81f8fc007b321540fadd/doc/Retrospectives/Sprint%20Retrospective%20%231.pdf?at=release%2Fsprint-5&fileviewer=file-view-default)
@@ -67,15 +68,16 @@ Load the `dest` folder in chrome:
 - Sprint retrospective 3, 13-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/1dfb0a9efb1f193434ee81f8fc007b321540fadd/doc/Retrospectives/Sprint%20%20Retrospective%20%233.pdf?at=release%2Fsprint-5&fileviewer=file-view-default)
 - Sprint retrospective 4, 20-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/1dfb0a9efb1f193434ee81f8fc007b321540fadd/doc/Retrospectives/Sprint%20Retrospective%20%234.pdf?at=release%2Fsprint-5&fileviewer=file-view-default)
 - Sprint retrospective 5, 27-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/1dfb0a9efb1f193434ee81f8fc007b321540fadd/doc/Retrospectives/Sprint%20Retrospective%20%235.pdf?at=release%2Fsprint-5&fileviewer=file-view-default)
+- Sprint retrospective 6, 03-06-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/7c9deaa57dff51126b384b49d313284b07ac410a/doc/Retrospectives/Sprint%20Retrospective%20%236.pdf?at=release%2Fsprint-6&fileviewer=file-view-default)
 
 
 ## Other documentation
 
-- Class Diagram, 27-05-2016: [here](https://drive.google.com/file/d/0Byx_cnrHIK23TXktNjRQYVNXOHM/view?usp=sharing)
-- Product Architecture C0.5, 27-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/1dfb0a9efb1f193434ee81f8fc007b321540fadd/doc/Architecture/Product%20Architectural%20Design%20C0.5.pdf?at=release%2Fsprint-5&fileviewer=file-view-default)
+- Class Diagram, 03-06-2016: [here](https://drive.google.com/file/d/0Byx_cnrHIK23TXktNjRQYVNXOHM/view?usp=sharing)
+- Product Architecture C0.6, 03-06-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/7c9deaa57dff51126b384b49d313284b07ac410a/doc/Architecture/Product%20Architectural%20Design%20C0.6.pdf?at=release%2Fsprint-6&fileviewer=file-view-default)
 - Product Planning V1.0, 03-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/1dfb0a9efb1f193434ee81f8fc007b321540fadd/doc/Planning/Product%20Planning%20V1.0.pdf?at=release%2Fsprint-5&fileviewer=file-view-default)
 - Product Vision V1.0, 03-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/1dfb0a9efb1f193434ee81f8fc007b321540fadd/doc/Vision/Product%20Vision%20V1.0.pdf?at=release%2Fsprint-5&fileviewer=file-view-default)
-- Coding Choices Motivation, 27-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/1dfb0a9efb1f193434ee81f8fc007b321540fadd/doc/Architecture/Coding%20Choices%20Clarification.pdf?at=release%2Fsprint-5&fileviewer=file-view-default)
+- Coding Choices Motivation, 03-06-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/7c9deaa57dff51126b384b49d313284b07ac410a/doc/Architecture/Coding%20Choices%20Clarification.pdf?at=release%2Fsprint-6&fileviewer=file-view-default)
 - Tooling Choices Motivation, 20-05-2016: [here](https://bitbucket.org/CasBs/ooc-octopeer/src/1dfb0a9efb1f193434ee81f8fc007b321540fadd/doc/Architecture/Tooling%20Choices%20Clarification.pdf?at=release%2Fsprint-5&fileviewer=file-view-default)
 
 
