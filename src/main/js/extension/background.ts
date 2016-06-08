@@ -1,5 +1,7 @@
 import Tab = chrome.tabs.Tab;
 
+declare var RARequestsSender: any;
+
 /**
  * Creates a page on a tab when the extension badge is clicked.
  */

@@ -8,7 +8,6 @@
 ///<reference path="./ChromeTrackingCollector.ts" />
 ///<reference path="./BitBucketSessionDataGatherer.ts" />
 
-declare var RARequestsSender: any;
 declare var VisibilityTracker: any;
 declare var KeystrokeTracker: any;
 declare var MouseClickTracker: any;
