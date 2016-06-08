@@ -19,12 +19,15 @@ export function registerCheckbox(storageName: string, checkboxId: string) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_position,       "checkboxMousePosition");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_clicks,         "checkboxMouseClicks");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution,      "checkboxPageRes");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,          "checkboxKeystrokes");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_events,      "checkboxSemanticEvents");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_visibility,           "checkboxVisibility");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_position,           "checkboxMousePosition");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_clicks,             "checkboxMouseClicks");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution,          "checkboxPageRes");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,              "checkboxKeystrokes");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_position,        "checkboxSemanticPos");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_clicks,          "checkboxSemanticClicks");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_key_strokes,     "checkboxSemanticKeystrokes");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_scrolling,       "checkboxSemanticScrolling");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_visibility,      "checkboxSemanticPRPageVisibility");
 
     document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
         chrome.tabs.query({
