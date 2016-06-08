@@ -29,8 +29,8 @@ describe("The Visibility Tracker", function() {
         expect(this.collector.sendMessage).toHaveBeenCalledWith({
             table: "semantic-events/",
             data: {
-                event_type: "http://10.0.22.6/api/event-types/" + 402 + "/",
-                element_type: "http://10.0.22.6/api/element-types/" + 101 + "/",
+                event_type: 402,
+                element_type: 101,
                 created_at: Date.now() / 1000
             }
         });
@@ -53,8 +53,8 @@ describe("The Visibility Tracker", function() {
         expect(this.collector.sendMessage).toHaveBeenCalledWith({
             table: "semantic-events/",
             data: {
-                event_type: "http://10.0.22.6/api/event-types/" + 401 + "/",
-                element_type: "http://10.0.22.6/api/element-types/" + 101 + "/",
+                event_type: 401,
+                element_type: 101,
                 created_at: Date.now() / 1000
             }
         });

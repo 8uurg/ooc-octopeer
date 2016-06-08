@@ -1,3 +1,4 @@
+/// <reference path="../interfaces/Message.ts" />
 /// <reference path="../interfaces/TrackingCollector.ts" />
 
 /**
@@ -6,6 +7,7 @@
  * Declaration / header.
  */
 declare abstract class Tracker {
+
     /**
      * Register a tracker into the current environment.
      */

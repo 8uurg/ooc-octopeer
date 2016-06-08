@@ -1,9 +1,10 @@
-///<reference path="../interfaces/Message.ts" />
-///<reference path="../interfaces/DatabaseSchemes/WindowResolutionJSON.ts" />
-/// <reference path="../interfaces/TrackingCollector.ts" />
+/// <reference path="../interfaces/DatabaseSchemes/WindowResolutionJSON.ts" />
 /// <reference path="../OctopeerConstants.ts" />
 /// <reference path="./Tracker.d.ts" />
 
+/**
+ * Provides a tracker that tracks the resolution of the screen.
+ */
 export class ResizeTracker extends Tracker {
     private width: number = -1;
     private height: number = -1;

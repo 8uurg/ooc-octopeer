@@ -10,6 +10,8 @@ const lazypipe      = require('lazypipe');
 const remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
 const tslint        = require('gulp-tslint');
 const replace       = require('gulp-replace');
+const dest          = require('gulp-dest');
+const flatten       = require('gulp-flatten');
 
 const fail = function() {
     util.log("A component which does not force fail, failed.");
@@ -86,11 +88,23 @@ gulp.task('test-report-coveralls', ['test-report'], function() {
     return gulp.src("./target/assets/unit-test-coverage/lcov.info")
         .pipe(replace("SF:", "SF:src/"))
         .pipe(gulp.dest('./target/assets/unit-test-coverage/'));
-})
+});
 
-gulp.task('test', ['test-report-coveralls']); 
+gulp.task('test', ['test-report-coveralls']);
 
-gulp.task('build', ['test', 'lint'], function() {
+gulp.task('copy-dependencies', ['clean'], function() {
+    return gulp.src([
+        './node_modules/jquery/dist/*.+(js|map)',
+        './node_modules/materialize-css/dist/css/*.+(css|js)',
+        './node_modules/materialize-css/dist/js/*.+(css|js)'
+    ], { base: './' })
+        .pipe(flatten())
+        .pipe(gulpif('*.+(map|js)', dest('js')))
+        .pipe(gulpif('*.css', dest('css')))
+        .pipe(gulp.dest('./dest'));
+});
+
+gulp.task('build', ['test', 'lint', 'copy-dependencies'], function() {
     return gulp.src('./target/src/main/**')
         .pipe(gulpif("**/*.js", replace(/.*exports[^\n;]*(;|\n)/g, "")))
         .pipe(gulp.dest('./dest'));

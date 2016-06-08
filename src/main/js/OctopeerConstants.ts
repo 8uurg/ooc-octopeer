@@ -1,6 +1,4 @@
 /**
- * Created by larsstegman on 12-05-16.
- *
  * Constants that are used in the local storage for Octopeer.
  */
 var OCTOPEER_CONSTANTS: any = { // tslint:disable-line
@@ -16,8 +14,14 @@ var OCTOPEER_CONSTANTS: any = { // tslint:disable-line
     "track_semantic_events":    "checkboxSemanticEvents",
     "track_pr_metadata":        "trackPRMetaData",
     "track_browser_data":       "trackBrowserData",
+    "track_scroll":             "trackScroll",
     "track_visibility":         "trackVisibility",
+    "track_dom":                "trackDom",
     "hash_username":            "hashUsername",
     "hash_pr_metadata":         "hashPRMetaData",
-    "hash_browser_data":        "hashBrowserData"
+    "hash_browser_data":        "hashBrowserData",
+
+    // The database constants
+    "database_location_key":     "databaseLocation",
+    "standard_database_location": "http://10.0.22.6/api/"
 };

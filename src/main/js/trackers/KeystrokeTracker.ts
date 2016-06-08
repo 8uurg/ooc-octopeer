@@ -1,8 +1,18 @@
-///<reference path="../interfaces/Message.ts" />
-///<reference path="../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
-///<reference path="../interfaces/TrackingCollector.ts" />
+/// <reference path="../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
 
+/**
+ * Enum as the database uses only two types identified by numbers.
+ * This avoids using magic numbers.
+ */
+enum KeyEventType {
+    down = 1,
+    up = 2
+}
+
+/**
+ * Provides a tracker that tracks keystrokes on the page.
+ */
 export class KeystrokeTracker extends Tracker {
 
     private keyMap: any = {8: "[Backspace]",
@@ -21,68 +31,48 @@ export class KeystrokeTracker extends Tracker {
                            45: "[Insert]",
                            46: "[Delete]"};
 
-    private pressedKeys: number[];
-
     /**
      * Register the keystroke tracker.
      */
     public register() {
-        this.pressedKeys = [];
-        /**
-         * Create an EventListener that fires each time a key is pressed. Log the key that is pressed in the console.
-         * @param event object that contains the required key information.
-         */
         document.addEventListener("keydown", (event) => {
-            this.pressedKeys[event.keyCode] = Date.now() / 1000;
-            this.sendUnsentKeyDowns();
+            this.sendData(this.createMessage(this.mapKeyCodeToString(event.keyCode), KeyEventType.down));
         });
 
         document.addEventListener("keyup", (event) => {
-            let key_down_time = this.pressedKeys[event.keyCode];
-            let key_up_time = Date.now() / 1000;
-
-            this.pressedKeys[event.keyCode] = undefined;
-
-            this.sendData(this.createMessage(event.keyCode, key_down_time, key_up_time));
-            this.sendUnsentKeyDowns();
+            this.sendData(this.createMessage(this.mapKeyCodeToString(event.keyCode), KeyEventType.up));
         });
     }
 
     /**
-     * Sends the keys which have had no keyup event.
+     * Maps a key code to a string.
+     * @param keyCode The key code.
+     * @returns {string} The corresponding string.
      */
-    private sendUnsentKeyDowns() {
-        for ( let key in this.pressedKeys ) {
-            if (this.pressedKeys.hasOwnProperty(key) && Date.now() - this.pressedKeys[key] > 10000) {
-                let key_down_time = this.pressedKeys[key];
-                this.pressedKeys[key] = undefined;
-                this.sendData(this.createMessage(Number(key), key_down_time, undefined));
-            }
+    private mapKeyCodeToString(keyCode: number): string {
+        if (this.keyMap[keyCode] != null) {
+            return this.keyMap[keyCode];
+        } else {
+            return String.fromCharCode(keyCode);
         }
     }
 
     /**
      * Creates a message using the Keystroke interface.
+     * @param keyName The keycode for the key that has to be sent.
+     * @param type The type of the key stroke.
      * @returns {KeystrokeJSON}
      */
-    private createMessage(keyCode: number, key_down_time: number, key_up_time: number): KeystrokeJSON {
-        let keyName: string;
-        if (this.keyMap[keyCode] != null) {
-            keyName = this.keyMap[keyCode];
-        } else {
-            keyName = String.fromCharCode(keyCode);
-        }
-
+    private createMessage(keyName: string, type: KeyEventType): KeystrokeJSON {
         return {
             created_at: Date.now() / 1000,
             keystroke: keyName,
-            key_down_at: key_down_time,
-            key_up_at: key_up_time
+            keystroke_type: type
         };
     }
 
     /**
-     * Send data to the database
+     * Send data to the database.
      */
     private sendData(ksData: KeystrokeJSON) {
         this.sendMessage({

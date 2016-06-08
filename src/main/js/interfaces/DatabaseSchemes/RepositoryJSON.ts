@@ -1,5 +1,4 @@
 /**
- * Created by Cas on 23-5-2016.
  * This interface is used to define the structure of a repository in the RESTful API.
  */
 interface RepositoryJSON {

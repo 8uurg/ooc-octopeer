@@ -4,6 +4,7 @@
 ///<reference path="./trackers/ResizeTracker.ts" />
 ///<reference path="./trackers/semanticTracker.ts" />
 ///<reference path="./trackers/VisibilityTracker.ts" />
+///<reference path="./trackers/DomTracker.ts" />
 
 ///<reference path="./ChromeTrackingCollector.ts" />
 ///<reference path="./BitBucketSessionDataGatherer.ts" />
@@ -13,7 +14,9 @@ declare var KeystrokeTracker: any;
 declare var MouseClickTracker: any;
 declare var MousePositionTracker: any;
 declare var ResizeTracker: any;
+declare var ScrollTracker: any;
 declare var SemanticTracker: any;
+declare var DomTracker: any;
 declare var DataGatherer: any;
 declare var ChromeTrackingCollector: any;
 declare var StartEndTrottle: any;
@@ -29,13 +32,26 @@ let neededSettings: { [key: string]: boolean; } = {
     [OCTOPEER_CONSTANTS.track_mouse_position]: true,
     [OCTOPEER_CONSTANTS.track_page_resolution]: true,
     [OCTOPEER_CONSTANTS.track_mouse_clicks]: true,
+    [OCTOPEER_CONSTANTS.track_scroll]: true,
     [OCTOPEER_CONSTANTS.track_semantic_events]: true,
-    [OCTOPEER_CONSTANTS.track_visibility]: true
+    [OCTOPEER_CONSTANTS.track_visibility]: true,
+    [OCTOPEER_CONSTANTS.track_dom]: true
 };
 
 chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
+
     // Create a collector.
     let collector: TrackingCollector = new ChromeTrackingCollector(new DataGatherer());
+
+    if (!collector.isReadyToSend()) {
+        return;
+    }
+
+    // Register the visibility tracker to the current document.
+    if (items[OCTOPEER_CONSTANTS.track_dom]) {
+        (new DomTracker()).withCollector(collector).register();
+    }
+
     // Register the resize tracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_page_resolution]) {
         (new ResizeTracker()).withCollector(collector).withTrottle(StartEndTrottle).register();
@@ -49,6 +65,11 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
     // Register the mousetracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_mouse_position]) {
         (new MousePositionTracker()).withCollector(collector).withTrottle(StartEndTrottle).register();
+    }
+
+    // Register the scroll tracker to the current document.
+    if (items[OCTOPEER_CONSTANTS.track_scroll]) {
+        (new ScrollTracker()).withCollector(collector).register();
     }
 
     // Register the mouse click tracker to the current document.

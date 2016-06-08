@@ -6,7 +6,6 @@
 
 /// <reference path="../../../typings/index.d.ts" />
 
-
 /**
  * ChromeTrackingCollector
  * Collects all the tracking data and multiplexes it over a singular chrome port.
@@ -21,6 +20,14 @@ export class ChromeTrackingCollector implements TrackingCollector {
         });
 
         this.session = sc.getSessionData();
+    }
+
+    /**
+     * Indicates whether the session is instantiated and the collector can send messages.
+     * @returns {boolean} 
+     */
+    public isReadyToSend(): boolean {
+        return this.session !== null;
     }
 
     /**

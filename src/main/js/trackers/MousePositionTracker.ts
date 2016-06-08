@@ -1,10 +1,8 @@
-///<reference path="../interfaces/Message.ts" />
-///<reference path="../interfaces/DatabaseSchemes/MousePosJSON.ts" />
-///<reference path="../interfaces/TrackingCollector.ts" />
+/// <reference path="../interfaces/DatabaseSchemes/MousePosJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
 
 /**
- * Provides a tracker that tracks the mouse on the webpage.
+ * Provides a tracker that tracks the mouse on the page.
  */
 export class MousePositionTracker extends Tracker {
     private cursorX: number = -1;
