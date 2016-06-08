@@ -43,7 +43,7 @@ export function setUpRefreshNotificationElements() {
  */
 export function setUpDatabaseLocationElements() {
     let databaseLocationField = <HTMLInputElement> document.getElementById("database_location");
-    let apiRegex = new RegExp("(http|https)://.*/api/");
+    let apiRegex = new RegExp("^(http|https)://.*/api/$");
     chrome.storage.sync.get(
         { [OCTOPEER_CONSTANTS.database_location_key]: [OCTOPEER_CONSTANTS.standard_database_location] }, (items) => {
             databaseLocationField.value = items[OCTOPEER_CONSTANTS.database_location_key];
@@ -55,11 +55,6 @@ export function setUpDatabaseLocationElements() {
         if (location.match(apiRegex) !== null) {
             chrome.storage.sync.set({ [OCTOPEER_CONSTANTS.database_location_key] : location });
             console.log("set database location to: " + location);
-            databaseLocationField.className =
-                databaseLocationField.className.replace(" invalid", " valid");
-        } else {
-            databaseLocationField.className =
-                databaseLocationField.className.replace(" valid", " invalid");
         }
     });
 }
