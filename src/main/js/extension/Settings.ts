@@ -66,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,          "checkboxKeystrokes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_events,      "checkboxSemanticEvents");
     registerCheckbox(OCTOPEER_CONSTANTS.track_visibility,           "checkboxVisibility");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_dom,                  "checkboxDom");
     registerCheckbox(OCTOPEER_CONSTANTS.track_scroll,               "checkboxScroll");
 
     setUpRefreshNotificationElements();
