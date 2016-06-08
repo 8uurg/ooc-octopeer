@@ -25,6 +25,7 @@
         "js": [
           "js/OctopeerConstants.js",
           "js/trackers/Tracker.js",
+          "js/trackers/DomTracker.js",
           "js/trackers/KeystrokeTracker.js",
           "js/trackers/MouseClickTracker.js",
           "js/trackers/ScrollTracker.js",
@@ -51,7 +52,6 @@
   "permissions": [
     // Domain Permissions
     "https://bitbucket.org/*",
-    "https://localhost:8000/api/*",
     "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js",
     "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css",
     "https://code.jquery.com/jquery-2.1.1.min.js",

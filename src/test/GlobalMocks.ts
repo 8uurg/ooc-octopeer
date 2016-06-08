@@ -55,5 +55,7 @@ _global.window = {
 };
 _global.window.innerHeight = 500;
 _global.window.innerWidth = 400;
+_global.window.scrollX = 0;
+_global.window.scrollY = 0;
 
 _global.OCTOPEER_CONSTANTS = {};

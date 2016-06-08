@@ -1,3 +1,4 @@
+///<reference path="../interfaces/DatabaseSchemes/DomJSON.ts" />
 ///<reference path="../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
 ///<reference path="../interfaces/DatabaseSchemes/MouseClickJSON.ts" />
 ///<reference path="../interfaces/DatabaseSchemes/MousePosJSON.ts" />
@@ -14,10 +15,10 @@ interface Message {
      */
     table: "users/"|"repositories/"|"pull-requests/"|"sessions/"|"event-types/"|
            "element-types/"|"semantic-events/"|"event-positions/"|"keystroke-events/"|"mouse-position-events/"|
-           "mouse-click-events/"|"mouse-scroll-events/"|"window-resolution-events/";
+           "mouse-click-events/"|"mouse-scroll-events/"|"window-resolution-events/"|"html-pages/";
 
     /**
      * The data object which adheres one interface.
      */
-    data: KeystrokeJSON|MouseClickJSON|MousePosJSON|WindowResolutionJSON|SemanticEventJSON|ScrollJSON;
+    data: KeystrokeJSON|MouseClickJSON|MousePosJSON|WindowResolutionJSON|SemanticEventJSON|DomJSON|ScrollJSON;
 }

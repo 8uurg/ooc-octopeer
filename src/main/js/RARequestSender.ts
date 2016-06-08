@@ -1,4 +1,4 @@
-///<reference path="./interfaces/message.ts" />
+///<reference path="./interfaces/Message.ts" />
 /// <reference path="../../../typings/index.d.ts" />
 
 /**
