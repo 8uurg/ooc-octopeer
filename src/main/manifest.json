@@ -24,13 +24,13 @@
         ],
         "js": [
           "js/OctopeerConstants.js",
+          "js/trackers/DomTracker.js",
           "js/trackers/KeystrokeTracker.js",
           "js/trackers/MouseClickTracker.js",
           "js/trackers/MousePositionTracker.js",
           "js/trackers/ResizeTracker.js",
           "js/trackers/semanticTracker.js",
           "js/trackers/VisibilityTracker.js",
-          "js/trackers/DomTracker.js",
           "js/BitBucketSessionDataGatherer.js",
           "js/ChromeTrackingCollector.js",
           "js/Main.js"
