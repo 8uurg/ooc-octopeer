@@ -22,7 +22,7 @@ interface KeystrokeJSON {
     created_at: number;
 
     /**
-     * The type of the keystroke
+     * The type of the keystroke.
      */
     keystroke_type: number;
 }

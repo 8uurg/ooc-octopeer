@@ -2,6 +2,11 @@
 ///<reference path="../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
 ///<reference path="../interfaces/TrackingCollector.ts" />
 
+enum KeyEventType {
+    down = 1,
+    up = 2
+}
+
 export class KeystrokeTracker {
 
     private collector: TrackingCollector;
@@ -46,6 +51,8 @@ export class KeystrokeTracker {
 
     /**
      * Creates a message using the Keystroke interface.
+     * @param keyCode The keycode for the key that has to be sent.
+     * @param type The type of the key stroke.
      * @returns {KeystrokeJSON}
      */
     private createMessage(keyCode: number, type: KeyEventType): KeystrokeJSON {
@@ -72,9 +79,4 @@ export class KeystrokeTracker {
             data: ksData
         });
     }
-}
-
-enum KeyEventType {
-    down = 1,
-    up = 2
 }

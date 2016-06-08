@@ -50,7 +50,7 @@ describe("KeystrokeTracker", function() {
     ];
 
     testArray.forEach( function(item) {
-        it("should key up event with the '" + item.name + "' key.", function() {
+        it("should log a key up event with the '" + item.name + "' key.", function() {
             this.tracker.register();
 
             // Mock date, because of ms differences.
