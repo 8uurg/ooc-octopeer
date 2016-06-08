@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
     registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_clicks,             "checkboxMouseClicks");
     registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution,          "checkboxPageRes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,              "checkboxKeystrokes");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_position,        "checkboxSemanticPos");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_position,        "checkboxSemanticPosition");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_clicks,          "checkboxSemanticClicks");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_key_strokes,     "checkboxSemanticKeystrokes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_scrolling,       "checkboxSemanticScrolling");
