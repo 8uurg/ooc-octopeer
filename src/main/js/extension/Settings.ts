@@ -45,20 +45,11 @@ export function setUpRefreshNotificationElements() {
  */
 export function setUpDatabaseLocationElements() {
     let databaseLocationField = <HTMLInputElement> document.getElementById("database_location");
-    let apiRegex = new RegExp("http://.*/api/");
+    let apiRegex = new RegExp("(http|https)://.*/api/");
     chrome.storage.sync.get(
         { [OCTOPEER_CONSTANTS.database_location_key]: [OCTOPEER_CONSTANTS.standard_database_location] }, (items) => {
             databaseLocationField.value = items[OCTOPEER_CONSTANTS.database_location_key];
         });
-
-    databaseLocationField.addEventListener("keyup", () => {
-        let val = databaseLocationField.value;
-        if (val.match(apiRegex) !== null) {
-            databaseLocationField.className = databaseLocationField.className.replace(" invalid", " valid ");
-        } else {
-            databaseLocationField.className = databaseLocationField.className.replace(" valid", " invalid ");
-        }
-    });
 
     document.getElementById("change-database-location").addEventListener("click", () => {
         let location = databaseLocationField.value;

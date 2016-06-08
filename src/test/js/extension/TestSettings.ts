@@ -125,23 +125,6 @@ describe("The database input field", function () {
         expect(this.databaseLocationTextField.value).toEqual(this.location);
     });
 
-    it("should check whether the input is valid every time a key is pressed", function () {
-        let dispatchKeyUp: () => void = null;
-        this.databaseLocationTextField.addEventListener.and.callFake((event: string, callback: () => void) => {
-            dispatchKeyUp = callback;
-        });
-
-        setUpDatabaseLocationElements();
-
-        this.databaseLocationTextField.className = " valid";
-        this.databaseLocationTextField.value += "y";
-        dispatchKeyUp();
-        expect(this.databaseLocationTextField.className).toMatch(new RegExp(" invalid"));
-        this.databaseLocationTextField.value = this.location;
-        dispatchKeyUp();
-        expect(this.databaseLocationTextField.className).toMatch(new RegExp(" valid"));
-    });
-
     it("should set the chrome setting to the field value when the apply button is pressed", function () {
         let dispatchClick: () => void = null;
         this.applyButton.addEventListener.and.callFake((event: string, callback: () => void) => {
