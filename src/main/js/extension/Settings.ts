@@ -1,13 +1,11 @@
 /*This script ensures scripts can be used from the popup*/
 
-/**
- * This function handles the status of the checkboxes and stores changes made by users locally.
- */
 declare var OCTOPEER_CONSTANTS: any;
 
 /**
  * Adds a listener for each checkbox which changes the setting in chrome.
  */
+
 export function registerCheckbox(storageName: string, checkboxId: string) {
     let checkbox = <HTMLInputElement> document.getElementById(checkboxId);
     let syncedStorage = chrome.storage.sync;
@@ -75,7 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
     registerCheckbox(OCTOPEER_CONSTANTS.track_visibility,           "checkboxVisibility");
 
     setUpRefreshNotificationElements();
-
     setUpDatabaseLocationElements();
 });
 

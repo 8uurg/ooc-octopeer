@@ -20,14 +20,14 @@ const fail = function() {
 
 const tsv = ts.createProject({
     noEmitOnError: true,
-    target: 'es6',
+    target: 'es5',
     module: 'commonjs',
     noImplicitAny: true
 });
 
 const tst = ts.createProject({
     noEmitOnError: true,
-    target: 'es6',
+    target: 'es5',
     module: 'commonjs',
     noImplicitAny: true
 });
