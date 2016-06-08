@@ -110,6 +110,6 @@ describe("The database input field", function () {
     });
 
     it("should have the stored location on start up", function () {
-        
+
     });
 });
