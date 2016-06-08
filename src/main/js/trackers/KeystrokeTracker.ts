@@ -1,6 +1,4 @@
-///<reference path="../interfaces/Message.ts" />
-///<reference path="../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
-///<reference path="../interfaces/TrackingCollector.ts" />
+/// <reference path="../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
 
 export class KeystrokeTracker extends Tracker {
