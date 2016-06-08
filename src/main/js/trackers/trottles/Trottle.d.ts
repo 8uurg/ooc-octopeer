@@ -17,6 +17,11 @@ declare abstract class Trottle implements TrackingCollector {
     public sendTrottledMessage(message: Message, drop: () => void): void;
 
     /**
+     * Pass ready to send to actual collector.
+     */
+    public isReadyToSend(): boolean;
+
+    /**
      * Send a message. Ignore the callback.
      */
     public sendMessage(message: Message): void;

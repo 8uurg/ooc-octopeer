@@ -23,6 +23,13 @@ export class Trottle implements TrackingCollector {
     }
 
     /**
+     * Pass ready to send to actual collector.
+     */
+    public isReadyToSend(): boolean {
+        return this.collector.isReadyToSend();
+    }
+
+    /**
      * Send a message. Ignore the callback.
      */
     public sendMessage(message: Message) {
