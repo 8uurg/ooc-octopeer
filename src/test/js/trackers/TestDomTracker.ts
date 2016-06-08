@@ -41,6 +41,24 @@ describe("The Visible Elements Tracker", function() {
         expect(this.collector.sendMessage).toHaveBeenCalledTimes(2);
     });
 
+    it("should should not add a data-octopeer-z attribute on a default case", function() {
+        this.element.style.zIndex = "auto";
+
+        this.tracker.register();
+        this.ev();
+
+        expect(this.element.getAttribute("data-octopeer-z")).toBeNull();
+    });
+
+    it("should should add a data-octopeer-z attribute when needed", function() {
+        this.element.style.zIndex = 3;
+
+        this.tracker.register();
+        this.ev();
+
+        expect(this.element.getAttribute("data-octopeer-z")).not.toBeNull();
+    });
+
     afterEach(function () {
         jasmine.clock().uninstall();
     });
