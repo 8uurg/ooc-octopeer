@@ -43,18 +43,15 @@
 
   "background": {
     "scripts": [
-        "js/extension/background.js",
         "js/OctopeerConstants.js",
-        "js/RARequestSender.js"
+        "js/RARequestSender.js",
+        "js/extension/background.js"
       ]
   },
 
   "permissions": [
     // Domain Permissions
     "https://bitbucket.org/*",
-    "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js",
-    "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css",
-    "https://code.jquery.com/jquery-2.1.1.min.js",
     "https://fonts.googleapis.com/icon?family=Material+Icons",
 
     // API Permissions

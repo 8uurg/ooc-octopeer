@@ -38,6 +38,7 @@ let neededSettings: { [key: string]: boolean; } = {
 };
 
 chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
+
     // Create a collector.
     let collector: TrackingCollector = new ChromeTrackingCollector(new DataGatherer());
 

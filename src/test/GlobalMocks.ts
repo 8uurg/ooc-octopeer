@@ -27,6 +27,10 @@ _global.chrome = {
             set: function () {},
             get: function () {}
         }
+    },
+    tabs: {
+        query: function() {},
+        reload: function() {}
     }
 };
 
@@ -58,4 +62,6 @@ _global.window.innerWidth = 400;
 _global.window.scrollX = 0;
 _global.window.scrollY = 0;
 
-_global.OCTOPEER_CONSTANTS = {};
+_global.OCTOPEER_CONSTANTS = {
+    "database_location_key": "databaseLocation"
+};
