@@ -59,6 +59,9 @@ export function databaseLocationField() {
             console.log("set database location to: " + location);
             databaseLocationField.className =
                 databaseLocationField.className.replace(" invalid", " valid");
+        } else {
+            databaseLocationField.className =
+                databaseLocationField.className.replace(" valid", " invalid");
         }
     });
 }

@@ -159,4 +159,20 @@ describe("The database input field", function () {
         });
         expect(this.databaseLocationTextField.className).toMatch(new RegExp(" valid"));
     });
+
+    it("should not set the chrome setting if the value is not valid", function () {
+        let dispatchClick: () => void = null;
+        this.applyButton.addEventListener.and.callFake((event: string, callback: () => void) => {
+            dispatchClick = callback;
+        });
+        this.databaseLocationTextField.value = "thisIsNotTheDBYouAreLookingFor";
+        this.databaseLocationTextField.className = " invalid";
+        spyOn(chrome.storage.sync, "set");
+
+        databaseLocationField();
+        dispatchClick();
+
+        expect(chrome.storage.sync.set).not.toHaveBeenCalled();
+        expect(this.databaseLocationTextField.className).not.toMatch(new RegExp(" valid"));
+    });
 });
