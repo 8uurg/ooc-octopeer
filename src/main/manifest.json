@@ -24,6 +24,10 @@
         ],
         "js": [
           "js/OctopeerConstants.js",
+          "js/trackers/trottles/Trottle.js",
+          "js/trackers/trottles/LastMessageTrottle.js",
+          "js/trackers/trottles/MinDelayTrottle.js",
+          "js/trackers/trottles/StartEndTrottle.js",
           "js/trackers/Tracker.js",
           "js/trackers/KeystrokeTracker.js",
           "js/trackers/MouseClickTracker.js",
