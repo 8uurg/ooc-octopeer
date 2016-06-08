@@ -19,10 +19,10 @@ export class VisibleElementsTracker {
         };
 
         // Send initial dom on page load.
-        prepareDom();
+        _this.modifyDom();
 
         // Sends modified dom on change of the dom.
-        window.document.addEventListener("change", prepareDom);
+        document.addEventListener("change", prepareDom);
     }
 
     /**
