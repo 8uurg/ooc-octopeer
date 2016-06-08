@@ -1,18 +1,15 @@
-///<reference path="../interfaces/Message.ts" />
-///<reference path="../interfaces/DatabaseSchemes/WindowResolutionJSON.ts" />
-/// <reference path="../interfaces/TrackingCollector.ts" />
+/// <reference path="../interfaces/DatabaseSchemes/WindowResolutionJSON.ts" />
 /// <reference path="../OctopeerConstants.ts" />
+/// <reference path="./Tracker.d.ts" />
 
 /**
  * Provides a tracker that tracks the resolution of the screen.
  */
-export class ResizeTracker {
-
+export class ResizeTracker extends Tracker {
     private width: number = -1;
     private height: number = -1;
     private timestamp: number = -1;
     private timer: any = null;
-    private collector: TrackingCollector;
 
     /**
      * Registers and hooks the instance into the environment.
@@ -39,16 +36,6 @@ export class ResizeTracker {
     }
 
     /**
-     * Set the collector for this tracker.
-     * @param collector The collector to send the tracking data to.
-     * @return Itself for daisy chaining.
-     */
-    public withCollector(collector: TrackingCollector): ResizeTracker {
-        this.collector = collector;
-        return this;
-    }
-
-    /**
      * Creates a message of type WindowResolutionJSON.
      * @returns {WindowResolutionJSON}
      */
@@ -64,7 +51,7 @@ export class ResizeTracker {
      * Sends data to the centralized collector.
      */
     private sendData(wsData: WindowResolutionJSON) {
-        this.collector.sendMessage({
+        this.sendMessage({
             table: "window-resolution-events/",
             data: wsData
         });
