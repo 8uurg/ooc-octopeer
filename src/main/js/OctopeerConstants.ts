@@ -1,6 +1,4 @@
 /**
- * Created by larsstegman on 12-05-16.
- *
  * Constants that are used in the local storage for Octopeer.
  */
 var OCTOPEER_CONSTANTS: any = { // tslint:disable-line
@@ -13,6 +11,7 @@ var OCTOPEER_CONSTANTS: any = { // tslint:disable-line
     "track_mouse_clicks":           "checkboxMouseClicks",
     "track_page_resolution":        "checkboxPageRes",
     "track_key_strokes":            "checkboxKeystrokes",
+    "track_scroll":                 "checkboxScrolling",
     "track_semantic_events":        "checkboxSemanticEvents", // Up for deletion after refactor, still used in main.ts .
     "track_semantic_position":      "checkboxSemanticPos",
     "track_semantic_clicks":        "checkboxSemanticClicks",

@@ -4,11 +4,11 @@
     <title>Octopeer - Settings</title>
     <script type="text/javascript" src="../js/jquery.min.js"></script>
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="../css/materialize.css">
+    <link rel="stylesheet" href="../css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../css/settings_page.css" />
     <!-- Compiled and minified JavaScript -->
-    <script src="../js/materialize.js"></script>
+    <script src="../js/materialize.min.js"></script>
 
     <script src="../js/OctopeerConstants.js"></script>
     <script src="../js/extension/Settings.js"></script>
@@ -133,6 +133,24 @@
                 </div>
             </div>
         </div>
+        <div class="row" id="scroll-setting">
+            <div class="col s1">
+                <div id="scroll-setting-question" class="chip explain-tracking-button">
+                    ?
+                </div>
+            </div>
+            <div class="col s11">
+                <div class="switch">
+                    <label>
+                        Off
+                        <input type="checkbox" id="checkboxScroll">
+                        <span class="lever"></span>
+                        On
+                    </label>
+                    Track Scroll
+                </div>
+            </div>
+        </div>
         <div class="row" id="semantic-position-setting">
             <div class="col s1">
                 <div id="semantic-position-setting-question" class="chip explain-tracking-button">
@@ -231,7 +249,8 @@
         <div class="row">
             <div class="input-field col s8">
                 <i class="material-icons prefix">dns</i>
-                <input placeholder="http://server/api/" id="database_location" type="text" class="validate valid">
+                <input placeholder="http://server/api/" id="database_location" type="text" class="validate"
+                       pattern="(http|https)://.*/api/">
                 <label for="database_location">Database Location</label>
             </div>
             <div class="col s4">

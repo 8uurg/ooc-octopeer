@@ -20,14 +20,14 @@ const fail = function() {
 
 const tsv = ts.createProject({
     noEmitOnError: true,
-    target: 'es6',
+    target: 'es5',
     module: 'commonjs',
     noImplicitAny: true
 });
 
 const tst = ts.createProject({
     noEmitOnError: true,
-    target: 'es6',
+    target: 'es5',
     module: 'commonjs',
     noImplicitAny: true
 });
@@ -95,7 +95,8 @@ gulp.task('test', ['test-report-coveralls']);
 gulp.task('copy-dependencies', ['clean'], function() {
     return gulp.src([
         './node_modules/jquery/dist/*.+(js|map)',
-        './node_modules/materialize-css/bin/*.+(css|js)'
+        './node_modules/materialize-css/dist/css/*.+(css|js)',
+        './node_modules/materialize-css/dist/js/*.+(css|js)'
     ], { base: './' })
         .pipe(flatten())
         .pipe(gulpif('*.+(map|js)', dest('js')))

@@ -1,13 +1,11 @@
 /*This script ensures scripts can be used from the popup*/
 
-/**
- * This function handles the status of the checkboxes and stores changes made by users locally.
- */
 declare var OCTOPEER_CONSTANTS: any;
 
 /**
  * Adds a listener for each checkbox which changes the setting in chrome.
  */
+
 export function registerCheckbox(storageName: string, checkboxId: string) {
     let checkbox = <HTMLInputElement> document.getElementById(checkboxId);
     let syncedStorage = chrome.storage.sync;
@@ -29,6 +27,7 @@ export function setupCheckboxes() {
     registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_clicks,             "checkboxMouseClicks");
     registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution,          "checkboxPageRes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,              "checkboxKeystrokes");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_scroll,                   "checkboxScroll");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_position,        "checkboxSemanticPosition");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_clicks,          "checkboxSemanticClicks");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_key_strokes,     "checkboxSemanticKeystrokes");
@@ -61,20 +60,11 @@ export function setUpRefreshNotificationElements() {
  */
 export function setUpDatabaseLocationElements() {
     let databaseLocationField = <HTMLInputElement> document.getElementById("database_location");
-    let apiRegex = new RegExp("http://.*/api/");
+    let apiRegex = new RegExp("(http|https)://.*/api/");
     chrome.storage.sync.get(
         { [OCTOPEER_CONSTANTS.database_location_key]: [OCTOPEER_CONSTANTS.standard_database_location] }, (items) => {
             databaseLocationField.value = items[OCTOPEER_CONSTANTS.database_location_key];
         });
-
-    databaseLocationField.addEventListener("keyup", () => {
-        let val = databaseLocationField.value;
-        if (val.match(apiRegex) !== null) {
-            databaseLocationField.className = databaseLocationField.className.replace(" invalid", " valid ");
-        } else {
-            databaseLocationField.className = databaseLocationField.className.replace(" valid", " invalid ");
-        }
-    });
 
     document.getElementById("change-database-location").addEventListener("click", () => {
         let location = databaseLocationField.value;
@@ -93,9 +83,7 @@ export function setUpDatabaseLocationElements() {
 
 document.addEventListener("DOMContentLoaded", () => {
     setupCheckboxes();
-
     setUpRefreshNotificationElements();
-
     setUpDatabaseLocationElements();
 });
 

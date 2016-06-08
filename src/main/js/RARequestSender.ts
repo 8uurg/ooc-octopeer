@@ -2,7 +2,6 @@
 /// <reference path="../../../typings/index.d.ts" />
 
 /**
- * Created by Cas on 23-4-2016.
  * This class lets gives the possibility to send DatabaseSchemes requests to the restful api.
  */
 export class RARequestsSender {
@@ -55,6 +54,7 @@ export class RARequestsSender {
      * @param loc The api location
      */
     public setApiLocation(loc: string) {
+        console.log("Database location set to: " + loc);
         this.api_location = loc;
     }
 

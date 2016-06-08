@@ -63,6 +63,7 @@ describe("Setting explanation cards", function() {
         {id: "mouse-click-setting-question",            title: "Mouse Click Tracking"},
         {id: "page-resolution-setting-question",        title: "Page Resolution Tracking"},
         {id: "keystroke-setting-question",              title: "Keystroke Tracking"},
+        {id: "scroll-setting-question",                 title: "Scroll Tracking"},
         {id: "semantic-position-setting-question",      title: "Semantic Position Tracking"},
         {id: "semantic-clicks-setting-question",        title: "Semantic Clicks Tracking"},
         {id: "semantic-keystrokes-setting-question",    title: "Semantic Keystrokes Tracking"},

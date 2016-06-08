@@ -1,5 +1,7 @@
 /**
- * Created by Cas on 18-5-2016.
+ * This class mocks global elements to enable testing on these functions.
+ * @type {NodeJS.Global}
+ * @private
  */
 
 // Linting is disabled as var is required here. Let has not the proper functionality yet.
@@ -51,7 +53,9 @@ _global.document = {
 
 _global.localStorage = function() {};
 _global.window = {
-    addEventListener: function() {}
+    addEventListener: function() {},
+    scrollX: 0,
+    scrollY: 0
 };
 _global.window.innerHeight = 500;
 _global.window.innerWidth = 400;

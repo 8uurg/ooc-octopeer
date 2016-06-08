@@ -94,6 +94,14 @@ export class SettingsExplanations {
             }
         },
         {
+            "settingSelector": "scroll-setting-question", "title": "Scroll Tracking",
+            "bodyText": [
+                "The scroll tracker tracks x and y position of the visible portion of web pages on Bitbucket pull " +
+                "requests. This information is used to identify what is visible on your screen and what is not."
+            ],
+            "sampleData": () => { let emptyArray: Array<HTMLElement> = []; return emptyArray; }
+        },
+        {
             "settingSelector": "semantic-position-setting-question", "title": "Semantic Position Tracking",
             "bodyText": [
                 "The semantic position tracker tracks the position of your mouse in relation to elements on " +
