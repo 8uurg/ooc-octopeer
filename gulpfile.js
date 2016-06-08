@@ -95,7 +95,8 @@ gulp.task('test', ['test-report-coveralls']);
 gulp.task('copy-dependencies', ['clean'], function() {
     return gulp.src([
         './node_modules/jquery/dist/*.+(js|map)',
-        './node_modules/materialize-css/bin/*.+(css|js)'
+        './node_modules/materialize-css/dist/css/*.+(css|js)',
+        './node_modules/materialize-css/dist/js/*.+(css|js)'
     ], { base: './' })
         .pipe(flatten())
         .pipe(gulpif('*.+(map|js)', dest('js')))

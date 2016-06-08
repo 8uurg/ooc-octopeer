@@ -54,6 +54,7 @@ export class RARequestsSender {
      * @param loc The api location
      */
     public setApiLocation(loc: string) {
+        console.log("Database location set to: " + loc);
         this.api_location = loc;
     }
 

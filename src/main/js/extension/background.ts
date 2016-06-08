@@ -62,7 +62,7 @@ chrome.storage.sync.get({ [OCTOPEER_CONSTANTS.database_location_key]: OCTOPEER_C
 
         chrome.storage.onChanged.addListener((changedItems: any) => {
             if (items.hasOwnProperty(OCTOPEER_CONSTANTS.database_location_key)) {
-                requestSender.setApiLocation(changedItems[OCTOPEER_CONSTANTS.database_location_key]);
+                requestSender.setApiLocation(changedItems[OCTOPEER_CONSTANTS.database_location_key].newValue);
             }
         });
     });
