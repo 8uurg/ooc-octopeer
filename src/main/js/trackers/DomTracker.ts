@@ -4,14 +4,14 @@
  * This tracker was created for tracking all coordinates of visible elements on the webpage.
  * As these coordinates combined with mouse positions can give a lot of information.
  */
-export class VisibleElementsTracker {
+export class DomTracker {
     private collector: TrackingCollector;
 
     /**
      * Register the VisibleElementsTracker.
      */
     public register() {
-        const _this: VisibleElementsTracker = this;
+        const _this: DomTracker = this;
 
         let prepareDom = function () {
             _this.modifyDom();
@@ -21,7 +21,7 @@ export class VisibleElementsTracker {
         _this.modifyDom();
 
         // Sends modified dom on change of the dom.
-        document.addEventListener("change", prepareDom);
+        window.document.addEventListener("change", prepareDom);
     }
 
     /**
@@ -62,7 +62,7 @@ export class VisibleElementsTracker {
      * @param collector The collector to send to.
      * @returns {VisibleElementsTracker}
      */
-    public withCollector(collector: TrackingCollector): VisibleElementsTracker {
+    public withCollector(collector: TrackingCollector): DomTracker {
         this.collector = collector;
         return this;
     }

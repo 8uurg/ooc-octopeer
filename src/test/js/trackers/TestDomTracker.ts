@@ -1,6 +1,6 @@
 ///<reference path="../../../../typings/index.d.ts" />
 
-import {VisibleElementsTracker} from "../../../main/js/trackers/VisibleElementsTracker";
+import {DomTracker} from "../../../main/js/trackers/DomTracker";
 
 describe("The Visible Elements Tracker", function() {
 
@@ -9,7 +9,7 @@ describe("The Visible Elements Tracker", function() {
 
         jasmine.clock().install();
         jasmine.clock().mockDate();
-        this.tracker = new VisibleElementsTracker();
+        this.tracker = new DomTracker();
         window.document = document;
 
         this.ev = <(e: any) => void> null;
@@ -18,7 +18,7 @@ describe("The Visible Elements Tracker", function() {
         };
 
         this.collector = jasmine.createSpyObj("collector", ["sendMessage"]);
-        this.tracker = new VisibleElementsTracker();
+        this.tracker = new DomTracker();
         this.tracker.withCollector(this.collector);
         this.element = document.createElement("a");
         document.body.appendChild(this.element);
