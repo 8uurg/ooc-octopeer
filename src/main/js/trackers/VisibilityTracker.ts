@@ -42,9 +42,9 @@ export class VisibilityTracker extends Tracker {
      * Send data to centralized collector.
      */
     private sendData(vtData: SemanticEventJSON) {
-            this.sendMessage({
-                table: "semantic-events/",
-                data: vtData
-            });
+        this.sendMessage({
+            table: "semantic-events/",
+            data: vtData
+        });
     }
 }
