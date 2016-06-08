@@ -58,7 +58,7 @@ export function databaseLocationField() {
             chrome.storage.sync.set({ [OCTOPEER_CONSTANTS.database_location_key] : location });
             console.log("set database location to: " + location);
             databaseLocationField.className =
-                databaseLocationField.className.replace(new RegExp(" invalid"), " valid");
+                databaseLocationField.className.replace(" invalid", " valid");
         }
     });
 }

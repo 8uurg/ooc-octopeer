@@ -126,7 +126,7 @@ describe("The database input field", function () {
     });
 
     it("should check whether the input is valid every time a key is pressed", function () {
-        let dispatchKeyUp: () => void;
+        let dispatchKeyUp: () => void = null;
         this.databaseLocationTextField.addEventListener.and.callFake((event: string, callback: () => void) => {
             dispatchKeyUp = callback;
         });
@@ -139,6 +139,24 @@ describe("The database input field", function () {
         expect(this.databaseLocationTextField.className).toMatch(new RegExp(" invalid"));
         this.databaseLocationTextField.value = this.location;
         dispatchKeyUp();
+        expect(this.databaseLocationTextField.className).toMatch(new RegExp(" valid"));
+    });
+
+    it("should set the chrome setting to the field value when the apply button is pressed", function () {
+        let dispatchClick: () => void = null;
+        this.applyButton.addEventListener.and.callFake((event: string, callback: () => void) => {
+            dispatchClick = callback;
+        });
+        this.databaseLocationTextField.value = this.location;
+        this.databaseLocationTextField.className = " invalid";
+        spyOn(chrome.storage.sync, "set");
+
+        databaseLocationField();
+        dispatchClick();
+
+        expect(chrome.storage.sync.set).toHaveBeenCalledWith({
+            [OCTOPEER_CONSTANTS.database_location_key]: this.location
+        });
         expect(this.databaseLocationTextField.className).toMatch(new RegExp(" valid"));
     });
 });
