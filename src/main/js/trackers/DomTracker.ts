@@ -1,11 +1,11 @@
 /// <reference path="../interfaces/DatabaseSchemes/DomJSON.ts" />
+/// <reference path="./Tracker.d.ts" />
 
 /**
  * This tracker was created for tracking all coordinates of visible elements on the webpage.
  * As these coordinates combined with mouse positions can give a lot of information.
  */
-export class DomTracker {
-    private collector: TrackingCollector;
+export class DomTracker extends Tracker {
 
     /**
      * Register the VisibleElementsTracker.
@@ -58,16 +58,6 @@ export class DomTracker {
     }
 
     /**
-     * Add a collector to send the tracked data to.
-     * @param collector The collector to send to.
-     * @returns {DomTracker}
-     */
-    public withCollector(collector: TrackingCollector): DomTracker {
-        this.collector = collector;
-        return this;
-    }
-
-    /**
      * Creates a message using the VisibleElementJSON interface.
      * @param Dom  The modified dom with data elements added.
      * @returns {DomJSON}
@@ -84,7 +74,7 @@ export class DomTracker {
      * @param dData   The DomJSON object.
      */
     private sendData(dData: DomJSON) {
-        this.collector.sendMessage({
+        this.sendMessage({
             table: "html-pages/",
             data: dData
         });

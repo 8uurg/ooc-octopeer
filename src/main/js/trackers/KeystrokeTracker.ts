@@ -1,6 +1,5 @@
-///<reference path="../interfaces/Message.ts" />
-///<reference path="../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
-///<reference path="../interfaces/TrackingCollector.ts" />
+/// <reference path="../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
+/// <reference path="./Tracker.d.ts" />
 
 /**
  * Enum as the database uses only two types identified by numbers.
@@ -14,9 +13,8 @@ enum KeyEventType {
 /**
  * Provides a tracker that tracks keystrokes on the page.
  */
-export class KeystrokeTracker {
+export class KeystrokeTracker extends Tracker {
 
-    private collector: TrackingCollector;
     private keyMap: any = {8: "[Backspace]",
                            9: "[Tab]",
                            13: "[Enter]",
@@ -44,16 +42,6 @@ export class KeystrokeTracker {
         document.addEventListener("keyup", (event) => {
             this.sendData(this.createMessage(this.mapKeyCodeToString(event.keyCode), KeyEventType.up));
         });
-    }
-
-    /**
-     * Add a collector to send the tracked data to.
-     * @param collector The collector to send to.
-     * @returns {KeystrokeTracker}
-     */
-    public withCollector(collector: TrackingCollector): KeystrokeTracker {
-        this.collector = collector;
-        return this;
     }
 
     /**
@@ -87,7 +75,7 @@ export class KeystrokeTracker {
      * Send data to the database.
      */
     private sendData(ksData: KeystrokeJSON) {
-        this.collector.sendMessage({
+        this.sendMessage({
             table: "keystroke-events/",
             data: ksData
         });
