@@ -4,7 +4,6 @@
  * This tracker was created for tracking all coordinates of visible elements on the webpage.
  * As these coordinates combined with mouse positions can give a lot of information.
  */
-
 export class VisibleElementsTracker {
     private collector: TrackingCollector;
 
@@ -61,7 +60,7 @@ export class VisibleElementsTracker {
     /**
      * Add a collector to send the tracked data to.
      * @param collector The collector to send to.
-     * @returns {KeystrokeTracker}
+     * @returns {VisibleElementsTracker}
      */
     public withCollector(collector: TrackingCollector): VisibleElementsTracker {
         this.collector = collector;
@@ -71,7 +70,7 @@ export class VisibleElementsTracker {
     /**
      * Creates a message using the VisibleElementJSON interface.
      * @param Dom  The modified dom with data elements added.
-     * @returns {{Dom: NodeListOf<Element>, created_at: number}}
+     * @returns {{Dom: string}}
      */
     public createMessage(Dom: string): VisibleElementJSON {
         return {
