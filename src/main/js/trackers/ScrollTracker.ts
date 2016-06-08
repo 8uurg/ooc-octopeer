@@ -9,7 +9,6 @@
 export class ScrollTracker {
     private collector: TrackingCollector;
 
-    private message: ScrollJSON;
     private lastCall: number = -1;
 
     /**
@@ -19,8 +18,7 @@ export class ScrollTracker {
         const _this = this;
 
         function sendWindowPosition() {
-            _this.message = _this.createMessage();
-            _this.sendMessage();
+            _this.sendMessage(_this.createMessage());
         }
 
         // Send window position on load.
@@ -52,14 +50,14 @@ export class ScrollTracker {
      * Send the scroll message.
      * @param message The message to send.
      */
-    public sendMessage() {
+    public sendMessage(message: ScrollJSON) {
         let newCall: number = Date.now();
 
         if ( newCall - this.lastCall >= 1000 ) {
             this.lastCall = newCall;
             this.collector.sendMessage({
                 table: "mouse-scroll-events/",
-                data: this.message
+                data: message
             });
         }
     }
