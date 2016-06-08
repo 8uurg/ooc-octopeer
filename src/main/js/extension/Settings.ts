@@ -34,22 +34,13 @@ export function makeRefreshButtonFunctional() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_position,       "checkboxMousePosition");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_clicks,         "checkboxMouseClicks");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution,      "checkboxPageRes");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,          "checkboxKeystrokes");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_events,      "checkboxSemanticEvents");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_visibility,           "checkboxVisibility");
-
-    makeRefreshButtonFunctional();
-
+export function databaseLocationField() {
     let databaseLocationField = <HTMLInputElement> document.getElementById("database_location");
     let apiRegex = new RegExp("http://.*/api/");
     chrome.storage.sync.get(
         { [OCTOPEER_CONSTANTS.database_location_key]: [OCTOPEER_CONSTANTS.standard_database_location] }, (items) => {
-        databaseLocationField.value = items[OCTOPEER_CONSTANTS.database_location_key];
-    });
+            databaseLocationField.value = items[OCTOPEER_CONSTANTS.database_location_key];
+        });
 
     databaseLocationField.addEventListener("keyup", () => {
         let val = databaseLocationField.value;
@@ -70,6 +61,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 databaseLocationField.className.replace(new RegExp(" invalid"), " valid");
         }
     });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_position,       "checkboxMousePosition");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_clicks,         "checkboxMouseClicks");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution,      "checkboxPageRes");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,          "checkboxKeystrokes");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_events,      "checkboxSemanticEvents");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_visibility,           "checkboxVisibility");
+
+    makeRefreshButtonFunctional();
+
+    databaseLocationField();
 });
 
 
