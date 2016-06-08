@@ -11,7 +11,6 @@ export class MousePositionTracker extends Tracker {
     private cursorY: number = -1;
     private viewportX: number = -1;
     private viewportY: number = -1;
-    private lastCall: number = -1;
 
     /**
      * Register the mouse tracker to the document.
@@ -51,14 +50,9 @@ export class MousePositionTracker extends Tracker {
      * Send data to centralized collector.
      */
     private sendData(mpData: MousePosJSON) {
-        let newCall: number = Date.now();
-
-        if ( newCall - this.lastCall >= 1000 ) {
-            this.lastCall = newCall;
-            this.sendMessage({
-                table: "mouse-position-events/",
-                data: mpData
-            });
-        }
+        this.sendMessage({
+            table: "mouse-position-events/",
+            data: mpData
+        });
     }
 }
