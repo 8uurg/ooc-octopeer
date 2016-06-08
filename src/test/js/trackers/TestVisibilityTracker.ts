@@ -3,7 +3,7 @@
 // Nullroute the default creation of the visibilitytracker.
 // Actual imports.
 import createSpyObj = jasmine.createSpyObj;
-import {VisibilityTracker} from "../../../main/js/trackers/VisibilityTracker";
+import {VisibilityTracker} from "../../../main/js/trackers/RawDataTrackers/VisibilityTracker";
 
 
 describe("The Visibility Tracker", function() {

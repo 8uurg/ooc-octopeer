@@ -1,6 +1,6 @@
 ///<reference path="../../../../typings/index.d.ts" />
 
-import {DomTracker} from "../../../main/js/trackers/DomTracker";
+import {DomTracker} from "../../../main/js/trackers/RawDataTrackers/DomTracker";
 
 describe("The Dom Tracker", function() {
 

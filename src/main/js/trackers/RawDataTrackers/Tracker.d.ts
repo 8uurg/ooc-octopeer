@@ -1,5 +1,5 @@
-/// <reference path="../interfaces/Message.ts" />
-/// <reference path="../interfaces/TrackingCollector.ts" />
+/// <reference path="../../interfaces/Message.ts" />
+/// <reference path="../../interfaces/TrackingCollector.ts" />
 
 /**
  * An abstract class that represents a tracker.

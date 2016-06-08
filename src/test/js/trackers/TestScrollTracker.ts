@@ -1,5 +1,5 @@
 ///<reference path="../../../../typings/index.d.ts" />
-import {ScrollTracker} from "../../../main/js/trackers/ScrollTracker";
+import {ScrollTracker} from "../../../main/js/trackers/RawDataTrackers/ScrollTracker";
 
 describe("The ScrollTracker", function() {
 

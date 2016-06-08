@@ -1,10 +1,10 @@
-///<reference path="./trackers/KeystrokeTracker.ts" />
-///<reference path="./trackers/MouseClickTracker.ts" />
-///<reference path="./trackers/MousePositionTracker.ts" />
-///<reference path="./trackers/ResizeTracker.ts" />
+///<reference path="./trackers/RawDataTrackers/KeystrokeTracker.ts" />
+///<reference path="./trackers/RawDataTrackers/MouseClickTracker.ts" />
+///<reference path="./trackers/RawDataTrackers/MousePositionTracker.ts" />
+///<reference path="./trackers/RawDataTrackers/ResizeTracker.ts" />
 ///<reference path="./trackers/semanticTrackerMerged.ts" />
-///<reference path="./trackers/VisibilityTracker.ts" />
-///<reference path="./trackers/DomTracker.ts" />
+///<reference path="./trackers/RawDataTrackers/VisibilityTracker.ts" />
+///<reference path="./trackers/RawDataTrackers/DomTracker.ts" />
 
 ///<reference path="./ChromeTrackingCollector.ts" />
 ///<reference path="./BitBucketSessionDataGatherer.ts" />
@@ -13,17 +13,12 @@ declare var VisibilityTracker: any;
 declare var KeystrokeTracker: any;
 declare var MouseClickTracker: any;
 declare var MousePositionTracker: any;
+declare var SemanticTrackerMerged: any;
 declare var ResizeTracker: any;
 declare var ScrollTracker: any;
-declare var SemanticTracker: any;
 declare var DomTracker: any;
 declare var DataGatherer: any;
 declare var ChromeTrackingCollector: any;
-
-/**
- * Created by larsstegman on 16-05-16.
- * This file is the starting point for each BitBucket page tracking.
- */
 
 // The needed settings. True is the default value if storage does not contain the key.
 let neededSettings: { [key: string]: boolean; } = {
@@ -78,7 +73,7 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
 
     // Register the semantic event tracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_semantic_events]) {
-        (new SemanticTracker()).withCollector(collector).register();
+        (new SemanticTrackerMerged()).withCollector(collector).register();
     }
 
     // Register the visibility tracker to the current document.

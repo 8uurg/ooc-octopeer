@@ -1,5 +1,5 @@
-/// <reference path="../interfaces/TrackingCollector.ts" />
-/// <reference path="../interfaces/DatabaseSchemes/ScrollJSON.ts" />
+/// <reference path="../../interfaces/TrackingCollector.ts" />
+/// <reference path="../../interfaces/DatabaseSchemes/ScrollJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
 
 /**
@@ -37,7 +37,7 @@ export class ScrollTracker extends Tracker {
 
     /**
      * Send the scroll message.
-     * @param message The message to send.
+     * @param sData The message to send.
      */
     public sendData(sData: ScrollJSON) {
         let newCall: number = Date.now();

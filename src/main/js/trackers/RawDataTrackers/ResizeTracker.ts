@@ -1,5 +1,5 @@
-/// <reference path="../interfaces/DatabaseSchemes/WindowResolutionJSON.ts" />
-/// <reference path="../OctopeerConstants.ts" />
+/// <reference path="../../interfaces/DatabaseSchemes/WindowResolutionJSON.ts" />
+/// <reference path="../../OctopeerConstants.ts" />
 /// <reference path="./Tracker.d.ts" />
 
 /**

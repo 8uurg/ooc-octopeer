@@ -3,7 +3,7 @@
 // Nullroute the default creation of the KeystrokeTracker.
 // Actual imports.
 import createSpyObj = jasmine.createSpyObj;
-import {KeystrokeTracker} from "../../../main/js/trackers/KeystrokeTracker";
+import {KeystrokeTracker} from "../../../main/js/trackers/RawDataTrackers/KeystrokeTracker";
 
 describe("KeystrokeTracker", function() {
     let eventCalls: any = {};

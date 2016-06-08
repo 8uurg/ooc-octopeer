@@ -1,7 +1,7 @@
 /**
  * A semantic tracker class
  */
-abstract class SemanticTracker {
+export abstract class SemanticTracker {
 
     /**
      * The collector which collects the data to send it to the database.
@@ -65,7 +65,7 @@ abstract class SemanticTracker {
      * Send the data to the database.
      * @param data The data to send.
      */
-    protected sendData(data: SemanticEventJSON) {
+    protected sendData(data: SemanticEventJSON): void {
         this.collector.sendMessage({
             table: "semantic-events/",
             data: data
@@ -73,8 +73,9 @@ abstract class SemanticTracker {
     }
 
     /**
-     * This method registers the trackers for all semantic elements.
-     * @param element The semantic element to track and its settings.
+     * Register an HTMLElement to this semantic tracker.
+     * @param element The element to monitor
+     * @param eventName The name of the event.
      */
-    public abstract registerSemanticElement(element: SemanticMapping);
+    public abstract registerElement(element: Element, eventName: string): void;
 }

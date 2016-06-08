@@ -1,4 +1,4 @@
-/// <reference path="../interfaces/DatabaseSchemes/MousePosJSON.ts" />
+/// <reference path="../../interfaces/DatabaseSchemes/MousePosJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
 
 /**

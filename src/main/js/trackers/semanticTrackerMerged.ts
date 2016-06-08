@@ -26,7 +26,7 @@ function createSemanticElement(name: string, descriptor: string, mapping: Semant
  * Implements semantic tracking
  * For given elements tracks specific events.
  */
-export class SemanticTracker {
+export class SemanticTrackerMerged {
 
     private mappings: SemanticMapping[];
     private collector: TrackingCollector;
