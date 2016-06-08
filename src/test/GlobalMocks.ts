@@ -53,7 +53,9 @@ _global.document = {
 
 _global.localStorage = function() {};
 _global.window = {
-    addEventListener: function() {}
+    addEventListener: function() {},
+    scrollX: 0,
+    scrollY: 0
 };
 _global.window.innerHeight = 500;
 _global.window.innerWidth = 400;

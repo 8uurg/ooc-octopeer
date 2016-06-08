@@ -14,6 +14,7 @@ var OCTOPEER_CONSTANTS: any = { // tslint:disable-line
     "track_semantic_events":    "checkboxSemanticEvents",
     "track_pr_metadata":        "trackPRMetaData",
     "track_browser_data":       "trackBrowserData",
+    "track_scroll":             "trackScroll",
     "track_visibility":         "trackVisibility",
     "hash_username":            "hashUsername",
     "hash_pr_metadata":         "hashPRMetaData",
