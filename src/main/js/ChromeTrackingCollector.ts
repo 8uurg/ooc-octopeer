@@ -6,7 +6,6 @@
 
 /// <reference path="../../../typings/index.d.ts" />
 
-
 /**
  * ChromeTrackingCollector
  * Collects all the tracking data and multiplexes it over a singular chrome port.

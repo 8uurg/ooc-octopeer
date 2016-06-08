@@ -5,6 +5,9 @@
  */
 declare var OCTOPEER_CONSTANTS: any;
 
+/**
+ * Adds a listener for each checkbox which changes the setting in chrome.
+ */
 export function registerCheckbox(storageName: string, checkboxId: string) {
     let checkbox = <HTMLInputElement> document.getElementById(checkboxId);
     let syncedStorage = chrome.storage.sync;
@@ -18,7 +21,10 @@ export function registerCheckbox(storageName: string, checkboxId: string) {
     });
 }
 
-export function initializeCheckboxes() {
+/**
+ * Adds the functionality to the checkbox toggles.
+ */
+export function setupCheckboxes() {
     registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_position,           "checkboxMousePosition");
     registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_clicks,             "checkboxMouseClicks");
     registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution,          "checkboxPageRes");
@@ -30,7 +36,10 @@ export function initializeCheckboxes() {
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_visibility,      "checkboxSemanticPRPageVisibility");
 }
 
-export function makeRefreshButtonFunctional() {
+/**
+ * Adds the functionality to the refresh notification.
+ */
+export function setUpRefreshNotificationElements() {
 
     document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
         chrome.tabs.query({
@@ -47,7 +56,10 @@ export function makeRefreshButtonFunctional() {
     });
 }
 
-export function databaseLocationField() {
+/**
+ * Creates the functionality for the database setting's textfield and apply button.
+ */
+export function setUpDatabaseLocationElements() {
     let databaseLocationField = <HTMLInputElement> document.getElementById("database_location");
     let apiRegex = new RegExp("http://.*/api/");
     chrome.storage.sync.get(
@@ -71,17 +83,20 @@ export function databaseLocationField() {
             chrome.storage.sync.set({ [OCTOPEER_CONSTANTS.database_location_key] : location });
             console.log("set database location to: " + location);
             databaseLocationField.className =
-                databaseLocationField.className.replace(new RegExp(" invalid"), " valid");
+                databaseLocationField.className.replace(" invalid", " valid");
+        } else {
+            databaseLocationField.className =
+                databaseLocationField.className.replace(" valid", " invalid");
         }
     });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    initializeCheckboxes();
+    setupCheckboxes();
 
-    makeRefreshButtonFunctional();
+    setUpRefreshNotificationElements();
 
-    databaseLocationField();
+    setUpDatabaseLocationElements();
 });
 
 
