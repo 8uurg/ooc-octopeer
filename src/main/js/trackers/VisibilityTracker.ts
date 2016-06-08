@@ -2,7 +2,7 @@
 /// <reference path="./Tracker.d.ts" />
 
 /**
- * Provides a tracker that tracks the visibility on the webpage.
+ * Provides a tracker that tracks the visibility on the page.
  */
 export class VisibilityTracker extends Tracker {
     private pageVisible: boolean = false;
