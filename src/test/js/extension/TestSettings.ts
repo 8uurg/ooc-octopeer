@@ -1,7 +1,10 @@
 "use strict";
 ///<reference path="../../../../typings/index.d.ts" />
 
-import {registerCheckbox, makeRefreshButtonFunctional} from "../../../main/js/extension/Settings";
+import {
+    registerCheckbox, makeRefreshButtonFunctional,
+    databaseLocationField
+} from "../../../main/js/extension/Settings";
 
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
 let browser: any = new MockBrowser();
@@ -103,6 +106,10 @@ describe("The database input field", function () {
         this.oldDocument = document;
         browser = new MockBrowser();
         document = browser.getDocument();
+        this.location = "http://test-server.com/api/";
+        this.databaseLocationTextField = jasmine.createSpyObj("div", ["addEventListener", "value", "className"]);
+        this.applyButton = jasmine.createSpyObj("input", ["addEventListener"]);
+        spyOn(document, "getElementById").and.returnValues(this.databaseLocationTextField, this.applyButton);
     });
 
     afterEach(function () {
@@ -110,6 +117,28 @@ describe("The database input field", function () {
     });
 
     it("should have the stored location on start up", function () {
-        
+        spyOn(chrome.storage.sync, "get").and.callFake((defaults: any, callback: any) => {
+            callback({ [OCTOPEER_CONSTANTS.database_location_key]: this.location });
+        });
+
+        databaseLocationField();
+        expect(this.databaseLocationTextField.value).toEqual(this.location);
+    });
+
+    it("should check whether the input is valid every time a key is pressed", function () {
+        let dispatchKeyUp: () => void;
+        this.databaseLocationTextField.addEventListener.and.callFake((event: string, callback: () => void) => {
+            dispatchKeyUp = callback;
+        });
+
+        databaseLocationField();
+
+        this.databaseLocationTextField.className = " valid";
+        this.databaseLocationTextField.value += "y";
+        dispatchKeyUp();
+        expect(this.databaseLocationTextField.className).toMatch(new RegExp(" invalid"));
+        this.databaseLocationTextField.value = this.location;
+        dispatchKeyUp();
+        expect(this.databaseLocationTextField.className).toMatch(new RegExp(" valid"));
     });
 });
