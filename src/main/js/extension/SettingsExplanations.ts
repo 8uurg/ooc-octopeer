@@ -92,6 +92,46 @@ export class SettingsExplanations {
                 });
                 return [this.title, keys];
             }
+        },
+        {
+            "settingSelector": "semantic-position-setting-question", "title": "Semantic Position Tracking",
+            "bodyText": [
+                "The semantic position tracker tracks the position of your mouse in relation to elements on " +
+                "Bitbucket web pages. Events are triggered when the mouse enters or leaves HTML elements on the page."
+            ],
+            "sampleData": () => { let emptyArray: Array<HTMLElement> = []; return emptyArray; }
+        },
+        {
+            "settingSelector": "semantic-clicks-setting-question", "title": "Semantic Clicks Tracking",
+            "bodyText": [
+                "The semantic click tracker tracks the mouse clicks in relation to elements  that are clicked on " +
+                "Bitbucket web pages. When a mouse click occurs, the specific element that is clicked is also stored."
+            ],
+            "sampleData": () => { let emptyArray: Array<HTMLElement> = []; return emptyArray; }
+        },
+        {
+            "settingSelector": "semantic-keystrokes-setting-question", "title": "Semantic Keystrokes Tracking",
+            "bodyText": [
+                "The semantic keystroke tracker tracks the keystrokes in relation to elements on " +
+                "Bitbucket web pages. When you use your keyboard, the field where the text is being typed in " +
+                    "(for instance a comment box) is stored as well."
+            ],
+            "sampleData": () => { let emptyArray: Array<HTMLElement> = []; return emptyArray; }
+        },
+        {
+            "settingSelector": "semantic-scrolling-setting-question", "title": "Semantic Scrolling Tracking",
+            "bodyText": [
+                "The semantic scrolling tracker tracks how far you've scrolled down on Bitbucket web pages." +
+                "This way it is possible to deduce which elements on the web page are in view at any given time."
+            ],
+            "sampleData": () => { let emptyArray: Array<HTMLElement> = []; return emptyArray; }
+        },
+        {
+            "settingSelector": "semantic-visibility-setting-question", "title": "Semantic PR Page Visibility Tracking",
+            "bodyText": [
+                "The semantic PR page visibility tracker tracks whether a Bitbucket PR tab is active or not."
+            ],
+            "sampleData": () => { let emptyArray: Array<HTMLElement> = []; return emptyArray; }
         }
     ];
 

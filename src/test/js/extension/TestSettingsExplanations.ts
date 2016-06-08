@@ -59,10 +59,15 @@ describe("Setting explanation cards", function() {
     });
 
     let testArray = [
-        {id: "mouse-position-setting-question",     title: "Mouse Position Tracking"},
-        {id: "mouse-click-setting-question",        title: "Mouse Click Tracking"},
-        {id: "page-resolution-setting-question",    title: "Page Resolution Tracking"},
-        {id: "keystroke-setting-question",          title: "Keystroke Tracking"}
+        {id: "mouse-position-setting-question",         title: "Mouse Position Tracking"},
+        {id: "mouse-click-setting-question",            title: "Mouse Click Tracking"},
+        {id: "page-resolution-setting-question",        title: "Page Resolution Tracking"},
+        {id: "keystroke-setting-question",              title: "Keystroke Tracking"},
+        {id: "semantic-position-setting-question",      title: "Semantic Position Tracking"},
+        {id: "semantic-clicks-setting-question",        title: "Semantic Clicks Tracking"},
+        {id: "semantic-keystrokes-setting-question",    title: "Semantic Keystrokes Tracking"},
+        {id: "semantic-scrolling-setting-question",     title: "Semantic Scrolling Tracking"},
+        {id: "semantic-visibility-setting-question",    title: "Semantic PR Page Visibility Tracking"}
     ];
 
     testArray.forEach( function(item) {
