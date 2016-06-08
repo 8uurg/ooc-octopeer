@@ -2,7 +2,7 @@
 
 import {DomTracker} from "../../../main/js/trackers/DomTracker";
 
-describe("The Visible Elements Tracker", function() {
+describe("The Dom Tracker", function() {
 
     beforeEach(function () {
         let _this = this;

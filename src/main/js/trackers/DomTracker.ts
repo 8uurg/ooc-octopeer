@@ -13,15 +13,16 @@ export class DomTracker {
     public register() {
         const _this: DomTracker = this;
 
-        let prepareDom = function () {
+        let sendModifiedDom = function () {
             _this.modifyDom();
+            _this.sendData(_this.createMessage(document.documentElement.outerHTML));
         };
 
         // Send initial dom on page load.
-        _this.modifyDom();
+        sendModifiedDom();
 
         // Sends modified dom on change of the dom.
-        window.document.addEventListener("change", prepareDom);
+        window.document.addEventListener("change", sendModifiedDom);
     }
 
     /**
@@ -35,7 +36,6 @@ export class DomTracker {
             let element: Element = allDOMElements.item(numberOfElements);
             this.setDataAttributesToElement(element);
         }
-        this.sendData(this.createMessage(document.documentElement.outerHTML));
     }
 
     /**
@@ -60,7 +60,7 @@ export class DomTracker {
     /**
      * Add a collector to send the tracked data to.
      * @param collector The collector to send to.
-     * @returns {VisibleElementsTracker}
+     * @returns {DomTracker}
      */
     public withCollector(collector: TrackingCollector): DomTracker {
         this.collector = collector;
@@ -70,7 +70,7 @@ export class DomTracker {
     /**
      * Creates a message using the VisibleElementJSON interface.
      * @param Dom  The modified dom with data elements added.
-     * @returns {{Dom: string}}
+     * @returns {VisibleElementJSON}
      */
     public createMessage(Dom: string): VisibleElementJSON {
         return {
