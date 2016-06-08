@@ -2,11 +2,18 @@
 ///<reference path="../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
 ///<reference path="../interfaces/TrackingCollector.ts" />
 
+/**
+ * Enum as the database uses only two types identified by numbers.
+ * This avoids using magic numbers.
+ */
 enum KeyEventType {
     down = 1,
     up = 2
 }
 
+/**
+ * Provides a tracker that tracks keystrokes on the page.
+ */
 export class KeystrokeTracker {
 
     private collector: TrackingCollector;
@@ -77,7 +84,7 @@ export class KeystrokeTracker {
     }
     
     /**
-     * Send data to the database
+     * Send data to the database.
      */
     private sendData(ksData: KeystrokeJSON) {
         this.collector.sendMessage({

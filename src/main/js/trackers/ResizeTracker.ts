@@ -3,7 +3,11 @@
 /// <reference path="../interfaces/TrackingCollector.ts" />
 /// <reference path="../OctopeerConstants.ts" />
 
+/**
+ * Provides a tracker that tracks the resolution of the screen.
+ */
 export class ResizeTracker {
+
     private width: number = -1;
     private height: number = -1;
     private timestamp: number = -1;
