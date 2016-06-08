@@ -39,6 +39,10 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
     // Create a collector.
     let collector: TrackingCollector = new ChromeTrackingCollector(new DataGatherer());
 
+    if (!collector.isReadyToSend()) {
+        return;
+    }
+
     // Register the visibility tracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_dom]) {
         (new DomTracker()).withCollector(collector).register();

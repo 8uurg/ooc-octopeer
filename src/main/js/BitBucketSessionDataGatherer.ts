@@ -10,6 +10,9 @@ export class BitBucketSessionDataGatherer implements SessionDataGatherer {
 
     private sessionData: SessionJSON;
 
+    /**
+     * Creating a BitBucketSessionDataGatherer object.
+     */
     constructor() {
         let data = document.getElementsByTagName("body")[0].attributes;
 
@@ -85,7 +88,7 @@ type BitBucketRepository = {
 };
 
 /**
- * BitBucket User data tag format 
+ * BitBucket User data tag format.
  */
 type BitBucketUser = {
    "username": string,

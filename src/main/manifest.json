@@ -19,8 +19,8 @@
   "content_scripts": [
       {
         "matches": [
-          "http://bitbucket.org/*",
-          "https://bitbucket.org/*"
+          "http://bitbucket.org/*/pull-requests/*",
+          "https://bitbucket.org/*/pull-requests/*"
         ],
         "js": [
           "js/OctopeerConstants.js",

@@ -1,5 +1,7 @@
 /**
- * Created by Cas on 18-5-2016.
+ * This class mocks global elements to enable testing on these functions.
+ * @type {NodeJS.Global}
+ * @private
  */
 
 // Linting is disabled as var is required here. Let has not the proper functionality yet.

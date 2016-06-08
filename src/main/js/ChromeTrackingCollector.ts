@@ -24,6 +24,14 @@ export class ChromeTrackingCollector implements TrackingCollector {
     }
 
     /**
+     * Indicates whether the session is instantiated and the collector can send messages.
+     * @returns {boolean} 
+     */
+    public isReadyToSend(): boolean {
+        return this.session !== null;
+    }
+
+    /**
      * Send a tracker message using the ChromeTrackingCollector.
      */
     public sendMessage(message: Message) {

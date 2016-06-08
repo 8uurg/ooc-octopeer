@@ -12,7 +12,7 @@ import {BitBucketSessionDataGatherer} from "../../main/js/BitBucketSessionDataGa
 const samplePrData = {
    "localId": 71,
    "author": {
-      "username": "breijm"
+      "username": "johnDoe"
    }
 };
 
