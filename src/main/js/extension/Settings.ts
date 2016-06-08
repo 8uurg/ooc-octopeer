@@ -5,6 +5,9 @@
  */
 declare var OCTOPEER_CONSTANTS: any;
 
+/**
+ * Adds a listener for each checkbox which changes the setting in chrome.
+ */
 export function registerCheckbox(storageName: string, checkboxId: string) {
     let checkbox = <HTMLInputElement> document.getElementById(checkboxId);
     let syncedStorage = chrome.storage.sync;
@@ -18,7 +21,10 @@ export function registerCheckbox(storageName: string, checkboxId: string) {
     });
 }
 
-export function makeRefreshButtonFunctional() {
+/**
+ * Adds the functionality to the refresh notification.
+ */
+export function setUpRefreshNotificationElements() {
     document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
         chrome.tabs.query({
             "url" : [
@@ -34,7 +40,10 @@ export function makeRefreshButtonFunctional() {
     });
 }
 
-export function databaseLocationField() {
+/**
+ * Creates the functionality for the database setting's textfield and apply button.
+ */
+export function setUpDatabaseLocationElements() {
     let databaseLocationField = <HTMLInputElement> document.getElementById("database_location");
     let apiRegex = new RegExp("http://.*/api/");
     chrome.storage.sync.get(
@@ -74,9 +83,9 @@ document.addEventListener("DOMContentLoaded", () => {
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_events,      "checkboxSemanticEvents");
     registerCheckbox(OCTOPEER_CONSTANTS.track_visibility,           "checkboxVisibility");
 
-    makeRefreshButtonFunctional();
+    setUpRefreshNotificationElements();
 
-    databaseLocationField();
+    setUpDatabaseLocationElements();
 });
 
 

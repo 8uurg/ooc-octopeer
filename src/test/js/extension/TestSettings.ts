@@ -2,8 +2,8 @@
 ///<reference path="../../../../typings/index.d.ts" />
 
 import {
-    registerCheckbox, makeRefreshButtonFunctional,
-    databaseLocationField
+    registerCheckbox, setUpRefreshNotificationElements,
+    setUpDatabaseLocationElements
 } from "../../../main/js/extension/Settings";
 
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
@@ -96,7 +96,7 @@ describe("The refresh page notification", function () {
             resultCallback([{ id: 4 }]);
         });
 
-        makeRefreshButtonFunctional();
+        setUpRefreshNotificationElements();
         expect(chrome.tabs.reload).toHaveBeenCalledWith(4);
     });
 });
@@ -121,7 +121,7 @@ describe("The database input field", function () {
             callback({ [OCTOPEER_CONSTANTS.database_location_key]: this.location });
         });
 
-        databaseLocationField();
+        setUpDatabaseLocationElements();
         expect(this.databaseLocationTextField.value).toEqual(this.location);
     });
 
@@ -131,7 +131,7 @@ describe("The database input field", function () {
             dispatchKeyUp = callback;
         });
 
-        databaseLocationField();
+        setUpDatabaseLocationElements();
 
         this.databaseLocationTextField.className = " valid";
         this.databaseLocationTextField.value += "y";
@@ -151,7 +151,7 @@ describe("The database input field", function () {
         this.databaseLocationTextField.className = " invalid";
         spyOn(chrome.storage.sync, "set");
 
-        databaseLocationField();
+        setUpDatabaseLocationElements();
         dispatchClick();
 
         expect(chrome.storage.sync.set).toHaveBeenCalledWith({
@@ -169,7 +169,7 @@ describe("The database input field", function () {
         this.databaseLocationTextField.className = " invalid";
         spyOn(chrome.storage.sync, "set");
 
-        databaseLocationField();
+        setUpDatabaseLocationElements();
         dispatchClick();
 
         expect(chrome.storage.sync.set).not.toHaveBeenCalled();
