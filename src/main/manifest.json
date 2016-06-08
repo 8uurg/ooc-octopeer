@@ -27,6 +27,7 @@
           "js/trackers/Tracker.js",
           "js/trackers/KeystrokeTracker.js",
           "js/trackers/MouseClickTracker.js",
+          "js/trackers/ScrollTracker.js",
           "js/trackers/MousePositionTracker.js",
           "js/trackers/ResizeTracker.js",
           "js/trackers/semanticTracker.js",

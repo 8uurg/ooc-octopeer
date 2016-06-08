@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
     registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,          "checkboxKeystrokes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_events,      "checkboxSemanticEvents");
     registerCheckbox(OCTOPEER_CONSTANTS.track_visibility,           "checkboxVisibility");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_scroll,               "checkboxScroll");
 
     document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
         chrome.tabs.query({
