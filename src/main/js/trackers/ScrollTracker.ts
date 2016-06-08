@@ -5,8 +5,8 @@
  * ScrollTracker, Tracks the current viewport position in comparison to the page origin.
  */
 export class ScrollTracker {
+    
     private collector: TrackingCollector;
-
     private lastCall: number = -1;
 
     /**

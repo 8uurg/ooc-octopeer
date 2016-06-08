@@ -1,6 +1,7 @@
 ///<reference path="../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
 ///<reference path="../interfaces/DatabaseSchemes/MouseClickJSON.ts" />
 ///<reference path="../interfaces/DatabaseSchemes/MousePosJSON.ts" />
+///<reference path="../interfaces/DatabaseSchemes/ScrollJSON.ts" />
 ///<reference path="../interfaces/DatabaseSchemes/SemanticEventJSON.ts" />
 ///<reference path="../interfaces/DatabaseSchemes/WindowResolutionJSON.ts" />
 /**
