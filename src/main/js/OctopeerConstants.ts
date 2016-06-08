@@ -1,6 +1,4 @@
 /**
- * Created by larsstegman on 12-05-16.
- *
  * Constants that are used in the local storage for Octopeer.
  */
 var OCTOPEER_CONSTANTS: any = { // tslint:disable-line

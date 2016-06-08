@@ -19,11 +19,12 @@
   "content_scripts": [
       {
         "matches": [
-          "http://bitbucket.org/*",
-          "https://bitbucket.org/*"
+          "http://bitbucket.org/*/pull-requests/*",
+          "https://bitbucket.org/*/pull-requests/*"
         ],
         "js": [
           "js/OctopeerConstants.js",
+          "js/trackers/Tracker.js",
           "js/trackers/KeystrokeTracker.js",
           "js/trackers/MouseClickTracker.js",
           "js/trackers/ScrollTracker.js",

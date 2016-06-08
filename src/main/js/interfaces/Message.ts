@@ -5,9 +5,10 @@
 ///<reference path="../interfaces/DatabaseSchemes/SemanticEventJSON.ts" />
 ///<reference path="../interfaces/DatabaseSchemes/WindowResolutionJSON.ts" />
 /**
- * Created by Cas on 14-5-2016.
+ * This interface is used to define the structure for a chrome message to enforce type-checking.
  */
 interface Message {
+
     /**
      * The type of the message. *F.E.: MousePos for mouse position events*
      */

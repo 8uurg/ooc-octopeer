@@ -2,8 +2,6 @@
 import {SemanticTracker} from "../../../main/js/trackers/semanticTracker";
 
 /**
- * Created by larsstegman on 31-05-16.
- * 
  * A test suite for the semantic keystroke tracker.
  */
 describe("The key stroke semantic tracker", function() {

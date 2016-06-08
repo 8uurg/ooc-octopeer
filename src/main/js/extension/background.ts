@@ -1,4 +1,5 @@
 import Tab = chrome.tabs.Tab;
+
 /**
  * Creates a page on a tab when the extension badge is clicked.
  */

@@ -1,10 +1,10 @@
 /*This script ensures scripts can be used from the popup*/
 
+declare var OCTOPEER_CONSTANTS: any;
+
 /**
  * This function handles the status of the checkboxes and stores changes made by users locally.
  */
-declare var OCTOPEER_CONSTANTS: any;
-
 export function registerCheckbox(storageName: string, checkboxId: string) {
     let checkbox = <HTMLInputElement> document.getElementById(checkboxId);
     let syncedStorage = chrome.storage.sync;
