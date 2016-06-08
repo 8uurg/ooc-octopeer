@@ -19,7 +19,8 @@ export class ScrollTracker {
             _this.sendMessage(_this.createMessage());
         }
 
-        document.addEventListener("load", sendWindowPosition);
+        // Send window position on load.
+        sendWindowPosition();
         window.addEventListener("scroll", sendWindowPosition);
     }
 
