@@ -31,11 +31,11 @@ export class KeystrokeTracker {
      */
     public register() {
         document.addEventListener("keydown", (event) => {
-            this.sendData(this.createMessage(event.keyCode, KeyEventType.down));
+            this.sendData(this.createMessage(this.mapKeyCodeToString(event.keyCode), KeyEventType.down));
         });
 
         document.addEventListener("keyup", (event) => {
-            this.sendData(this.createMessage(event.keyCode, KeyEventType.up));
+            this.sendData(this.createMessage(this.mapKeyCodeToString(event.keyCode), KeyEventType.up));
         });
     }
 
@@ -50,26 +50,32 @@ export class KeystrokeTracker {
     }
 
     /**
+     * Maps a key code to a string.
+     * @param keyCode The key code.
+     * @returns {string} The corresponding string.
+     */
+    private mapKeyCodeToString(keyCode: number): string {
+        if (this.keyMap[keyCode] != null) {
+            return this.keyMap[keyCode];
+        } else {
+            return String.fromCharCode(keyCode);
+        }
+    }
+
+    /**
      * Creates a message using the Keystroke interface.
-     * @param keyCode The keycode for the key that has to be sent.
+     * @param keyName The keycode for the key that has to be sent.
      * @param type The type of the key stroke.
      * @returns {KeystrokeJSON}
      */
-    private createMessage(keyCode: number, type: KeyEventType): KeystrokeJSON {
-        let keyName: string;
-        if (this.keyMap[keyCode] != null) {
-            keyName = this.keyMap[keyCode];
-        } else {
-            keyName = String.fromCharCode(keyCode);
-        }
-
+    private createMessage(keyName: string, type: KeyEventType): KeystrokeJSON {
         return {
             created_at: Date.now() / 1000,
             keystroke: keyName,
             keystroke_type: type
         };
     }
-
+    
     /**
      * Send data to the database
      */
