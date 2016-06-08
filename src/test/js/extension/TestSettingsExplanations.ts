@@ -113,3 +113,17 @@ describe("Setting explanation cards", function() {
             .getPropertyValue("display")).toEqual("none");
     });
 });
+
+describe("Time Formatter", function() {
+    beforeEach(function() {
+        this.tracker = new SettingsExplanations();
+    });
+
+    it("should prepend a 0 to a value below 10", function() {
+        expect(this.tracker.timeFormatter(9)).toEqual("09");
+    });
+
+    it("should not touch a value above 9", function() {
+        expect(this.tracker.timeFormatter(10)).toEqual("10");
+    });
+});

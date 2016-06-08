@@ -48,8 +48,8 @@ export class SettingsExplanations {
                 let time = document.createElement("div");
                 document.addEventListener("click", () => {
                     let date = new Date();
-                    time.innerHTML = "Timestamp: " + date.getHours() + ":" + date.getMinutes() + ":" +
-                        date.getSeconds();
+                    time.innerHTML = "Timestamp: " + this.timeFormatter(date.getHours()) +
+                        ":" + this.timeFormatter(date.getMinutes()) + ":" + this.timeFormatter(date.getSeconds());
                 });
                 return [this.title, time];
             }
@@ -151,6 +151,18 @@ export class SettingsExplanations {
             "sampleData": () => { let emptyArray: Array<HTMLElement> = []; return emptyArray; }
         }
     ];
+
+    /**
+     * This function will prepend a 0 to count values below 10. This way the time will always be formatted neatly.
+     * @param count The hour, minute or second count
+     * @returns a toString() of the count
+     */
+    public timeFormatter(count: number) {
+        if (count < 10) {
+            return ("0" + count.toString());
+        }
+        return count.toString();
+    }
 
     /**
      * Sets the notification contents and add event listeners to them.
