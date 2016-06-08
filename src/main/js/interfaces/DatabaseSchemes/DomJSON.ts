@@ -3,7 +3,7 @@
 /**
  * This interface is used to define the structure of an html-page in the RESTful API.
  */
-interface VisibleElementJSON {
+interface DomJSON {
 
     /**
      * The session object of the current pull request.

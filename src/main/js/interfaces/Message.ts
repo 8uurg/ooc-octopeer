@@ -1,3 +1,4 @@
+///<reference path="../interfaces/DatabaseSchemes/DomJSON.ts" />
 ///<reference path="../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
 ///<reference path="../interfaces/DatabaseSchemes/MouseClickJSON.ts" />
 ///<reference path="../interfaces/DatabaseSchemes/MousePosJSON.ts" />
@@ -18,5 +19,5 @@ interface Message {
     /**
      * The data object which adheres one interface.
      */
-    data: KeystrokeJSON|MouseClickJSON|MousePosJSON|WindowResolutionJSON|SemanticEventJSON|VisibleElementJSON;
+    data: KeystrokeJSON|MouseClickJSON|MousePosJSON|WindowResolutionJSON|SemanticEventJSON|DomJSON;
 }

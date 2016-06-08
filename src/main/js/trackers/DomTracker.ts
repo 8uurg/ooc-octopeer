@@ -1,4 +1,4 @@
-/// <reference path="../interfaces/DatabaseSchemes/VisibleElementJSON.ts" />
+/// <reference path="../interfaces/DatabaseSchemes/DomJSON.ts" />
 
 /**
  * This tracker was created for tracking all coordinates of visible elements on the webpage.
@@ -70,9 +70,9 @@ export class DomTracker {
     /**
      * Creates a message using the VisibleElementJSON interface.
      * @param Dom  The modified dom with data elements added.
-     * @returns {VisibleElementJSON}
+     * @returns {DomJSON}
      */
-    public createMessage(Dom: string): VisibleElementJSON {
+    public createMessage(Dom: string): DomJSON {
         return {
             dom: Dom,
             created_at: Date.now() / 1000
@@ -81,12 +81,12 @@ export class DomTracker {
 
     /**
      * Sends data to the database.
-     * @param veData   The VisibleElementJSON object.
+     * @param dData   The DomJSON object.
      */
-    private sendData(veData: VisibleElementJSON) {
+    private sendData(dData: DomJSON) {
         this.collector.sendMessage({
             table: "html-pages/",
-            data: veData
+            data: dData
         });
     }
 }
