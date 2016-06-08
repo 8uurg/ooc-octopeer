@@ -4,11 +4,11 @@
 ///<reference path="./trackers/ResizeTracker.ts" />
 ///<reference path="./trackers/semanticTracker.ts" />
 ///<reference path="./trackers/VisibilityTracker.ts" />
+///<reference path="./trackers/DomTracker.ts" />
 
 ///<reference path="./ChromeTrackingCollector.ts" />
 ///<reference path="./BitBucketSessionDataGatherer.ts" />
 
-declare var RARequestsSender: any;
 declare var VisibilityTracker: any;
 declare var KeystrokeTracker: any;
 declare var MouseClickTracker: any;
@@ -16,6 +16,7 @@ declare var MousePositionTracker: any;
 declare var ResizeTracker: any;
 declare var ScrollTracker: any;
 declare var SemanticTracker: any;
+declare var DomTracker: any;
 declare var DataGatherer: any;
 declare var ChromeTrackingCollector: any;
 
@@ -32,7 +33,8 @@ let neededSettings: { [key: string]: boolean; } = {
     [OCTOPEER_CONSTANTS.track_mouse_clicks]: true,
     [OCTOPEER_CONSTANTS.track_scroll]: true,
     [OCTOPEER_CONSTANTS.track_semantic_events]: true,
-    [OCTOPEER_CONSTANTS.track_visibility]: true
+    [OCTOPEER_CONSTANTS.track_visibility]: true,
+    [OCTOPEER_CONSTANTS.track_dom]: true
 };
 
 chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
@@ -42,6 +44,11 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
 
     if (!collector.isReadyToSend()) {
         return;
+    }
+
+    // Register the visibility tracker to the current document.
+    if (items[OCTOPEER_CONSTANTS.track_dom]) {
+        (new DomTracker()).withCollector(collector).register();
     }
 
     // Register the resize tracker to the current document.

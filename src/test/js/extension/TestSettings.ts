@@ -138,7 +138,6 @@ describe("The database input field", function () {
             dispatchClick = callback;
         });
         this.databaseLocationTextField.value = this.location;
-        this.databaseLocationTextField.className = " invalid";
         spyOn(chrome.storage.sync, "set");
 
         setUpDatabaseLocationElements();
@@ -147,7 +146,6 @@ describe("The database input field", function () {
         expect(chrome.storage.sync.set).toHaveBeenCalledWith({
             [OCTOPEER_CONSTANTS.database_location_key]: this.location
         });
-        expect(this.databaseLocationTextField.className).toMatch(new RegExp(" valid"));
     });
 
     it("should not set the chrome setting if the value is not valid", function () {
@@ -156,13 +154,11 @@ describe("The database input field", function () {
             dispatchClick = callback;
         });
         this.databaseLocationTextField.value = "thisIsNotTheDBYouAreLookingFor";
-        this.databaseLocationTextField.className = " invalid";
         spyOn(chrome.storage.sync, "set");
 
         setUpDatabaseLocationElements();
         dispatchClick();
 
         expect(chrome.storage.sync.set).not.toHaveBeenCalled();
-        expect(this.databaseLocationTextField.className).not.toMatch(new RegExp(" valid"));
     });
 });
