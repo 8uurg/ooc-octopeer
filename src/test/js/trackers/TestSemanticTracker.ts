@@ -1,5 +1,5 @@
 ///<reference path="../../../../typings/index.d.ts" />
-import {SemanticTracker} from "../../../main/js/trackers/semanticTracker";
+import {SemanticTracker} from "../../../main/js/trackers/semanticTrackerMerged";
 
 /**
  * A test suite for the semantic keystroke tracker.
