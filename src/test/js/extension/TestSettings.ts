@@ -75,7 +75,7 @@ describe("The checkboxes setup", function () {
     it("should register all checkboxes", function () {
         spyOn(chrome.storage.sync, "get").and.callThrough();
         setupCheckboxes();
-        expect(chrome.storage.sync.get).toHaveBeenCalledTimes(10);
+        expect(chrome.storage.sync.get).toHaveBeenCalledTimes(11);
     });
 });
 
