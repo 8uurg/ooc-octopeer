@@ -25,6 +25,10 @@ _global.chrome = {
             set: function () {},
             get: function () {}
         }
+    },
+    tabs: {
+        query: function() {},
+        reload: function() {}
     }
 };
 

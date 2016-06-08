@@ -1,11 +1,10 @@
 "use strict";
 ///<reference path="../../../../typings/index.d.ts" />
 
-import {registerCheckbox} from "../../../main/js/extension/Settings";
+import {registerCheckbox, makeRefreshButtonFunctional} from "../../../main/js/extension/Settings";
 
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
 let browser: any = new MockBrowser();
-localStorage = browser.getLocalStorage();
 
 /**
  * Tests for popup.
@@ -26,7 +25,7 @@ describe("Settings.ts tests", function () {
         body.appendChild(checkbox);
     });
 
-    afterEach(function() {
+    afterEach(function () {
         document = this.oldDocument;
     });
 
@@ -67,5 +66,50 @@ describe("Settings.ts tests", function () {
          * If this is fixed in the future and you encounter this comment,
          * Remove the second checkbox.click().
          */
+    });
+});
+
+describe("The refresh page notification", function () {
+
+    beforeEach(function () {
+        this.oldDocument = document;
+        browser = new MockBrowser();
+        document = browser.getDocument();
+    });
+
+    afterEach(function () {
+        document = this.oldDocument;
+    });
+
+    it("should refresh all Bitbucket pages", function () {
+        let element = jasmine.createSpyObj("a", ["addEventListener"]);
+        let refreshNotification = document.createElement("div");
+        spyOn(chrome.tabs, "reload");
+        element.addEventListener.and.callFake((_: string, refreshPageCallback: any) => {
+            refreshPageCallback();
+        });
+        spyOn(document, "getElementById").and.returnValues(element, refreshNotification);
+        spyOn(chrome.tabs, "query").and.callFake((_: any, resultCallback: any) => {
+            resultCallback([{ id: 4 }]);
+        });
+
+        makeRefreshButtonFunctional();
+        expect(chrome.tabs.reload).toHaveBeenCalledWith(4);
+    });
+});
+
+describe("The database input field", function () {
+    beforeEach(function () {
+        this.oldDocument = document;
+        browser = new MockBrowser();
+        document = browser.getDocument();
+    });
+
+    afterEach(function () {
+        document = this.oldDocument;
+    });
+
+    it("should have the stored location on start up", function () {
+        
     });
 });

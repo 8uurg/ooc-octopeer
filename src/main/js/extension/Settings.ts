@@ -18,6 +18,22 @@ export function registerCheckbox(storageName: string, checkboxId: string) {
     });
 }
 
+export function makeRefreshButtonFunctional() {
+    document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
+        chrome.tabs.query({
+            "url" : [
+                "http://bitbucket.org/*",
+                "https://bitbucket.org/*"
+            ]
+        }, (tabs: chrome.tabs.Tab[]) => {
+            tabs.forEach((tab) => {
+                chrome.tabs.reload(tab.id);
+            });
+            document.getElementById("refresh-pages-notification").style.setProperty("display", "none");
+        });
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_position,       "checkboxMousePosition");
     registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_clicks,         "checkboxMouseClicks");
@@ -26,19 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_events,      "checkboxSemanticEvents");
     registerCheckbox(OCTOPEER_CONSTANTS.track_visibility,           "checkboxVisibility");
 
-    document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
-        chrome.tabs.query({
-            "url" : [
-                "http://bitbucket.org/*",
-                "https://bitbucket.org/*"
-            ]
-        }, (tabs: [chrome.tabs.Tab]) => {
-            tabs.forEach((tab) => {
-                chrome.tabs.reload(tab.id);
-            });
-            document.getElementById("refresh-pages-notification").style.setProperty("display", "none");
-        });
-    });
+    makeRefreshButtonFunctional();
 
     let databaseLocationField = <HTMLInputElement> document.getElementById("database_location");
     let apiRegex = new RegExp("http://.*/api/");
