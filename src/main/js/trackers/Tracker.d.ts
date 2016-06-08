@@ -7,6 +7,7 @@
  * Declaration / header.
  */
 declare abstract class Tracker {
+    
     /**
      * Register a tracker into the current environment.
      */
