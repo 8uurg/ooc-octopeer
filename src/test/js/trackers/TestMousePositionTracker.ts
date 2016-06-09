@@ -45,7 +45,7 @@ describe("The Mouse Position Tracker", function() {
         });
     });
 
-    it("should throttle the amount of sendData calls, if events occur too fast.", function() {
+    it("should never throttle the amount of sendData calls.", function() {
         this.tracker.register();
 
         // Change cursor position.
@@ -68,33 +68,7 @@ describe("The Mouse Position Tracker", function() {
             clientY: 0
         });
 
-        // Second call should be throttled.
-        expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
-    });
-
-    it("should call sendData multiple times, if there is enough time between events.", function() {
-        this.tracker.register();
-        jasmine.clock().mockDate();
-
-        // Change cursor position.
-        this.eventCall({
-            pageX: 50,
-            pageY: 100,
-            clientX: 0,
-            clientY: 0
-        });
-
-        // Pass a sufficient amount of time.
-        jasmine.clock().tick(1000);
-
-        // Change cursor position.
-        this.eventCall({
-            pageX: 250,
-            pageY: 100,
-            clientX: 0,
-            clientY: 0
-        });
-
+        // Second call should not be throttled either.
         expect(this.collector.sendMessage).toHaveBeenCalledTimes(2);
     });
 

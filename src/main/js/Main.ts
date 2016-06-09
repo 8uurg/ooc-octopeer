@@ -19,6 +19,7 @@ declare var SemanticTracker: any;
 declare var DomTracker: any;
 declare var DataGatherer: any;
 declare var ChromeTrackingCollector: any;
+declare var StartEndThrottle: any;
 
 /**
  * Created by larsstegman on 16-05-16.
@@ -53,7 +54,7 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
 
     // Register the resize tracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_page_resolution]) {
-        (new ResizeTracker()).withCollector(collector).register();
+        (new ResizeTracker()).withCollector(collector).withThrottle(StartEndThrottle).register();
     }
 
     // Create an instance of the keystroke tracker.
@@ -63,7 +64,7 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
 
     // Register the mousetracker to the current document.
     if (items[OCTOPEER_CONSTANTS.track_mouse_position]) {
-        (new MousePositionTracker()).withCollector(collector).register();
+        (new MousePositionTracker()).withCollector(collector).withThrottle(StartEndThrottle).register();
     }
 
     // Register the scroll tracker to the current document.

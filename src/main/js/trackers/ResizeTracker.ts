@@ -9,7 +9,6 @@ export class ResizeTracker extends Tracker {
     private width: number = -1;
     private height: number = -1;
     private timestamp: number = -1;
-    private timer: any = null;
 
     /**
      * Registers and hooks the instance into the environment.
@@ -22,12 +21,7 @@ export class ResizeTracker extends Tracker {
             _this.height = window.innerHeight;
             _this.timestamp = Date.now();
 
-            // Stop the previous resize event from being sent.
-            clearTimeout(_this.timer);
-
-            _this.timer = setTimeout(function () {
-                _this.sendData(_this.createMessage());
-            }, 400);
+            _this.sendData(_this.createMessage());
         };
         // Send initial window size on page load.
         window.addEventListener("load", prepareDatapoint);

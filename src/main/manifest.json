@@ -24,6 +24,10 @@
         ],
         "js": [
           "js/OctopeerConstants.js",
+          "js/trackers/throttles/Throttle.js",
+          "js/trackers/throttles/LastMessageThrottle.js",
+          "js/trackers/throttles/MinDelayThrottle.js",
+          "js/trackers/throttles/StartEndThrottle.js",
           "js/trackers/Tracker.js",
           "js/trackers/DomTracker.js",
           "js/trackers/KeystrokeTracker.js",
