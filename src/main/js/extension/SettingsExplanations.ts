@@ -157,7 +157,7 @@ export class SettingsExplanations {
      * @param count The hour, minute or second count
      * @returns a toString() of the count
      */
-    public timeFormatter(count: number) {
+    private timeFormatter(count: number) {
         if (count < 10) {
             return ("0" + count.toString());
         }
