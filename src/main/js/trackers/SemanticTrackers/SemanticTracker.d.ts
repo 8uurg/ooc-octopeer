@@ -45,4 +45,10 @@ declare abstract class SemanticTracker {
      * @param eventName The name of the event.
      */
     public abstract registerElement(element: Element, eventName: string): void;
+
+    /**
+     * The name of this semantic tracker
+     * @returns {string}
+     */
+    public abstract getName(): string;
 }

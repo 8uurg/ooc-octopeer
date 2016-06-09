@@ -1,8 +1,4 @@
-/**
- * Created by larsstegman on 09-06-16.
- */
-
-import {SemanticTrackerTest} from "./SemanticTrackerTest";
+import {SemanticTrackerTest} from "./TestSemanticTracker";
 import {ClickSemanticTracker} from "../../../../main/js/trackers/SemanticTrackers/ClickSemanticTracker";
 
 SemanticTrackerTest(ClickSemanticTracker);

@@ -1,5 +1,4 @@
-
-import {SemanticTrackerTest} from "./SemanticTrackerTest";
+import {SemanticTrackerTest} from "./TestSemanticTracker";
 import {KeystrokeSemanticTracker} from "../../../../main/js/trackers/SemanticTrackers/KeystrokeSemanticTracker";
 
 SemanticTrackerTest(KeystrokeSemanticTracker);

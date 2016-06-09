@@ -1,7 +1,7 @@
 import {MouseSemanticTracker} from "../../../../main/js/trackers/SemanticTrackers/MouseSemanticTracker";
-/**
- * Created by larsstegman on 09-06-16.
- */
+import {SemanticTrackerTest} from "./TestSemanticTracker";
+
+SemanticTrackerTest(MouseSemanticTracker);
 
 describe("The mouse semantic tracker", function () {
 
@@ -17,6 +17,13 @@ describe("The mouse semantic tracker", function () {
         jasmine.clock().mockDate();
 
         fireEvent = {};
+
+        let element = jasmine.createSpyObj("elem", ["addEventListener"]);
+        element.addEventListener.and.callFake((event: string, callback: any) => {
+            fireEvent[event] = callback;
+        });
+
+        tracker.registerElement(element, "Comment textfield");
     });
 
     afterEach(function () {
@@ -24,12 +31,6 @@ describe("The mouse semantic tracker", function () {
     });
 
     it("should correctly register a mouse enter", function () {
-        let element = jasmine.createSpyObj("elem", ["addEventListener"]);
-        element.addEventListener.and.callFake((event: string, callback: any) => {
-            fireEvent[event] = callback;
-        });
-
-        tracker.registerElement(element, "Comment textfield");
         fireEvent["mouseenter"]();
         expect(collector.sendMessage).toHaveBeenCalledTimes(1);
         expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
@@ -40,12 +41,6 @@ describe("The mouse semantic tracker", function () {
     });
 
     it("should correctly register a mouse leave", function () {
-        let element = jasmine.createSpyObj("elem", ["addEventListener"]);
-        element.addEventListener.and.callFake((event: string, callback: any) => {
-            fireEvent[event] = callback;
-        });
-
-        tracker.registerElement(element, "Comment textfield");
         fireEvent["mouseleave"]();
         expect(collector.sendMessage).toHaveBeenCalledTimes(1);
         expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({

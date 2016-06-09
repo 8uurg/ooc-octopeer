@@ -1,4 +1,3 @@
-
 /**
  * Creates a test suite for the abstract class.
  * Execute this function outside your implementation test suite with the constructor of the class.
@@ -6,7 +5,7 @@
  */
 export function SemanticTrackerTest(SemanticTrackerInstance: new () => SemanticTracker): void {
 
-    describe("The Abstract Tracker", function () {
+    describe("The " + new SemanticTrackerInstance().getName(), function () {
         let abstractTracker: SemanticTracker;
         let collector: TrackingCollector;
 
@@ -28,15 +27,11 @@ export function SemanticTrackerTest(SemanticTrackerInstance: new () => SemanticT
                 callback();
             });
 
-            let creationDate = Date.now() / 1000;
             abstractTracker.registerElement(element, "Comment textfield");
-
-            expect(collector.sendMessage).toHaveBeenCalledTimes(1);
             expect(collector.sendMessage).toHaveBeenCalledWith({
                 table: "semantic-events/",
                 data: jasmine.objectContaining({
                     element_type: 501,
-                    created_at: creationDate
                 })
             });
         });
@@ -56,7 +51,11 @@ export function SemanticTrackerTest(SemanticTrackerInstance: new () => SemanticT
             spyOn(document, "querySelectorAll").and.returnValue(elements);
 
             abstractTracker.registerElementWithSelector("", "Comment textfield");
-            expect(collector.sendMessage).toHaveBeenCalledTimes(2);
+            expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
+                data: jasmine.objectContaining({
+                    element_type: 501
+                })
+            }));
         });
 
         it("should register a list of elements via a selector correctly", function () {
@@ -78,7 +77,6 @@ export function SemanticTrackerTest(SemanticTrackerInstance: new () => SemanticT
             spyOn(document, "querySelectorAll").and.returnValues([element0], [element1]);
 
             abstractTracker.registerElements(elementSelectors);
-            expect(collector.sendMessage).toHaveBeenCalledTimes(2);
             expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
                 data: jasmine.objectContaining({
                     element_type: 501
@@ -121,6 +119,10 @@ export function SemanticTrackerTest(SemanticTrackerInstance: new () => SemanticT
  */
 class WrongSemanticTracker
     extends SemanticTracker {
+
+    public getName() {
+        return "WrongSemanticTracker";
+    }
 
     public registerElement(element: Element, eventName: string): void {
         element.addEventListener("click", () => {

@@ -7,6 +7,14 @@ export class KeystrokeSemanticTracker
     extends SemanticTracker {
 
     /**
+     * The name of this semantic tracker
+     * @returns {string}
+     */
+    public getName(): string {
+        return "KeystrokeSemanticTracker";
+    }
+
+    /**
      * Register a HTMLElement to this semantic tracker.
      * @param element The element to monitor
      * @param eventName The name of the event.
