@@ -30,7 +30,10 @@ let neededSettings: { [key: string]: boolean; } = {
     [OCTOPEER_CONSTANTS.track_mouse_clicks]: true,
     [OCTOPEER_CONSTANTS.track_scroll]: true,
     [OCTOPEER_CONSTANTS.track_semantic_events]: true,
+    [OCTOPEER_CONSTANTS.track_semantic_clicks]: true,
     [OCTOPEER_CONSTANTS.track_visibility]: true,
+    [OCTOPEER_CONSTANTS.track_semantic_key_strokes]: true,
+    [OCTOPEER_CONSTANTS.track_semantic_position]: true,
     [OCTOPEER_CONSTANTS.track_dom]: true
 };
 
@@ -56,7 +59,7 @@ let semanticElementsToTrack: {eventType: string, selector: string, trackKeyStrok
         trackClick: true, trackHover: true, trackScroll: true}
 ];
 
-chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
+chrome.storage.sync.get(neededSettings, (preferences: { [key: string]: any }) => {
 
     // Create a collector.
     let collector: TrackingCollector = new ChromeTrackingCollector(new DataGatherer());
@@ -66,37 +69,37 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
     }
 
     // Register the visibility tracker to the current document.
-    if (items[OCTOPEER_CONSTANTS.track_dom]) {
+    if (preferences[OCTOPEER_CONSTANTS.track_dom]) {
         (new DomTracker()).withCollector(collector).register();
     }
 
     // Register the resize tracker to the current document.
-    if (items[OCTOPEER_CONSTANTS.track_page_resolution]) {
+    if (preferences[OCTOPEER_CONSTANTS.track_page_resolution]) {
         (new ResizeTracker()).withCollector(collector).register();
     }
 
     // Create an instance of the keystroke tracker.
-    if (items[OCTOPEER_CONSTANTS.track_key_strokes]) {
+    if (preferences[OCTOPEER_CONSTANTS.track_key_strokes]) {
         (new KeystrokeTracker()).withCollector(collector).register();
     }
 
     // Register the mousetracker to the current document.
-    if (items[OCTOPEER_CONSTANTS.track_mouse_position]) {
+    if (preferences[OCTOPEER_CONSTANTS.track_mouse_position]) {
         (new MousePositionTracker()).withCollector(collector).register();
     }
 
     // Register the scroll tracker to the current document.
-    if (items[OCTOPEER_CONSTANTS.track_scroll]) {
+    if (preferences[OCTOPEER_CONSTANTS.track_scroll]) {
         (new ScrollTracker()).withCollector(collector).register();
     }
 
     // Register the mouse click tracker to the current document.
-    if (items[OCTOPEER_CONSTANTS.track_mouse_clicks]) {
+    if (preferences[OCTOPEER_CONSTANTS.track_mouse_clicks]) {
         (new MouseClickTracker()).withCollector(collector).register();
     }
 
     // Register the visibility tracker to the current document.
-    if (items[OCTOPEER_CONSTANTS.track_visibility]) {
+    if (preferences[OCTOPEER_CONSTANTS.track_visibility]) {
         (new VisibilityTracker()).withCollector(collector).register();
     }
 
@@ -106,13 +109,13 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
 
     for (let i = 0; i < semanticElementsToTrack.length; i++) {
         let element = semanticElementsToTrack[i];
-        if (element.trackKeyStroke) {
+        if (element.trackKeyStroke && preferences[OCTOPEER_CONSTANTS.track_semantic_key_strokes]) {
             keyStrokeTracker.registerElementWithSelector(element.selector, element.eventType);
         }
-        if (element.trackClick) {
+        if (element.trackClick && preferences[OCTOPEER_CONSTANTS.track_semantic_clicks]) {
             mouseClickTracker.registerElementWithSelector(element.selector, element.eventType);
         }
-        if (element.trackHover) {
+        if (element.trackHover && preferences[OCTOPEER_CONSTANTS.track_semantic_position]) {
             mouseHoverTracker.registerElementWithSelector(element.selector, element.eventType);
         }
     }
