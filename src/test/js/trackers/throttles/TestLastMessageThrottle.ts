@@ -20,7 +20,7 @@ describe("The LastMessage throttle", function () {
         };
     });
 
-    it("should not immidiately pass the message onwards.", function() {
+    it("should not immediately pass the message onwards.", function() {
         this.throttle.sendMessage(this.fakeMessage);
 
         expect(this.fakeCollector.sendMessage).not.toHaveBeenCalledWith(this.fakeMessage);

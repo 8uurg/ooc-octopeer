@@ -20,7 +20,7 @@ describe("The MinDelay throttle", function () {
         };
     });
 
-    it("should immidiately pass the message onwards.", function() {
+    it("should immediately pass the message onwards.", function() {
         this.throttle.sendMessage(this.fakeMessage);
 
         expect(this.fakeCollector.sendMessage).toHaveBeenCalledWith(this.fakeMessage);
