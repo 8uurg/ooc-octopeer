@@ -2,7 +2,6 @@
 ///<reference path="./trackers/RawDataTrackers/MouseClickTracker.ts" />
 ///<reference path="./trackers/RawDataTrackers/MousePositionTracker.ts" />
 ///<reference path="./trackers/RawDataTrackers/ResizeTracker.ts" />
-///<reference path="./trackers/semanticTrackerMerged.ts" />
 ///<reference path="./trackers/RawDataTrackers/VisibilityTracker.ts" />
 ///<reference path="./trackers/RawDataTrackers/DomTracker.ts" />
 
