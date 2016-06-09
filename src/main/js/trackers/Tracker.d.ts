@@ -1,5 +1,6 @@
 /// <reference path="../interfaces/Message.ts" />
 /// <reference path="../interfaces/TrackingCollector.ts" />
+/// <reference path="./throttles/Throttle.d.ts" />
 
 /**
  * An abstract class that represents a tracker.
@@ -22,7 +23,7 @@ declare abstract class Tracker {
      * Place a throttle in between.
      * @param throttle The throttle class to place in between.
      */
-    public withThrottle(throttle: any): Tracker;
+    public withThrottle(throttle: new (collector: TrackingCollector) => Throttle): Tracker;
 
     /**
      * Send a message over the collector.
