@@ -80,6 +80,30 @@ export abstract class SemanticTracker {
     }
 
     /**
+     * Add an element to track
+     * If the selector selects multiple elements, they will all be tracked.
+     * @param selector The css selector which selects the element to track.
+     * @param eventName The name of the event that is tracked.
+     */
+    public registerElement(selector: string, eventName: string) {
+        let selectedElements = <NodeListOf<Element>> document.querySelectorAll(selector);
+        for (let i = 0; i < selectedElements.length; i++) {
+            this.registerElement(selectedElements[i], eventName);
+        }
+    }
+
+    /**
+     * Add multiple elements to track.
+     * If a selector selects multiple elements, they will all be tracked.
+     * @param elements A tuple containing the selector for the element and the name of the event.
+     */
+    public registerElements(elements: [string, string][]) {
+        for (let i = 0; i < elements.length; i++) {
+            this.registerElement(elements[i][0], elements[i][1]);
+        }
+    }
+
+    /**
      * Register an HTMLElement to this semantic tracker.
      * @param element The element to monitor
      * @param eventName The name of the event.
