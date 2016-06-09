@@ -99,7 +99,7 @@ export class SettingsExplanations {
                 "The scroll tracker tracks x and y position of the visible portion of web pages on Bitbucket pull " +
                 "requests. This information is used to identify what is visible on your screen and what is not."
             ],
-            "sampleData": () => { let emptyArray: Array<HTMLElement> = []; return emptyArray; }
+            "sampleData": () => { let emptyArray: HTMLElement[] = []; return emptyArray; }
         },
         {
             "settingSelector": "dom-setting-question", "title": "DOM Element Tracking",
@@ -148,7 +148,7 @@ export class SettingsExplanations {
             "bodyText": [
                 "The semantic PR page visibility tracker tracks whether a Bitbucket PR tab is active or not."
             ],
-            "sampleData": () => { let emptyArray: Array<HTMLElement> = []; return emptyArray; }
+            "sampleData": () => { let emptyArray: HTMLElement[] = []; return emptyArray; }
         }
     ];
 
