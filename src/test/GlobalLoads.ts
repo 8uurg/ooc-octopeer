@@ -8,11 +8,11 @@ var _global: any = global; // tslint:disable-line
 import {Tracker} from "../main/js/trackers/Tracker";
 _global.Tracker = Tracker;
 
-import {Trottle} from "../main/js/trackers/trottles/Trottle";
-_global.Trottle = Trottle;
+import {Throttle} from "../main/js/trackers/throttles/Throttle";
+_global.Throttle = Throttle;
 
-import {MinDelayTrottle} from "../main/js/trackers/trottles/MinDelayTrottle";
-_global.MinDelayTrottle = MinDelayTrottle;
+import {MinDelayThrottle} from "../main/js/trackers/throttles/MinDelayThrottle";
+_global.MinDelayThrottle = MinDelayThrottle;
 
-import {LastMessageTrottle} from "../main/js/trackers/trottles/LastMessageTrottle";
-_global.LastMessageTrottle = LastMessageTrottle;
+import {LastMessageThrottle} from "../main/js/trackers/throttles/LastMessageThrottle";
+_global.LastMessageThrottle = LastMessageThrottle;

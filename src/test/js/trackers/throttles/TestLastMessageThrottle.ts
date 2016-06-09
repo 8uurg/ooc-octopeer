@@ -1,14 +1,14 @@
 /// <reference path="../../../../../typings/index.d.ts" />
 
-import {MinDelayTrottle} from "../../../../main/js/trackers/trottles/MinDelayTrottle";
+import {LastMessageThrottle} from "../../../../main/js/trackers/throttles/LastMessageThrottle";
 
-describe("The MinDelay trottle", function () {
+describe("The LastMessage throttle", function () {
 
     beforeEach(function () {
         jasmine.clock().install();
         jasmine.clock().mockDate();
         this.fakeCollector = jasmine.createSpyObj("Collector", ["sendMessage"]);
-        this.trottle = new MinDelayTrottle(this.fakeCollector);
+        this.throttle = new LastMessageThrottle(this.fakeCollector);
         this.fakeMessage = {
             test: "isWorking"
         };
@@ -20,27 +20,31 @@ describe("The MinDelay trottle", function () {
         };
     });
 
-    it("should immidiately pass the message onwards.", function() {
-        this.trottle.sendMessage(this.fakeMessage);
+    it("should not immidiately pass the message onwards.", function() {
+        this.throttle.sendMessage(this.fakeMessage);
 
+        expect(this.fakeCollector.sendMessage).not.toHaveBeenCalledWith(this.fakeMessage);
+        jasmine.clock().tick(1000);
         expect(this.fakeCollector.sendMessage).toHaveBeenCalledWith(this.fakeMessage);
     });
 
-    it("should drop the current message if one was sent before it.", function() {
-        this.trottle.sendMessage(this.fakeMessage);
+    it("should drop the message if one is sent after it.", function() {
+        this.throttle.sendMessage(this.wrongFakeMessage);
 
         jasmine.clock().tick(800);
-        this.trottle.sendMessage(this.WrongFakeMessage);
+        this.throttle.sendMessage(this.fakeMessage);
 
+        jasmine.clock().tick(1000);
         expect(this.fakeCollector.sendMessage).not.toHaveBeenCalledWith(this.wrongFakeMessage);
         expect(this.fakeCollector.sendMessage).toHaveBeenCalledWith(this.fakeMessage);
     });
 
     it("should keep sending if the delay is great enough", function() {
-        this.trottle.sendMessage(this.fakeMessage);
+        this.throttle.sendMessage(this.fakeMessage);
 
         jasmine.clock().tick(5000);
-        this.trottle.sendMessage(this.anotherFakeMessage);
+        this.throttle.sendMessage(this.anotherFakeMessage);
+        jasmine.clock().tick(1000);
 
         expect(this.fakeCollector.sendMessage).toHaveBeenCalledWith(this.anotherFakeMessage);
         expect(this.fakeCollector.sendMessage).toHaveBeenCalledWith(this.fakeMessage);
@@ -49,5 +53,4 @@ describe("The MinDelay trottle", function () {
     afterEach(function () {
         jasmine.clock().uninstall();
     });
-
 });

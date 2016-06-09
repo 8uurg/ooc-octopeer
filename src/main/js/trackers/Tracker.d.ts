@@ -19,10 +19,10 @@ declare abstract class Tracker {
     public withCollector(collector: TrackingCollector): Tracker;
 
     /**
-     * Place a trottle in between.
-     * @param Trottle The trottle class to place in between.
+     * Place a throttle in between.
+     * @param Throttle The throttle class to place in between.
      */
-    public withTrottle(trottle: any): Tracker;
+    public withThrottle(throttle: any): Tracker;
 
     /**
      * Send a message over the collector.

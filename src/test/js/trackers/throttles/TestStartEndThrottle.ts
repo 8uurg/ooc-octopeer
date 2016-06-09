@@ -1,14 +1,14 @@
 /// <reference path="../../../../../typings/index.d.ts" />
 
-import {StartEndTrottle} from "../../../../main/js/trackers/trottles/StartEndTrottle";
+import {StartEndThrottle} from "../../../../main/js/trackers/throttles/StartEndThrottle";
 
-describe("The LastMessage trottle", function () {
+describe("The LastMessage throttle", function () {
 
     beforeEach(function () {
         jasmine.clock().install();
         jasmine.clock().mockDate();
         this.fakeCollector = jasmine.createSpyObj("Collector", ["sendMessage"]);
-        this.trottle = new StartEndTrottle(this.fakeCollector);
+        this.throttle = new StartEndThrottle(this.fakeCollector);
         this.fakeMessage = {
             test: "isWorking"
         };
@@ -21,17 +21,17 @@ describe("The LastMessage trottle", function () {
     });
 
     it("should immidiately pass the first message onwards.", function() {
-        this.trottle.sendMessage(this.fakeMessage);
+        this.throttle.sendMessage(this.fakeMessage);
 
         expect(this.fakeCollector.sendMessage).toHaveBeenCalledWith(this.fakeMessage);
     });
 
     it("Not immidiately send the message sent soon after it.", function() {
-        this.trottle.sendMessage(this.fakeMessage);
+        this.throttle.sendMessage(this.fakeMessage);
         expect(this.fakeCollector.sendMessage).toHaveBeenCalledWith(this.fakeMessage);
 
         jasmine.clock().tick(800);
-        this.trottle.sendMessage(this.anotherFakeMessage);
+        this.throttle.sendMessage(this.anotherFakeMessage);
         expect(this.fakeCollector.sendMessage).not.toHaveBeenCalledWith(this.anotherFakeMessage);
 
         jasmine.clock().tick(1000);
@@ -39,12 +39,12 @@ describe("The LastMessage trottle", function () {
     });
 
     it("should keep sending if the delay is great enough", function() {
-        this.trottle.sendMessage(this.fakeMessage);
+        this.throttle.sendMessage(this.fakeMessage);
         expect(this.fakeCollector.sendMessage).toHaveBeenCalledWith(this.fakeMessage);
 
         jasmine.clock().tick(1001);
 
-        this.trottle.sendMessage(this.anotherFakeMessage);
+        this.throttle.sendMessage(this.anotherFakeMessage);
         expect(this.fakeCollector.sendMessage).toHaveBeenCalledWith(this.anotherFakeMessage);
     });
 

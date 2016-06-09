@@ -1,6 +1,6 @@
 /// <reference path="../interfaces/Message.ts" />
 /// <reference path="../interfaces/TrackingCollector.ts" />
-/// <reference path="./trottles/Trottle.d.ts" />
+/// <reference path="./throttles/Throttle.d.ts" />
 
 
 /**
@@ -25,11 +25,11 @@ export abstract class Tracker {
     }
 
     /**
-     * Place a trottle in between.
-     * @param Trottle The trottle class to place in between.
+     * Place a throttle in between.
+     * @param Throttle The throttle class to place in between.
      */
-    public withTrottle(trottle: any): Tracker {
-        this.collector = new trottle(this.collector);
+    public withThrottle(throttle: any): Tracker {
+        this.collector = new throttle(this.collector);
         return this;
     }
 

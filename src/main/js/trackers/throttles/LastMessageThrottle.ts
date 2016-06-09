@@ -1,17 +1,17 @@
-/// <reference path="Trottle.d.ts" />
+/// <reference path="Throttle.d.ts" />
 
 /**
  * Drops all messages coming in before a certain timespan of the current message.
  */
-export class LastMessageTrottle extends Trottle {
+export class LastMessageThrottle extends Throttle {
     private lastTimer: any = -1;
     private lastDrop: () => void;
     private maxDelay: number = 1000;
 
     /**
-     * Send a trottled message, dropping those sent before if sent too quickly.
+     * Send a throttled message, dropping those sent before if sent too quickly.
      */
-    public sendTrottledMessage(message: Message, drop: () => void) {
+    public sendThrottledMessage(message: Message, drop: () => void) {
         if (this.lastDrop) {
             clearTimeout(this.lastTimer);
             this.lastDrop();
@@ -20,7 +20,7 @@ export class LastMessageTrottle extends Trottle {
         this.lastDrop = drop;
         this.lastTimer = setTimeout(() => {
             this.lastDrop = null;
-            super.sendTrottledMessage(message, drop);
+            super.sendThrottledMessage(message, drop);
         }, this.maxDelay);
     }
 }

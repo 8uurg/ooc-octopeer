@@ -1,16 +1,16 @@
 /// <reference path="../../../../../typings/index.d.ts" />
 
-import {Trottle} from "../../../../main/js/trackers/trottles/Trottle";
+import {Throttle} from "../../../../main/js/trackers/throttles/Throttle";
 
-describe("The basic trottle", function () {
+describe("The basic throttle", function () {
     it("should just pass the message onwards", function() {
         let fakeCollector = jasmine.createSpyObj("Collector", ["sendMessage"]);
-        let trottle = new Trottle(fakeCollector);
+        let throttle = new Throttle(fakeCollector);
         let fakeMessage: any = {
             test: "isWorking"
         };
 
-        trottle.sendMessage(fakeMessage);
+        throttle.sendMessage(fakeMessage);
 
         expect(fakeCollector.sendMessage).toHaveBeenCalledWith(fakeMessage);
     });

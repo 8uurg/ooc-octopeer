@@ -1,12 +1,12 @@
 /// <reference path="../../interfaces/TrackingCollector.ts" />
 
 /**
- * A basic mainframe for creating a trottle.
+ * A basic mainframe for creating a throttle.
  */
-declare abstract class Trottle implements TrackingCollector {
+declare abstract class Throttle implements TrackingCollector {
 
     /**
-     * Initialize a Trottle.
+     * Initialize a Throttle.
      */
     constructor(collector: TrackingCollector);
 
@@ -14,7 +14,7 @@ declare abstract class Trottle implements TrackingCollector {
      * Send message with a callback.
      * Callback is used to handle the message being dropped.
      */
-    public sendTrottledMessage(message: Message, drop: () => void): void;
+    public sendThrottledMessage(message: Message, drop: () => void): void;
 
     /**
      * Pass ready to send to actual collector.
