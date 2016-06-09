@@ -4,7 +4,7 @@
  * Drops all messages coming in within a certain timespan of the last accepted message.
  */
 export class MinDelayThrottle extends Throttle {
-    private lastDate: number = -1;
+    private lastTimeSent: number = -1;
     private minDelay: number = 1000;
 
     /**
@@ -15,8 +15,8 @@ export class MinDelayThrottle extends Throttle {
     public sendThrottledMessage(message: Message, drop: () => void) {
         const currDate: number = Date.now();
 
-        if (this.lastDate + this.minDelay < currDate) {
-            this.lastDate = currDate;
+        if (this.lastTimeSent + this.minDelay < currDate) {
+            this.lastTimeSent = currDate;
             super.sendThrottledMessage(message, drop);
         } else {
             drop();
