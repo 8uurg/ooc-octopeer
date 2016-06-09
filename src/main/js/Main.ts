@@ -8,9 +8,6 @@
 ///<reference path="./ChromeTrackingCollector.ts" />
 ///<reference path="./BitBucketSessionDataGatherer.ts" />
 
-import {KeystrokeSemanticTracker} from "./trackers/SemanticTrackers/KeystrokeSemanticTracker";
-import {ClickSemanticTracker} from "./trackers/SemanticTrackers/ClickSemanticTracker";
-import {MouseSemanticTracker} from "./trackers/SemanticTrackers/MouseSemanticTracker";
 declare var VisibilityTracker: any;
 declare var KeystrokeTracker: any;
 declare var MouseClickTracker: any;
@@ -20,6 +17,10 @@ declare var ScrollTracker: any;
 declare var DomTracker: any;
 declare var DataGatherer: any;
 declare var ChromeTrackingCollector: any;
+
+declare var KeystrokeSemanticTracker: any;
+declare var ClickSemanticTracker: any;
+declare var MouseSemanticTracker: any;
 
 // The needed settings. True is the default value if storage does not contain the key.
 let neededSettings: { [key: string]: boolean; } = {
