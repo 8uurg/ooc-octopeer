@@ -1,3 +1,8 @@
+let nop: () => HTMLElement[] = () => {
+    let emptyArray = <HTMLElement[]> [];
+    return emptyArray;
+};
+
 /**
  * Configures the explanations on the settings page of Octopeer.
  */
@@ -16,7 +21,8 @@ export class SettingsExplanations {
      * An array of explanation text, one element per paragraph
      * and a closure which generates demo elements, this can be an empty array.
      */
-    private explanations = [
+    private explanations: { settingSelector: string, title: string,
+            bodyText: string[], sampleData: () => HTMLElement[] }[] = [
         {
             "settingSelector": "mouse-position-setting-question", "title": "Mouse Position Tracking",
             "bodyText": [
@@ -99,7 +105,7 @@ export class SettingsExplanations {
                 "The scroll tracker tracks x and y position of the visible portion of web pages on Bitbucket pull " +
                 "requests. This information is used to identify what is visible on your screen and what is not."
             ],
-            "sampleData": () => { let emptyArray: HTMLElement[] = []; return emptyArray; }
+            "sampleData": nop
         },
         {
             "settingSelector": "dom-setting-question", "title": "DOM Element Tracking",
@@ -108,7 +114,7 @@ export class SettingsExplanations {
                 "element are tracked, along with the width and height. This way elements can be tied to other " +
                 "events such as mouse clicks on a certain position."
             ],
-            "sampleData": () => { let emptyArray: HTMLElement[] = []; return emptyArray; }
+            "sampleData": nop
         },
         {
             "settingSelector": "semantic-position-setting-question", "title": "Semantic Position Tracking",
@@ -116,7 +122,7 @@ export class SettingsExplanations {
                 "The semantic position tracker tracks the position of your mouse in relation to elements on " +
                 "Bitbucket web pages. Events are triggered when the mouse enters or leaves HTML elements on the page."
             ],
-            "sampleData": () => { let emptyArray: HTMLElement[] = []; return emptyArray; }
+            "sampleData": nop
         },
         {
             "settingSelector": "semantic-clicks-setting-question", "title": "Semantic Clicks Tracking",
@@ -124,7 +130,7 @@ export class SettingsExplanations {
                 "The semantic click tracker tracks the mouse clicks in relation to elements  that are clicked on " +
                 "Bitbucket web pages. When a mouse click occurs, the specific element that is clicked is also stored."
             ],
-            "sampleData": () => { let emptyArray: HTMLElement[]; return emptyArray; }
+            "sampleData": nop
         },
         {
             "settingSelector": "semantic-keystrokes-setting-question", "title": "Semantic Keystrokes Tracking",
@@ -133,7 +139,7 @@ export class SettingsExplanations {
                 "Bitbucket web pages. When you use your keyboard, the field where the text is being typed in " +
                     "(for instance a comment box) is stored as well."
             ],
-            "sampleData": () => { let emptyArray: HTMLElement[] = []; return emptyArray; }
+            "sampleData": nop
         },
         {
             "settingSelector": "semantic-scrolling-setting-question", "title": "Semantic Scrolling Tracking",
@@ -141,14 +147,14 @@ export class SettingsExplanations {
                 "The semantic scrolling tracker tracks how far you've scrolled down on Bitbucket web pages." +
                 "This way it is possible to deduce which elements on the web page are in view at any given time."
             ],
-            "sampleData": () => { let emptyArray: HTMLElement[] = []; return emptyArray; }
+            "sampleData": nop
         },
         {
             "settingSelector": "semantic-visibility-setting-question", "title": "Semantic PR Page Visibility Tracking",
             "bodyText": [
                 "The semantic PR page visibility tracker tracks whether a Bitbucket PR tab is active or not."
             ],
-            "sampleData": () => { let emptyArray: HTMLElement[] = []; return emptyArray; }
+            "sampleData": nop
         }
     ];
 

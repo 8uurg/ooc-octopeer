@@ -37,16 +37,16 @@ export class ScrollTracker extends Tracker {
 
     /**
      * Send the scroll message.
-     * @param sData The message to send.
+     * @param scrollData The message to send.
      */
-    public sendData(sData: ScrollJSON) {
+    public sendData(scrollData: ScrollJSON) {
         let newCall: number = Date.now();
 
         if ( newCall - this.lastCall >= 1000 ) {
             this.lastCall = newCall;
             this.sendMessage({
                 table: "mouse-scroll-events/",
-                data: sData
+                data: scrollData
             });
         }
     }
