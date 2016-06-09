@@ -36,6 +36,10 @@
           "js/trackers/SemanticTrackers/ClickSemanticTracker.js",
           "js/trackers/SemanticTrackers/KeystrokeSemanticTracker.js",
           "js/trackers/SemanticTrackers/MouseSemanticTracker.js",
+          "js/trackers/throttles/Throttle.js",
+          "js/trackers/throttles/LastMessageThrottle.js",
+          "js/trackers/throttles/MinDelayThrottle.js",
+          "js/trackers/throttles/StartEndThrottle.js",
           "js/BitBucketSessionDataGatherer.js",
           "js/ChromeTrackingCollector.js",
           "js/Main.js"

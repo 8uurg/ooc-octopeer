@@ -45,7 +45,7 @@ describe("The ResizeTracker", function() {
        });
     });
 
-    it("should not send all resize events during a resize.", function() {
+    it("should send all resize events during a resize.", function() {
         this.tracker.register();
         this.ev();
         let creationTime1 = Date.now() / 1000;
@@ -54,40 +54,13 @@ describe("The ResizeTracker", function() {
         let creationTime2 = Date.now() / 1000;
         jasmine.clock().tick(400);
 
-        expect(this.collector.sendMessage).not.toHaveBeenCalledWith({
-            table: "window-resolution-events/",
-            data: {
-                width: 400,
-                height: 500,
-                created_at: creationTime1
-            }
-        });
         expect(this.collector.sendMessage).toHaveBeenCalledWith({
             table: "window-resolution-events/",
             data: {
                 width: 400,
                 height: 500,
-                created_at: creationTime2
-            }
-        });
-    });
-
-    it("should send all resize events if they are different resizes.", function() {
-        this.tracker.register();
-        this.ev();
-        let creationTime1 = Date.now() / 1000;
-        jasmine.clock().tick(3000);
-        this.ev();
-        let creationTime2 = Date.now() / 1000;
-        jasmine.clock().tick(400);
-
-         expect(this.collector.sendMessage).toHaveBeenCalledWith({
-             table: "window-resolution-events/",
-             data: {
-                width: 400,
-                height: 500,
                 created_at: creationTime1
-             }
+            }
         });
         expect(this.collector.sendMessage).toHaveBeenCalledWith({
             table: "window-resolution-events/",

@@ -1,5 +1,6 @@
 /// <reference path="../../interfaces/Message.ts" />
 /// <reference path="../../interfaces/TrackingCollector.ts" />
+/// <reference path="../throttles/Throttle.d.ts" />
 
 /**
  * An abstract class that represents a tracker.
@@ -15,9 +16,19 @@ export abstract class Tracker {
 
     /**
      * Define the collector to use with this class.
+     * @param collector Collector to send data to.
      */
     public withCollector(collector: TrackingCollector): Tracker {
         this.collector = collector;
+        return this;
+    }
+
+    /**
+     * Place a throttle in between.
+     * @param throttle The throttle class to place in between.
+     */
+    public withThrottle(throttle: new (collector: TrackingCollector) => Throttle): Tracker {
+        this.collector = new throttle(this.collector);
         return this;
     }
 
