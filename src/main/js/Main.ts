@@ -29,7 +29,6 @@ let neededSettings: { [key: string]: boolean; } = {
     [OCTOPEER_CONSTANTS.track_page_resolution]: true,
     [OCTOPEER_CONSTANTS.track_mouse_clicks]: true,
     [OCTOPEER_CONSTANTS.track_scroll]: true,
-    [OCTOPEER_CONSTANTS.track_semantic_events]: true,
     [OCTOPEER_CONSTANTS.track_semantic_clicks]: true,
     [OCTOPEER_CONSTANTS.track_visibility]: true,
     [OCTOPEER_CONSTANTS.track_semantic_key_strokes]: true,

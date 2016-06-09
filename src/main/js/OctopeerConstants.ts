@@ -13,7 +13,6 @@ var OCTOPEER_CONSTANTS: any = { // tslint:disable-line
     "track_key_strokes":            "checkboxKeystrokes",
     "track_scroll":                 "checkboxScrolling",
     "track_dom":                    "checkboxDom",
-    "track_semantic_events":        "checkboxSemanticEvents", // Up for deletion after refactor, still used in main.ts.
     "track_semantic_position":      "checkboxSemanticPos",
     "track_semantic_clicks":        "checkboxSemanticClicks",
     "track_semantic_key_strokes":   "checkboxSemanticKeystrokes",
