@@ -1,17 +1,17 @@
 
 /**
- * Creates a test suite for the abstract classes.
- * Execute this function in your implementation test suite with the constructor of the class not executed.
+ * Creates a test suite for the abstract class.
+ * Execute this function outside your implementation test suite with the constructor of the class.
  * e.g. `SemanticTrackerTest(ImplementSemanticTracker)`;
  */
-export function SemanticTrackerTest(tracker: new () => SemanticTracker): void {
+export function SemanticTrackerTest(SemanticTrackerInstance: new () => SemanticTracker): void {
 
     describe("The Abstract Tracker", function () {
         let abstractTracker: SemanticTracker;
         let collector: TrackingCollector;
 
         beforeEach(function () {
-            abstractTracker = new tracker();
+            abstractTracker = new SemanticTrackerInstance();
             collector = jasmine.createSpyObj("collector", ["sendMessage"]);
             abstractTracker.withCollector(collector);
             jasmine.clock().install();

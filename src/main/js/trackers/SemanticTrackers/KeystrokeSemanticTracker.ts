@@ -13,7 +13,7 @@ export class KeystrokeSemanticTracker
      */
     public registerElement(element: Element, eventName: string): void {
         element.addEventListener("keyup", () => {
-            this.sendData(this.createMessage("Keystroke", name));
+            this.sendData(this.createMessage("Keystroke", eventName));
         });
     }
 }
