@@ -1,9 +1,9 @@
-///<reference path="../../../../typings/index.d.ts" />
+///<reference path="../../../../../typings/index.d.ts" />
 
 // Nullroute the default creation of the mousetracker.
 // Actual imports.
 import createSpyObj = jasmine.createSpyObj;
-import {MousePositionTracker} from "../../../main/js/trackers/MousePositionTracker";
+import {MousePositionTracker} from "../../../../main/js/trackers/RawDataTrackers/MousePositionTracker";
 
 
 describe("The Mouse Position Tracker", function() {

@@ -20,6 +20,23 @@ export function registerCheckbox(storageName: string, checkboxId: string) {
 }
 
 /**
+ * Adds the functionality to the checkbox toggles.
+ */
+export function setupCheckboxes() {
+    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_position,           "checkboxMousePosition");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_clicks,             "checkboxMouseClicks");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution,          "checkboxPageRes");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,              "checkboxKeystrokes");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_scroll,                   "checkboxScroll");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_dom,                      "checkboxDom");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_position,        "checkboxSemanticPosition");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_clicks,          "checkboxSemanticClicks");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_key_strokes,     "checkboxSemanticKeystrokes");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_scrolling,       "checkboxSemanticScrolling");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_visibility,      "checkboxSemanticPRPageVisibility");
+}
+
+/**
  * Adds the functionality to the refresh notification.
  */
 export function setUpRefreshNotificationElements() {
@@ -60,15 +77,7 @@ export function setUpDatabaseLocationElements() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_position,       "checkboxMousePosition");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_mouse_clicks,         "checkboxMouseClicks");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_page_resolution,      "checkboxPageRes");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,          "checkboxKeystrokes");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_events,      "checkboxSemanticEvents");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_visibility,           "checkboxVisibility");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_dom,                  "checkboxDom");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_scroll,               "checkboxScroll");
-
+    setupCheckboxes();
     setUpRefreshNotificationElements();
     setUpDatabaseLocationElements();
 });

@@ -2,7 +2,7 @@
 
 import {
     registerCheckbox, setUpRefreshNotificationElements,
-    setUpDatabaseLocationElements
+    setUpDatabaseLocationElements, setupCheckboxes
 } from "../../../main/js/extension/Settings";
 
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
@@ -68,6 +68,14 @@ describe("Settings.ts tests", function () {
          * If this is fixed in the future and you encounter this comment,
          * Remove the second checkbox.click().
          */
+    });
+});
+
+describe("The checkboxes setup", function () {
+    it("should register all checkboxes", function () {
+        spyOn(chrome.storage.sync, "get").and.callThrough();
+        setupCheckboxes();
+        expect(chrome.storage.sync.get).toHaveBeenCalledTimes(11);
     });
 });
 

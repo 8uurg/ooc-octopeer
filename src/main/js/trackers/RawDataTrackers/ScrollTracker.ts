@@ -1,5 +1,5 @@
-/// <reference path="../interfaces/TrackingCollector.ts" />
-/// <reference path="../interfaces/DatabaseSchemes/ScrollJSON.ts" />
+/// <reference path="../../interfaces/TrackingCollector.ts" />
+/// <reference path="../../interfaces/DatabaseSchemes/ScrollJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
 
 /**
@@ -37,16 +37,16 @@ export class ScrollTracker extends Tracker {
 
     /**
      * Send the scroll message.
-     * @param message The message to send.
+     * @param scrollData The message to send.
      */
-    public sendData(sData: ScrollJSON) {
+    public sendData(scrollData: ScrollJSON) {
         let newCall: number = Date.now();
 
         if ( newCall - this.lastCall >= 1000 ) {
             this.lastCall = newCall;
             this.sendMessage({
                 table: "mouse-scroll-events/",
-                data: sData
+                data: scrollData
             });
         }
     }

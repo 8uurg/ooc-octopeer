@@ -1,4 +1,4 @@
-/// <reference path="../interfaces/DatabaseSchemes/DomJSON.ts" />
+/// <reference path="../../interfaces/DatabaseSchemes/DomJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
 
 /**

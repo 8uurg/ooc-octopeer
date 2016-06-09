@@ -1,7 +1,6 @@
-/// <reference path="../interfaces/Message.ts" />
-/// <reference path="../interfaces/TrackingCollector.ts" />
-/// <reference path="./throttles/Throttle.d.ts" />
-
+/// <reference path="../../interfaces/Message.ts" />
+/// <reference path="../../interfaces/TrackingCollector.ts" />
+/// <reference path="../throttles/Throttle.d.ts" />
 
 /**
  * An abstract class that represents a tracker.

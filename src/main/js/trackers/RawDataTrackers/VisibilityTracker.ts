@@ -1,4 +1,4 @@
-/// <reference path="../interfaces/DatabaseSchemes/SemanticEventJSON.ts" />
+/// <reference path="../../interfaces/DatabaseSchemes/SemanticEventJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
 
 /**
