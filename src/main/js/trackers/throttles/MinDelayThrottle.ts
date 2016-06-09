@@ -9,6 +9,8 @@ export class MinDelayThrottle extends Throttle {
 
     /**
      * Send a throttled message, dropping those sent in quick succession.
+     * @param message The message to send.
+     * @param drop The callback to call in case of failure.
      */
     public sendThrottledMessage(message: Message, drop: () => void) {
         const currDate: number = Date.now();

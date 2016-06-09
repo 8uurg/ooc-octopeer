@@ -11,6 +11,7 @@ export class StartEndThrottle extends Throttle {
 
     /**
      * Initialize a Throttle.
+     * @param collector The collector to send data to next.
      */
     constructor(collector: TrackingCollector) {
         super(collector);
@@ -21,6 +22,8 @@ export class StartEndThrottle extends Throttle {
     /**
      * Send a throttled message, dropping those sent in quick succession
      * but keeping the last message if possible.
+     * @param message The message to send.
+     * @param drop The callback to call in case of failure.
      */
     public sendThrottledMessage(message: Message, drop: () => void) {
         this.minDelayThrottle.sendThrottledMessage(message, () => {
