@@ -1,4 +1,4 @@
-/// <reference path="../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
+/// <reference path="../../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
 
 /**

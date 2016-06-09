@@ -26,7 +26,7 @@ function createSemanticElement(name: string, descriptor: string, mapping: Semant
  * Implements semantic tracking
  * For given elements tracks specific events.
  */
-export class SemanticTracker {
+export class SemanticTrackerMerged {
 
     private mappings: SemanticMapping[];
     private collector: TrackingCollector;
@@ -71,7 +71,7 @@ export class SemanticTracker {
             createSemanticElement("Edit comment", ".comment-actions .edit-link", full),
             createSemanticElement("Add reaction", ".new-comment .buttons .aui-button-primary", full),
 
-            // TODO: Give the tabas database id's.
+            // TODO: Give the tabs database id's.
             /*/!* TABS - NOTICE: almost no overlap with GitHub. *!/
             createSemanticElement("commits_tab", "#pr-menu-commits", full),
             createSemanticElement("overview_tab", "#pr-menu-diff", full),
@@ -88,7 +88,7 @@ export class SemanticTracker {
      * @param collector The collector to send the tracking data to.
      * @return Itself for daisy chaining.
      */
-    public withCollector(collector: TrackingCollector): SemanticTracker {
+    public withCollector(collector: TrackingCollector): SemanticTrackerMerged {
         this.collector = collector;
         return this;
     }
