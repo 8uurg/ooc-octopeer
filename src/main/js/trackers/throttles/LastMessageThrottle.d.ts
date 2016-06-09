@@ -1,6 +1,6 @@
 /// <reference path="Throttle.d.ts" />
 
 /**
- * Drops all messages coming in before a certain timespan of the current message.
+ * Drops all messages except the last one in a certain time span.
  */
 declare class LastMessageThrottle extends Throttle {}
