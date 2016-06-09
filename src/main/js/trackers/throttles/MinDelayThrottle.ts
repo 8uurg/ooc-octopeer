@@ -15,7 +15,7 @@ export class MinDelayThrottle extends Throttle {
     public sendThrottledMessage(message: Message, drop: () => void) {
         const currDate: number = Date.now();
 
-        if (this.lastTimeSent + this.minDelay < currDate) {
+        if (currDate - this.lastTimeSent > this.minDelay) {
             this.lastTimeSent = currDate;
             super.sendThrottledMessage(message, drop);
         } else {
