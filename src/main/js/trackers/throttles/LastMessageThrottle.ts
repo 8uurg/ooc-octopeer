@@ -14,7 +14,7 @@ export class LastMessageThrottle extends Throttle {
      * @param drop The callback to call in case of failure.
      */
     public sendThrottledMessage(message: Message, drop: () => void) {
-        if (this.lastDrop !== null) {
+        if (this.lastDrop != null) {
             clearTimeout(this.lastTimer);
             this.lastDrop();
         }
