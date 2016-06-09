@@ -3,7 +3,7 @@
 /// <reference path="LastMessageThrottle.d.ts" />
 
 /**
- * Keeps the first and last message. By using the other two throttles.
+ * Keeps the first and last message within a certain timespan by combining the other two throttles.
  */
 export class StartEndThrottle extends Throttle {
     private minDelayThrottle: MinDelayThrottle;
