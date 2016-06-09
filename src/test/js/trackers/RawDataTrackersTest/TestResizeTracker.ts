@@ -1,7 +1,7 @@
-///<reference path="../../../../typings/index.d.ts" />
+///<reference path="../../../../../typings/index.d.ts" />
 
 import createSpyObj = jasmine.createSpyObj;
-import {ResizeTracker} from "../../../main/js/trackers/RawDataTrackers/ResizeTracker";
+import {ResizeTracker} from "../../../../main/js/trackers/RawDataTrackers/ResizeTracker";
 
 describe("The ResizeTracker", function() {
 

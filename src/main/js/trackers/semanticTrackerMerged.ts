@@ -71,7 +71,7 @@ export class SemanticTrackerMerged {
             createSemanticElement("Edit comment", ".comment-actions .edit-link", full),
             createSemanticElement("Add reaction", ".new-comment .buttons .aui-button-primary", full),
 
-            // TODO: Give the tabas database id's.
+            // TODO: Give the tabs database id's.
             /*/!* TABS - NOTICE: almost no overlap with GitHub. *!/
             createSemanticElement("commits_tab", "#pr-menu-commits", full),
             createSemanticElement("overview_tab", "#pr-menu-diff", full),

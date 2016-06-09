@@ -1,5 +1,5 @@
 ///<reference path="../../../../typings/index.d.ts" />
-import {SemanticTracker} from "../../../main/js/trackers/semanticTrackerMerged";
+import {SemanticTrackerMerged} from "../../../main/js/trackers/semanticTrackerMerged";
 
 /**
  * A test suite for the semantic keystroke tracker.
@@ -7,7 +7,7 @@ import {SemanticTracker} from "../../../main/js/trackers/semanticTrackerMerged";
 describe("The key stroke semantic tracker", function() {
 
     let collector: TrackingCollector;
-    let semanticTracker: SemanticTracker;
+    let semanticTracker: SemanticTrackerMerged;
     let htmlElement: any; // Using the real type, HTMLElement, causes issues when spying on it.
     let fireEvent: any;
 
@@ -15,7 +15,7 @@ describe("The key stroke semantic tracker", function() {
         jasmine.clock().install();
         jasmine.clock().mockDate();
         collector = jasmine.createSpyObj("collector", ["sendMessage"]);
-        semanticTracker = new SemanticTracker().withCollector(collector);
+        semanticTracker = new SemanticTrackerMerged().withCollector(collector);
         htmlElement = jasmine.createSpyObj("elem", ["addEventListener"]);
         fireEvent = {};
         htmlElement.addEventListener.and.callFake((eventString: string, fireEventFunction: any) => {
@@ -54,7 +54,7 @@ describe("SemanticTracker", function() {
         let _this = this;
 
         this.fakeElement = browser.getDocument().createElement("body");
-        this.tracker = new SemanticTracker();
+        this.tracker = new SemanticTrackerMerged();
         this.collector = jasmine.createSpyObj("TrackingCollector", ["sendMessage"]);
         this.tracker.withCollector(this.collector);
 

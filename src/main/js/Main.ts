@@ -16,7 +16,6 @@ declare var VisibilityTracker: any;
 declare var KeystrokeTracker: any;
 declare var MouseClickTracker: any;
 declare var MousePositionTracker: any;
-declare var SemanticTrackerMerged: any;
 declare var ResizeTracker: any;
 declare var ScrollTracker: any;
 declare var DomTracker: any;
@@ -35,7 +34,7 @@ let neededSettings: { [key: string]: boolean; } = {
     [OCTOPEER_CONSTANTS.track_dom]: true
 };
 
-var semanticElementsToTrack: {eventType: string, selector: string, trackKeyStroke: boolean,
+let semanticElementsToTrack: {eventType: string, selector: string, trackKeyStroke: boolean,
     trackClick: boolean, trackHover: boolean, trackScroll: boolean}[] = [
     {eventType: "Merge Pull Request", selector: "#fullfill-pullrequest", trackKeyStroke: true,
         trackClick: true, trackHover: true, trackScroll: true},
@@ -108,22 +107,13 @@ chrome.storage.sync.get(neededSettings, (items: { [key: string]: any }) => {
     for (let i = 0; i < semanticElementsToTrack.length; i++) {
         let element = semanticElementsToTrack[i];
         if (element.trackKeyStroke) {
-            keyStrokeTracker.registerElement(element.selector, element.eventType);
+            keyStrokeTracker.registerElementWithSelector(element.selector, element.eventType);
         }
         if (element.trackClick) {
-            mouseClickTracker.registerElement(element.selector, element.eventType);
+            mouseClickTracker.registerElementWithSelector(element.selector, element.eventType);
         }
-        if(element.trackHover) {
-            mouseHoverTracker.registerElement(element.selector, element.eventType);
+        if (element.trackHover) {
+            mouseHoverTracker.registerElementWithSelector(element.selector, element.eventType);
         }
     }
 });
-
-
-
-
-
-
-
-
-

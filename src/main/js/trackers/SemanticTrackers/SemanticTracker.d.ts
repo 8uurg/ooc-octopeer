@@ -25,6 +25,21 @@ declare abstract class SemanticTracker {
     protected sendData(data: SemanticEventJSON): void;
 
     /**
+     * Add an element to track
+     * If the selector selects multiple elements, they will all be tracked.
+     * @param selector The css selector which selects the element to track.
+     * @param eventName The name of the event that is tracked.
+     */
+    public registerElementWithSelector(selector: string, eventName: string): void;
+
+    /**
+     * Add multiple elements to track.
+     * If a selector selects multiple elements, they will all be tracked.
+     * @param elements A tuple containing the selector for the element and the name of the event.
+     */
+    public registerElements(elements: [string, string][]): void;
+
+    /**
      * Register an HTMLElement to this semantic tracker.
      * @param element The element to monitor
      * @param eventName The name of the event.

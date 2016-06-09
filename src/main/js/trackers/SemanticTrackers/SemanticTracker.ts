@@ -11,7 +11,7 @@ export abstract class SemanticTracker {
     /**
      * The semantic element types and their corresponding codes.
      */
-    protected element_types_mapping: any = {
+    public element_types_mapping: any = {
         "Merge Pull Request":        101,
         "Close Pull Request":        102,
         "Cancel inline comment":     103,
@@ -26,7 +26,7 @@ export abstract class SemanticTracker {
     /**
      * The semantic event types and their corresponding codes.
      */
-    protected event_types_mapping: any = {
+    public event_types_mapping: any = {
         "Keystroke":                   101,
         "Click":                       201,
         "Mouseenter":                  202,
@@ -85,7 +85,7 @@ export abstract class SemanticTracker {
      * @param selector The css selector which selects the element to track.
      * @param eventName The name of the event that is tracked.
      */
-    public registerElement(selector: string, eventName: string) {
+    public registerElementWithSelector(selector: string, eventName: string) {
         let selectedElements = <NodeListOf<Element>> document.querySelectorAll(selector);
         for (let i = 0; i < selectedElements.length; i++) {
             this.registerElement(selectedElements[i], eventName);
@@ -99,7 +99,7 @@ export abstract class SemanticTracker {
      */
     public registerElements(elements: [string, string][]) {
         for (let i = 0; i < elements.length; i++) {
-            this.registerElement(elements[i][0], elements[i][1]);
+            this.registerElementWithSelector(elements[i][0], elements[i][1]);
         }
     }
 
