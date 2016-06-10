@@ -22,5 +22,6 @@ describe("The basic throttle", function () {
         expect(this.throttle.isReadyToSend()).toBeFalsy();
         expect(this.throttle.isReadyToSend()).toBeFalsy();
         expect(this.throttle.isReadyToSend()).toBeTruthy();
+        expect(this.fakeCollector.isReadyToSend()).toHaveBeenCalledTimes(3);
     });
 });
