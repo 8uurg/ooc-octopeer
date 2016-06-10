@@ -31,7 +31,7 @@ let neededSettings: { [key: string]: boolean; } = {
     [OCTOPEER_CONSTANTS.track_mouse_clicks]: true,
     [OCTOPEER_CONSTANTS.track_scroll]: true,
     [OCTOPEER_CONSTANTS.track_semantic_clicks]: true,
-    [OCTOPEER_CONSTANTS.track_visibility]: true,
+    [OCTOPEER_CONSTANTS.track_semantic_visibility]: true,
     [OCTOPEER_CONSTANTS.track_semantic_key_strokes]: true,
     [OCTOPEER_CONSTANTS.track_semantic_position]: true,
     [OCTOPEER_CONSTANTS.track_dom]: true
@@ -99,7 +99,7 @@ chrome.storage.sync.get(neededSettings, (preferences: { [key: string]: any }) =>
     }
 
     // Register the visibility tracker to the current document.
-    if (preferences[OCTOPEER_CONSTANTS.track_visibility]) {
+    if (preferences[OCTOPEER_CONSTANTS.track_semantic_visibility]) {
         (new VisibilityTracker()).withCollector(collector).register();
     }
 
