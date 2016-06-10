@@ -1,3 +1,5 @@
+///<reference path="../interfaces/UIExplanation.ts" />
+
 let nop: () => HTMLElement[] = () => {
     let emptyArray = <HTMLElement[]> [];
     return emptyArray;
@@ -21,8 +23,7 @@ export class SettingsExplanations {
      * An array of explanation text, one element per paragraph
      * and a closure which generates demo elements, this can be an empty array.
      */
-    private explanations: { settingSelector: string, title: string,
-            bodyText: string[], sampleData: () => HTMLElement[] }[] = [
+    private explanations: UIExplanation[] = [
         {
             "settingSelector": "mouse-position-setting-question", "title": "Mouse Position Tracking",
             "bodyText": [
@@ -214,8 +215,7 @@ export class SettingsExplanations {
      * Sets the contents for an explanation card.
      * @param explanation The data for on the card.
      */
-    private setCard(explanation: {settingSelector: string, title: string, bodyText: string[],
-            sampleData: () => HTMLElement[]}) {
+    private setCard(explanation: UIExplanation) {
         document.getElementById("card-title").innerHTML = explanation.title;
         this.setCardContentText(explanation.bodyText);
         this.setCardSampleData(explanation.sampleData());
