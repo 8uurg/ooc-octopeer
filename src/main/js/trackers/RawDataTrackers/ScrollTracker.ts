@@ -1,4 +1,3 @@
-/// <reference path="../../interfaces/TrackingCollector.ts" />
 /// <reference path="../../interfaces/DatabaseSchemes/ScrollJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
 

@@ -1,12 +1,19 @@
-///<reference path="./trackers/RawDataTrackers/KeystrokeTracker.ts" />
-///<reference path="./trackers/RawDataTrackers/MouseClickTracker.ts" />
-///<reference path="./trackers/RawDataTrackers/MousePositionTracker.ts" />
-///<reference path="./trackers/RawDataTrackers/ResizeTracker.ts" />
-///<reference path="./trackers/RawDataTrackers/VisibilityTracker.ts" />
-///<reference path="./trackers/RawDataTrackers/DomTracker.ts" />
+/// <reference path="./ChromeTrackingCollector.ts" />
+/// <reference path="./BitBucketSessionDataGatherer.ts" />
 
-///<reference path="./ChromeTrackingCollector.ts" />
-///<reference path="./BitBucketSessionDataGatherer.ts" />
+/// <reference path="./trackers/RawDataTrackers/DomTracker.ts" />
+/// <reference path="./trackers/RawDataTrackers/KeystrokeTracker.ts" />
+/// <reference path="./trackers/RawDataTrackers/MouseClickTracker.ts" />
+/// <reference path="./trackers/RawDataTrackers/MousePositionTracker.ts" />
+/// <reference path="./trackers/RawDataTrackers/ResizeTracker.ts" />
+/// <reference path="./trackers/RawDataTrackers/ScrollTracker.ts" />
+/// <reference path="./trackers/RawDataTrackers/VisibilityTracker.ts" />
+
+/// <reference path="./trackers/SemanticTrackers/ClickSemanticTracker.ts" />
+/// <reference path="./trackers/SemanticTrackers/KeystrokeSemanticTracker.ts" />
+/// <reference path="./trackers/SemanticTrackers/MouseSemanticTracker.ts" />
+
+/// <reference path="./trackers/throttles/StartEndThrottle.ts" />
 
 declare var VisibilityTracker: any;
 declare var KeystrokeTracker: any;
