@@ -1,12 +1,12 @@
 ///<reference path="../../../../../typings/index.d.ts" />
 
-// Nullroute the default creation of the visibilitytracker.
-// Actual imports.
 import createSpyObj = jasmine.createSpyObj;
 import {VisibilityTracker} from "../../../../main/js/trackers/RawDataTrackers/VisibilityTracker";
-
+import {testTracker} from "./TestTracker";
 
 describe("The Visibility Tracker", function() {
+    testTracker(VisibilityTracker);
+
     beforeEach(function(){
         jasmine.clock().install();
         jasmine.clock().mockDate();

@@ -1,7 +1,9 @@
 ///<reference path="../../../../../typings/index.d.ts" />
 import {ScrollTracker} from "../../../../main/js/trackers/RawDataTrackers/ScrollTracker";
+import {testTracker} from "./TestTracker";
 
 describe("The ScrollTracker", function() {
+    testTracker(ScrollTracker);
 
     beforeEach(function() {
         this.collector = jasmine.createSpyObj("Collector", ["sendMessage"]);
