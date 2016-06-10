@@ -1,3 +1,8 @@
+let nop: () => HTMLElement[] = () => {
+    let emptyArray = <HTMLElement[]> [];
+    return emptyArray;
+};
+
 /**
  * Configures the explanations on the settings page of Octopeer.
  */
@@ -16,7 +21,8 @@ export class SettingsExplanations {
      * An array of explanation text, one element per paragraph
      * and a closure which generates demo elements, this can be an empty array.
      */
-    private explanations = [
+    private explanations: { settingSelector: string, title: string,
+            bodyText: string[], sampleData: () => HTMLElement[] }[] = [
         {
             "settingSelector": "mouse-position-setting-question", "title": "Mouse Position Tracking",
             "bodyText": [
@@ -48,8 +54,8 @@ export class SettingsExplanations {
                 let time = document.createElement("div");
                 document.addEventListener("click", () => {
                     let date = new Date();
-                    time.innerHTML = "Timestamp: " + date.getHours() + ":" + date.getMinutes() + ":" +
-                        date.getSeconds();
+                    time.innerHTML = "Timestamp: " + this.timeFormatter(date.getHours()) +
+                        ":" + this.timeFormatter(date.getMinutes()) + ":" + this.timeFormatter(date.getSeconds());
                 });
                 return [this.title, time];
             }
@@ -92,8 +98,77 @@ export class SettingsExplanations {
                 });
                 return [this.title, keys];
             }
+        },
+        {
+            "settingSelector": "scroll-setting-question", "title": "Scroll Tracking",
+            "bodyText": [
+                "The scroll tracker tracks x and y position of the visible portion of web pages on Bitbucket pull " +
+                "requests. This information is used to identify what is visible on your screen and what is not."
+            ],
+            "sampleData": nop
+        },
+        {
+            "settingSelector": "dom-setting-question", "title": "DOM Element Tracking",
+            "bodyText": [
+                "The DOM element tracker tracks all HTML elements on Bitbucket. The x and y coordinates of each " +
+                "element are tracked, along with the width and height. This way elements can be tied to other " +
+                "events such as mouse clicks on a certain position."
+            ],
+            "sampleData": nop
+        },
+        {
+            "settingSelector": "semantic-position-setting-question", "title": "Semantic Position Tracking",
+            "bodyText": [
+                "The semantic position tracker tracks the position of your mouse in relation to elements on " +
+                "Bitbucket web pages. Events are triggered when the mouse enters or leaves HTML elements on the page."
+            ],
+            "sampleData": nop
+        },
+        {
+            "settingSelector": "semantic-clicks-setting-question", "title": "Semantic Clicks Tracking",
+            "bodyText": [
+                "The semantic click tracker tracks the mouse clicks in relation to elements  that are clicked on " +
+                "Bitbucket web pages. When a mouse click occurs, the specific element that is clicked is also stored."
+            ],
+            "sampleData": nop
+        },
+        {
+            "settingSelector": "semantic-keystrokes-setting-question", "title": "Semantic Keystrokes Tracking",
+            "bodyText": [
+                "The semantic keystroke tracker tracks the keystrokes in relation to elements on " +
+                "Bitbucket web pages. When you use your keyboard, the field where the text is being typed in " +
+                    "(for instance a comment box) is stored as well."
+            ],
+            "sampleData": nop
+        },
+        {
+            "settingSelector": "semantic-scrolling-setting-question", "title": "Semantic Scrolling Tracking",
+            "bodyText": [
+                "The semantic scrolling tracker tracks how far you've scrolled down on Bitbucket web pages." +
+                "This way it is possible to deduce which elements on the web page are in view at any given time."
+            ],
+            "sampleData": nop
+        },
+        {
+            "settingSelector": "semantic-visibility-setting-question", "title": "Semantic PR Page Visibility Tracking",
+            "bodyText": [
+                "The semantic PR page visibility tracker tracks whether a Bitbucket PR tab is active or not."
+            ],
+            "sampleData": nop
         }
     ];
+
+    /**
+     * This function will prepend a 0 to count values below 10. This way the time will always be formatted neatly.
+     * @param count The hour, minute or second count
+     * @returns a toString() of the count
+     */
+    private timeFormatter(count: number) {
+        if (count < 10) {
+            return ("0" + count.toString());
+        }
+        return count.toString();
+    }
 
     /**
      * Sets the notification contents and add event listeners to them.

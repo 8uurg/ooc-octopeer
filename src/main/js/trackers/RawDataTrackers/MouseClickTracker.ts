@@ -1,11 +1,10 @@
-///<reference path="../interfaces/Message.ts" />
-///<reference path="../interfaces/DatabaseSchemes/MouseClickJSON.ts" />
-///<reference path="../interfaces/TrackingCollector.ts" />
+/// <reference path="../../interfaces/DatabaseSchemes/MouseClickJSON.ts" />
+/// <reference path="./Tracker.d.ts" />
+
 /**
- * Provides a tracker that tracks the mouse on the webpage.
+ * Provides a tracker that tracks the mouse on the page.
  */
-export class MouseClickTracker {
-    private collector: TrackingCollector;
+export class MouseClickTracker extends Tracker {
 
     /**
      * Register the mouse tracker to the document.
@@ -24,16 +23,6 @@ export class MouseClickTracker {
     }
 
     /**
-     * Add the collector to send the data to.
-     * @param collector The collector
-     * @returns {MouseClickTracker}
-     */
-    public withCollector(collector: TrackingCollector): MouseClickTracker {
-        this.collector = collector;
-        return this;
-    }
-
-    /**
      * Creates a message using the MouseClick interface.
      * @returns {MouseClickJSON}
      */
@@ -47,7 +36,7 @@ export class MouseClickTracker {
      * Send mouse click data to centralized collector.
      */
     private sendData(mcData: MouseClickJSON) {
-        this.collector.sendMessage({
+        this.sendMessage({
             table: "mouse-click-events/",
             data: mcData
         });

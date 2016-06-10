@@ -1,12 +1,12 @@
-///<reference path="../../../../typings/index.d.ts" />
+///<reference path="../../../../../typings/index.d.ts" />
 
-// Nullroute the default creation of the visibilitytracker.
-// Actual imports.
 import createSpyObj = jasmine.createSpyObj;
-import {VisibilityTracker} from "../../../main/js/trackers/VisibilityTracker";
-
+import {VisibilityTracker} from "../../../../main/js/trackers/RawDataTrackers/VisibilityTracker";
+import {testTracker} from "./TestTracker";
 
 describe("The Visibility Tracker", function() {
+    testTracker(VisibilityTracker);
+
     beforeEach(function(){
         jasmine.clock().install();
         jasmine.clock().mockDate();
@@ -29,8 +29,8 @@ describe("The Visibility Tracker", function() {
         expect(this.collector.sendMessage).toHaveBeenCalledWith({
             table: "semantic-events/",
             data: {
-                event_type: "http://10.0.22.6/api/event-types/" + 402 + "/",
-                element_type: "http://10.0.22.6/api/element-types/" + 101 + "/",
+                event_type: 402,
+                element_type: 101,
                 created_at: Date.now() / 1000
             }
         });
@@ -53,8 +53,8 @@ describe("The Visibility Tracker", function() {
         expect(this.collector.sendMessage).toHaveBeenCalledWith({
             table: "semantic-events/",
             data: {
-                event_type: "http://10.0.22.6/api/event-types/" + 401 + "/",
-                element_type: "http://10.0.22.6/api/element-types/" + 101 + "/",
+                event_type: 401,
+                element_type: 101,
                 created_at: Date.now() / 1000
             }
         });

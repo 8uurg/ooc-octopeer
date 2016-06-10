@@ -80,6 +80,27 @@ main.container {
     content: "\00a0\00a0";
 }
 
+#change-database-location {
+    margin-top: 25px;
+    background-color: #388E3C;
+}
+
+#databaseLocationRow {
+    margin-top: 20px;
+}
+
+.input-field i {
+    color: #388E3C !important;
+}
+
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: #4CAF50 !important;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: #388E3C;
+}
+
 footer {
     margin-top: 0px !important;
     background-color: #4CAF50 !important;

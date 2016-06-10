@@ -1,17 +1,14 @@
-///<reference path="../interfaces/Message.ts" />
-///<reference path="../interfaces/DatabaseSchemes/MousePosJSON.ts" />
-///<reference path="../interfaces/TrackingCollector.ts" />
+/// <reference path="../../interfaces/DatabaseSchemes/MousePosJSON.ts" />
+/// <reference path="./Tracker.d.ts" />
 
 /**
- * Provides a tracker that tracks the mouse on the webpage.
+ * Provides a tracker that tracks the mouse on the page.
  */
-export class MousePositionTracker {
-    private collector: TrackingCollector;
+export class MousePositionTracker extends Tracker {
     private cursorX: number = -1;
     private cursorY: number = -1;
     private viewportX: number = -1;
     private viewportY: number = -1;
-    private lastCall: number = -1;
 
     /**
      * Register the mouse tracker to the document.
@@ -34,16 +31,6 @@ export class MousePositionTracker {
     }
 
     /**
-     * Add a collector to send the data to.
-     * @param collector The collector.
-     * @returns {MousePositionTracker}
-     */
-    public withCollector(collector: TrackingCollector): MousePositionTracker {
-        this.collector = collector;
-        return this;
-    }
-
-    /**
      * Creates an object of type MousePosJSON.
      * @returns {MousePosJSON}
      */
@@ -61,14 +48,9 @@ export class MousePositionTracker {
      * Send data to centralized collector.
      */
     private sendData(mpData: MousePosJSON) {
-        let newCall: number = Date.now();
-
-        if ( newCall - this.lastCall >= 1000 ) {
-            this.lastCall = newCall;
-            this.collector.sendMessage({
-                table: "mouse-position-events/",
-                data: mpData
-            });
-        }
+        this.sendMessage({
+            table: "mouse-position-events/",
+            data: mpData
+        });
     }
 }
