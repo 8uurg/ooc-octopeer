@@ -44,4 +44,9 @@ describe("ChromeTrackingCollector", function () {
 
         expect(this.port.postMessage).toHaveBeenCalledWith(sessionInjectedMessage);
     });
+
+    it("should give back whether the session is set or not", function() {
+        let collector = new ChromeTrackingCollector(this.sessionDataGatherer);
+        expect(collector.isReadyToSend()).toBe(true);
+    });
 });
