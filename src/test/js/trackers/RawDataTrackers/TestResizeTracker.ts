@@ -2,8 +2,10 @@
 
 import createSpyObj = jasmine.createSpyObj;
 import {ResizeTracker} from "../../../../main/js/trackers/RawDataTrackers/ResizeTracker";
+import {testTracker} from "./TestTracker";
 
 describe("The ResizeTracker", function() {
+    testTracker(ResizeTracker);
 
     beforeEach(function () {
         jasmine.clock().install();
