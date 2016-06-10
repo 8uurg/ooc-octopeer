@@ -18,10 +18,8 @@ describe("The basic throttle", function () {
     });
 
     it("should pass the request if it ready to send onwards.", function () {
-        this.fakeCollector.isReadyToSend.and.returnValues(false, false, true);
-        expect(this.throttle.isReadyToSend()).toBeFalsy();
-        expect(this.throttle.isReadyToSend()).toBeFalsy();
-        expect(this.throttle.isReadyToSend()).toBeTruthy();
-        expect(this.fakeCollector.isReadyToSend()).toHaveBeenCalledTimes(3);
+        this.throttle.isReadyToSend();
+
+        expect(this.fakeCollector.isReadyToSend).toHaveBeenCalledTimes(1);
     });
 });
