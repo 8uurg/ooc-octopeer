@@ -42,7 +42,7 @@ describe("RARequestSender Tests", function() {
         expect(rarObject.isSent()).toBeFalsy();
     });
 
-    it("should set the api_location", function() {
+    it("should allow setting the api_location", function() {
         let rarObject = new RARequestsSender("location");
         rarObject.setApiLocation("newLocation");
 
