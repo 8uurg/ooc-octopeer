@@ -45,8 +45,15 @@ describe("ChromeTrackingCollector", function () {
         expect(this.port.postMessage).toHaveBeenCalledWith(sessionInjectedMessage);
     });
 
-    it("should give back whether the session is set or not", function() {
+    it("should give back whether the session is set or not (case true)", function() {
         let collector = new ChromeTrackingCollector(this.sessionDataGatherer);
         expect(collector.isReadyToSend()).toBe(true);
+    });
+
+    it("should give back whether the session is set or not (case false)", function() {
+        this.sessionDataGatherer.getSessionData.and.returnValue(null);
+        let collector = new ChromeTrackingCollector(this.sessionDataGatherer);
+        
+        expect(collector.isReadyToSend()).toBe(false);
     });
 });
