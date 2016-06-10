@@ -41,4 +41,11 @@ describe("RARequestSender Tests", function() {
         rarObject.sendRequest("table", {});
         expect(rarObject.isSent()).toBeFalsy();
     });
+
+    it("should set the api_location", function() {
+        let rarObject = new RARequestsSender("location");
+        rarObject.setApiLocation("newLocation");
+
+        expect(rarObject.getApiLocation()).toEqual("newLocation");
+    });
 });
