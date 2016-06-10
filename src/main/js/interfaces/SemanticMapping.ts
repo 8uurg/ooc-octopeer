@@ -1,3 +1,5 @@
+/// <reference path="./SemanticEnablingMapping.ts" />
+
 /**
  * This interface is used for declaring semantic elements.
  */

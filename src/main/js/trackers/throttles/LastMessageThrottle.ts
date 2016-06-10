@@ -1,4 +1,5 @@
 /// <reference path="Throttle.d.ts" />
+/// <reference path="../../interfaces/Message.ts" />
 
 /**
  * Drops all messages except the last one in a certain time span.

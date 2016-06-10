@@ -1,6 +1,8 @@
 /// <reference path="Throttle.d.ts" />
 /// <reference path="MinDelayThrottle.d.ts" />
 /// <reference path="LastMessageThrottle.d.ts" />
+/// <reference path="../../interfaces/Message.ts" />
+/// <reference path="../../interfaces/TrackingCollector.ts" />
 
 /**
  * Preserves the first and last message within a certain timespan by combining the other two throttles.
