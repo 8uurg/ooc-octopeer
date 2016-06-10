@@ -1,7 +1,4 @@
 ///<reference path="../../../typings/index.d.ts" />
-/**
- * Created by Cas on 8-5-2016.
- */
 
 import {RARequestsSender} from "../../main/js/RARequestSender";
 
@@ -43,5 +40,12 @@ describe("RARequestSender Tests", function() {
         let rarObject = new RARequestsSender("location");
         rarObject.sendRequest("table", {});
         expect(rarObject.isSent()).toBeFalsy();
+    });
+
+    it("should allow setting the api_location", function() {
+        let rarObject = new RARequestsSender("location");
+        rarObject.setApiLocation("newLocation");
+
+        expect(rarObject.getApiLocation()).toEqual("newLocation");
     });
 });

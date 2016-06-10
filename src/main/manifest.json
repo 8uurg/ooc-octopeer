@@ -3,25 +3,43 @@
   
   "name": "Octopeer-BitBucket",
   "description": "Monitors peer-review behaviour on pull requests on BitBucket for acquiring peer review behaviour",
-  "version": "0.0.4",
+  "version": "0.0.7",
 
   "browser_action": {
     "default_title": "Octopeer",
-    "default_icon": "./favicon.png"
+    "default_icon": "./img/icons/icon1024.png"
+  },
+
+  "icons" : {
+    "16": "./img/icons/icon16.png",
+    "48": "./img/icons/icon48.png",
+    "128": "./img/icons/icon128.png"
   },
 
   "content_scripts": [
       {
         "matches": [
-          "http://bitbucket.org/*",
-          "https://bitbucket.org/*"
+          "http://bitbucket.org/*/pull-requests/*",
+          "https://bitbucket.org/*/pull-requests/*"
         ],
         "js": [
           "js/OctopeerConstants.js",
-          "js/trackers/KeystrokeTracker.js",
-          "js/trackers/MouseClickTracker.js",
-          "js/trackers/MousePositionTracker.js",
-          "js/trackers/ResizeTracker.js",
+          "js/trackers/RawDataTrackers/Tracker.js",
+          "js/trackers/RawDataTrackers/DomTracker.js",
+          "js/trackers/RawDataTrackers/KeystrokeTracker.js",
+          "js/trackers/RawDataTrackers/MouseClickTracker.js",
+          "js/trackers/RawDataTrackers/ScrollTracker.js",
+          "js/trackers/RawDataTrackers/MousePositionTracker.js",
+          "js/trackers/RawDataTrackers/ResizeTracker.js",
+          "js/trackers/RawDataTrackers/VisibilityTracker.js",
+          "js/trackers/SemanticTrackers/SemanticTracker.js",
+          "js/trackers/SemanticTrackers/ClickSemanticTracker.js",
+          "js/trackers/SemanticTrackers/KeystrokeSemanticTracker.js",
+          "js/trackers/SemanticTrackers/MouseSemanticTracker.js",
+          "js/trackers/throttles/Throttle.js",
+          "js/trackers/throttles/LastMessageThrottle.js",
+          "js/trackers/throttles/MinDelayThrottle.js",
+          "js/trackers/throttles/StartEndThrottle.js",
           "js/BitBucketSessionDataGatherer.js",
           "js/ChromeTrackingCollector.js",
           "js/Main.js"
@@ -32,19 +50,15 @@
 
   "background": {
     "scripts": [
-        "js/extension/background.js",
         "js/OctopeerConstants.js",
-        "js/RARequestSender.js"
+        "js/RARequestSender.js",
+        "js/extension/background.js"
       ]
   },
 
   "permissions": [
     // Domain Permissions
     "https://bitbucket.org/*",
-    "https://localhost:8000/api/*",
-    "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js",
-    "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css",
-    "https://code.jquery.com/jquery-2.1.1.min.js",
     "https://fonts.googleapis.com/icon?family=Material+Icons",
 
     // API Permissions

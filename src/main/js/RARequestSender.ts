@@ -1,9 +1,8 @@
-///<reference path="./interfaces/message.ts" />
+///<reference path="./interfaces/Message.ts" />
 /// <reference path="../../../typings/index.d.ts" />
 
 /**
- * Created by Cas on 23-4-2016.
- * This class lets gives the possibility to send JSON requests to the restful api.
+ * This class lets gives the possibility to send DatabaseSchemes requests to the restful api.
  */
 export class RARequestsSender {
 
@@ -51,6 +50,15 @@ export class RARequestsSender {
     }
 
     /**
+     * Allows setting the api location.
+     * @param loc The api location
+     */
+    public setApiLocation(loc: string) {
+        console.log("Database location set to: " + loc);
+        this.api_location = loc;
+    }
+
+    /**
      * Sends the data to the database if a database location is set.
      * @param table  The table to put the information in.
      * @param data   The data in an object..
@@ -75,5 +83,3 @@ export class RARequestsSender {
         xmlHTTP.send(JSON.stringify(data));
     }
 }
-
-new RARequestsSender("http://10.0.22.6/api/");

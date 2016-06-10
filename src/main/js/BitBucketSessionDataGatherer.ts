@@ -1,7 +1,7 @@
 ///<reference path="./interfaces/CurrentUserData.ts" />
 /// <reference path="./interfaces/Repository.ts" />
 /// <reference path="./interfaces/SessionDataGatherer.ts" />
-/// <reference path="./interfaces/SessionJSON.ts" />
+/// <reference path="./interfaces/DatabaseSchemes/SessionJSON.ts" />
 
 /**
  * This class tracks the user and repository data on BitBucket pages.
@@ -10,6 +10,9 @@ export class BitBucketSessionDataGatherer implements SessionDataGatherer {
 
     private sessionData: SessionJSON;
 
+    /**
+     * Creating a BitBucketSessionDataGatherer object.
+     */
     constructor() {
         let data = document.getElementsByTagName("body")[0].attributes;
 
@@ -85,7 +88,7 @@ type BitBucketRepository = {
 };
 
 /**
- * BitBucket User data tag format 
+ * BitBucket User data tag format.
  */
 type BitBucketUser = {
    "username": string,
