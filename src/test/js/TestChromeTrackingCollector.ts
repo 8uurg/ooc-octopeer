@@ -53,7 +53,7 @@ describe("ChromeTrackingCollector", function () {
     it("should give back whether the session is set or not (case false)", function() {
         this.sessionDataGatherer.getSessionData.and.returnValue(null);
         let collector = new ChromeTrackingCollector(this.sessionDataGatherer);
-        
+
         expect(collector.isReadyToSend()).toBe(false);
     });
 });
