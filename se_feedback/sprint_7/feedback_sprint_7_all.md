@@ -23,7 +23,9 @@ Total: ****
 | reflection            |      |
 
 ## Notes
-
+* Good Job!
+* Thanks for adding the table with extra hours!
+* Laurens has 33% to 45% less hours than the other team members??
 
 #Code Evolution Quality Feedback
 
