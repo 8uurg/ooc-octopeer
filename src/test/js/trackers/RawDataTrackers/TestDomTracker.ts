@@ -3,7 +3,7 @@
 import {DomTracker} from "../../../../main/js/trackers/RawDataTrackers/DomTracker";
 import {testTracker} from "./TestTracker";
 
-describe("The Dom Tracker", function() {
+xdescribe("The Dom Tracker", function() {
     testTracker(DomTracker);
 
     beforeEach(function () {

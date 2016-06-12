@@ -7,22 +7,16 @@
  */
 export class DomTracker extends Tracker {
 
+    private mObserver: MutationObserver;
+    private mConfig: Object;
+
     /**
      * Register the VisibleElementsTracker.
      */
     public register() {
-        const _this: DomTracker = this;
-
-        let sendModifiedDom = function () {
-            _this.modifyDom();
-            _this.sendData(_this.createMessage(document.documentElement.outerHTML));
-        };
-
-        // Send initial dom on page load.
-        sendModifiedDom();
-
-        // Sends modified dom on change of the dom.
-        window.document.addEventListener("change", sendModifiedDom);
+        this.createObserver();
+        this.setObserverConfiguration(true, false, false);
+        this.setObserverToAllElements();
     }
 
     /**
@@ -36,6 +30,8 @@ export class DomTracker extends Tracker {
             let element: Element = allDOMElements.item(numberOfElements);
             this.setDataAttributesToElement(element);
         }
+        this.sendData(this.createMessage(document.documentElement.outerHTML));
+        this.setObserverToAllElements();
     }
 
     /**
@@ -54,6 +50,45 @@ export class DomTracker extends Tracker {
         if (elementStyle.getPropertyValue("z-index") !== "" &&
             elementStyle.getPropertyValue("z-index") !== "auto") {
             element.setAttribute("data-octopeer-z", elementStyle.getPropertyValue("z-index"));
+        }
+    }
+
+    /**
+     *
+     * @returns {MutationObserver}
+     */
+    private createObserver(): void {
+        const _this: DomTracker = this;
+
+        this.mObserver =  new MutationObserver(function() {
+            _this.modifyDom();
+        });
+    }
+
+    /**
+     *
+     * @param attributes
+     * @param childList
+     * @param characterData
+     * @returns {{attributes: boolean, childList: boolean, characterData: boolean}}
+     */
+    public setObserverConfiguration(attributes: boolean, childList: boolean, characterData: boolean): void {
+        this.mConfig = {
+            attributes:         attributes,
+            attributeFilter:    ["id", "class", "src"],
+            characterData:      characterData,
+            childList:          childList,
+        };
+    }
+
+    /**
+     * 
+     */
+    private setObserverToAllElements() {
+        let allElements = document.getElementsByTagName("*");
+
+        for (let iNumberOfElement = 0; iNumberOfElement < allElements.length; iNumberOfElement++) {
+            this.mObserver.observe(allElements.item(iNumberOfElement), this.mConfig);
         }
     }
 
