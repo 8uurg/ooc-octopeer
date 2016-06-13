@@ -3,24 +3,27 @@
 import {DomTracker} from "../../../../main/js/trackers/RawDataTrackers/DomTracker";
 import {testTracker} from "./TestTracker";
 
-xdescribe("The Dom Tracker", function() {
-    testTracker(DomTracker);
+testTracker(DomTracker);
+
+describe("The Dom Tracker", function() {
 
     beforeEach(function () {
-        let _this = this;
-
         jasmine.clock().install();
         jasmine.clock().mockDate();
+
+        this.mutationObserver = jasmine.createSpyObj("observer", ["disconnect", "observe"]);
+        let _this = this;
+        (<any> global).MutationObserver = function (callback: any) {
+            this.disconnect = jasmine.createSpy("disconnect");
+            this.observe = jasmine.createSpy("observe");
+            _this.mutationObserved = callback;
+            return _this.mutationObserver;
+        };
+
         this.tracker = new DomTracker();
         window.document = document;
 
-        this.ev = <(e: any) => void> null;
-        document.addEventListener = function(eventName: string, callback: (e: any) => void) {
-            _this.ev = callback;
-        };
-
         this.collector = jasmine.createSpyObj("collector", ["sendMessage"]);
-        this.tracker = new DomTracker();
         this.tracker.withCollector(this.collector);
         this.element = document.createElement("a");
         document.body.appendChild(this.element);
@@ -28,7 +31,7 @@ xdescribe("The Dom Tracker", function() {
 
     it("should add data-octopeer attributes to the elements", function() {
         this.tracker.register();
-        this.ev();
+        this.mutationObserved();
 
         expect(this.element.getAttribute("data-octopeer-x")).toBe("0");
         expect(this.element.getAttribute("data-octopeer-y")).toBe("0");
@@ -38,7 +41,7 @@ xdescribe("The Dom Tracker", function() {
 
     it("should call the sendData twice", function() {
         this.tracker.register();
-        this.ev();
+        this.mutationObserved();
 
         expect(this.collector.sendMessage).toHaveBeenCalledTimes(2);
     });
@@ -47,7 +50,7 @@ xdescribe("The Dom Tracker", function() {
         this.element.style.zIndex = "auto";
 
         this.tracker.register();
-        this.ev();
+        this.mutationObserved();
 
         expect(this.element.getAttribute("data-octopeer-z")).toBeNull();
     });
@@ -56,7 +59,7 @@ xdescribe("The Dom Tracker", function() {
         this.element.style.zIndex = 3;
 
         this.tracker.register();
-        this.ev();
+        this.mutationObserved();
 
         expect(this.element.getAttribute("data-octopeer-z")).not.toBeNull();
     });
