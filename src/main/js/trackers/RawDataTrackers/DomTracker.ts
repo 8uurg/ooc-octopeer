@@ -38,8 +38,7 @@ export class DomTracker extends Tracker {
         if (this.mutationObserver === null) {
             return;
         }
-        let body = document.getElementsByTagName("body")[0];
-        this.mutationObserver.observe(body, this.mutationObserverConfiguration);
+        this.mutationObserver.observe(document.body, this.mutationObserverConfiguration);
     }
 
     /**
