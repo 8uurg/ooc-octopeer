@@ -46,7 +46,7 @@ let neededSettings: { [key: string]: boolean; } = {
 
 let semanticElementsToTrack: {eventType: string, selector: string, trackKeyStroke: boolean,
     trackClick: boolean, trackHover: boolean, trackScroll: boolean}[] = [
-    {eventType: "Merge Pull Request", selector: "#fullfill-pullrequest", trackKeyStroke: true,
+    {eventType: "Merge Pull Request", selector: "#fulfill-pullrequest", trackKeyStroke: true,
         trackClick: true, trackHover: true, trackScroll: true},
     {eventType: "Close Pull Request", selector: "#reject-pullrequest", trackKeyStroke: true,
         trackClick: true, trackHover: true, trackScroll: true},
