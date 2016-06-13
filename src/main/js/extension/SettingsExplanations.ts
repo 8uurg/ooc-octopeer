@@ -177,7 +177,7 @@ export class SettingsExplanations {
         this.title.className += " card-sub-title";
 
         document.addEventListener("DOMContentLoaded", () => {
-            this.refreshPages();
+            this.setupPageRefreshButton();
 
             document.getElementById("hide-explanation-button").addEventListener("click", () => {
                 document.getElementById("tracking-explanation").style.setProperty("display", "none");
@@ -194,7 +194,7 @@ export class SettingsExplanations {
     /**
      * Makes the refresh button functional.
      */
-    private refreshPages() {
+    private setupPageRefreshButton() {
         document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
             chrome.tabs.query({
                 "url": [

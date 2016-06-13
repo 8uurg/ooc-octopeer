@@ -37,25 +37,6 @@ export function setupCheckboxes() {
 }
 
 /**
- * Adds the functionality to the refresh notification.
- */
-export function setUpRefreshNotificationElements() {
-    document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
-        chrome.tabs.query({
-            "url" : [
-                "http://bitbucket.org/*",
-                "https://bitbucket.org/*"
-            ]
-        }, (tabs: chrome.tabs.Tab[]) => {
-            tabs.forEach((tab) => {
-                chrome.tabs.reload(tab.id);
-            });
-            document.getElementById("refresh-pages-notification").style.setProperty("display", "none");
-        });
-    });
-}
-
-/**
  * Creates the functionality for the database setting's textfield and apply button.
  */
 export function setUpDatabaseLocationElements() {
@@ -78,7 +59,6 @@ export function setUpDatabaseLocationElements() {
 
 document.addEventListener("DOMContentLoaded", () => {
     setupCheckboxes();
-    setUpRefreshNotificationElements();
     setUpDatabaseLocationElements();
 });
 

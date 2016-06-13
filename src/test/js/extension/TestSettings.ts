@@ -1,7 +1,7 @@
 ///<reference path="../../../../typings/index.d.ts" />
 
 import {
-    registerCheckbox, setUpRefreshNotificationElements,
+    registerCheckbox,
     setUpDatabaseLocationElements, setupCheckboxes
 } from "../../../main/js/extension/Settings";
 
@@ -76,35 +76,6 @@ describe("The checkboxes setup", function () {
         spyOn(chrome.storage.sync, "get").and.callThrough();
         setupCheckboxes();
         expect(chrome.storage.sync.get).toHaveBeenCalledTimes(11);
-    });
-});
-
-describe("The refresh page notification", function () {
-
-    beforeEach(function () {
-        this.oldDocument = document;
-        browser = new MockBrowser();
-        document = browser.getDocument();
-    });
-
-    afterEach(function () {
-        document = this.oldDocument;
-    });
-
-    it("should refresh all Bitbucket pages", function () {
-        let element = jasmine.createSpyObj("a", ["addEventListener"]);
-        let refreshNotification = document.createElement("div");
-        spyOn(chrome.tabs, "reload");
-        element.addEventListener.and.callFake((_: string, refreshPageCallback: any) => {
-            refreshPageCallback();
-        });
-        spyOn(document, "getElementById").and.returnValues(element, refreshNotification);
-        spyOn(chrome.tabs, "query").and.callFake((_: any, resultCallback: any) => {
-            resultCallback([{ id: 4 }]);
-        });
-
-        setUpRefreshNotificationElements();
-        expect(chrome.tabs.reload).toHaveBeenCalledWith(4);
     });
 });
 
