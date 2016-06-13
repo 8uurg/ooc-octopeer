@@ -61,3 +61,14 @@ Total: ****
 | Code Review            |      |
 
 ##Notes
+* Good job fixing the ADD and incorporating the feedback
+* Declarations of interfaces should be explained somewhere (great idea btw!!)
+* `LastMessageThrottle`
+	* `maxDelay` the time units are not clear (I assume milliseconds) add a comment or change the name to incorporate this fact
+* Throttles seem to be a candidate for a Decorator Pattern
+	* especially `StartEndThrottle`
+* `Tracker` (in RawTrackers)
+	* naming is confusing since `SemanticTracker` does not inherit from it
+	* rename to RawTracker?
+* `DatabaseSchemes`
+	* Well done renaming these to fall in line with the explanation you give in your coding choices document
