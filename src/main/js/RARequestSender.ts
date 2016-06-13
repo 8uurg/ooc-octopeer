@@ -63,7 +63,7 @@ export class RARequestsSender {
      * @param table  The endpoint for the database to send the data to.
      * @returns {XMLHttpRequest}
      */
-    private createSender(table: string): XMLHttpRequest {
+    private createJSONRequest(table: string): XMLHttpRequest {
         let xmlHTTP = new XMLHttpRequest();
         let _this: RARequestsSender = this;
 
@@ -91,7 +91,7 @@ export class RARequestsSender {
             return;
         }
 
-        let xmlHTTP = this.createSender(table);
+        let xmlHTTP = this.createJSONRequest(table);
         xmlHTTP.send(JSON.stringify(data));
     }
 }
