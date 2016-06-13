@@ -7,31 +7,52 @@
  */
 export class DomTracker extends Tracker {
 
-    private mObserver: MutationObserver;
-    private mConfig: Object;
+    private mutationObserver: MutationObserver;
+    private mutationObserverConfiguration: MutationObserverInit = {
+        attributes: true,
+        attributeFilter: ["data-octopeer-x", "data-octopeer-y", "data-octopeer-height", "data-octopeer-width",
+            "data-octopeer-z"],
+        childList: true,
+        subtree: true
+    };
 
     /**
      * Register the VisibleElementsTracker.
      */
     public register() {
-        this.createObserver();
-        this.setObserverConfiguration(true, false, false);
-        this.setObserverToAllElements();
+        let registerChange = () => {
+            this.mutationObserver.disconnect();
+            this.modifyDom();
+            this.sendData(this.createMessage(document.documentElement.outerHTML));
+            this.connectObserver();
+        };
+        this.mutationObserver = new MutationObserver(registerChange);
+        this.connectObserver();
+        registerChange();
     }
 
     /**
-     * This method goes through all elements of the dom to add new attributes to them.
+     * Connect the mutation observer with the body.
+     */
+    private connectObserver() {
+        if (this.mutationObserver === null) {
+            return;
+        }
+        let body = document.getElementsByTagName("body")[0];
+        this.mutationObserver.observe(body, this.mutationObserverConfiguration);
+    }
+
+    /**
+     * This method goes through all elements of the body to add new attributes to them.
      * Afterwards it sends the dom to the message handler.
      */
     private modifyDom() {
-        let allDOMElements: NodeListOf<Element> = document.getElementsByTagName("*");
+        let allBodyElements: NodeListOf<Element> = document.querySelectorAll("body *");
 
-        for (let numberOfElements = 0; numberOfElements < allDOMElements.length; numberOfElements++) {
-            let element: Element = allDOMElements.item(numberOfElements);
+        for (let numberOfElements = 0; numberOfElements < allBodyElements.length; numberOfElements++) {
+            let element: Element = allBodyElements.item(numberOfElements);
             this.setDataAttributesToElement(element);
         }
-        this.sendData(this.createMessage(document.documentElement.outerHTML));
-        this.setObserverToAllElements();
     }
 
     /**
@@ -54,52 +75,13 @@ export class DomTracker extends Tracker {
     }
 
     /**
-     *
-     * @returns {MutationObserver}
-     */
-    private createObserver(): void {
-        const _this: DomTracker = this;
-
-        this.mObserver =  new MutationObserver(function() {
-            _this.modifyDom();
-        });
-    }
-
-    /**
-     *
-     * @param attributes
-     * @param childList
-     * @param characterData
-     * @returns {{attributes: boolean, childList: boolean, characterData: boolean}}
-     */
-    public setObserverConfiguration(attributes: boolean, childList: boolean, characterData: boolean): void {
-        this.mConfig = {
-            attributes:         attributes,
-            attributeFilter:    ["id", "class", "src"],
-            characterData:      characterData,
-            childList:          childList,
-        };
-    }
-
-    /**
-     * 
-     */
-    private setObserverToAllElements() {
-        let allElements = document.getElementsByTagName("*");
-
-        for (let iNumberOfElement = 0; iNumberOfElement < allElements.length; iNumberOfElement++) {
-            this.mObserver.observe(allElements.item(iNumberOfElement), this.mConfig);
-        }
-    }
-
-    /**
      * Creates a message using the VisibleElementJSON interface.
-     * @param Dom  The modified dom with data elements added.
+     * @param dom  The modified dom with data elements added.
      * @returns {DomJSON}
      */
-    public createMessage(Dom: string): DomJSON {
+    public createMessage(dom: string): DomJSON {
         return {
-            dom: Dom,
+            dom: dom,
             created_at: Date.now() / 1000
         };
     }
