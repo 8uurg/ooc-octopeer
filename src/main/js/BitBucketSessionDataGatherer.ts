@@ -51,7 +51,7 @@ export class BitBucketSessionDataGatherer implements SessionDataGatherer {
      * This method creates a pull-request object.
      * @param pr    The information about the current pull-request which the user is looking at.
      * @param repo  The information about the current repository which the user is using.
-     * @returns {{repository: RepositoryJSON, pull_request_number: number}}
+     * @returns {PullRequestJSON}
      */
     private createPullRequest(pr: BitBucketPullRequest, repo: BitBucketRepository): PullRequestJSON {
         let repository: RepositoryJSON = this.createRepository(repo);
@@ -64,7 +64,7 @@ export class BitBucketSessionDataGatherer implements SessionDataGatherer {
     /**
      * This method creates a repository object.
      * @param repo  The information about the current repository which the user is using.
-     * @returns {{owner: String, name: string, platform: string}}
+     * @returns {RepositoryJSON}
      */
     private createRepository(repo: BitBucketRepository): RepositoryJSON {
         return {
@@ -77,7 +77,7 @@ export class BitBucketSessionDataGatherer implements SessionDataGatherer {
     /**
      * This method creates an user object.
      * @param user  The information about the current user.
-     * @returns {{username: string}}
+     * @returns {UserJSON}
      */
     private createUser(user: BitBucketUser): UserJSON {
         return {
