@@ -47,10 +47,10 @@ export class DomTracker extends Tracker {
      * Afterwards it sends the dom to the message handler.
      */
     private modifyDom() {
-        let allBodyElements: NodeListOf<Element> = document.querySelectorAll("body *");
+        let elements: NodeListOf<Element> = document.querySelectorAll("body *");
 
-        for (let numberOfElements = 0; numberOfElements < allBodyElements.length; numberOfElements++) {
-            let element: Element = allBodyElements.item(numberOfElements);
+        for (let i = 0; i < elements.length; i++) {
+            let element: Element = elements.item(i);
             this.setDataAttributesToElement(element);
         }
     }
