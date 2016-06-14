@@ -8,12 +8,12 @@
 #Sprint Feedback
 Feedback and Grades for Sprint 7.
 
-Total: **9.55**
+Total: **9.85**
 
 | User Story | Score |
 |------------|-------|
 | definition |  10   |
-| splitting  |   7  |
+| splitting  |   9  |
 | responsibility | 10 |
 
 | Learning from History | Score |
@@ -25,7 +25,7 @@ Total: **9.55**
 ## Notes
 * Good Job!
 * Thanks for adding the table with extra hours!
-* Laurens has 33% to 45% less hours than the other team members??
+* Laurens has 33% to 45% less hours than the other team members?? **Resolved**
 
 #Code Evolution Quality Feedback
 
