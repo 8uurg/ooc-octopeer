@@ -26,11 +26,28 @@ _global.chrome = {
         sync: {
             set: function () {},
             get: function () {}
+        },
+        onChanged: {
+            addListener: function() {}
         }
     },
     tabs: {
         query: function() {},
-        reload: function() {}
+        reload: function() {},
+        create: function() {},
+        get: function() {},
+        onUpdated: {
+            addListener: function() {}
+        },
+        onActivated: {
+            addListener: function() {}
+        }
+    },
+    browserAction: {
+        setIcon: function() {},
+        onClicked: {
+            addListener: function() {}
+        }
     }
 };
 
@@ -63,5 +80,6 @@ _global.window.scrollX = 0;
 _global.window.scrollY = 0;
 
 _global.OCTOPEER_CONSTANTS = {
+    "standard_database_location": "http://10.0.22.6/api/",
     "database_location_key": "databaseLocation"
 };
