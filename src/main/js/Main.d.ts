@@ -1,0 +1,50 @@
+/// <reference path="./interfaces/SessionDataGatherer.ts" />
+/// <reference path="./interfaces/SemanticMapping.ts" />
+/// <reference path="./interfaces/TrackerDefinition.ts" />
+/// <reference path="./interfaces/SemanticMapping.ts" />
+
+/// <reference path="./trackers/throttles/Throttle.d.ts" />
+
+/**
+ * The class that prepares everthing for readyness.
+ */
+declare class Main {
+
+    private collector: TrackingCollector;
+    private trackers: TrackerDefinition[];
+    private semanticMappings: any;
+    private sessionDataGatherer: any;
+
+    /**
+     * Declare a tracking collector.
+     * @throws Error upon registering two or more tracking collectors.
+     */
+    public declareTrackingCollector(collector: (SessionDataGatherer) => TrackingCollector): void;
+
+    /**
+     * Declare a session data getherer.
+     * @throws Error upon registering two or more session data gatherers.
+     */
+    public declareSessionDataGatherer(sessionDataGatherer: () => SessionDataGatherer): void;
+
+    /**
+     * Declare a semantic mapping.
+     * @throws Error upon registering two or more semantic mappings.
+     */
+    public declareSemanticMappings(semanticMappings: SemanticMapping[]): void;
+
+    /**
+     * Declare a tracker to be loaded upon load.
+     * @param definition The definition to use for registering the tracker.
+     */
+    public declareTracker(definition: TrackerDefinition): void;
+
+    /**
+     * Run to create and register all trackers.
+     * @throws Error upon missing collector.
+     */
+    public done();
+
+}
+
+declare var main: Main;
