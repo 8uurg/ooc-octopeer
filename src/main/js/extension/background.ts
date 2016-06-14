@@ -25,9 +25,6 @@ export function createBackgroundProcesses() {
 
 }
 
-createBackgroundProcesses();
-addTabListenersForIcon();
-
 let urlWithIcon = [
     {
         urlMatcher: new RegExp("(http|https):\/\/bitbucket\.org\/.*\/pull-requests\/[0-9]+\/.*"),
@@ -71,4 +68,6 @@ export function addTabListenersForIcon() {
     });
 }
 
+createBackgroundProcesses();
+addTabListenersForIcon();
 
