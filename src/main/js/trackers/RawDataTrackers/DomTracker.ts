@@ -38,6 +38,7 @@ export class DomTracker extends Tracker {
         if (this.mutationObserver === null) {
             return;
         }
+        this.mutationObserver.disconnect();
         this.mutationObserver.observe(document.body, this.mutationObserverConfiguration);
     }
 
@@ -94,5 +95,14 @@ export class DomTracker extends Tracker {
             table: "html-pages/",
             data: dData
         });
+    }
+
+    /**
+     * Changes the tracker configuration.
+     * @param conf The configuration for the DOM tracker.
+     */
+    public changeTrackerConfiguration(conf: MutationObserverInit) {
+        this.mutationObserverConfiguration = conf;
+        this.connectObserver();
     }
 }

@@ -2,6 +2,7 @@
 
 import {DomTracker} from "../../../../main/js/trackers/RawDataTrackers/DomTracker";
 import {testTracker} from "./TestTracker";
+import any = jasmine.any;
 
 testTracker(DomTracker);
 
@@ -62,6 +63,15 @@ describe("The Dom Tracker", function() {
         this.mutationObserved();
 
         expect(this.element.getAttribute("data-octopeer-z")).not.toBeNull();
+    });
+
+    it("should change the configuration, when it is changed.", function () {
+        this.tracker.register();
+        let newConf = jasmine.objectContaining({
+            attributes: false
+        });
+        this.tracker.changeTrackerConfiguration(newConf);
+        expect(this.mutationObserver.observe).toHaveBeenCalledWith(any(Object), newConf);
     });
 
     afterEach(function () {
