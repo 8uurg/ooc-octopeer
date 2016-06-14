@@ -1,7 +1,10 @@
 ///<reference path="./interfaces/CurrentUserData.ts" />
 /// <reference path="./interfaces/Repository.ts" />
 /// <reference path="./interfaces/SessionDataGatherer.ts" />
+/// <reference path="./interfaces/DatabaseSchemes/PullRequestJSON.ts" />
+/// <reference path="./interfaces/DatabaseSchemes/RepositoryJSON.ts" />
 /// <reference path="./interfaces/DatabaseSchemes/SessionJSON.ts" />
+/// <reference path="./interfaces/DatabaseSchemes/UserJSON.ts" />
 
 /**
  * This class tracks the user and repository data on BitBucket pages.
@@ -25,27 +28,66 @@ export class BitBucketSessionDataGatherer implements SessionDataGatherer {
             return;
         }
 
+        this.createSession(data);
+    }
+
+    /**
+     * This method creates a session for the user.
+     * @param data   All the elements from the body of the document.
+     */
+    private createSession(data: NamedNodeMap): void {
+
         let pr: BitBucketPullRequest = JSON.parse(data.getNamedItem("data-current-pr").value);
         let repo: BitBucketRepository = JSON.parse(data.getNamedItem("data-current-repo").value);
         let user: BitBucketUser = JSON.parse(data.getNamedItem("data-current-user").value);
 
         this.sessionData = {
-            pull_request: {
-                repository: {
-                    owner: repo.owner.username,
-                    name: repo.slug,
-                    platform: "bitbucket"
-                },
-                pull_request_number: pr.localId
-            },
-            user: {
-                username: user.username
-            }
+            pull_request: this.createPullRequest(pr, repo),
+            user: this.createUser(user)
+        };
+    }
+
+    /**
+     * This method creates a pull-request object.
+     * @param pr    The information about the current pull-request which the user is looking at.
+     * @param repo  The information about the current repository which the user is using.
+     * @returns {PullRequestJSON}
+     */
+    private createPullRequest(pr: BitBucketPullRequest, repo: BitBucketRepository): PullRequestJSON {
+        let repository: RepositoryJSON = this.createRepository(repo);
+        return {
+            repository: repository,
+            pull_request_number: pr.localId
+        };
+    }
+
+    /**
+     * This method creates a repository object.
+     * @param repo  The information about the current repository which the user is using.
+     * @returns {RepositoryJSON}
+     */
+    private createRepository(repo: BitBucketRepository): RepositoryJSON {
+        return {
+            owner: repo.owner.username,
+            name: repo.slug,
+            platform: "bitbucket"
+        };
+    }
+
+    /**
+     * This method creates an user object.
+     * @param user  The information about the current user.
+     * @returns {UserJSON}
+     */
+    private createUser(user: BitBucketUser): UserJSON {
+        return {
+            username: user.username
         };
     }
 
     /**
      * Returns the Session Data for this page in database format.
+     * @returns {SessionJSON}
      */
     public getSessionData(): SessionJSON {
         return this.sessionData;
