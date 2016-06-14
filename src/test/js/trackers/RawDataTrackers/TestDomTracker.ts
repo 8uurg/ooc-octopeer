@@ -62,7 +62,7 @@ describe("The Dom Tracker", function() {
         this.tracker.register();
         this.mutationObserved();
 
-        expect(this.element.getAttribute("data-octopeer-z")).not.toBeNull();
+        expect(this.element.getAttribute("data-octopeer-z")).toBe("3");
     });
 
     it("should change the configuration, when it is changed.", function () {
