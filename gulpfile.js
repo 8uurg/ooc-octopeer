@@ -96,7 +96,8 @@ gulp.task('copy-dependencies', ['clean'], function() {
     return gulp.src([
         './node_modules/jquery/dist/*.+(js|map)',
         './node_modules/materialize-css/dist/css/*.+(css|js)',
-        './node_modules/materialize-css/dist/js/*.+(css|js)'
+        './node_modules/materialize-css/dist/js/*.+(css|js)',
+        './TI2806/src/**'
     ], { base: './' })
         .pipe(flatten())
         .pipe(gulpif('*.+(map|js)', dest('js')))
