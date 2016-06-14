@@ -3,14 +3,6 @@ import {updateBrowserActionIcon, addTabListenersForIcon,
 
 describe("The background script", function () {
 
-    beforeEach(function () {
-
-    });
-
-    afterEach(function () {
-
-    });
-
     it("should open the settings page when the browser action button is clicked", function () {
         spyOn(chrome.tabs, "create");
         spyOn(chrome.browserAction.onClicked, "addListener").and.callFake((callback: any) => {
