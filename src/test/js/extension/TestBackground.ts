@@ -48,6 +48,16 @@ describe("The background script", function () {
         }});
         expect(this.req.setApiLocation).not.toHaveBeenCalled();
     });
+
+    it("should not update the api location if no value changed, but the default value does exist", function () {
+        createBackgroundProcesses();
+        this.initialiseDBConnectionCallback({ databaseLocation: "http;//testserver.com/api/" });
+        
+        this.changeAPILocationCallback({ username_key: {
+            newValue: "joost"
+        }});
+        expect(this.req.setApiLocation).not.toHaveBeenCalled();
+    });
 });
 
 describe("The Octopeer browser action icon", function () {
