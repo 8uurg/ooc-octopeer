@@ -3,14 +3,17 @@ import {updateBrowserActionIcon, addTabListenersForIcon,
 
 describe("The background script", function () {
 
-    let req: any;
-
     beforeEach(function () {
-        req = jasmine.createSpyObj("requestSender", ["setApiLocation"]);
+        this.req = jasmine.createSpyObj("requestSender", ["setApiLocation"]);
         (<any> global).RARequestsSender = function (loc: string) {
             this.setApiLocation = function () {};
             return req;
         };
+        
+        this.changeAPILocationCallback: (changedItems: any) => void;
+        spyOn(chrome.storage.onChanged, "addListener").and.callFake((callback: any) => {
+            this.changeAPILocationCallback = callback;
+        });
     });
 
     it("should open the settings page when the browser action button is clicked", function () {
@@ -28,18 +31,14 @@ describe("The background script", function () {
         spyOn(chrome.storage.sync, "get").and.callFake((_: any, callback: any) => {
             initialiseDBConnectionCallback = callback;
         });
-
-        let changeAPILocationCallback: (changedItems: any) => void;
-        spyOn(chrome.storage.onChanged, "addListener").and.callFake((callback: any) => {
-            changeAPILocationCallback = callback;
-        });
+        
         createBackgroundProcesses();
         initialiseDBConnectionCallback({ databaseLocation: "http://fake-server.com/api/" });
         let newDatabaseLoc = "http://test-server.com/api/";
-        changeAPILocationCallback({ databaseLocation: {
+        this.changeAPILocationCallback({ databaseLocation: {
             newValue: newDatabaseLoc
         }});
-        expect(req.setApiLocation).toHaveBeenCalledWith(newDatabaseLoc);
+        expect(this.req.setApiLocation).toHaveBeenCalledWith(newDatabaseLoc);
     });
 
     it("should not set the api location if no change was made to the api", function () {
@@ -48,18 +47,14 @@ describe("The background script", function () {
         spyOn(chrome.storage.sync, "get").and.callFake((_: any, callback: any) => {
             initialiseDBConnectionCallback = callback;
         });
-
-        let changeAPILocationCallback: (changedItems: any) => void;
-        spyOn(chrome.storage.onChanged, "addListener").and.callFake((callback: any) => {
-            changeAPILocationCallback = callback;
-        });
+        
         createBackgroundProcesses();
         initialiseDBConnectionCallback({ username_key: "joostje" });
         let newUsername = "joost";
-        changeAPILocationCallback({ username_key: {
+        this.changeAPILocationCallback({ username_key: {
             newValue: newUsername
         }});
-        expect(req.setApiLocation).not.toHaveBeenCalled();
+        expect(this.req.setApiLocation).not.toHaveBeenCalled();
     });
 });
 
