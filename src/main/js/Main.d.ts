@@ -6,7 +6,7 @@
 /// <reference path="./trackers/throttles/Throttle.d.ts" />
 
 /**
- * The class that prepares everthing for readyness.
+ * The class that prepares everthing for readiness.
  */
 declare class Main {
 

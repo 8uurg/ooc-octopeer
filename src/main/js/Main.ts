@@ -68,7 +68,7 @@ export class Main {
     /**
      * Create the default settings object.
      */
-    private getDefaultSettings() {
+    private getDefaultSettings(): { [key: string]: boolean; } {
         let settings: {[key: string]: boolean} = {};
         this.trackerDefinitions.forEach(function(trackerDefinition) {
             settings[trackerDefinition.setting.name] = trackerDefinition.setting.def;
