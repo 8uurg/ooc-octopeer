@@ -52,7 +52,8 @@ export class VisibilityTracker extends Tracker {
 main.declareTracker({
     tracker: (collector) => {
         return (new VisibilityTracker())
-            .withCollector(collector);
+            .withCollector(collector)
+            .register();
     },
     setting: {
         name: OCTOPEER_CONSTANTS.track_semantic_visibility,

@@ -48,7 +48,8 @@ export class MouseClickTracker extends Tracker {
 main.declareTracker({
     tracker: (collector) => {
         return (new MouseClickTracker())
-            .withCollector(collector);
+            .withCollector(collector)
+            .register();
     },
     setting: {
         name: OCTOPEER_CONSTANTS.track_mouse_clicks,

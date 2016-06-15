@@ -59,7 +59,8 @@ main.declareTracker({
     tracker: (collector) => {
         return (new ResizeTracker())
             .withCollector(collector)
-            .withThrottle(StartEndThrottle.getFactory());
+            .withThrottle(StartEndThrottle.getFactory())
+            .register();
     },
     setting: {
         name: OCTOPEER_CONSTANTS.track_page_resolution,

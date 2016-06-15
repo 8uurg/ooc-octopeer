@@ -87,7 +87,8 @@ export class KeystrokeTracker extends Tracker {
 main.declareTracker({
     tracker: (collector) => {
         return (new KeystrokeTracker())
-            .withCollector(collector);
+            .withCollector(collector)
+            .register();
     },
     setting: {
         name: OCTOPEER_CONSTANTS.track_key_strokes,
