@@ -29,6 +29,7 @@ export class BitBucketSessionDataGatherer implements SessionDataGatherer {
         }
 
         this.createSession(data);
+        this.updateBitbucketUsername();
     }
 
     /**
@@ -83,7 +84,6 @@ export class BitBucketSessionDataGatherer implements SessionDataGatherer {
         return {
             username: user.username
         };
-        this.updateBitbucketUsername();
     }
 
     /**
