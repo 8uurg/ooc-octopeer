@@ -1,4 +1,6 @@
 /// <reference path="./SemanticTracker.d.ts" />
+/// <reference path="../../Main.d.ts" />
+declare var OCTOPEER_CONSTANTS;
 
 /**
  * The semantic key stroke tracker
@@ -25,3 +27,14 @@ export class ClickSemanticTracker
         });
     }
 }
+
+main.declareTracker({
+    tracker: (collector, mappings) => { 
+        return (new ClickSemanticTracker())
+            .withCollector(collector);
+    },
+    setting: {
+        name: OCTOPEER_CONSTANTS.track_semantic_clicks,
+        def: true
+    }
+});

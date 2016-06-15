@@ -1,5 +1,6 @@
 /// <reference path="../../interfaces/DatabaseSchemes/SemanticEventJSON.ts" />
 /// <reference path="../../interfaces/TrackingCollector.ts" />
+
 /**
  * A semantic tracker class
  */

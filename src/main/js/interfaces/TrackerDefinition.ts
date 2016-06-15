@@ -1,5 +1,6 @@
 /// <reference path="../interfaces/TrackingCollector.ts" />
 /// <reference path="../trackers/RawDataTrackers/Tracker.d.ts" />
+/// <reference path="../trackers/SemanticTrackers/SemanticTracker.d.ts" />
 /// <reference path="../trackers/throttles/Throttle.d.ts" />
 
 /**
@@ -10,7 +11,7 @@ interface TrackerDefinition {
     /**
      * The factory of this instance.
      */
-    tracker: (collector: TrackingCollector, semanticMappings?: any) => Tracker;
+    tracker: (collector: TrackingCollector, semanticMappings?: any) => Tracker | SemanticTracker;
 
     /**
      * The setting for this tracker.
