@@ -1,3 +1,6 @@
+/**
+ * Makes sure that the notifications are always on screen.
+ */
 window.addEventListener("scroll", () => {
     let navBarBounds = document.getElementById("ourNavBar").getBoundingClientRect();
 
