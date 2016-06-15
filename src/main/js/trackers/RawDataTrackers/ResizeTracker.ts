@@ -62,7 +62,7 @@ main.declareTracker({
             .withThrottle(StartEndThrottle.getFactory());
     },
     setting: {
-        name: OCTOPEER_CONSTANTS.track_key_strokes,
+        name: OCTOPEER_CONSTANTS.track_page_resolution,
         def: true
     }
 });

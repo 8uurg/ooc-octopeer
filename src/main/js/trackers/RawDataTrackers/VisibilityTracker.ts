@@ -55,7 +55,7 @@ main.declareTracker({
             .withCollector(collector);
     },
     setting: {
-        name: OCTOPEER_CONSTANTS.track_key_strokes,
+        name: OCTOPEER_CONSTANTS.track_semantic_visibility,
         def: true
     }
 });
