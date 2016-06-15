@@ -3,6 +3,16 @@ import {updateBrowserActionIcon, addTabListenersForIcon,
 
 describe("The background script", function () {
 
+    let req: any;
+
+    beforeEach(function () {
+        req = jasmine.createSpyObj("requestSender", ["setApiLocation"]);
+        (<any> global).RARequestsSender = function (loc: string) {
+            this.setApiLocation = function () {};
+            return req;
+        };
+    });
+
     it("should open the settings page when the browser action button is clicked", function () {
         spyOn(chrome.tabs, "create");
         spyOn(chrome.browserAction.onClicked, "addListener").and.callFake((callback: any) => {
@@ -14,12 +24,6 @@ describe("The background script", function () {
 
     it("should set the api location properly", function () {
         // Spy on the RARequestSender
-        let req = jasmine.createSpyObj("requestSender", ["setApiLocation"]);
-        (<any> global).RARequestsSender = function (loc: string) {
-            this.setApiLocation = function () {};
-            return req;
-        };
-
         let initialiseDBConnectionCallback: (items: any) => void;
         spyOn(chrome.storage.sync, "get").and.callFake((_: any, callback: any) => {
             initialiseDBConnectionCallback = callback;
@@ -37,15 +41,9 @@ describe("The background script", function () {
         }});
         expect(req.setApiLocation).toHaveBeenCalledWith(newDatabaseLoc);
     });
-    
+
     it("should not set the api location if no change was made to the api", function () {
         // Spy on the RARequestSender
-        let req = jasmine.createSpyObj("requestSender", ["setApiLocation"]);
-        (<any> global).RARequestsSender = function (loc: string) {
-            this.setApiLocation = function () {};
-            return req;
-        };
-
         let initialiseDBConnectionCallback: (items: any) => void;
         spyOn(chrome.storage.sync, "get").and.callFake((_: any, callback: any) => {
             initialiseDBConnectionCallback = callback;
@@ -71,6 +69,10 @@ describe("The Octopeer browser action icon", function () {
     beforeEach(function () {
         tab = jasmine.createSpyObj("tab", ["active", "url"]);
         spyOn(chrome.browserAction, "setIcon");
+
+        spyOn(chrome.tabs.onUpdated, "addListener").and.callFake((callback: any) => {
+            callback(42, {}, tab);
+        });
     });
 
     it("should be updated correctly", function () {
@@ -87,9 +89,7 @@ describe("The Octopeer browser action icon", function () {
     it("should be updated to active when a bitbucket tab is updated", function () {
         tab.active = true;
         tab.url = "http://bitbucket.org/joe/pull-requests/1/";
-        spyOn(chrome.tabs.onUpdated, "addListener").and.callFake((callback: any) => {
-            callback(42, {}, tab);
-        });
+
         addTabListenersForIcon();
         expect(chrome.browserAction.setIcon).toHaveBeenCalledWith({ path: {
             "48"  : "../../img/icons/icon_active48.png",
@@ -102,9 +102,6 @@ describe("The Octopeer browser action icon", function () {
         tab.active = true;
         tab.url = "http://google.com/";
 
-        spyOn(chrome.tabs.onUpdated, "addListener").and.callFake((callback: any) => {
-            callback(42, {}, tab);
-        });
         addTabListenersForIcon();
         expect(chrome.browserAction.setIcon).toHaveBeenCalledWith({ path: {
             "48"  : "../../img/icons/icon48.png",
@@ -117,9 +114,6 @@ describe("The Octopeer browser action icon", function () {
         tab.active = false;
         tab.url = "http://bitbucket.com/";
 
-        spyOn(chrome.tabs.onUpdated, "addListener").and.callFake((callback: any) => {
-            callback(42, {}, tab);
-        });
         addTabListenersForIcon();
         expect(chrome.browserAction.setIcon).not.toHaveBeenCalled();
     });
