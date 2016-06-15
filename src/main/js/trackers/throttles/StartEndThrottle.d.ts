@@ -21,7 +21,7 @@ declare class StartEndThrottle extends Throttle {
      * @param message The message to send.
      * @param drop The callback to call in case of failure.
      */
-    public sendThrottledMessage(message: Message, drop: () => void);
+    public sendThrottledMessage(message: Message, drop: () => void): void;
     
     /**
      * Get a factory for this throttle.

@@ -1,7 +1,7 @@
 /// <reference path="../../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
 /// <reference path="../../Main.d.ts" />
-declare var OCTOPEER_CONSTANTS;
+declare var OCTOPEER_CONSTANTS: any;
 
 /**
  * Enum as the database uses only two types identified by numbers.

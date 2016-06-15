@@ -1,6 +1,6 @@
 /// <reference path="./SemanticTracker.d.ts" />
 /// <reference path="../../Main.d.ts" />
-declare var OCTOPEER_CONSTANTS;
+declare var OCTOPEER_CONSTANTS: any;
 
 /**
  * The semantic key stroke tracker

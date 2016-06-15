@@ -1,7 +1,7 @@
 /// <reference path="../../interfaces/DatabaseSchemes/SemanticEventJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
 /// <reference path="../../Main.d.ts" />
-declare var OCTOPEER_CONSTANTS;
+declare var OCTOPEER_CONSTANTS: any;
 
 /**
  * Provides a tracker that tracks the visibility on the page.

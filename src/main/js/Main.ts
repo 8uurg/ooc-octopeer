@@ -21,7 +21,7 @@ export class Main {
      * Declare a tracking collector.
      * @throws Error upon registering two or more tracking collectors.
      */
-    public declareTrackingCollector(collector: (SessionDataGatherer) => TrackingCollector): void {
+    public declareTrackingCollector(collector: (sessionDataGatherer: SessionDataGatherer) => TrackingCollector): void {
         if(this.collector != null) {
             throw new Error("Don't register more than a single tracking collector.");
         }
@@ -64,7 +64,7 @@ export class Main {
      * Create the default settings object.
      */
     private getDefaultSettings() {
-        let settings = {};
+        let settings:{[key: string]: boolean} = {};
         this.trackers.forEach(function(tracker) {
             settings[tracker.setting.name] = tracker.setting.def;
         });

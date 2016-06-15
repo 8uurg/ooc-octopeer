@@ -19,7 +19,7 @@ declare class Main {
      * Declare a tracking collector.
      * @throws Error upon registering two or more tracking collectors.
      */
-    public declareTrackingCollector(collector: (SessionDataGatherer) => TrackingCollector): void;
+    public declareTrackingCollector(collector: (sessionDataGatherer: SessionDataGatherer) => TrackingCollector): void;
 
     /**
      * Declare a session data getherer.
@@ -43,7 +43,7 @@ declare class Main {
      * Run to create and register all trackers.
      * @throws Error upon missing collector.
      */
-    public done();
+    public done(): void;
 
 }
 

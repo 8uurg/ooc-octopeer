@@ -3,7 +3,7 @@
 /// <reference path="../../Main.d.ts" />
 /// <reference path="../throttles/StartEndThrottle.d.ts" />
 
-declare var OCTOPEER_CONSTANTS;
+declare var OCTOPEER_CONSTANTS: any;
 
 /**
  * Provides a tracker that tracks the resolution of the screen.
