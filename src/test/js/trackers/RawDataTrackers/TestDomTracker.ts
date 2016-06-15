@@ -2,25 +2,29 @@
 
 import {DomTracker} from "../../../../main/js/trackers/RawDataTrackers/DomTracker";
 import {testTracker} from "./TestTracker";
+import any = jasmine.any;
+
+testTracker(DomTracker);
 
 describe("The Dom Tracker", function() {
-    testTracker(DomTracker);
 
     beforeEach(function () {
-        let _this = this;
-
         jasmine.clock().install();
         jasmine.clock().mockDate();
+
+        this.mutationObserver = jasmine.createSpyObj("observer", ["disconnect", "observe"]);
+        let _this = this;
+        (<any> global).MutationObserver = function (callback: any) {
+            this.disconnect = jasmine.createSpy("disconnect");
+            this.observe = jasmine.createSpy("observe");
+            _this.mutationObserved = callback;
+            return _this.mutationObserver;
+        };
+
         this.tracker = new DomTracker();
         window.document = document;
 
-        this.ev = <(e: any) => void> null;
-        document.addEventListener = function(eventName: string, callback: (e: any) => void) {
-            _this.ev = callback;
-        };
-
         this.collector = jasmine.createSpyObj("collector", ["sendMessage"]);
-        this.tracker = new DomTracker();
         this.tracker.withCollector(this.collector);
         this.element = document.createElement("a");
         document.body.appendChild(this.element);
@@ -28,7 +32,7 @@ describe("The Dom Tracker", function() {
 
     it("should add data-octopeer attributes to the elements", function() {
         this.tracker.register();
-        this.ev();
+        this.mutationObserved();
 
         expect(this.element.getAttribute("data-octopeer-x")).toBe("0");
         expect(this.element.getAttribute("data-octopeer-y")).toBe("0");
@@ -38,7 +42,7 @@ describe("The Dom Tracker", function() {
 
     it("should call the sendData twice", function() {
         this.tracker.register();
-        this.ev();
+        this.mutationObserved();
 
         expect(this.collector.sendMessage).toHaveBeenCalledTimes(2);
     });
@@ -47,7 +51,7 @@ describe("The Dom Tracker", function() {
         this.element.style.zIndex = "auto";
 
         this.tracker.register();
-        this.ev();
+        this.mutationObserved();
 
         expect(this.element.getAttribute("data-octopeer-z")).toBeNull();
     });
@@ -56,9 +60,18 @@ describe("The Dom Tracker", function() {
         this.element.style.zIndex = 3;
 
         this.tracker.register();
-        this.ev();
+        this.mutationObserved();
 
-        expect(this.element.getAttribute("data-octopeer-z")).not.toBeNull();
+        expect(this.element.getAttribute("data-octopeer-z")).toBe("3");
+    });
+
+    it("should change the configuration, when it is changed.", function () {
+        this.tracker.register();
+        let newConf = jasmine.objectContaining({
+            attributes: false
+        });
+        this.tracker.changeTrackerConfiguration(newConf);
+        expect(this.mutationObserver.observe).toHaveBeenCalledWith(any(Object), newConf);
     });
 
     afterEach(function () {

@@ -9,33 +9,50 @@ declare var OCTOPEER_CONSTANTS: any;
  */
 export class DomTracker extends Tracker {
 
+    private mutationObserver: MutationObserver;
+    private mutationObserverConfiguration: MutationObserverInit = {
+        attributes: true,
+        attributeFilter: ["data-octopeer-x", "data-octopeer-y", "data-octopeer-height", "data-octopeer-width",
+            "data-octopeer-z"],
+        childList: true,
+        subtree: true
+    };
+
     /**
      * Register the VisibleElementsTracker.
      */
     public register() {
-        const _this: DomTracker = this;
-
-        let sendModifiedDom = function () {
-            _this.modifyDom();
-            _this.sendData(_this.createMessage(document.documentElement.outerHTML));
+        let registerChange = () => {
+            this.mutationObserver.disconnect();
+            this.modifyDom();
+            this.sendData(this.createMessage(document.documentElement.outerHTML));
+            this.connectObserver();
         };
-
-        // Send initial dom on page load.
-        sendModifiedDom();
-
-        // Sends modified dom on change of the dom.
-        window.document.addEventListener("change", sendModifiedDom);
+        this.mutationObserver = new MutationObserver(registerChange);
+        this.connectObserver();
+        registerChange();
     }
 
     /**
-     * This method goes through all elements of the dom to add new attributes to them.
+     * Connect the mutation observer with the body.
+     */
+    private connectObserver() {
+        if (this.mutationObserver === null) {
+            return;
+        }
+        this.mutationObserver.disconnect();
+        this.mutationObserver.observe(document.body, this.mutationObserverConfiguration);
+    }
+
+    /**
+     * This method goes through all elements of the body to add new attributes to them.
      * Afterwards it sends the dom to the message handler.
      */
     private modifyDom() {
-        let allDOMElements: NodeListOf<Element> = document.getElementsByTagName("*");
+        let elementsInBody: NodeListOf<Element> = document.querySelectorAll("body *");
 
-        for (let numberOfElements = 0; numberOfElements < allDOMElements.length; numberOfElements++) {
-            let element: Element = allDOMElements.item(numberOfElements);
+        for (let i = 0; i < elementsInBody.length; i++) {
+            let element: Element = elementsInBody.item(i);
             this.setDataAttributesToElement(element);
         }
     }
@@ -61,12 +78,12 @@ export class DomTracker extends Tracker {
 
     /**
      * Creates a message using the VisibleElementJSON interface.
-     * @param Dom  The modified dom with data elements added.
+     * @param dom  The modified dom with data elements added.
      * @returns {DomJSON}
      */
-    public createMessage(Dom: string): DomJSON {
+    public createMessage(dom: string): DomJSON {
         return {
-            dom: Dom,
+            dom: dom,
             created_at: Date.now() / 1000
         };
     }
@@ -80,6 +97,15 @@ export class DomTracker extends Tracker {
             table: "html-pages/",
             data: dData
         });
+    }
+
+    /**
+     * Changes the tracker configuration.
+     * @param conf The configuration for the DOM tracker.
+     */
+    public changeTrackerConfiguration(conf: MutationObserverInit) {
+        this.mutationObserverConfiguration = conf;
+        this.connectObserver();
     }
 }
 
