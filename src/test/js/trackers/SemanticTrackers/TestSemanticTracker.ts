@@ -113,6 +113,38 @@ export function SemanticTrackerTest(SemanticTrackerInstance: new () => SemanticT
                 abstractTracker.registerElement(element, "Add reaction");
             }).toThrowError(new RegExp("Illegal semantic event type name:"));
         });
+
+        it("should filter a disabled matching mapping out.", function () {
+            let testMapping: SemanticMapping[] = [{
+                name: "HA",
+                selector: "div",
+                track: {
+                    keystroke: false,
+                    click: false,
+                    hover: false,
+                    scroll: false
+                }
+            }];
+            spyOn(abstractTracker, "registerElements");
+            abstractTracker.withMappings(testMapping);
+            expect(abstractTracker.registerElements).toHaveBeenCalledWith([]);
+        });
+
+        it("should not filter an enabled matching mapping out and map it.", function () {
+            let testMapping: SemanticMapping[] = [{
+                name: "HA",
+                selector: "div",
+                track: {
+                    keystroke: true,
+                    click: true,
+                    hover: true,
+                    scroll: true
+                }
+            }];
+            spyOn(abstractTracker, "registerElements");
+            abstractTracker.withMappings(testMapping);
+            expect(abstractTracker.registerElements).toHaveBeenCalledWith([["div", "HA"]]);
+        });
     });
 }
 
