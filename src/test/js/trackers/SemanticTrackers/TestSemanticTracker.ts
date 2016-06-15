@@ -1,3 +1,6 @@
+///<reference path="../../../../../typings/index.d.ts" />
+///<reference path="../../../../main/js/trackers/SemanticTrackers/SemanticTracker.d.ts" />
+
 /**
  * Creates a test suite for the abstract class.
  * Execute this function outside your implementation test suite with the constructor of the class.
@@ -122,6 +125,10 @@ class WrongSemanticTracker
 
     public getName() {
         return "WrongSemanticTracker";
+    }
+
+    public filterMappings(mapping: SemanticMapping) {
+        return true;
     }
 
     public registerElement(element: Element, eventName: string): void {
