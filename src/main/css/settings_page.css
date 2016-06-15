@@ -135,6 +135,22 @@ main {
     line-height: 32px;
 }
 
+.privacy-settings .row h3 {
+    text-align: center;
+}
+
 .hidden-explain-button {
     visibility: hidden;
+}
+
+.optioncol{
+    width: 50%;
+}
+
+footer.page-footer {
+    padding-top: 0px;
+}
+
+footer.page-footer .container .row {
+    margin-bottom: 0px;
 }
