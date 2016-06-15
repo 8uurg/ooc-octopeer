@@ -29,7 +29,7 @@ export function setupCheckboxes() {
     registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,              "checkboxKeystrokes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_scroll,                   "checkboxScroll");
     registerCheckbox(OCTOPEER_CONSTANTS.track_dom,                      "checkboxDom");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_position,        "checkboxSemanticPosition");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_position,        "checkboxSemanticHover");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_clicks,          "checkboxSemanticClicks");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_key_strokes,     "checkboxSemanticKeystrokes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_scrolling,       "checkboxSemanticScrolling");

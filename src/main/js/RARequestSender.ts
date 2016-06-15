@@ -59,6 +59,28 @@ export class RARequestsSender {
     }
 
     /**
+     * This method creates a XMLHttpRequest and sets all parameters.
+     * @param table  The endpoint for the database to send the data to.
+     * @returns {XMLHttpRequest}
+     */
+    private createJSONRequest(table: string): XMLHttpRequest {
+        let xmlHTTP = new XMLHttpRequest();
+        let _this: RARequestsSender = this;
+
+        xmlHTTP.open("POST", this.api_location + table, true);
+        xmlHTTP.setRequestHeader("Content-Type", "application/json");
+        xmlHTTP.onreadystatechange = function() {
+            if (_this.allowedStates.indexOf(xmlHTTP.status) === -1  && xmlHTTP.readyState === 4) {
+                console.error("An error occurred while sending data to the server: " + xmlHTTP.status);
+            } else {
+                _this.send = true;
+            }
+        };
+
+        return xmlHTTP;
+    }
+
+    /**
      * Sends the data to the database if a database location is set.
      * @param table  The table to put the information in.
      * @param data   The data in an object..
@@ -69,17 +91,7 @@ export class RARequestsSender {
             return;
         }
 
-        let xmlHTTP = new XMLHttpRequest();
-        let _this: RARequestsSender = this;
-        xmlHTTP.open("POST", this.api_location + table, true);
-        xmlHTTP.setRequestHeader("Content-Type", "application/json");
-        xmlHTTP.onreadystatechange = function() {
-            if (_this.allowedStates.indexOf(xmlHTTP.status) === -1  && xmlHTTP.readyState === 4) {
-                console.error("An error occurred while sending data to the server: " + xmlHTTP.status);
-            } else {
-                _this.send = true;
-            }
-        };
+        let xmlHTTP = this.createJSONRequest(table);
         xmlHTTP.send(JSON.stringify(data));
     }
 }
