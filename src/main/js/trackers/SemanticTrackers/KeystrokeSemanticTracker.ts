@@ -29,7 +29,7 @@ export class KeystrokeSemanticTracker
 }
 
 main.declareTracker({
-    tracker: (collector, mappings) => { 
+    tracker: (collector, mappings) => {
         return (new KeystrokeSemanticTracker())
             .withCollector(collector);
     },

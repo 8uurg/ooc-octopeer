@@ -60,7 +60,7 @@ export class MousePositionTracker extends Tracker {
 }
 
 main.declareTracker({
-    tracker: (collector) => { 
+    tracker: (collector) => {
         return (new MousePositionTracker())
             .withCollector(collector)
             .withThrottle(StartEndThrottle.getFactory());

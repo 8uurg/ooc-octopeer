@@ -56,7 +56,7 @@ export class ResizeTracker extends Tracker {
 }
 
 main.declareTracker({
-    tracker: (collector) => { 
+    tracker: (collector) => {
         return (new ResizeTracker())
             .withCollector(collector)
             .withThrottle(StartEndThrottle.getFactory());

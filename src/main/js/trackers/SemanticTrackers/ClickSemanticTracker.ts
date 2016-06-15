@@ -29,7 +29,7 @@ export class ClickSemanticTracker
 }
 
 main.declareTracker({
-    tracker: (collector, mappings) => { 
+    tracker: (collector, mappings) => {
         return (new ClickSemanticTracker())
             .withCollector(collector);
     },

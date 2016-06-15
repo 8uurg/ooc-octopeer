@@ -1,3 +1,5 @@
+/// <reference path="../../typings/index.d.ts" />
+
 /**
  * This class mocks global elements to enable testing on these functions.
  * @type {NodeJS.Global}
@@ -8,7 +10,7 @@
 var _global: any = global; // tslint:disable-line
 
 // A function that does nothing, used as a placeholder.
-function nop() {}
+function nop() {};
 
 _global.chrome = {
     runtime: {
@@ -75,4 +77,4 @@ _global.main = {
     declareSemanticMappings: nop,
     declareTracker: nop,
     done: nop
-}
+};

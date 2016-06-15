@@ -1,8 +1,8 @@
 /// <reference path="./Main.d.ts" />
-let trackAll: SemanticEnablingMapping = { 
+let trackAll: SemanticEnablingMapping = {
     keystroke: true,
     click: true,
-    hover: true, 
+    hover: true,
     scroll: true
 };
 

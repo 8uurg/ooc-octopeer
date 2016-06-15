@@ -56,7 +56,7 @@ export class ScrollTracker extends Tracker {
 }
 
 main.declareTracker({
-    tracker: (collector) => { 
+    tracker: (collector) => {
         return (new ScrollTracker())
             .withCollector(collector)
             .withThrottle(StartEndThrottle.getFactory());

@@ -33,7 +33,7 @@ export class MouseSemanticTracker
 }
 
 main.declareTracker({
-    tracker: (collector, mappings) => { 
+    tracker: (collector, mappings) => {
         return (new MouseSemanticTracker())
             .withCollector(collector);
     },

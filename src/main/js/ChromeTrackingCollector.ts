@@ -44,5 +44,5 @@ export class ChromeTrackingCollector implements TrackingCollector {
     }
 }
 
-main.declareTrackingCollector((sessionDataGatherer) => 
-    new ChromeTrackingCollector(sessionDataGatherer))
+main.declareTrackingCollector((sessionDataGatherer) =>
+    new ChromeTrackingCollector(sessionDataGatherer));

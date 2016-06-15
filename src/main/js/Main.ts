@@ -13,8 +13,8 @@
 export class Main {
 
     private collector: TrackingCollector;
-    private trackers: TrackerDefinition[];
-    private semanticMappings: SemanticMapping[];
+    private trackers: TrackerDefinition[] = [];
+    private semanticMappings: SemanticMapping[] = [];
     private sessionDataGatherer: SessionDataGatherer;
 
     /**
@@ -22,7 +22,7 @@ export class Main {
      * @throws Error upon registering two or more tracking collectors.
      */
     public declareTrackingCollector(collector: (sessionDataGatherer: SessionDataGatherer) => TrackingCollector): void {
-        if(this.collector != null) {
+        if (this.collector != null) {
             throw new Error("Don't register more than a single tracking collector.");
         }
 
@@ -34,19 +34,19 @@ export class Main {
      * @throws Error upon registering two or more session data gatherers.
      */
     public declareSessionDataGatherer(sessionDataGatherer: () => SessionDataGatherer): void {
-        if(this.sessionDataGatherer != null) {
+        if (this.sessionDataGatherer != null) {
             throw new Error("Don't register more than a single tracking collector.");
         }
 
         this.sessionDataGatherer = sessionDataGatherer();
     }
-    
+
     /**
      * Declare a semantic mapping.
      * @throws Error upon registering two or more semantic mappings.
      */
     public declareSemanticMappings(semanticMappings: SemanticMapping[]): void {
-        if(this.semanticMappings != null) {
+        if (this.semanticMappings != null) {
             throw new Error("Don't register more than a single semantic mapping.");
         }
 
@@ -64,7 +64,7 @@ export class Main {
      * Create the default settings object.
      */
     private getDefaultSettings() {
-        let settings:{[key: string]: boolean} = {};
+        let settings: {[key: string]: boolean} = {};
         this.trackers.forEach(function(tracker) {
             settings[tracker.setting.name] = tracker.setting.def;
         });
@@ -75,11 +75,11 @@ export class Main {
      * Verify if we can start in the current state of things.
      */
     private verifyState() {
-        if(this.collector == null) {
+        if (this.collector == null) {
             throw new Error("Before creating the trackers, a collector is required.");
         }
 
-        if(!this.collector.isReadyToSend()) {
+        if (!this.collector.isReadyToSend()) {
             throw new Error("The collector was unable to obtain the data required.");
         }
     }
@@ -91,7 +91,7 @@ export class Main {
     public done() {
         this.verifyState();
 
-        const requiredSettings = this.getDefaultSettings(); 
+        const requiredSettings = this.getDefaultSettings();
 
         chrome.storage.sync.get(requiredSettings, (preferences: { [key: string]: any }) => {
             const activated = this.trackers.filter((tracker) => preferences[tracker.setting.name]);
@@ -103,20 +103,5 @@ export class Main {
 
 }
 
-// var is required in global scope.
+// `var` is required in global scope.
 var main = new Main(); // tslint:disable-line
-
-// Keep this for reference, don't want to look through git to find this again.
-// // The needed settings. True is the default value if storage does not contain the key.
-// let neededSettings: { [key: string]: boolean; } = {
-//     [OCTOPEER_CONSTANTS.track_key_strokes]: true,
-//     [OCTOPEER_CONSTANTS.track_mouse_position]: true,
-//     [OCTOPEER_CONSTANTS.track_page_resolution]: true,
-//     [OCTOPEER_CONSTANTS.track_mouse_clicks]: true,
-//     [OCTOPEER_CONSTANTS.track_scroll]: true,
-//     [OCTOPEER_CONSTANTS.track_semantic_clicks]: true,
-//     [OCTOPEER_CONSTANTS.track_semantic_visibility]: true,
-//     [OCTOPEER_CONSTANTS.track_semantic_key_strokes]: true,
-//     [OCTOPEER_CONSTANTS.track_semantic_position]: true,
-//     [OCTOPEER_CONSTANTS.track_dom]: true
-// };

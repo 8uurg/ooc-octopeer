@@ -7,7 +7,7 @@
  * A descriptor for Tracker.
  */
 interface TrackerDefinition {
-    
+
     /**
      * The factory of this instance.
      */
@@ -19,5 +19,5 @@ interface TrackerDefinition {
     setting: {
         name: string;
         def: boolean;
-    }
+    };
 }

@@ -15,6 +15,7 @@ declare class StartEndThrottle extends Throttle {
      * @param collector The collector to send data to next.
      */
     constructor(collector: TrackingCollector);
+
     /**
      * Send a throttled message, dropping those sent in quick succession
      * but keeping the last message if possible.
@@ -22,7 +23,7 @@ declare class StartEndThrottle extends Throttle {
      * @param drop The callback to call in case of failure.
      */
     public sendThrottledMessage(message: Message, drop: () => void): void;
-    
+
     /**
      * Get a factory for this throttle.
      */

@@ -85,7 +85,7 @@ export class KeystrokeTracker extends Tracker {
 }
 
 main.declareTracker({
-    tracker: (collector) => { 
+    tracker: (collector) => {
         return (new KeystrokeTracker())
             .withCollector(collector);
     },

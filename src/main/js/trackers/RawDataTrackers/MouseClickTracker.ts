@@ -46,7 +46,7 @@ export class MouseClickTracker extends Tracker {
 }
 
 main.declareTracker({
-    tracker: (collector) => { 
+    tracker: (collector) => {
         return (new MouseClickTracker())
             .withCollector(collector);
     },

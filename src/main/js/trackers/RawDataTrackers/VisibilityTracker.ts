@@ -50,7 +50,7 @@ export class VisibilityTracker extends Tracker {
 }
 
 main.declareTracker({
-    tracker: (collector) => { 
+    tracker: (collector) => {
         return (new VisibilityTracker())
             .withCollector(collector);
     },

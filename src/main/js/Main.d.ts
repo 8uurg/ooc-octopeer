@@ -10,11 +10,6 @@
  */
 declare class Main {
 
-    private collector: TrackingCollector;
-    private trackers: TrackerDefinition[];
-    private semanticMappings: any;
-    private sessionDataGatherer: any;
-
     /**
      * Declare a tracking collector.
      * @throws Error upon registering two or more tracking collectors.
