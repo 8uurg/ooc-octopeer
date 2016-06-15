@@ -1,5 +1,9 @@
 /// <reference path="../../interfaces/DatabaseSchemes/WindowResolutionJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
+/// <reference path="../../Main.d.ts" />
+/// <reference path="../throttles/StartEndThrottle.d.ts" />
+
+declare var OCTOPEER_CONSTANTS;
 
 /**
  * Provides a tracker that tracks the resolution of the screen.
@@ -50,3 +54,15 @@ export class ResizeTracker extends Tracker {
         });
     }
 }
+
+main.declareTracker({
+    tracker: (collector) => { 
+        return (new ResizeTracker())
+            .withCollector(collector)
+            .withThrottle(StartEndThrottle.getFactory());
+    },
+    setting: {
+        name: OCTOPEER_CONSTANTS.track_key_strokes,
+        def: true
+    }
+});
