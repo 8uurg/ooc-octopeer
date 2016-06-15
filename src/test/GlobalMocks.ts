@@ -26,6 +26,10 @@ _global.chrome = {
         sync: {
             set: function () {},
             get: function () {}
+        },
+        local: {
+            set: function() {},
+            get: function() {}
         }
     },
     tabs: {
