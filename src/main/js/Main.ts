@@ -13,7 +13,7 @@
  */
 export class Main {
 
-    private collector: TrackingCollector;
+    private collector: (sessionDataGatherer: SessionDataGatherer) => TrackingCollector;
     private trackerDefinitions: TrackerDefinition[] = [];
     private semanticMappings: SemanticMapping[] = [];
     private sessionDataGatherer: SessionDataGatherer;
@@ -28,7 +28,7 @@ export class Main {
             throw new Error("Don't register more than a single tracking collector.");
         }
 
-        this.collector = collector(this.sessionDataGatherer);
+        this.collector = collector;
     }
 
     /**
@@ -79,14 +79,15 @@ export class Main {
     /**
      * Verify if we can start in the current state of things.
      */
-    private verifyState() {
+    private verifiedCollector(): TrackingCollector {
         if (this.collector == null) {
             throw new Error("Before creating the trackers, a collector is required.");
         }
-
-        if (!this.collector.isReadyToSend()) {
-            throw new Error("The collector was unable to obtain the data required.");
+        const collector = this.collector(this.sessionDataGatherer);
+        if (collector.isReadyToSend()) {
+            throw new Error("The collector was unable to obtain the session data required.");
         }
+        return collector;
     }
 
     /**
@@ -94,15 +95,14 @@ export class Main {
      * @throws Error upon missing collector.
      */
     public done() {
-        this.verifyState();
-
+        const collector: TrackingCollector = this.verifiedCollector();
         const requiredSettings = this.getDefaultSettings();
 
         chrome.storage.sync.get(requiredSettings, (preferences: { [key: string]: any }) => {
             const activated = this.trackerDefinitions
                 .filter((trackerDefinition) => preferences[trackerDefinition.setting.name]);
             activated.forEach((trackerDefinition) => {
-                trackerDefinition.tracker(this.collector, this.semanticMappings);
+                trackerDefinition.tracker(collector, this.semanticMappings);
             });
         });
     }
