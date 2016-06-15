@@ -37,6 +37,32 @@ describe("The background script", function () {
         }});
         expect(req.setApiLocation).toHaveBeenCalledWith(newDatabaseLoc);
     });
+    
+    it("should not set the api location if no change was made to the api", function () {
+        // Spy on the RARequestSender
+        let req = jasmine.createSpyObj("requestSender", ["setApiLocation"]);
+        (<any> global).RARequestsSender = function (loc: string) {
+            this.setApiLocation = function () {};
+            return req;
+        };
+
+        let initialiseDBConnectionCallback: (items: any) => void;
+        spyOn(chrome.storage.sync, "get").and.callFake((_: any, callback: any) => {
+            initialiseDBConnectionCallback = callback;
+        });
+
+        let changeAPILocationCallback: (changedItems: any) => void;
+        spyOn(chrome.storage.onChanged, "addListener").and.callFake((callback: any) => {
+            changeAPILocationCallback = callback;
+        });
+        createBackgroundProcesses();
+        initialiseDBConnectionCallback({ username_key: "joostje" });
+        let newUsername = "joost";
+        changeAPILocationCallback({ username_key: {
+            newValue: newUsername
+        }});
+        expect(req.setApiLocation).not.toHaveBeenCalled();
+    });
 });
 
 describe("The Octopeer browser action icon", function () {
@@ -85,6 +111,17 @@ describe("The Octopeer browser action icon", function () {
             "64"  : "../../img/icons/icon64.png",
             "128" : "../../img/icons/icon128.png"
         }});
+    });
+
+    it("should not be updated to inactive if the tab is not active", function () {
+        tab.active = false;
+        tab.url = "http://bitbucket.com/";
+
+        spyOn(chrome.tabs.onUpdated, "addListener").and.callFake((callback: any) => {
+            callback(42, {}, tab);
+        });
+        addTabListenersForIcon();
+        expect(chrome.browserAction.setIcon).not.toHaveBeenCalled();
     });
 
     it("should update the icon to active when a bitbucket tab is opened", function () {
