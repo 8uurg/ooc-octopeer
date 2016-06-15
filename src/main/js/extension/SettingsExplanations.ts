@@ -161,8 +161,8 @@ export class SettingsExplanations {
             "settingSelector": "semantic-keystrokes-setting-question", "title": "Semantic Keystrokes Tracking",
             "bodyText": [
                 "On Bitbucket pull-request pages the keypresses in relation to elements on Bitbucket webpages are " +
-                "tracked. An event is triggered when a keypress is made in a monitored HTML element on the webpage. " +
-                "(For instance a comment box). Afterwards, a predefined event and element type together with the " +
+                "tracked. An event is triggered when a keypress is made in a monitored HTML element on the webpage " +
+                "(for instance a comment box). Afterwards, a predefined event and element type together with the " +
                 "timestamp are send to the database."
             ],
             "sampleData": nop
@@ -178,7 +178,7 @@ export class SettingsExplanations {
             "settingSelector": "semantic-visibility-setting-question", "title": "Semantic PR Page Visibility Tracking",
             "bodyText": [
                 "On Bitbucket pull-request pages the visibility of the tab is being tracked. When the pull-request " +
-                "tab becomes (in)visible a notification is send to the database."
+                "tab becomes (in)visible that is stored in the database."
             ],
             "sampleData": nop
         }
