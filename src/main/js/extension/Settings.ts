@@ -64,13 +64,14 @@ document.addEventListener("DOMContentLoaded", () => {
     let openAnalyticsButton = document.getElementById("openAnalytics");
     openAnalyticsButton.addEventListener("click", (e) => {
         e.preventDefault();
+        let url     = openAnalyticsButton.getAttribute("href");
+        let target  = openAnalyticsButton.getAttribute("target");
         chrome.storage.local.get([OCTOPEER_CONSTANTS.user_id_key], (items) => {
             if (items.hasOwnProperty(OCTOPEER_CONSTANTS.user_id_key)) {
-                let url = openAnalyticsButton.getAttribute("href");
                 url += "?userName=" + items[OCTOPEER_CONSTANTS.user_id_key];
                 url += "&platform=Bitbucket";
-                window.open(url, openAnalyticsButton.getAttribute("target"));
             }
+            window.open(url, target);
         });
     });
 });
