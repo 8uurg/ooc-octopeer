@@ -20,6 +20,7 @@ export class Main {
 
     /**
      * Declare a tracking collector.
+     * @param collector The tracking collector to declare.
      * @throws Error upon registering two or more tracking collectors.
      */
     public declareTrackingCollector(collector: (sessionDataGatherer: SessionDataGatherer) => TrackingCollector): void {
@@ -32,6 +33,7 @@ export class Main {
 
     /**
      * Declare a session data gatherer.
+     * @param sessionDataGatherer The SessionDataGatherer to declare.
      * @throws Error upon registering two or more session data gatherers.
      */
     public declareSessionDataGatherer(sessionDataGatherer: () => SessionDataGatherer): void {
@@ -44,6 +46,7 @@ export class Main {
 
     /**
      * Declare a semantic mapping.
+     * @param semanticMappings The semantic mappings to declare.
      * @throws Error upon registering two or more semantic mappings.
      */
     public declareSemanticMappings(semanticMappings: SemanticMapping[]): void {
