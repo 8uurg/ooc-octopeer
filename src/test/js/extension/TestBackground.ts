@@ -20,21 +20,22 @@ describe("The background script", function () {
             return req;
         };
 
-        let getCallback: (items: any) => void;
+        let initialiseDBConnectionCallback: (items: any) => void;
         spyOn(chrome.storage.sync, "get").and.callFake((_: any, callback: any) => {
-            getCallback = callback;
+            initialiseDBConnectionCallback = callback;
         });
 
-        let changeListener: (changedItems: any) => void;
+        let changeAPILocationCallback: (changedItems: any) => void;
         spyOn(chrome.storage.onChanged, "addListener").and.callFake((callback: any) => {
-            changeListener = callback;
+            changeAPILocationCallback = callback;
         });
         createBackgroundProcesses();
-        getCallback({ databaseLocation: "http://fake-server.com/api/" });
-        changeListener({ databaseLocation: {
-            newValue: "http://test-server.com/api/"
+        initialiseDBConnectionCallback({ databaseLocation: "http://fake-server.com/api/" });
+        let newDatabaseLoc = "http://test-server.com/api/";
+        changeAPILocationCallback({ databaseLocation: {
+            newValue: newDatabaseLoc
         }});
-        expect(req.setApiLocation).toHaveBeenCalled();
+        expect(req.setApiLocation).toHaveBeenCalledWith(newDatabaseLoc);
     });
 });
 
