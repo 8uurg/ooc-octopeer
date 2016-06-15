@@ -71,7 +71,7 @@ _global.OCTOPEER_CONSTANTS = {
 
 _global.main = {
     declareTrackingCollector: nop,
-    declareSessionDataGetherer: nop,
+    declareSessionDataGatherer: nop,
     declareSemanticMappings: nop,
     declareTracker: nop,
     done: nop
