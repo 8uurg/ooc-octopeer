@@ -26,12 +26,21 @@ export class KeystrokeSemanticTracker
             this.sendData(this.createMessage("Keystroke", eventName));
         });
     }
+
+    /**
+     * Check if this element mapping has tracking keystroke turned on.
+     * @param mapping The mapping that is being checked.
+     */
+    public filterMappings(mapping: SemanticMapping) {
+        return mapping.track.keystroke;
+    }
 }
 
 main.declareTracker({
     tracker: (collector, mappings) => {
         return (new KeystrokeSemanticTracker())
-            .withCollector(collector);
+            .withCollector(collector)
+            .withMappings(mappings);
     },
     setting: {
         name: OCTOPEER_CONSTANTS.track_semantic_key_strokes,

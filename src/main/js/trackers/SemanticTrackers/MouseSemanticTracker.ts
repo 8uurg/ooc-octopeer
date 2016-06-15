@@ -30,12 +30,21 @@ export class MouseSemanticTracker
             this.sendData(this.createMessage("Mouseleave", eventName));
         });
     }
+
+    /**
+     * Check if this element mapping has tracking mouse turned on.
+     * @param mapping The mapping that is being checked.
+     */
+    public filterMappings(mapping: SemanticMapping) {
+        return mapping.track.hover;
+    }
 }
 
 main.declareTracker({
     tracker: (collector, mappings) => {
         return (new MouseSemanticTracker())
-            .withCollector(collector);
+            .withCollector(collector)
+            .withMappings(mappings);
     },
     setting: {
         name: OCTOPEER_CONSTANTS.track_semantic_position,

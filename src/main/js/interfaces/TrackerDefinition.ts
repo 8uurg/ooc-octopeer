@@ -11,7 +11,7 @@ interface TrackerDefinition {
     /**
      * The factory of this instance.
      */
-    tracker: (collector: TrackingCollector, semanticMappings?: any) => void;
+    tracker: (collector: TrackingCollector, semanticMappings?: SemanticMapping[]) => void;
 
     /**
      * The setting for this tracker.

@@ -26,12 +26,21 @@ export class ClickSemanticTracker
             this.sendData(this.createMessage("Click", eventName));
         });
     }
+
+    /**
+     * Check if this element mapping has tracking click turned on.
+     * @param mapping The mapping that is being checked.
+     */
+    public filterMappings(mapping: SemanticMapping) {
+        return mapping.track.click;
+    }
 }
 
 main.declareTracker({
     tracker: (collector, mappings) => {
         return (new ClickSemanticTracker())
-            .withCollector(collector);
+            .withCollector(collector)
+            .withMappings(mappings);
     },
     setting: {
         name: OCTOPEER_CONSTANTS.track_semantic_clicks,
