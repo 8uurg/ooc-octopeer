@@ -8,12 +8,13 @@
 /// <reference path="./trackers/throttles/Throttle.ts" />
 
 /**
- * The class that prepares everthing for readyness.
+ * The class that prepares everything and connects dependencies.
+ * Makes sure everything is good to go.
  */
 export class Main {
 
     private collector: TrackingCollector;
-    private trackers: TrackerDefinition[] = [];
+    private trackerDefinitions: TrackerDefinition[] = [];
     private semanticMappings: SemanticMapping[] = [];
     private sessionDataGatherer: SessionDataGatherer;
 
@@ -30,7 +31,7 @@ export class Main {
     }
 
     /**
-     * Declare a session data getherer.
+     * Declare a session data gatherer.
      * @throws Error upon registering two or more session data gatherers.
      */
     public declareSessionDataGatherer(sessionDataGatherer: () => SessionDataGatherer): void {
@@ -52,12 +53,13 @@ export class Main {
 
         this.semanticMappings = semanticMappings;
     }
+
     /**
      * Declare a tracker to be loaded upon load.
      * @param definition The definition to use for registering the tracker.
      */
     public declareTracker(definition: TrackerDefinition): void {
-        this.trackers.push(definition);
+        this.trackerDefinitions.push(definition);
     }
 
     /**
@@ -65,8 +67,8 @@ export class Main {
      */
     private getDefaultSettings() {
         let settings: {[key: string]: boolean} = {};
-        this.trackers.forEach(function(tracker) {
-            settings[tracker.setting.name] = tracker.setting.def;
+        this.trackerDefinitions.forEach(function(trackerDefinition) {
+            settings[trackerDefinition.setting.name] = trackerDefinition.setting.def;
         });
         return settings;
     }
@@ -94,9 +96,10 @@ export class Main {
         const requiredSettings = this.getDefaultSettings();
 
         chrome.storage.sync.get(requiredSettings, (preferences: { [key: string]: any }) => {
-            const activated = this.trackers.filter((tracker) => preferences[tracker.setting.name]);
-            activated.forEach(function(tracker) {
-                tracker.tracker(this.collector, this.semanticMappings);
+            const activated = this.trackerDefinitions
+                .filter((trackerDefinition) => preferences[trackerDefinition.setting.name]);
+            activated.forEach((trackerDefinition) => {
+                trackerDefinition.tracker(this.collector, this.semanticMappings);
             });
         });
     }

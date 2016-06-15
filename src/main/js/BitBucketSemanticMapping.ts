@@ -1,4 +1,5 @@
 /// <reference path="./Main.d.ts" />
+
 let trackAll: SemanticEnablingMapping = {
     keystroke: true,
     click: true,
