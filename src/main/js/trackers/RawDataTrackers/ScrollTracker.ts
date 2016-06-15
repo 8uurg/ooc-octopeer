@@ -1,5 +1,9 @@
 /// <reference path="../../interfaces/DatabaseSchemes/ScrollJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
+/// <reference path="../../Main.d.ts" />
+/// <reference path="../throttles/StartEndThrottle.d.ts" />
+
+declare var OCTOPEER_CONSTANTS;
 
 /**
  * ScrollTracker, Tracks the current viewport position in comparison to the page origin.
@@ -50,3 +54,15 @@ export class ScrollTracker extends Tracker {
         }
     }
 }
+
+main.declareTracker({
+    tracker: (collector) => { 
+        return (new ScrollTracker())
+            .withCollector(collector)
+            .withThrottle(StartEndThrottle.getFactory());
+    },
+    setting: {
+        name: OCTOPEER_CONSTANTS.track_key_strokes,
+        def: true
+    }
+});
