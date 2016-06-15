@@ -15,7 +15,7 @@ export class Main {
 
     private collector: (sessionDataGatherer: SessionDataGatherer) => TrackingCollector;
     private trackerDefinitions: TrackerDefinition[] = [];
-    private semanticMappings: SemanticMapping[] = [];
+    private semanticMappings: SemanticMapping[];
     private sessionDataGatherer: SessionDataGatherer;
 
     /**
@@ -84,7 +84,7 @@ export class Main {
             throw new Error("Before creating the trackers, a collector is required.");
         }
         const collector = this.collector(this.sessionDataGatherer);
-        if (collector.isReadyToSend()) {
+        if (!collector.isReadyToSend()) {
             throw new Error("The collector was unable to obtain the session data required.");
         }
         return collector;
