@@ -1,3 +1,3 @@
-declare var main;
+/// <reference path="./Main.d.ts" />
 
 main.done();

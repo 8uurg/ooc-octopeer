@@ -27,8 +27,8 @@ export abstract class Tracker {
      * Place a throttle in between.
      * @param throttle The throttle class to place in between.
      */
-    public withThrottle(throttle: new (collector: TrackingCollector) => Throttle): Tracker {
-        this.collector = new throttle(this.collector);
+    public withThrottle(throttle: (collector: TrackingCollector) => Throttle): Tracker {
+        this.collector = throttle(this.collector);
         return this;
     }
 
@@ -38,4 +38,4 @@ export abstract class Tracker {
     public sendMessage(message: Message): void {
         this.collector.sendMessage(message);
     }
-} 
+}
