@@ -5,14 +5,18 @@ describe("The background script", function () {
 
     beforeEach(function () {
         this.req = jasmine.createSpyObj("requestSender", ["setApiLocation"]);
+        let _thisTestSuite = this;
         (<any> global).RARequestsSender = function (loc: string) {
             this.setApiLocation = function () {};
-            return req;
+            return _thisTestSuite.req;
         };
         
-        this.changeAPILocationCallback: (changedItems: any) => void;
         spyOn(chrome.storage.onChanged, "addListener").and.callFake((callback: any) => {
             this.changeAPILocationCallback = callback;
+        });
+        
+        spyOn(chrome.storage.sync, "get").and.callFake((_: any, callback: any) => {
+            this.initialiseDBConnectionCallback = callback;
         });
     });
 
@@ -25,15 +29,9 @@ describe("The background script", function () {
         expect(chrome.tabs.create).toHaveBeenCalled();
     });
 
-    it("should set the api location properly", function () {
-        // Spy on the RARequestSender
-        let initialiseDBConnectionCallback: (items: any) => void;
-        spyOn(chrome.storage.sync, "get").and.callFake((_: any, callback: any) => {
-            initialiseDBConnectionCallback = callback;
-        });
-        
+    it("should set the api location properly", function () {        
         createBackgroundProcesses();
-        initialiseDBConnectionCallback({ databaseLocation: "http://fake-server.com/api/" });
+        this.initialiseDBConnectionCallback({ databaseLocation: "http://fake-server.com/api/" });
         let newDatabaseLoc = "http://test-server.com/api/";
         this.changeAPILocationCallback({ databaseLocation: {
             newValue: newDatabaseLoc
@@ -42,14 +40,8 @@ describe("The background script", function () {
     });
 
     it("should not set the api location if no change was made to the api", function () {
-        // Spy on the RARequestSender
-        let initialiseDBConnectionCallback: (items: any) => void;
-        spyOn(chrome.storage.sync, "get").and.callFake((_: any, callback: any) => {
-            initialiseDBConnectionCallback = callback;
-        });
-        
         createBackgroundProcesses();
-        initialiseDBConnectionCallback({ username_key: "joostje" });
+        this.initialiseDBConnectionCallback({ username_key: "joostje" });
         let newUsername = "joost";
         this.changeAPILocationCallback({ username_key: {
             newValue: newUsername
