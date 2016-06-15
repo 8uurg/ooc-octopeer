@@ -51,21 +51,19 @@ describe("The background script", function () {
 });
 
 describe("The Octopeer browser action icon", function () {
-
-    let tab: chrome.tabs.Tab;
+    
     beforeEach(function () {
-        tab = jasmine.createSpyObj("tab", ["active", "url"]);
+        this.tab = jasmine.createSpy("tab");
         spyOn(chrome.browserAction, "setIcon");
 
         spyOn(chrome.tabs.onUpdated, "addListener").and.callFake((callback: any) => {
-            callback(42, {}, tab);
+            callback(42, {}, this.tab);
         });
     });
 
     it("should be updated correctly", function () {
-        let tab = jasmine.createSpyObj("tab", ["url"]);
-        tab.url = "http://bitbucket.org/joe/pull-requests/1/";
-        updateBrowserActionIcon(tab);
+        this.tab.url = "http://bitbucket.org/joe/pull-requests/1/";
+        updateBrowserActionIcon(this.tab);
         expect(chrome.browserAction.setIcon).toHaveBeenCalledWith({ path: {
             "48"  : "../../img/icons/icon_active48.png",
             "64"  : "../../img/icons/icon_active64.png",
@@ -74,8 +72,8 @@ describe("The Octopeer browser action icon", function () {
     });
 
     it("should be updated to active when a bitbucket tab is updated", function () {
-        tab.active = true;
-        tab.url = "http://bitbucket.org/joe/pull-requests/1/";
+        this.tab.active = true;
+        this.tab.url = "http://bitbucket.org/joe/pull-requests/1/";
 
         addTabListenersForIcon();
         expect(chrome.browserAction.setIcon).toHaveBeenCalledWith({ path: {
@@ -86,8 +84,8 @@ describe("The Octopeer browser action icon", function () {
     });
 
     it("should be updated to inactive when the active tab is not a bitbucket page", function () {
-        tab.active = true;
-        tab.url = "http://google.com/";
+        this.tab.active = true;
+        this.tab.url = "http://google.com/";
 
         addTabListenersForIcon();
         expect(chrome.browserAction.setIcon).toHaveBeenCalledWith({ path: {
@@ -98,19 +96,19 @@ describe("The Octopeer browser action icon", function () {
     });
 
     it("should not be updated to inactive if the tab is not active", function () {
-        tab.active = false;
-        tab.url = "http://bitbucket.com/";
+        this.tab.active = false;
+        this.tab.url = "http://bitbucket.com/";
 
         addTabListenersForIcon();
         expect(chrome.browserAction.setIcon).not.toHaveBeenCalled();
     });
 
     it("should update the icon to active when a bitbucket tab is opened", function () {
-        tab.active = true;
-        tab.url = "http://bitbucket.org/joe/pull-requests/1/";
+        this.active = true;
+        this.tab.url = "http://bitbucket.org/joe/pull-requests/1/";
 
         spyOn(chrome.tabs, "get").and.callFake((tabId: number, callback: any) => {
-            callback(tab);
+            callback(this.tab);
         });
 
         spyOn(chrome.tabs.onActivated, "addListener").and.callFake((callback: any) => {
