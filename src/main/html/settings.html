@@ -13,6 +13,7 @@
     <script src="../js/OctopeerConstants.js"></script>
     <script src="../js/extension/Settings.js"></script>
     <script src="../js/extension/SettingsExplanations.js"></script>
+    <script src="../js/extension/SettingsStyleManager.js"></script>
 </head>
 <body>
 
@@ -61,201 +62,205 @@
         <div class="row">
             <h3>Tracking Settings</h3>
         </div>
-        <div class="row" id="mouse-position-setting">
-            <div class="col s1">
-                <div id="mouse-position-setting-question" class="chip explain-tracking-button">
-                    ?
+        <div class="col optioncol">
+            <div class="row" id="mouse-position-setting">
+                <div class="col s2">
+                    <div id="mouse-position-setting-question" class="chip explain-tracking-button">
+                        ?
+                    </div>
+                </div>
+                <div class="col s10">
+                    <div class="switch">
+                        <label>
+                            Off
+                            <input type="checkbox" id="checkboxMousePosition">
+                            <span class="lever"></span>
+                            On
+                        </label>
+                        Track Mouse Positions
+                    </div>
                 </div>
             </div>
-            <div class="col s11">
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox" id="checkboxMousePosition">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                    Track Mouse Positions
+            <div class="row" id="mouse-click-setting">
+                <div class="col s2">
+                    <div id="mouse-click-setting-question" class="chip explain-tracking-button">
+                        ?
+                    </div>
+                </div>
+                <div class="col s10">
+                    <div class="switch">
+                        <label>
+                            Off
+                            <input type="checkbox" id="checkboxMouseClicks">
+                            <span class="lever"></span>
+                            On
+                        </label>
+                        Track Mouse Clicks
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row" id="mouse-click-setting">
-            <div class="col s1">
-                <div id="mouse-click-setting-question" class="chip explain-tracking-button">
-                    ?
+            <div class="row" id="page-resolution-setting">
+                <div class="col s2">
+                    <div id="page-resolution-setting-question" class="chip explain-tracking-button">
+                        ?
+                    </div>
+                </div>
+                <div class="col s10">
+                    <div class="switch">
+                        <label>
+                            Off
+                            <input type="checkbox" id="checkboxPageRes">
+                            <span class="lever"></span>
+                            On
+                        </label>
+                        Track Page Resolution
+                    </div>
                 </div>
             </div>
-            <div class="col s11">
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox" id="checkboxMouseClicks">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                    Track Mouse Clicks
+            <div class="row" id="keystroke-setting">
+                <div class="col s2">
+                    <div id="keystroke-setting-question" class="chip explain-tracking-button">
+                        ?
+                    </div>
+                </div>
+                <div class="col s10">
+                    <div class="switch">
+                        <label>
+                            Off
+                            <input type="checkbox" id="checkboxKeystrokes">
+                            <span class="lever"></span>
+                            On
+                        </label>
+                        Track Keystrokes
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row" id="page-resolution-setting">
-            <div class="col s1">
-                <div id="page-resolution-setting-question" class="chip explain-tracking-button">
-                    ?
+            <div class="row" id="scroll-setting">
+                <div class="col s2">
+                    <div id="scroll-setting-question" class="chip explain-tracking-button">
+                        ?
+                    </div>
+                </div>
+                <div class="col s10">
+                    <div class="switch">
+                        <label>
+                            Off
+                            <input type="checkbox" id="checkboxScroll">
+                            <span class="lever"></span>
+                            On
+                        </label>
+                        Track Page Scrolling
+                    </div>
                 </div>
             </div>
-            <div class="col s11">
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox" id="checkboxPageRes">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                    Track Page Resolution
+            <div class="row" id="dom-setting">
+                <div class="col s2">
+                    <div id="dom-setting-question" class="chip explain-tracking-button">
+                        ?
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="row" id="keystroke-setting">
-            <div class="col s1">
-                <div id="keystroke-setting-question" class="chip explain-tracking-button">
-                    ?
-                </div>
-            </div>
-            <div class="col s11">
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox" id="checkboxKeystrokes">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                    Track Keystrokes
-                </div>
-            </div>
-        </div>
-        <div class="row" id="scroll-setting">
-            <div class="col s1">
-                <div id="scroll-setting-question" class="chip explain-tracking-button">
-                    ?
-                </div>
-            </div>
-            <div class="col s11">
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox" id="checkboxScroll">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                    Track Page Scrolling
-                </div>
-            </div>
-        </div>
-        <div class="row" id="dom-setting">
-            <div class="col s1">
-                <div id="dom-setting-question" class="chip explain-tracking-button">
-                    ?
-                </div>
-            </div>
-            <div class="col s11">
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox" id="checkboxDom">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                    Track DOM Elements
-                </div>
-            </div>
-        </div>
-        <div class="row" id="semantic-position-setting">
-            <div class="col s1">
-                <div id="semantic-position-setting-question" class="chip explain-tracking-button">
-                    ?
-                </div>
-            </div>
-            <div class="col s11">
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox" id="checkboxSemanticPosition">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                    Track Semantic Position Events
+                <div class="col s10">
+                    <div class="switch">
+                        <label>
+                            Off
+                            <input type="checkbox" id="checkboxDom">
+                            <span class="lever"></span>
+                            On
+                        </label>
+                        Track DOM
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row" id="semantic-clicks-setting">
-            <div class="col s1">
-                <div id="semantic-clicks-setting-question" class="chip explain-tracking-button">
-                    ?
+        <div class="col optioncol">
+            <div class="row" id="semantic-hover-setting">
+                <div class="col s2">
+                    <div id="semantic-hover-setting-question" class="chip explain-tracking-button">
+                        ?
+                    </div>
+                </div>
+                <div class="col s10">
+                    <div class="switch">
+                        <label>
+                            Off
+                            <input type="checkbox" id="checkboxSemanticHover">
+                            <span class="lever"></span>
+                            On
+                        </label>
+                        Track Semantic Hover Events
+                    </div>
                 </div>
             </div>
-            <div class="col s11">
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox" id="checkboxSemanticClicks">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                    Track Semantic Click Events
+            <div class="row" id="semantic-clicks-setting">
+                <div class="col s2">
+                    <div id="semantic-clicks-setting-question" class="chip explain-tracking-button">
+                        ?
+                    </div>
+                </div>
+                <div class="col s10">
+                    <div class="switch">
+                        <label>
+                            Off
+                            <input type="checkbox" id="checkboxSemanticClicks">
+                            <span class="lever"></span>
+                            On
+                        </label>
+                        Track Semantic Click Events
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row" id="semantic-keystroke-setting">
-            <div class="col s1">
-                <div id="semantic-keystrokes-setting-question" class="chip explain-tracking-button">
-                    ?
+            <div class="row" id="semantic-keystroke-setting">
+                <div class="col s2">
+                    <div id="semantic-keystrokes-setting-question" class="chip explain-tracking-button">
+                        ?
+                    </div>
+                </div>
+                <div class="col s10">
+                    <div class="switch">
+                        <label>
+                            Off
+                            <input type="checkbox" id="checkboxSemanticKeystrokes">
+                            <span class="lever"></span>
+                            On
+                        </label>
+                        Track Semantic Keystroke Events
+                    </div>
                 </div>
             </div>
-            <div class="col s11">
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox" id="checkboxSemanticKeystrokes">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                    Track Semantic Keystroke Events
+            <div class="row" id="semantic-scrolling-setting">
+                <div class="col s2">
+                    <div id="semantic-scrolling-setting-question" class="chip explain-tracking-button">
+                        ?
+                    </div>
+                </div>
+                <div class="col s10">
+                    <div class="switch">
+                        <label>
+                            Off
+                            <input type="checkbox" id="checkboxSemanticScrolling">
+                            <span class="lever"></span>
+                            On
+                        </label>
+                        Track Semantic Scroll Events
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row" id="semantic-scrolling-setting">
-            <div class="col s1">
-                <div id="semantic-scrolling-setting-question" class="chip explain-tracking-button">
-                    ?
+            <div class="row" id="semantic-visibility-setting">
+                <div class="col s2">
+                    <div id="semantic-visibility-setting-question" class="chip explain-tracking-button">
+                        ?
+                    </div>
                 </div>
-            </div>
-            <div class="col s11">
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox" id="checkboxSemanticScrolling">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                    Track Semantic Scroll Events
-                </div>
-            </div>
-        </div>
-        <div class="row" id="semantic-visibility-setting">
-            <div class="col s1">
-                <div id="semantic-visibility-setting-question" class="chip explain-tracking-button">
-                    ?
-                </div>
-            </div>
-            <div class="col s11">
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox" id="checkboxSemanticPRPageVisibility">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                    Track Semantic PR Page Visibility Events
+                <div class="col s10">
+                    <div class="switch">
+                        <label>
+                            Off
+                            <input type="checkbox" id="checkboxSemanticPRPageVisibility">
+                            <span class="lever"></span>
+                            On
+                        </label>
+                        Track Semantic Visibility Events
+                    </div>
                 </div>
             </div>
         </div>
@@ -285,12 +290,6 @@
             <div class="col s6">
                 <p class="grey-text small text-lighten-4 acknowledgement">Octopeer Logo made from <a class="grey-text text-lighten-2" href="http://www.onlinewebfonts.com/icon/432263" target="_blank">Icon Fonts</a> is licensed by CC BY 3.0.</p>
             </div>
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container">
-            Octopeer for Bitbucket
-            <a class="grey-text text-lighten-4 right" href="https://bitbucket.org/CasBs/ooc-octopeer">Octopeer on Bitbucket</a>
         </div>
     </div>
 </footer>

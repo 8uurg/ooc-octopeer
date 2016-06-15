@@ -60,6 +60,11 @@ _global.XMLHttpRequest = function() {
     };
 };
 
+_global.MutationObserver = function() {
+    this.disconnect = function() {};
+    this.observe = function() {};
+};
+
 _global.XMLHttpRequest.prototype.status = 0;
 _global.XMLHttpRequest.prototype.readyState = 0;
 

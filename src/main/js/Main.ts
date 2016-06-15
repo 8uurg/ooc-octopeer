@@ -122,7 +122,7 @@ chrome.storage.sync.get(neededSettings, (preferences: { [key: string]: any }) =>
         if (element.trackClick && preferences[OCTOPEER_CONSTANTS.track_semantic_clicks]) {
             mouseClickTracker.registerElementWithSelector(element.selector, element.eventType);
         }
-        if (element.trackHover && preferences[OCTOPEER_CONSTANTS.track_semantic_position]) {
+        if (element.trackHover && preferences[OCTOPEER_CONSTANTS.track_semantic_hover]) {
             mouseHoverTracker.registerElementWithSelector(element.selector, element.eventType);
         }
     }
