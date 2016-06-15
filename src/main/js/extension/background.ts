@@ -1,17 +1,13 @@
 declare var RARequestsSender: any;
 
-
+/**
+ * Attaches listeners for the browser action and api location changes.
+ */
 export function createBackgroundProcesses() {
-    /**
-     * Creates a page on a tab when the extension badge is clicked.
-     */
     chrome.browserAction.onClicked.addListener(() => {
         chrome.tabs.create({ url: "../../html/settings.html" });
     });
 
-    /**
-     * This creates the connection with the database for all pages.
-     */
     chrome.storage.sync.get(
         { [OCTOPEER_CONSTANTS.database_location_key]: OCTOPEER_CONSTANTS.standard_database_location }, (items) => {
             let requestSender = new RARequestsSender(items[OCTOPEER_CONSTANTS.database_location_key]);
@@ -44,6 +40,10 @@ let urlWithIcon = [
     }
 ];
 
+/**
+ * Updates the icon depending on the tab.
+ * @param tab The current active tab.
+ */
 export function updateBrowserActionIcon(tab: chrome.tabs.Tab) {
     for (let i = 0; i < urlWithIcon.length; i++) {
         let urlAndPath = urlWithIcon[i];
@@ -54,6 +54,9 @@ export function updateBrowserActionIcon(tab: chrome.tabs.Tab) {
     }
 }
 
+/**
+ * Attaches the listeners for the icon status.
+ */
 export function addTabListenersForIcon() {
     chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         if (tab.active) {
