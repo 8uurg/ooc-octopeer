@@ -12,8 +12,7 @@ export class DomTracker extends Tracker {
     private mutationObserver: MutationObserver;
     private mutationObserverConfiguration: MutationObserverInit = {
         attributes: true,
-        attributeFilter: ["data-octopeer-x", "data-octopeer-y", "data-octopeer-height", "data-octopeer-width",
-            "data-octopeer-z"],
+        attributeFilter: ["class"],
         childList: true,
         subtree: true
     };
@@ -22,15 +21,16 @@ export class DomTracker extends Tracker {
      * Register the VisibleElementsTracker.
      */
     public register() {
-        let registerChange = () => {
+        let mutationFired = () => {
             this.mutationObserver.disconnect();
             this.modifyDom();
             this.sendData(this.createMessage(document.documentElement.outerHTML));
             this.connectObserver();
         };
-        this.mutationObserver = new MutationObserver(registerChange);
-        this.connectObserver();
-        registerChange();
+        this.mutationObserver = new MutationObserver(mutationFired);
+
+        window.addEventListener("load", mutationFired);
+        window.addEventListener("resize", mutationFired);
     }
 
     /**
@@ -113,6 +113,7 @@ main.declareTracker({
     tracker: (collector) => {
         return (new DomTracker())
             .withCollector(collector)
+            .withThrottle(StartEndThrottle.getFactory())
             .register();
     },
     setting: {
