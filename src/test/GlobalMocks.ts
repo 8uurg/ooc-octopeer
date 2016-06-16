@@ -31,11 +31,28 @@ _global.chrome = {
         sync: {
             set: nop,
             get: nop
+        },
+        onChanged: {
+            addListener: nop
         }
     },
     tabs: {
         query: nop,
-        reload: nop
+        reload: nop,
+        create: nop,
+        get: nop,
+        onUpdated: {
+            addListener: nop
+        },
+        onActivated: {
+            addListener: nop
+        }
+    },
+    browserAction: {
+        setIcon: nop,
+        onClicked: {
+            addListener: nop
+        }
     }
 };
 
@@ -73,6 +90,7 @@ _global.window.scrollX = 0;
 _global.window.scrollY = 0;
 
 _global.OCTOPEER_CONSTANTS = {
+    "standard_database_location": "http://10.0.22.6/api/",
     "database_location_key": "databaseLocation"
 };
 
