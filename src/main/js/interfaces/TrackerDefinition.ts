@@ -10,6 +10,8 @@ interface TrackerDefinition {
 
     /**
      * The factory of this instance.
+     * @param collector The tracking collector to use.
+     * @param semanticMappings The semantic mappings to use.
      */
     tracker: (collector: TrackingCollector, semanticMappings?: SemanticMapping[]) => void;
 
