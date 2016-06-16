@@ -32,6 +32,10 @@ _global.chrome = {
             set: nop,
             get: nop
         },
+        local: {
+            set: nop,
+            get: nop
+        },
         onChanged: {
             addListener: nop
         }
