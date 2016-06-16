@@ -70,8 +70,8 @@ _global.XMLHttpRequest = function() {
 };
 
 _global.MutationObserver = function() {
-    this.disconnect = function() {};
-    this.observe = function() {};
+    this.disconnect = nop;
+    this.observe = nop;
 };
 
 _global.XMLHttpRequest.prototype.status = 0;
@@ -107,10 +107,5 @@ _global.main = {
 };
 
 _global.scrollMonitor = {
-    create: function () {
-        return {
-            enterViewport: nop,
-            exitViewport: nop
-        }
-    }
-}
+    create: nop
+};

@@ -2,7 +2,6 @@
 declare var scrollMonitor: any;
 
 import {ScrollSemanticTracker} from "../../../../main/js/trackers/SemanticTrackers/ScrollSemanticTracker";
-import {SemanticTrackerTest} from "./TestSemanticTracker";
 
 describe("The mouse semantic tracker", function () {
 
