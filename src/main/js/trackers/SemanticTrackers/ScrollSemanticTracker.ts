@@ -27,7 +27,6 @@ export class ScrollSemanticTracker
 
         sm.enterViewport(() => {
             this.sendData(this.createMessage("Scroll into view", elementName));
-
         });
         
         sm.exitViewport(() => {

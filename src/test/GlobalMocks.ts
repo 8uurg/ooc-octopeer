@@ -107,5 +107,10 @@ _global.main = {
 };
 
 _global.scrollMonitor = {
-    create: nop
+    create: function () {
+        return {
+            enterViewport: nop,
+            exitViewport: nop
+        }
+    }
 }
