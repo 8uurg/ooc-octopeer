@@ -25,6 +25,7 @@
         "js": [
           "js/OctopeerConstants.js",
           "js/Main.js",
+          "js/scrollMonitor.js",
           "js/BitBucketSemanticMapping.js",
           "js/trackers/RawDataTrackers/Tracker.js",
           "js/trackers/RawDataTrackers/DomTracker.js",
