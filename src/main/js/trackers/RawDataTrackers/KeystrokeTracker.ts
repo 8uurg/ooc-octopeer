@@ -1,5 +1,7 @@
 /// <reference path="../../interfaces/DatabaseSchemes/KeystrokeJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
+/// <reference path="../../Main.d.ts" />
+declare var OCTOPEER_CONSTANTS: any;
 
 /**
  * Enum as the database uses only two types identified by numbers.
@@ -81,3 +83,15 @@ export class KeystrokeTracker extends Tracker {
         });
     }
 }
+
+main.declareTracker({
+    tracker: (collector) => {
+        return (new KeystrokeTracker())
+            .withCollector(collector)
+            .register();
+    },
+    setting: {
+        name: OCTOPEER_CONSTANTS.track_key_strokes,
+        def: true
+    }
+});

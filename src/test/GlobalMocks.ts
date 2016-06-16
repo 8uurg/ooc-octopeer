@@ -1,3 +1,5 @@
+/// <reference path="../../typings/index.d.ts" />
+
 /**
  * This class mocks global elements to enable testing on these functions.
  * @type {NodeJS.Global}
@@ -7,11 +9,14 @@
 // Linting is disabled as var is required here. Let has not the proper functionality yet.
 var _global: any = global; // tslint:disable-line
 
+// A function that does nothing, used as a placeholder.
+function nop() {};
+
 _global.chrome = {
     runtime: {
         connect: function() {
             return {
-                postMessage: function() {}
+                postMessage: nop
             };
         },
         onConnect: {
@@ -24,23 +29,28 @@ _global.chrome = {
     },
     storage: {
         sync: {
-            set: function () {},
-            get: function () {}
+            set: nop,
+            get: nop
         }
     },
     tabs: {
-        query: function() {},
-        reload: function() {}
+        query: nop,
+        reload: nop
     }
 };
 
 _global.XMLHttpRequest = function() {
-    this.open = function() {};
-    this.setRequestHeader = function() {};
-    this.onreadystatechange = function() {};
+    this.open = nop;
+    this.setRequestHeader = nop;
+    this.onreadystatechange = nop;
     this.send = function() {
         this.onreadystatechange();
     };
+};
+
+_global.MutationObserver = function() {
+    this.disconnect = function() {};
+    this.observe = function() {};
 };
 
 _global.XMLHttpRequest.prototype.status = 0;
@@ -64,4 +74,12 @@ _global.window.scrollY = 0;
 
 _global.OCTOPEER_CONSTANTS = {
     "database_location_key": "databaseLocation"
+};
+
+_global.main = {
+    declareTrackingCollector: nop,
+    declareSessionDataGatherer: nop,
+    declareSemanticMappings: nop,
+    declareTracker: nop,
+    done: nop
 };
