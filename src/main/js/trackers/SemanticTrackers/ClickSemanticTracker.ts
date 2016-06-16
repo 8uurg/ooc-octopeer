@@ -1,4 +1,6 @@
 /// <reference path="./SemanticTracker.d.ts" />
+/// <reference path="../../Main.d.ts" />
+declare var OCTOPEER_CONSTANTS: any;
 
 /**
  * The semantic key stroke tracker
@@ -24,4 +26,24 @@ export class ClickSemanticTracker
             this.sendData(this.createMessage("Click", eventName));
         });
     }
+
+    /**
+     * Check if this element mapping has tracking click turned on.
+     * @param mapping The mapping that is being checked.
+     */
+    public filterMappings(mapping: SemanticMapping): boolean {
+        return mapping.track.click;
+    }
 }
+
+main.declareTracker({
+    tracker: (collector, mappings) => {
+        return (new ClickSemanticTracker())
+            .withCollector(collector)
+            .withMappings(mappings);
+    },
+    setting: {
+        name: OCTOPEER_CONSTANTS.track_semantic_clicks,
+        def: true
+    }
+});

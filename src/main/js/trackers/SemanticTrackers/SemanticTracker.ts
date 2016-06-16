@@ -1,5 +1,6 @@
 /// <reference path="../../interfaces/DatabaseSchemes/SemanticEventJSON.ts" />
 /// <reference path="../../interfaces/TrackingCollector.ts" />
+
 /**
  * A semantic tracker class
  */
@@ -111,6 +112,25 @@ export abstract class SemanticTracker {
      * @param eventName The name of the event.
      */
     public abstract registerElement(element: Element, eventName: string): void;
+
+    /**
+     * The filter to use for the mappings.
+     * @param filter The function that filters out the elements to not register to.
+     */
+    protected abstract filterMappings(mapping: SemanticMapping): boolean;
+
+    /**
+     * The mappings to use for this semantic tracker.
+     * @param mappings The semantic elements and their mappings to register.
+     */
+    public withMappings(mappings: SemanticMapping[]): SemanticTracker {
+        const remapped = mappings
+            .filter(this.filterMappings)
+            .map((mapping) => <[string, string]>[mapping.selector, mapping.name]);
+        this.registerElements(remapped);
+
+        return this;
+    }
 
     /**
      * The name of this semantic tracker

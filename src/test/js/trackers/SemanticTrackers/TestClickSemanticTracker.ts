@@ -1,3 +1,5 @@
+///<reference path="../../../../../typings/index.d.ts" />
+
 import {SemanticTrackerTest} from "./TestSemanticTracker";
 import {ClickSemanticTracker} from "../../../../main/js/trackers/SemanticTrackers/ClickSemanticTracker";
 
