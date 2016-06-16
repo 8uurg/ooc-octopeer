@@ -74,13 +74,13 @@ _global.XMLHttpRequest.prototype.status = 0;
 _global.XMLHttpRequest.prototype.readyState = 0;
 
 _global.document = {
-    addEventListener:  function() {},
-    querySelectorAll: function() {}
+    addEventListener:  nop,
+    querySelectorAll: nop
 };
 
-_global.localStorage = function() {};
+_global.localStorage = nop;
 _global.window = {
-    addEventListener: function() {},
+    addEventListener: nop,
     scrollX: 0,
     scrollY: 0
 };
