@@ -28,7 +28,7 @@ export class ChromeTrackingCollector implements TrackingCollector {
      * @returns {boolean} 
      */
     public isReadyToSend(): boolean {
-        return this.session !== null;
+        return this.session != null;
     }
 
     /**

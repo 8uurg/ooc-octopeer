@@ -31,6 +31,7 @@ export class BitBucketSessionDataGatherer implements SessionDataGatherer {
         }
 
         this.createSession(data);
+        this.updateBitbucketUsername();
     }
 
     /**
@@ -93,6 +94,13 @@ export class BitBucketSessionDataGatherer implements SessionDataGatherer {
      */
     public getSessionData(): SessionJSON {
         return this.sessionData;
+    }
+
+    /**
+     * Updates the bitbucket user name in Chrome storage.
+     */
+    private updateBitbucketUsername() {
+        chrome.storage.local.set({ [OCTOPEER_CONSTANTS.user_id_key]: this.sessionData.user.username });
     }
 
 }
