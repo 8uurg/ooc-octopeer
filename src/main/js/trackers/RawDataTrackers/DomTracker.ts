@@ -17,7 +17,7 @@ export class DomTracker extends Tracker {
         subtree: true
     };
 
-    private pageFullyLoaded  = false;
+    public pageFullyLoaded  = false;
 
     /**
      * Register the VisibleElementsTracker.
