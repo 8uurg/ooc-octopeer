@@ -17,7 +17,7 @@ export class DomTracker extends Tracker {
         subtree: true
     };
 
-    private pageFullyLoaded = false;
+    private pageFullyLoaded  = false;
 
     /**
      * Register the VisibleElementsTracker.
@@ -121,7 +121,7 @@ main.declareTracker({
     tracker: (collector) => {
         return (new DomTracker())
             .withCollector(collector)
-            .withThrottle(StartEndThrottle.getFactory())
+            .withThrottle(LastMessageThrottle.getFactory())
             .register();
     },
     setting: {
