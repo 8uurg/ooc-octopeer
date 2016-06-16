@@ -20,7 +20,8 @@ export class MouseClickTracker extends Tracker {
          * @param event Object that contains the required cursor information.
          */
         document.addEventListener("click", function (event) {
-            _this.sendData(_this.createMessage());
+            _this.sendData(_this.createClickMessage());
+            _this.sendData(_this.createPositionMessage(event));
         });
     }
 
@@ -28,8 +29,22 @@ export class MouseClickTracker extends Tracker {
      * Creates a message using the MouseClick interface.
      * @returns {MouseClickJSON}
      */
-    private createMessage(): MouseClickJSON {
+    private createClickMessage(): MouseClickJSON {
         return {
+            created_at: Date.now() / 1000
+        };
+    }
+
+    /**
+     * Creates a message using the MouseClick interface.
+     * @returns {MouseClickJSON}
+     */
+    private createPositionMessage(event): MousePosJSON {
+        return {
+            position_x: event.pageX,
+            position_y: event.pageY,
+            viewport_x: event.clientX,
+            viewport_y: event.clientY,
             created_at: Date.now() / 1000
         };
     }
