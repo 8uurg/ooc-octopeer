@@ -44,6 +44,18 @@ declare abstract class SemanticTracker {
     public registerElements(elements: [string, string][]): void;
 
     /**
+     * The mappings to use for this semantic tracker.
+     * @param mappings The semantic elements and their mappings to register.
+     */
+    public withMappings(mappings: SemanticMapping[]): SemanticTracker;
+
+    /**
+     * The filter to use for the mappings.
+     * @param filter The function that filters out the elements to not register to.
+     */
+    protected abstract filterMappings(mapping: SemanticMapping): boolean;
+
+    /**
      * Register an HTMLElement to this semantic tracker.
      * @param element The element to monitor
      * @param eventName The name of the event.

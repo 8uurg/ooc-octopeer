@@ -1,5 +1,7 @@
 /// <reference path="../../interfaces/DatabaseSchemes/SemanticEventJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
+/// <reference path="../../Main.d.ts" />
+declare var OCTOPEER_CONSTANTS: any;
 
 /**
  * Provides a tracker that tracks the visibility on the page.
@@ -46,3 +48,15 @@ export class VisibilityTracker extends Tracker {
         });
     }
 }
+
+main.declareTracker({
+    tracker: (collector) => {
+        return (new VisibilityTracker())
+            .withCollector(collector)
+            .register();
+    },
+    setting: {
+        name: OCTOPEER_CONSTANTS.track_semantic_visibility,
+        def: true
+    }
+});

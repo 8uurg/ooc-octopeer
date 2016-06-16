@@ -1,3 +1,5 @@
+/// <reference path="../../typings/index.d.ts" />
+
 /**
  * This class mocks global elements to enable testing on these functions.
  * @type {NodeJS.Global}
@@ -7,11 +9,14 @@
 // Linting is disabled as var is required here. Let has not the proper functionality yet.
 var _global: any = global; // tslint:disable-line
 
+// A function that does nothing, used as a placeholder.
+function nop() {};
+
 _global.chrome = {
     runtime: {
         connect: function() {
             return {
-                postMessage: function() {}
+                postMessage: nop
             };
         },
         onConnect: {
@@ -24,37 +29,37 @@ _global.chrome = {
     },
     storage: {
         sync: {
-            set: function () {},
-            get: function () {}
+            set: nop,
+            get: nop
         },
         onChanged: {
-            addListener: function() {}
+            addListener: nop
         }
     },
     tabs: {
-        query: function() {},
-        reload: function() {},
-        create: function() {},
-        get: function() {},
+        query: nop,
+        reload: nop,
+        create: nop,
+        get: nop,
         onUpdated: {
-            addListener: function() {}
+            addListener: nop
         },
         onActivated: {
-            addListener: function() {}
+            addListener: nop
         }
     },
     browserAction: {
-        setIcon: function() {},
+        setIcon: nop,
         onClicked: {
-            addListener: function() {}
+            addListener: nop
         }
     }
 };
 
 _global.XMLHttpRequest = function() {
-    this.open = function() {};
-    this.setRequestHeader = function() {};
-    this.onreadystatechange = function() {};
+    this.open = nop;
+    this.setRequestHeader = nop;
+    this.onreadystatechange = nop;
     this.send = function() {
         this.onreadystatechange();
     };
@@ -69,13 +74,13 @@ _global.XMLHttpRequest.prototype.status = 0;
 _global.XMLHttpRequest.prototype.readyState = 0;
 
 _global.document = {
-    addEventListener:  function() {},
-    querySelectorAll: function() {}
+    addEventListener:  nop,
+    querySelectorAll: nop
 };
 
-_global.localStorage = function() {};
+_global.localStorage = nop;
 _global.window = {
-    addEventListener: function() {},
+    addEventListener: nop,
     scrollX: 0,
     scrollY: 0
 };
@@ -87,4 +92,12 @@ _global.window.scrollY = 0;
 _global.OCTOPEER_CONSTANTS = {
     "standard_database_location": "http://10.0.22.6/api/",
     "database_location_key": "databaseLocation"
+};
+
+_global.main = {
+    declareTrackingCollector: nop,
+    declareSessionDataGatherer: nop,
+    declareSemanticMappings: nop,
+    declareTracker: nop,
+    done: nop
 };

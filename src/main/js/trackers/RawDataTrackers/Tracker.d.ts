@@ -23,7 +23,7 @@ declare abstract class Tracker {
      * Place a throttle in between.
      * @param throttle The throttle class to place in between.
      */
-    public withThrottle(throttle: new (collector: TrackingCollector) => Throttle): Tracker;
+    public withThrottle(throttle: (collector: TrackingCollector) => Throttle): Tracker;
 
     /**
      * Send a message over the collector.

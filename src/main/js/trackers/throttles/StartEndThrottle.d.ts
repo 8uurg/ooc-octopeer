@@ -8,19 +8,13 @@
  * Preserves the first and last message within a certain timespan by combining the other two throttles.
  * Keeps regular updates in between.
  */
-export class StartEndThrottle extends Throttle {
-    private minDelayThrottle: MinDelayThrottle;
-    private lastMessageThrottle: LastMessageThrottle;
+declare class StartEndThrottle extends Throttle {
 
     /**
      * Initialize a Throttle.
      * @param collector The collector to send data to next.
      */
-    constructor(collector: TrackingCollector) {
-        super(collector);
-        this.minDelayThrottle = new MinDelayThrottle(collector);
-        this.lastMessageThrottle = new LastMessageThrottle(collector);
-    }
+    constructor(collector: TrackingCollector);
 
     /**
      * Send a throttled message, dropping those sent in quick succession
@@ -28,16 +22,10 @@ export class StartEndThrottle extends Throttle {
      * @param message The message to send.
      * @param drop The callback to call in case of failure.
      */
-    public sendThrottledMessage(message: Message, drop: () => void) {
-        this.minDelayThrottle.sendThrottledMessage(message, () => {
-            this.lastMessageThrottle.sendThrottledMessage(message, drop);
-        });
-    }
+    public sendThrottledMessage(message: Message, drop: () => void): void;
 
     /**
      * Get a factory for this throttle.
      */
-    public static getFactory(): (collector: TrackingCollector) => StartEndThrottle {
-        return (collector) => new StartEndThrottle(collector);
-    }
+    public static getFactory(): (collector: TrackingCollector) => StartEndThrottle;
 }

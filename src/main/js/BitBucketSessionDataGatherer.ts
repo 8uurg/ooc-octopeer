@@ -6,6 +6,8 @@
 /// <reference path="./interfaces/DatabaseSchemes/SessionJSON.ts" />
 /// <reference path="./interfaces/DatabaseSchemes/UserJSON.ts" />
 
+/// <reference path="./Main.d.ts" />
+
 /**
  * This class tracks the user and repository data on BitBucket pages.
  */
@@ -95,8 +97,8 @@ export class BitBucketSessionDataGatherer implements SessionDataGatherer {
 
 }
 
-// Declare an alias for usage in main, for easy extension.
-var DataGatherer = BitBucketSessionDataGatherer; // tslint:disable-line - Block Scope not allowed in global but required.
+// When used, tell the main that this is the datagetherer to use.
+main.declareSessionDataGatherer(() => new BitBucketSessionDataGatherer());
 
 // Below are typings specifically used for bitbucket data extraction and convenience.
 /**

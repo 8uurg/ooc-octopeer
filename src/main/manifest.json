@@ -24,6 +24,8 @@
         ],
         "js": [
           "js/OctopeerConstants.js",
+          "js/Main.js",
+          "js/BitBucketSemanticMapping.js",
           "js/trackers/RawDataTrackers/Tracker.js",
           "js/trackers/RawDataTrackers/DomTracker.js",
           "js/trackers/RawDataTrackers/KeystrokeTracker.js",
@@ -42,7 +44,7 @@
           "js/trackers/throttles/StartEndThrottle.js",
           "js/BitBucketSessionDataGatherer.js",
           "js/ChromeTrackingCollector.js",
-          "js/Main.js"
+          "js/Ignition.js"
         ],
         "run_at": "document_end"
       }

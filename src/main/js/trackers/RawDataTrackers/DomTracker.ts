@@ -1,5 +1,7 @@
 /// <reference path="../../interfaces/DatabaseSchemes/DomJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
+/// <reference path="../../Main.d.ts" />
+declare var OCTOPEER_CONSTANTS: any;
 
 /**
  * This tracker was created for tracking all coordinates of visible elements on the webpage.
@@ -106,3 +108,15 @@ export class DomTracker extends Tracker {
         this.connectObserver();
     }
 }
+
+main.declareTracker({
+    tracker: (collector) => {
+        return (new DomTracker())
+            .withCollector(collector)
+            .register();
+    },
+    setting: {
+        name: OCTOPEER_CONSTANTS.track_dom,
+        def: true
+    }
+});
