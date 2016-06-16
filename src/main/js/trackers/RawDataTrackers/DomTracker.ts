@@ -17,11 +17,16 @@ export class DomTracker extends Tracker {
         subtree: true
     };
 
+    private pageFullyLoaded = false;
+
     /**
      * Register the VisibleElementsTracker.
      */
     public register() {
         let mutationFired = () => {
+            if (!this.pageFullyLoaded) {
+                return;
+            }
             this.mutationObserver.disconnect();
             this.modifyDom();
             this.sendData(this.createMessage(document.documentElement.outerHTML));
@@ -29,7 +34,10 @@ export class DomTracker extends Tracker {
         };
         this.mutationObserver = new MutationObserver(mutationFired);
 
-        window.addEventListener("load", mutationFired);
+        window.addEventListener("load", () => {
+            this.pageFullyLoaded = true;
+            mutationFired();
+        });
         window.addEventListener("resize", mutationFired);
     }
 
