@@ -83,3 +83,7 @@ _global.main = {
     declareTracker: nop,
     done: nop
 };
+
+_global.scrollMonitor = {
+    create: nop
+}
