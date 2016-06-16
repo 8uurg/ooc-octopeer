@@ -61,7 +61,7 @@ describe("The mouse semantic tracker", function () {
         })).toBeTruthy();
     });
 
-    it("should correctly register a mouse enter", function () {
+    it("should correctly register a viewport enter", function () {
         fireEvent["enterViewport"]();
         expect(collector.sendMessage).toHaveBeenCalledTimes(1);
         expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
@@ -71,7 +71,7 @@ describe("The mouse semantic tracker", function () {
         }));
     });
 
-    it("should correctly register a mouse leave", function () {
+    it("should correctly register a viewport leave", function () {
         fireEvent["exitViewport"]();
         expect(collector.sendMessage).toHaveBeenCalledTimes(1);
         expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
