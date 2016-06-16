@@ -69,6 +69,8 @@ describe("The Octopeer browser action icon", function () {
         spyOn(chrome.tabs.onUpdated, "addListener").and.callFake((callback: any) => {
             callback(42, {}, this.tab);
         });
+
+        this.tab.active = true;
     });
 
     it("should be updated correctly", function () {
@@ -82,7 +84,6 @@ describe("The Octopeer browser action icon", function () {
     });
 
     it("should be updated to active when a bitbucket tab is updated", function () {
-        this.tab.active = true;
         this.tab.url = "http://bitbucket.org/joe/pull-requests/1/";
 
         addTabListenersForIcon();
@@ -94,7 +95,6 @@ describe("The Octopeer browser action icon", function () {
     });
 
     it("should be updated to inactive when the active tab is not a bitbucket page", function () {
-        this.tab.active = true;
         this.tab.url = "http://google.com/";
 
         addTabListenersForIcon();
@@ -114,7 +114,6 @@ describe("The Octopeer browser action icon", function () {
     });
 
     it("should update the icon to active when a bitbucket tab is opened", function () {
-        this.active = true;
         this.tab.url = "http://bitbucket.org/joe/pull-requests/1/";
 
         spyOn(chrome.tabs, "get").and.callFake((tabId: number, callback: any) => {
