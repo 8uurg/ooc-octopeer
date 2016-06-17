@@ -31,7 +31,7 @@ describe("The mouse semantic tracker", function () {
     });
 
     it("should ignore mappings without scroll", function() {
-        expect(this.tracker.filterMappings({
+        expect(this.tracker.shouldRegisterElement({
             name: "Everything",
             selector: "*",
             track: {
@@ -44,7 +44,7 @@ describe("The mouse semantic tracker", function () {
     });
 
     it("should accept mappings with scroll", function() {
-        expect(this.tracker.filterMappings({
+        expect(this.tracker.shouldRegisterElement({
             name: "Everything",
             selector: "*",
             track: {

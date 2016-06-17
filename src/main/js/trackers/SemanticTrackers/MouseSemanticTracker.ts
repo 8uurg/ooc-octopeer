@@ -35,7 +35,7 @@ export class MouseSemanticTracker
      * Check if this element mapping has tracking mouse turned on.
      * @param mapping The mapping that is being checked.
      */
-    public filterMappings(mapping: SemanticMapping): boolean {
+    public shouldRegisterElement(mapping: SemanticMapping): boolean {
         return mapping.track.hover;
     }
 }
