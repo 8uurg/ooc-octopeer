@@ -80,6 +80,16 @@ describe("The Dom Tracker", function() {
         expect(this.mutationObserver.observe).toHaveBeenCalledWith(any(Object), newConf);
     });
 
+    it("should track the page on load", function () {
+        spyOn(window, "addEventListener").and.callFake((_: string, callback: any) => {
+            callback();
+        });
+        this.tracker.register();
+        jasmine.clock().tick(701);
+        expect(this.tracker.pageFullyLoaded).toBeTruthy();
+        expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
+    });
+
     afterEach(function () {
         jasmine.clock().uninstall();
     });
