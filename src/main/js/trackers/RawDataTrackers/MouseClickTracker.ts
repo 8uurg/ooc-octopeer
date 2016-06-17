@@ -27,7 +27,6 @@ export class MouseClickTracker extends Tracker {
 
     /**
      * Creates a message using the MouseClick interface.
-     * @returns {MouseClickJSON}
      */
     private createClickMessage(): MouseClickJSON {
         return {
@@ -37,7 +36,6 @@ export class MouseClickTracker extends Tracker {
 
     /**
      * Creates a message using the MouseClick interface.
-     * @returns {MouseClickJSON}
      */
     private createPositionMessage(event: MouseEvent): MousePosJSON {
         return {
