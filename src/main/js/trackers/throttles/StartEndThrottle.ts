@@ -33,4 +33,11 @@ export class StartEndThrottle extends Throttle {
             this.lastMessageThrottle.sendThrottledMessage(message, drop);
         });
     }
+
+    /**
+     * Get a factory for this throttle.
+     */
+    public static getFactory(): (collector: TrackingCollector) => StartEndThrottle {
+        return (collector) => new StartEndThrottle(collector);
+    }
 }

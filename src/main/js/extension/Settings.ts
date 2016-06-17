@@ -29,7 +29,7 @@ export function setupCheckboxes() {
     registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,              "checkboxKeystrokes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_scroll,                   "checkboxScroll");
     registerCheckbox(OCTOPEER_CONSTANTS.track_dom,                      "checkboxDom");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_position,        "checkboxSemanticPosition");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_hover,           "checkboxSemanticHover");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_clicks,          "checkboxSemanticClicks");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_key_strokes,     "checkboxSemanticKeystrokes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_scrolling,       "checkboxSemanticScrolling");
@@ -37,28 +37,9 @@ export function setupCheckboxes() {
 }
 
 /**
- * Adds the functionality to the refresh notification.
- */
-export function setUpRefreshNotificationElements() {
-    document.getElementById("refresh-bitbucket-pages").addEventListener("click", () => {
-        chrome.tabs.query({
-            "url" : [
-                "http://bitbucket.org/*",
-                "https://bitbucket.org/*"
-            ]
-        }, (tabs: chrome.tabs.Tab[]) => {
-            tabs.forEach((tab) => {
-                chrome.tabs.reload(tab.id);
-            });
-            document.getElementById("refresh-pages-notification").style.setProperty("display", "none");
-        });
-    });
-}
-
-/**
  * Creates the functionality for the database setting's textfield and apply button.
  */
-export function setUpDatabaseLocationElements() {
+export function setupDatabaseLocationElements() {
     let databaseLocationField = <HTMLInputElement> document.getElementById("database_location");
     let apiRegex = new RegExp("^(http|https)://.*/api/$");
     chrome.storage.sync.get(
@@ -76,10 +57,28 @@ export function setUpDatabaseLocationElements() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    setupCheckboxes();
-    setUpRefreshNotificationElements();
-    setUpDatabaseLocationElements();
-});
+export function setupAnalyticsButton() {
+    let openAnalyticsButton = document.getElementById("openAnalytics");
+    openAnalyticsButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        let url     = openAnalyticsButton.getAttribute("href");
+        let target  = openAnalyticsButton.getAttribute("target");
+        chrome.storage.local.get([OCTOPEER_CONSTANTS.user_id_key], (items) => {
+            if (items.hasOwnProperty(OCTOPEER_CONSTANTS.user_id_key)) {
+                url += "?userName=" + items[OCTOPEER_CONSTANTS.user_id_key];
+                url += "&platform=Bitbucket";
+            }
+            window.open(url, target);
+        });
+    });
+}
 
+export function initialize() {
+    document.addEventListener("DOMContentLoaded", () => {
+        setupCheckboxes();
+        setupDatabaseLocationElements();
+        setupAnalyticsButton();
+    });
+}
 
+initialize();

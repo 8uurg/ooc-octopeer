@@ -12,6 +12,7 @@ const tslint        = require('gulp-tslint');
 const replace       = require('gulp-replace');
 const dest          = require('gulp-dest');
 const flatten       = require('gulp-flatten');
+const shell         = require('gulp-shell');
 
 const fail = function() {
     util.log("A component which does not force fail, failed.");
@@ -94,6 +95,7 @@ gulp.task('test', ['test-report-coveralls']);
 
 gulp.task('copy-dependencies', ['clean'], function() {
     return gulp.src([
+        './node_modules/scrollmonitor/scrollMonitor.js',
         './node_modules/jquery/dist/*.+(js|map)',
         './node_modules/materialize-css/dist/css/*.+(css|js)',
         './node_modules/materialize-css/dist/js/*.+(css|js)'
@@ -104,7 +106,19 @@ gulp.task('copy-dependencies', ['clean'], function() {
         .pipe(gulp.dest('./dest'));
 });
 
-gulp.task('build', ['test', 'lint', 'copy-dependencies'], function() {
+gulp.task('update-submodules', ['clean'], shell.task([
+        "git submodule init",
+        "git submodule update --recursive" // Update the submodule contents.
+    ], { verbose: true })
+);
+
+gulp.task('copy-visualisation-module', ['update-submodules'], function() {
+    return gulp.src([
+        "./TI2806/+(libs|src)/**"
+    ]).pipe(gulp.dest('./dest/visualisation/'));
+});
+
+gulp.task('build', ['test', 'lint', 'copy-dependencies', 'copy-visualisation-module'], function() {
     return gulp.src('./target/src/main/**')
         .pipe(gulpif("**/*.js", replace(/.*exports[^\n;]*(;|\n)/g, "")))
         .pipe(gulp.dest('./dest'));

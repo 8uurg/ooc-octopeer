@@ -1,5 +1,7 @@
 /// <reference path="../../interfaces/DatabaseSchemes/MouseClickJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
+/// <reference path="../../Main.d.ts" />
+declare var OCTOPEER_CONSTANTS: any;
 
 /**
  * Provides a tracker that tracks the mouse on the page.
@@ -18,27 +20,65 @@ export class MouseClickTracker extends Tracker {
          * @param event Object that contains the required cursor information.
          */
         document.addEventListener("click", function (event) {
-            _this.sendData(_this.createMessage());
+            _this.sendClickData(_this.createClickMessage());
+            _this.sendPositionData(_this.createPositionMessage(event));
         });
     }
 
     /**
      * Creates a message using the MouseClick interface.
-     * @returns {MouseClickJSON}
      */
-    private createMessage(): MouseClickJSON {
+    private createClickMessage(): MouseClickJSON {
         return {
             created_at: Date.now() / 1000
         };
     }
 
     /**
-     * Send mouse click data to centralized collector.
+     * Creates a message using the MousePos interface.
+     * @param event The event to gather mousedata from.
      */
-    private sendData(mcData: MouseClickJSON) {
+    private createPositionMessage(event: MouseEvent): MousePosJSON {
+        return {
+            position_x: event.pageX,
+            position_y: event.pageY,
+            viewport_x: event.clientX,
+            viewport_y: event.clientY,
+            created_at: Date.now() / 1000
+        };
+    }
+
+    /**
+     * Send mouse click data to centralized collector.
+     * @param mcData The data to send.
+     */
+    private sendClickData(mcData: MouseClickJSON) {
         this.sendMessage({
             table: "mouse-click-events/",
             data: mcData
         });
     }
+
+    /**
+     * Send mouse click data to centralized collector.
+     * @param mcData The data to send.
+     */
+    private sendPositionData(mcData: MousePosJSON) {
+        this.sendMessage({
+            table: "mouse-position-events/",
+            data: mcData
+        });
+    }
 }
+
+main.declareTracker({
+    tracker: (collector) => {
+        return (new MouseClickTracker())
+            .withCollector(collector)
+            .register();
+    },
+    setting: {
+        name: OCTOPEER_CONSTANTS.track_mouse_clicks,
+        def: true
+    }
+});

@@ -1,39 +1,79 @@
 /// <reference path="../../interfaces/DatabaseSchemes/DomJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
+/// <reference path="../../Main.d.ts" />
+declare var OCTOPEER_CONSTANTS: any;
 
 /**
- * This tracker was created for tracking all coordinates of visible elements on the webpage.
- * As these coordinates combined with mouse positions can give a lot of information.
+ * Tracks the HTML page and assigns special meta-data to the elements.
+ * This meta data contains information about the rendered positions of the elements.
+ * If multiple mutation follows each other the tracking of data is delayed by certain interval.
  */
 export class DomTracker extends Tracker {
+
+    private mutationObserver: MutationObserver;
+    private mutationObserverConfiguration: MutationObserverInit = {
+        attributes: true,
+        attributeFilter: ["role", "aria-hidden"],
+        childList: true,
+        subtree: true
+    };
+    private timer: any;
+
+    public pageFullyLoaded  = false;
 
     /**
      * Register the VisibleElementsTracker.
      */
     public register() {
-        const _this: DomTracker = this;
-
-        let sendModifiedDom = function () {
-            _this.modifyDom();
-            _this.sendData(_this.createMessage(document.documentElement.outerHTML));
+        let mutationFired = () => {
+            clearInterval(this.timer);
+            this.timer = setInterval(() => {
+                this.collectData();
+                clearInterval(this.timer);
+            }, 700);
         };
+        this.mutationObserver = new MutationObserver(mutationFired);
 
-        // Send initial dom on page load.
-        sendModifiedDom();
-
-        // Sends modified dom on change of the dom.
-        window.document.addEventListener("change", sendModifiedDom);
+        window.addEventListener("load", () => {
+            this.pageFullyLoaded = true;
+            mutationFired();
+        });
+        window.addEventListener("resize", mutationFired);
     }
 
     /**
-     * This method goes through all elements of the dom to add new attributes to them.
+     * Triggers the collection and sending of data.
+     */
+    private collectData() {
+        if (!this.pageFullyLoaded) {
+            return;
+        }
+        this.mutationObserver.disconnect();
+        this.modifyDom();
+        this.sendData(this.createMessage(document.documentElement.outerHTML));
+        this.connectObserver();
+    }
+
+    /**
+     * Connect the mutation observer with the body.
+     */
+    private connectObserver() {
+        if (this.mutationObserver === null) {
+            return;
+        }
+        this.mutationObserver.disconnect();
+        this.mutationObserver.observe(document.body, this.mutationObserverConfiguration);
+    }
+
+    /**
+     * This method goes through all elements of the body to add new attributes to them.
      * Afterwards it sends the dom to the message handler.
      */
     private modifyDom() {
-        let allDOMElements: NodeListOf<Element> = document.getElementsByTagName("*");
+        let elementsInBody: NodeListOf<Element> = document.querySelectorAll("body *");
 
-        for (let numberOfElements = 0; numberOfElements < allDOMElements.length; numberOfElements++) {
-            let element: Element = allDOMElements.item(numberOfElements);
+        for (let i = 0; i < elementsInBody.length; i++) {
+            let element: Element = elementsInBody.item(i);
             this.setDataAttributesToElement(element);
         }
     }
@@ -59,12 +99,12 @@ export class DomTracker extends Tracker {
 
     /**
      * Creates a message using the VisibleElementJSON interface.
-     * @param Dom  The modified dom with data elements added.
+     * @param dom  The modified dom with data elements added.
      * @returns {DomJSON}
      */
-    public createMessage(Dom: string): DomJSON {
+    public createMessage(dom: string): DomJSON {
         return {
-            dom: Dom,
+            dom: dom,
             created_at: Date.now() / 1000
         };
     }
@@ -79,4 +119,25 @@ export class DomTracker extends Tracker {
             data: dData
         });
     }
+
+    /**
+     * Changes the tracker configuration.
+     * @param conf The configuration for the DOM tracker.
+     */
+    public changeTrackerConfiguration(conf: MutationObserverInit) {
+        this.mutationObserverConfiguration = conf;
+        this.connectObserver();
+    }
 }
+
+main.declareTracker({
+    tracker: (collector) => {
+        return (new DomTracker())
+            .withCollector(collector)
+            .register();
+    },
+    setting: {
+        name: OCTOPEER_CONSTANTS.track_dom,
+        def: true
+    }
+});
