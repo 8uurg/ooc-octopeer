@@ -48,7 +48,6 @@ export class DomTracker extends Tracker {
         if (!this.pageFullyLoaded) {
             return;
         }
-        console.log("Mutating DOM!");
         this.mutationObserver.disconnect();
         this.modifyDom();
         this.sendData(this.createMessage(document.documentElement.outerHTML));
