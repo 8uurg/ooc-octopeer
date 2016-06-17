@@ -13,7 +13,7 @@ var OCTOPEER_CONSTANTS: any = { // tslint:disable-line
     "track_key_strokes":            "checkboxKeystrokes",
     "track_scroll":                 "checkboxScrolling",
     "track_dom":                    "checkboxDom",
-    "track_semantic_hover":      "checkboxSemanticHover",
+    "track_semantic_hover":         "checkboxSemanticHover",
     "track_semantic_clicks":        "checkboxSemanticClicks",
     "track_semantic_key_strokes":   "checkboxSemanticKeystrokes",
     "track_semantic_scrolling":     "checkboxSemanticScrolling",
@@ -24,5 +24,5 @@ var OCTOPEER_CONSTANTS: any = { // tslint:disable-line
 
     // The database constants
     "database_location_key":        "databaseLocation",
-    "standard_database_location":   "http://10.0.22.6/api/"
+    "standard_database_location":   "http://146.185.128.124/api/"
 };
