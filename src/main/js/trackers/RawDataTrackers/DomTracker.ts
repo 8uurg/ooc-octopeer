@@ -6,6 +6,7 @@ declare var OCTOPEER_CONSTANTS: any;
 /**
  * Tracks the HTML page and assigns special meta-data to the elements.
  * This meta data contains information about the rendered positions of the elements.
+ * If multiple mutation follows each other the tracking of data is delayed by certain interval.
  */
 export class DomTracker extends Tracker {
 
@@ -16,6 +17,7 @@ export class DomTracker extends Tracker {
         childList: true,
         subtree: true
     };
+    private timer: any;
 
     public pageFullyLoaded  = false;
 
@@ -24,13 +26,11 @@ export class DomTracker extends Tracker {
      */
     public register() {
         let mutationFired = () => {
-            if (!this.pageFullyLoaded) {
-                return;
-            }
-            this.mutationObserver.disconnect();
-            this.modifyDom();
-            this.sendData(this.createMessage(document.documentElement.outerHTML));
-            this.connectObserver();
+            clearInterval(this.timer);
+            this.timer = setInterval(() => {
+                this.collectData();
+                clearInterval(this.timer);
+            }, 700);
         };
         this.mutationObserver = new MutationObserver(mutationFired);
 
@@ -39,6 +39,20 @@ export class DomTracker extends Tracker {
             mutationFired();
         });
         window.addEventListener("resize", mutationFired);
+    }
+
+    /**
+     * Triggers the collection and sending of data.
+     */
+    private collectData() {
+        if (!this.pageFullyLoaded) {
+            return;
+        }
+        console.log("Mutating DOM!");
+        this.mutationObserver.disconnect();
+        this.modifyDom();
+        this.sendData(this.createMessage(document.documentElement.outerHTML));
+        this.connectObserver();
     }
 
     /**
@@ -121,7 +135,6 @@ main.declareTracker({
     tracker: (collector) => {
         return (new DomTracker())
             .withCollector(collector)
-            .withThrottle(LastMessageThrottle.getFactory())
             .register();
     },
     setting: {
