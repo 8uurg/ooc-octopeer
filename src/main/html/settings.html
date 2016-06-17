@@ -6,7 +6,7 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="../css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../css/settings_page.css" />
+    <link rel="stylesheet" href="../css/settings.css" />
     <!-- Compiled and minified JavaScript -->
     <script src="../js/materialize.min.js"></script>
 
@@ -50,6 +50,7 @@
             <div class="brand-logo center"><img src="../img/icons/octopeer_white.svg" />Octopeer</div>
             <ul class="right">
                 <li><a href="settings.html"><i class="material-icons">settings</i></a></li>
+                <li><a id="openAnalytics" href="../visualisation/src/index.html" target="_blank"><i class="material-icons">insert_chart</i></a></li>
             </ul>
         </div>
     </nav>
@@ -271,7 +272,7 @@
     <div class="container">
         <div class="row">
             <div class="input-field col s8">
-                <i class="material-icons prefix">dns</i>
+                <i class="material-icons prefix">storage</i>
                 <input placeholder="http://server/api/" id="database_location" type="text" class="validate"
                        pattern="^(http|https)://.*/api/$">
                 <label for="database_location">Database Location</label>

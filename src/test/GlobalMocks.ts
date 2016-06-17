@@ -31,11 +31,32 @@ _global.chrome = {
         sync: {
             set: nop,
             get: nop
+        },
+        local: {
+            set: nop,
+            get: nop
+        },
+        onChanged: {
+            addListener: nop
         }
     },
     tabs: {
         query: nop,
-        reload: nop
+        reload: nop,
+        create: nop,
+        get: nop,
+        onUpdated: {
+            addListener: nop
+        },
+        onActivated: {
+            addListener: nop
+        }
+    },
+    browserAction: {
+        setIcon: nop,
+        onClicked: {
+            addListener: nop
+        }
     }
 };
 
@@ -49,21 +70,21 @@ _global.XMLHttpRequest = function() {
 };
 
 _global.MutationObserver = function() {
-    this.disconnect = function() {};
-    this.observe = function() {};
+    this.disconnect = nop;
+    this.observe = nop;
 };
 
 _global.XMLHttpRequest.prototype.status = 0;
 _global.XMLHttpRequest.prototype.readyState = 0;
 
 _global.document = {
-    addEventListener:  function() {},
-    querySelectorAll: function() {}
+    addEventListener:  nop,
+    querySelectorAll: nop
 };
 
-_global.localStorage = function() {};
+_global.localStorage = nop;
 _global.window = {
-    addEventListener: function() {},
+    addEventListener: nop,
     scrollX: 0,
     scrollY: 0
 };
@@ -73,6 +94,7 @@ _global.window.scrollX = 0;
 _global.window.scrollY = 0;
 
 _global.OCTOPEER_CONSTANTS = {
+    "standard_database_location": "http://10.0.22.6/api/",
     "database_location_key": "databaseLocation"
 };
 
@@ -82,4 +104,8 @@ _global.main = {
     declareSemanticMappings: nop,
     declareTracker: nop,
     done: nop
+};
+
+_global.scrollMonitor = {
+    create: nop
 };

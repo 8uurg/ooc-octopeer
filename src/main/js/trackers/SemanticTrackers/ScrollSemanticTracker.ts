@@ -2,33 +2,35 @@
 /// <reference path="../../Main.d.ts" />
 /// <reference path="../../interfaces/SemanticMapping.ts" />
 declare var OCTOPEER_CONSTANTS: any;
+declare var scrollMonitor: any;
 
 /**
- * The semantic key stroke tracker
+ * The semantic visible element scroll tracker.
  */
-export class MouseSemanticTracker
+export class ScrollSemanticTracker
     extends SemanticTracker {
 
     /**
-     * The name of this semantic tracker
-     * @returns {string}
+     * The name of this semantic tracker.
      */
     public getName(): string {
-        return "MouseSemanticTracker";
+        return "ScrollSemanticTracker";
     }
 
     /**
      * Register an HTMLElement to this semantic tracker.
      * @param element The element to monitor
-     * @param eventName The name of the event.
+     * @param elementName The name of the element.
      */
-    public registerElement(element: Element, eventName: string): void {
-        element.addEventListener("mouseenter", () => {
-            this.sendData(this.createMessage("Mouseenter", eventName));
-        });
+    public registerElement(element: Element, elementName: string): void {
+        let sm = scrollMonitor.create(element);
 
-        element.addEventListener("mouseleave", () => {
-            this.sendData(this.createMessage("Mouseleave", eventName));
+        sm.enterViewport(() => {
+            this.sendData(this.createMessage("Scroll into view", elementName));
+        });
+        
+        sm.exitViewport(() => {
+            this.sendData(this.createMessage("Scroll out of view", elementName));
         });
     }
 
@@ -37,18 +39,18 @@ export class MouseSemanticTracker
      * @param mapping The mapping that is being checked.
      */
     public shouldRegisterElement(mapping: SemanticMapping): boolean {
-        return mapping.track.hover;
+        return mapping.track.scroll;
     }
 }
 
 main.declareTracker({
     tracker: (collector, mappings) => {
-        return (new MouseSemanticTracker())
+        return (new ScrollSemanticTracker())
             .withCollector(collector)
             .withMappings(mappings);
     },
     setting: {
-        name: OCTOPEER_CONSTANTS.track_semantic_position,
+        name: OCTOPEER_CONSTANTS.track_semantic_scrolling,
         def: true
     }
 });

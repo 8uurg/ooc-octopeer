@@ -1,5 +1,6 @@
 /// <reference path="./SemanticTracker.d.ts" />
 /// <reference path="../../Main.d.ts" />
+/// <reference path="../../interfaces/SemanticMapping.ts" />
 declare var OCTOPEER_CONSTANTS: any;
 
 /**
@@ -31,7 +32,7 @@ export class ClickSemanticTracker
      * Check if this element mapping has tracking click turned on.
      * @param mapping The mapping that is being checked.
      */
-    public filterMappings(mapping: SemanticMapping): boolean {
+    public shouldRegisterElement(mapping: SemanticMapping): boolean {
         return mapping.track.click;
     }
 }

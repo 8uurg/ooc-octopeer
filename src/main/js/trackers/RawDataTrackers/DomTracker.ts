@@ -4,33 +4,54 @@
 declare var OCTOPEER_CONSTANTS: any;
 
 /**
- * This tracker was created for tracking all coordinates of visible elements on the webpage.
- * As these coordinates combined with mouse positions can give a lot of information.
+ * Tracks the HTML page and assigns special meta-data to the elements.
+ * This meta data contains information about the rendered positions of the elements.
+ * If multiple mutation follows each other the tracking of data is delayed by certain interval.
  */
 export class DomTracker extends Tracker {
 
     private mutationObserver: MutationObserver;
     private mutationObserverConfiguration: MutationObserverInit = {
         attributes: true,
-        attributeFilter: ["data-octopeer-x", "data-octopeer-y", "data-octopeer-height", "data-octopeer-width",
-            "data-octopeer-z"],
+        attributeFilter: ["role", "aria-hidden"],
         childList: true,
         subtree: true
     };
+    private timer: any;
+
+    public pageFullyLoaded  = false;
 
     /**
      * Register the VisibleElementsTracker.
      */
     public register() {
-        let registerChange = () => {
-            this.mutationObserver.disconnect();
-            this.modifyDom();
-            this.sendData(this.createMessage(document.documentElement.outerHTML));
-            this.connectObserver();
+        let mutationFired = () => {
+            clearInterval(this.timer);
+            this.timer = setInterval(() => {
+                this.collectData();
+                clearInterval(this.timer);
+            }, 700);
         };
-        this.mutationObserver = new MutationObserver(registerChange);
+        this.mutationObserver = new MutationObserver(mutationFired);
+
+        window.addEventListener("load", () => {
+            this.pageFullyLoaded = true;
+            mutationFired();
+        });
+        window.addEventListener("resize", mutationFired);
+    }
+
+    /**
+     * Triggers the collection and sending of data.
+     */
+    private collectData() {
+        if (!this.pageFullyLoaded) {
+            return;
+        }
+        this.mutationObserver.disconnect();
+        this.modifyDom();
+        this.sendData(this.createMessage(document.documentElement.outerHTML));
         this.connectObserver();
-        registerChange();
     }
 
     /**

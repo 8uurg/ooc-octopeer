@@ -2,8 +2,8 @@
   "manifest_version": 2,
   
   "name": "Octopeer-BitBucket",
-  "description": "Monitors peer-review behaviour on pull requests on BitBucket for acquiring peer review behaviour",
-  "version": "0.0.7",
+  "description": "Monitors peer-review behaviour on pull requests on Bitbucket for acquiring peer review behaviour",
+  "version": "1.0.0",
 
   "browser_action": {
     "default_title": "Octopeer",
@@ -25,6 +25,7 @@
         "js": [
           "js/OctopeerConstants.js",
           "js/Main.js",
+          "js/scrollMonitor.js",
           "js/BitBucketSemanticMapping.js",
           "js/trackers/RawDataTrackers/Tracker.js",
           "js/trackers/RawDataTrackers/DomTracker.js",
@@ -35,6 +36,7 @@
           "js/trackers/RawDataTrackers/ResizeTracker.js",
           "js/trackers/RawDataTrackers/VisibilityTracker.js",
           "js/trackers/SemanticTrackers/SemanticTracker.js",
+          "js/trackers/SemanticTrackers/ScrollSemanticTracker.js",
           "js/trackers/SemanticTrackers/ClickSemanticTracker.js",
           "js/trackers/SemanticTrackers/KeystrokeSemanticTracker.js",
           "js/trackers/SemanticTrackers/MouseSemanticTracker.js",

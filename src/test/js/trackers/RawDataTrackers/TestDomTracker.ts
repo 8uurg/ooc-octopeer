@@ -32,19 +32,23 @@ describe("The Dom Tracker", function() {
 
     it("should add data-octopeer attributes to the elements", function() {
         this.tracker.register();
+        this.tracker.pageFullyLoaded = true;
         this.mutationObserved();
-
+        jasmine.clock().tick(701);
+        
         expect(this.element.getAttribute("data-octopeer-x")).toBe("0");
         expect(this.element.getAttribute("data-octopeer-y")).toBe("0");
         expect(this.element.getAttribute("data-octopeer-width")).toBe("0");
         expect(this.element.getAttribute("data-octopeer-height")).toBe("0");
     });
 
-    it("should call the sendData twice", function() {
+    it("should only send data once if one mutation is observed", function() {
         this.tracker.register();
+        this.tracker.pageFullyLoaded = true;
         this.mutationObserved();
-
-        expect(this.collector.sendMessage).toHaveBeenCalledTimes(2);
+        jasmine.clock().tick(701);
+        
+        expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
     });
 
     it("should should not add a data-octopeer-z attribute on a default case", function() {
@@ -52,15 +56,17 @@ describe("The Dom Tracker", function() {
 
         this.tracker.register();
         this.mutationObserved();
-
+        jasmine.clock().tick(701);
+        
         expect(this.element.getAttribute("data-octopeer-z")).toBeNull();
     });
 
     it("should should add a data-octopeer-z attribute when needed", function() {
         this.element.style.zIndex = 3;
-
+        this.tracker.pageFullyLoaded = true;
         this.tracker.register();
         this.mutationObserved();
+        jasmine.clock().tick(701);
 
         expect(this.element.getAttribute("data-octopeer-z")).toBe("3");
     });
@@ -72,6 +78,16 @@ describe("The Dom Tracker", function() {
         });
         this.tracker.changeTrackerConfiguration(newConf);
         expect(this.mutationObserver.observe).toHaveBeenCalledWith(any(Object), newConf);
+    });
+
+    it("should track the page on load", function () {
+        spyOn(window, "addEventListener").and.callFake((_: string, callback: any) => {
+            callback();
+        });
+        this.tracker.register();
+        jasmine.clock().tick(701);
+        expect(this.tracker.pageFullyLoaded).toBeTruthy();
+        expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
     });
 
     afterEach(function () {
