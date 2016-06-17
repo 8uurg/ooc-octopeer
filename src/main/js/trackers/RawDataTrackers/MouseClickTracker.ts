@@ -35,7 +35,8 @@ export class MouseClickTracker extends Tracker {
     }
 
     /**
-     * Creates a message using the MouseClick interface.
+     * Creates a message using the MousePos interface.
+     * @param event The event to gather mousedata from.
      */
     private createPositionMessage(event: MouseEvent): MousePosJSON {
         return {
