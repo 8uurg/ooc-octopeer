@@ -1,5 +1,6 @@
 /// <reference path="./SemanticTracker.d.ts" />
 /// <reference path="../../Main.d.ts" />
+/// <reference path="../../interfaces/SemanticMapping.ts" />
 declare var OCTOPEER_CONSTANTS: any;
 
 /**
