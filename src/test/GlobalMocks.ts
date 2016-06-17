@@ -70,8 +70,8 @@ _global.XMLHttpRequest = function() {
 };
 
 _global.MutationObserver = function() {
-    this.disconnect = function() {};
-    this.observe = function() {};
+    this.disconnect = nop;
+    this.observe = nop;
 };
 
 _global.XMLHttpRequest.prototype.status = 0;
@@ -104,4 +104,8 @@ _global.main = {
     declareSemanticMappings: nop,
     declareTracker: nop,
     done: nop
+};
+
+_global.scrollMonitor = {
+    create: nop
 };
