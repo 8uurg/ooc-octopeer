@@ -19,8 +19,8 @@ describe("The Mouse Click Tracker", function() {
             clientY: 25
         };
         this.anotherMousePositionObject = {
-            pageX: 15,
-            pageY: 25,
+            pageX: 35,
+            pageY: 45,
             clientX: 15,
             clientY: 25
         };
