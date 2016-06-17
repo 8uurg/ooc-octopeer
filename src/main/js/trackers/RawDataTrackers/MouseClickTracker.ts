@@ -20,8 +20,8 @@ export class MouseClickTracker extends Tracker {
          * @param event Object that contains the required cursor information.
          */
         document.addEventListener("click", function (event) {
-            _this.sendData(_this.createClickMessage());
-            _this.sendData(_this.createPositionMessage(event));
+            _this.sendClickData(_this.createClickMessage());
+            _this.sendPositionData(_this.createPositionMessage(event));
         });
     }
 
@@ -50,10 +50,22 @@ export class MouseClickTracker extends Tracker {
 
     /**
      * Send mouse click data to centralized collector.
+     * @param mcData The data to send.
      */
-    private sendData(mcData: MouseClickJSON) {
+    private sendClickData(mcData: MouseClickJSON) {
         this.sendMessage({
             table: "mouse-click-events/",
+            data: mcData
+        });
+    }
+
+    /**
+     * Send mouse click data to centralized collector.
+     * @param mcData The data to send.
+     */
+    private sendPositionData(mcData: MouseClickJSON) {
+        this.sendMessage({
+            table: "mouse-position-events/",
             data: mcData
         });
     }
