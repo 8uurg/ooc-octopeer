@@ -11,6 +11,8 @@ export class DomTracker extends Tracker {
 
     private mutationObserver: MutationObserver;
     private mutationObserverConfiguration: MutationObserverInit = {
+        attributes: true,
+        attributeFilter: ["role"],
         childList: true,
         subtree: true
     };
