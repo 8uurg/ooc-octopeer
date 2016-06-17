@@ -13,7 +13,7 @@ export class DomTracker extends Tracker {
     private mutationObserver: MutationObserver;
     private mutationObserverConfiguration: MutationObserverInit = {
         attributes: true,
-        attributeFilter: ["role"],
+        attributeFilter: ["role", "aria-hidden"],
         childList: true,
         subtree: true
     };
