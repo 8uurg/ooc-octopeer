@@ -1,129 +1,113 @@
-/// <reference path="./ChromeTrackingCollector.ts" />
-/// <reference path="./BitBucketSessionDataGatherer.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
-/// <reference path="./trackers/RawDataTrackers/DomTracker.ts" />
-/// <reference path="./trackers/RawDataTrackers/KeystrokeTracker.ts" />
-/// <reference path="./trackers/RawDataTrackers/MouseClickTracker.ts" />
-/// <reference path="./trackers/RawDataTrackers/MousePositionTracker.ts" />
-/// <reference path="./trackers/RawDataTrackers/ResizeTracker.ts" />
-/// <reference path="./trackers/RawDataTrackers/ScrollTracker.ts" />
-/// <reference path="./trackers/RawDataTrackers/VisibilityTracker.ts" />
+/// <reference path="./interfaces/SessionDataGatherer.ts" />
+/// <reference path="./interfaces/SemanticMapping.ts" />
+/// <reference path="./interfaces/TrackerDefinition.ts" />
+/// <reference path="./interfaces/SemanticMapping.ts" />
 
-/// <reference path="./trackers/SemanticTrackers/ClickSemanticTracker.ts" />
-/// <reference path="./trackers/SemanticTrackers/KeystrokeSemanticTracker.ts" />
-/// <reference path="./trackers/SemanticTrackers/MouseSemanticTracker.ts" />
+/// <reference path="./trackers/throttles/Throttle.ts" />
 
-/// <reference path="./trackers/throttles/StartEndThrottle.ts" />
+/**
+ * The class that prepares everything and connects dependencies.
+ * Makes sure everything is good to go.
+ */
+export class Main {
 
-declare var VisibilityTracker: any;
-declare var KeystrokeTracker: any;
-declare var MouseClickTracker: any;
-declare var MousePositionTracker: any;
-declare var ResizeTracker: any;
-declare var ScrollTracker: any;
-declare var DomTracker: any;
-declare var DataGatherer: any;
-declare var ChromeTrackingCollector: any;
-declare var StartEndThrottle: any;
+    private collector: (sessionDataGatherer: SessionDataGatherer) => TrackingCollector;
+    private trackerDefinitions: TrackerDefinition[] = [];
+    private semanticMappings: SemanticMapping[];
+    private sessionDataGatherer: SessionDataGatherer;
 
-declare var KeystrokeSemanticTracker: any;
-declare var ClickSemanticTracker: any;
-declare var MouseSemanticTracker: any;
-
-// The needed settings. True is the default value if storage does not contain the key.
-let neededSettings: { [key: string]: boolean; } = {
-    [OCTOPEER_CONSTANTS.track_key_strokes]: true,
-    [OCTOPEER_CONSTANTS.track_mouse_position]: true,
-    [OCTOPEER_CONSTANTS.track_page_resolution]: true,
-    [OCTOPEER_CONSTANTS.track_mouse_clicks]: true,
-    [OCTOPEER_CONSTANTS.track_scroll]: true,
-    [OCTOPEER_CONSTANTS.track_semantic_clicks]: true,
-    [OCTOPEER_CONSTANTS.track_semantic_visibility]: true,
-    [OCTOPEER_CONSTANTS.track_semantic_key_strokes]: true,
-    [OCTOPEER_CONSTANTS.track_semantic_position]: true,
-    [OCTOPEER_CONSTANTS.track_dom]: true
-};
-
-let semanticElementsToTrack: {eventType: string, selector: string, trackKeyStroke: boolean,
-    trackClick: boolean, trackHover: boolean, trackScroll: boolean}[] = [
-    {eventType: "Merge Pull Request", selector: "#fulfill-pullrequest", trackKeyStroke: true,
-        trackClick: true, trackHover: true, trackScroll: true},
-    {eventType: "Close Pull Request", selector: "#reject-pullrequest", trackKeyStroke: true,
-        trackClick: true, trackHover: true, trackScroll: true},
-    {eventType: "Cancel inline comment", selector: ".new-comment .aui-button-primary", trackKeyStroke: true,
-        trackClick: true, trackHover: true, trackScroll: true},
-    {eventType: "Comment inline comment", selector: ".new-comment .buttons a", trackKeyStroke: true,
-        trackClick: true, trackHover: true, trackScroll: true},
-    {eventType: "Inline Comment", selector: ".aui-iconfont-add-comment", trackKeyStroke: true,
-        trackClick: true, trackHover: true, trackScroll: true},
-    {eventType: "Edit comment", selector: ".comment-actions .edit-link", trackKeyStroke: true,
-        trackClick: true, trackHover: true, trackScroll: true},
-    {eventType: "Add reaction", selector: ".new-comment .buttons .aui-button-primary", trackKeyStroke: true,
-        trackClick: true, trackHover: true, trackScroll: true},
-    {eventType: "Inline comment textfield", selector: ".comment-thread-container #id_new_comment", trackKeyStroke: true,
-        trackClick: true, trackHover: true, trackScroll: true},
-    {eventType: "Comment textfield", selector: "#general-comments #id_new_comment", trackKeyStroke: true,
-        trackClick: true, trackHover: true, trackScroll: true}
-];
-
-chrome.storage.sync.get(neededSettings, (preferences: { [key: string]: any }) => {
-
-    // Create a collector.
-    let collector: TrackingCollector = new ChromeTrackingCollector(new DataGatherer());
-
-    if (!collector.isReadyToSend()) {
-        return;
-    }
-
-    // Register the visibility tracker to the current document.
-    if (preferences[OCTOPEER_CONSTANTS.track_dom]) {
-        (new DomTracker()).withCollector(collector).register();
-    }
-
-    // Register the resize tracker to the current document.
-    if (preferences[OCTOPEER_CONSTANTS.track_page_resolution]) {
-        (new ResizeTracker()).withCollector(collector).withThrottle(StartEndThrottle).register();
-    }
-
-    // Create an instance of the keystroke tracker.
-    if (preferences[OCTOPEER_CONSTANTS.track_key_strokes]) {
-        (new KeystrokeTracker()).withCollector(collector).register();
-    }
-
-    // Register the mousetracker to the current document.
-    if (preferences[OCTOPEER_CONSTANTS.track_mouse_position]) {
-        (new MousePositionTracker()).withCollector(collector).withThrottle(StartEndThrottle).register();
-    }
-
-    // Register the scroll tracker to the current document.
-    if (preferences[OCTOPEER_CONSTANTS.track_scroll]) {
-        (new ScrollTracker()).withCollector(collector).register();
-    }
-
-    // Register the mouse click tracker to the current document.
-    if (preferences[OCTOPEER_CONSTANTS.track_mouse_clicks]) {
-        (new MouseClickTracker()).withCollector(collector).register();
-    }
-
-    // Register the visibility tracker to the current document.
-    if (preferences[OCTOPEER_CONSTANTS.track_semantic_visibility]) {
-        (new VisibilityTracker()).withCollector(collector).register();
-    }
-
-    let keyStrokeTracker = new KeystrokeSemanticTracker().withCollector(collector);
-    let mouseClickTracker = new ClickSemanticTracker().withCollector(collector);
-    let mouseHoverTracker = new MouseSemanticTracker().withCollector(collector);
-
-    for (let i = 0; i < semanticElementsToTrack.length; i++) {
-        let element = semanticElementsToTrack[i];
-        if (element.trackKeyStroke && preferences[OCTOPEER_CONSTANTS.track_semantic_key_strokes]) {
-            keyStrokeTracker.registerElementWithSelector(element.selector, element.eventType);
+    /**
+     * Declare a tracking collector.
+     * @param collector The tracking collector to declare.
+     * @throws Error upon registering two or more tracking collectors.
+     */
+    public declareTrackingCollector(collector: (sessionDataGatherer: SessionDataGatherer) => TrackingCollector): void {
+        if (this.collector != null) {
+            throw new Error("Don't register more than a single tracking collector.");
         }
-        if (element.trackClick && preferences[OCTOPEER_CONSTANTS.track_semantic_clicks]) {
-            mouseClickTracker.registerElementWithSelector(element.selector, element.eventType);
-        }
-        if (element.trackHover && preferences[OCTOPEER_CONSTANTS.track_semantic_position]) {
-            mouseHoverTracker.registerElementWithSelector(element.selector, element.eventType);
-        }
+
+        this.collector = collector;
     }
-});
+
+    /**
+     * Declare a session data gatherer.
+     * @param sessionDataGatherer The SessionDataGatherer to declare.
+     * @throws Error upon registering two or more session data gatherers.
+     */
+    public declareSessionDataGatherer(sessionDataGatherer: () => SessionDataGatherer): void {
+        if (this.sessionDataGatherer != null) {
+            throw new Error("Don't register more than a single tracking collector.");
+        }
+
+        this.sessionDataGatherer = sessionDataGatherer();
+    }
+
+    /**
+     * Declare a semantic mapping.
+     * @param semanticMappings The semantic mappings to declare.
+     * @throws Error upon registering two or more semantic mappings.
+     */
+    public declareSemanticMappings(semanticMappings: SemanticMapping[]): void {
+        if (this.semanticMappings != null) {
+            throw new Error("Don't register more than a single semantic mapping.");
+        }
+
+        this.semanticMappings = semanticMappings;
+    }
+
+    /**
+     * Declare a tracker to be loaded upon load.
+     * @param definition The definition to use for registering the tracker.
+     */
+    public declareTracker(definition: TrackerDefinition): void {
+        this.trackerDefinitions.push(definition);
+    }
+
+    /**
+     * Create the default settings object.
+     */
+    private getDefaultSettings(): { [key: string]: boolean; } {
+        let settings: {[key: string]: boolean} = {};
+        this.trackerDefinitions.forEach(function(trackerDefinition) {
+            settings[trackerDefinition.setting.name] = trackerDefinition.setting.def;
+        });
+        return settings;
+    }
+
+    /**
+     * Verify if we can start in the current state of things.
+     */
+    private verifiedCollector(): TrackingCollector {
+        if (this.collector == null) {
+            throw new Error("Before creating the trackers, a collector is required.");
+        }
+        const collector = this.collector(this.sessionDataGatherer);
+        if (!collector.isReadyToSend()) {
+            throw new Error("The collector was unable to obtain the session data required.");
+        }
+        return collector;
+    }
+
+    /**
+     * Run to create and register all trackers.
+     * @throws Error upon missing collector.
+     */
+    public done() {
+        const collector: TrackingCollector = this.verifiedCollector();
+        const requiredSettings = this.getDefaultSettings();
+
+        chrome.storage.sync.get(requiredSettings, (preferences: { [key: string]: any }) => {
+            const activated = this.trackerDefinitions
+                .filter((trackerDefinition) => preferences[trackerDefinition.setting.name]);
+            activated.forEach((trackerDefinition) => {
+                trackerDefinition.tracker(collector, this.semanticMappings);
+            });
+        });
+    }
+
+}
+
+// `var` is required in global scope.
+var main = new Main(); // tslint:disable-line

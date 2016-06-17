@@ -5,6 +5,7 @@
 /// <reference path="./OctopeerConstants.ts" />
 
 /// <reference path="../../../typings/index.d.ts" />
+/// <reference path="./Main.d.ts" />
 
 /**
  * ChromeTrackingCollector
@@ -27,7 +28,7 @@ export class ChromeTrackingCollector implements TrackingCollector {
      * @returns {boolean} 
      */
     public isReadyToSend(): boolean {
-        return this.session !== null;
+        return this.session != null;
     }
 
     /**
@@ -42,3 +43,6 @@ export class ChromeTrackingCollector implements TrackingCollector {
         }
     }
 }
+
+main.declareTrackingCollector((sessionDataGatherer) =>
+    new ChromeTrackingCollector(sessionDataGatherer));

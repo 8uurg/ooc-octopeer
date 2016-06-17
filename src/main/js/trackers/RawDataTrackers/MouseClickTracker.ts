@@ -1,5 +1,7 @@
 /// <reference path="../../interfaces/DatabaseSchemes/MouseClickJSON.ts" />
 /// <reference path="./Tracker.d.ts" />
+/// <reference path="../../Main.d.ts" />
+declare var OCTOPEER_CONSTANTS: any;
 
 /**
  * Provides a tracker that tracks the mouse on the page.
@@ -42,3 +44,15 @@ export class MouseClickTracker extends Tracker {
         });
     }
 }
+
+main.declareTracker({
+    tracker: (collector) => {
+        return (new MouseClickTracker())
+            .withCollector(collector)
+            .register();
+    },
+    setting: {
+        name: OCTOPEER_CONSTANTS.track_mouse_clicks,
+        def: true
+    }
+});

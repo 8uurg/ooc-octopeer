@@ -6,17 +6,17 @@
 interface SemanticMapping {
 
     /**
-     * The name of the semantic element.
+     * The name or type of the semantic element.
      */
     name: string;
 
     /**
-     * The css descriptors of the semantic element.
+     * The css selector of the semantic element.
      */
-    descriptor: string;
+    selector: string;
 
     /**
      * The semantic mapping scheme for the semantic element.
      */
-    mapping: SemanticEnablingMapping;
+    track: SemanticEnablingMapping;
 }

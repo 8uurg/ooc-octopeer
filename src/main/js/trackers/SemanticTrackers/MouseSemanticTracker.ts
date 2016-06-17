@@ -1,4 +1,6 @@
 /// <reference path="./SemanticTracker.d.ts" />
+/// <reference path="../../Main.d.ts" />
+declare var OCTOPEER_CONSTANTS: any;
 
 /**
  * The semantic key stroke tracker
@@ -28,4 +30,24 @@ export class MouseSemanticTracker
             this.sendData(this.createMessage("Mouseleave", eventName));
         });
     }
+
+    /**
+     * Check if this element mapping has tracking mouse turned on.
+     * @param mapping The mapping that is being checked.
+     */
+    public filterMappings(mapping: SemanticMapping): boolean {
+        return mapping.track.hover;
+    }
 }
+
+main.declareTracker({
+    tracker: (collector, mappings) => {
+        return (new MouseSemanticTracker())
+            .withCollector(collector)
+            .withMappings(mappings);
+    },
+    setting: {
+        name: OCTOPEER_CONSTANTS.track_semantic_position,
+        def: true
+    }
+});
