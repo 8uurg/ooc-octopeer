@@ -4,8 +4,8 @@
 declare var OCTOPEER_CONSTANTS: any;
 
 /**
- * This tracker was created for tracking all coordinates of visible elements on the webpage.
- * As these coordinates combined with mouse positions can give a lot of information.
+ * Tracks the HTML page and assigns special meta-data to the elements.
+ * This meta data contains information about the rendered positions of the elements.
  */
 export class DomTracker extends Tracker {
 
