@@ -63,7 +63,7 @@ export class MouseClickTracker extends Tracker {
      * Send mouse click data to centralized collector.
      * @param mcData The data to send.
      */
-    private sendPositionData(mcData: MouseClickJSON) {
+    private sendPositionData(mcData: MousePosJSON) {
         this.sendMessage({
             table: "mouse-position-events/",
             data: mcData
