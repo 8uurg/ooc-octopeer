@@ -2,7 +2,7 @@
 
 import {
     registerCheckbox, initialize,
-    setUpDatabaseLocationElements, setupCheckboxes
+    setupDatabaseLocationElements, setupCheckboxes, setupAnalyticsButton
 } from "../../../main/js/extension/Settings";
 
 let MockBrowser = require("mock-browser").mocks.MockBrowser;
@@ -12,13 +12,47 @@ let browser: any = new MockBrowser();
  * Tests for popup.
  */
 describe("The settings", function () {
-    it("should initiate on DOM load", function () {
+    it("should initiate the checkboxes, database field & analytics button on DOM load", function () {
+        let oldDocument = document;
+        browser = new MockBrowser();
+        document = browser.getDocument();
+        let element = document.createElement("div");
+        element.id = "database_location";
+        element.innerHTML = "<div id='change-database-location'></div><div id='openAnalytics'></div>"
+        document.body.insertBefore(element, document.body.firstChild);
+        
+        this.evt = document.createEvent("MutationEvents");
+        this.evt.initMutationEvent("DOMContentLoaded", true, true, document, "", "", "", 0);
         spyOn(chrome.storage.sync, "get").and.callThrough();
         initialize();
+        document.dispatchEvent(this.evt);
+        expect(chrome.storage.sync.get).toHaveBeenCalledTimes(12);
+        document = oldDocument;
+    });
+});
+
+describe("The setup analytics", function () {
+    it("should initiate the analytics button", function () {
+        let oldDocument = document;
+        browser = new MockBrowser();
+        document = browser.getDocument();
         let evt = document.createEvent("MutationEvents");
         evt.initMutationEvent("DOMContentLoaded", true, true, document, "", "", "", 0);
+        spyOn(chrome.storage.local, "get").and.callFake((_: {[key: string]: any}, callback: any ) => {
+            callback({ [OCTOPEER_CONSTANTS.user_id_key]: "someID"});
+        });
+        
+        let event = document.createEvent("HTMLEvents");
+        event.initEvent("click", false, true);
+        let element = document.createElement("div");
+        element.id = "openAnalytics";
+        document.body.insertBefore(element, document.body.firstChild);
+
+        setupAnalyticsButton();
         document.dispatchEvent(evt);
-        expect(chrome.storage.sync.get).toHaveBeenCalledTimes(12);
+        element.dispatchEvent(event);
+        expect(chrome.storage.local.get).toHaveBeenCalled();
+        document = oldDocument;
     });
 });
 
@@ -110,7 +144,7 @@ describe("The database input field", function () {
             callback({ [OCTOPEER_CONSTANTS.database_location_key]: this.location });
         });
 
-        setUpDatabaseLocationElements();
+        setupDatabaseLocationElements();
         expect(this.databaseLocationTextField.value).toEqual(this.location);
     });
 
@@ -122,7 +156,7 @@ describe("The database input field", function () {
         this.databaseLocationTextField.value = this.location;
         spyOn(chrome.storage.sync, "set");
 
-        setUpDatabaseLocationElements();
+        setupDatabaseLocationElements();
         dispatchClick();
 
         expect(chrome.storage.sync.set).toHaveBeenCalledWith({
@@ -138,7 +172,7 @@ describe("The database input field", function () {
         this.databaseLocationTextField.value = "thisIsNotTheDBYouAreLookingFor";
         spyOn(chrome.storage.sync, "set");
 
-        setUpDatabaseLocationElements();
+        setupDatabaseLocationElements();
         dispatchClick();
 
         expect(chrome.storage.sync.set).not.toHaveBeenCalled();
