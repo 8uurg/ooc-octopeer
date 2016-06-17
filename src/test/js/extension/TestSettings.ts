@@ -18,7 +18,7 @@ describe("The settings", function () {
         document = browser.getDocument();
         let element = document.createElement("div");
         element.id = "database_location";
-        element.innerHTML = "<div id='change-database-location'></div><div id='openAnalytics'></div>"
+        element.innerHTML = "<div id='change-database-location'></div><div id='openAnalytics'></div>";
         document.body.insertBefore(element, document.body.firstChild);
         
         this.evt = document.createEvent("MutationEvents");
