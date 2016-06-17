@@ -117,7 +117,7 @@ export abstract class SemanticTracker {
      * The filter to use for the mappings.
      * @param filter The function that filters out the elements to not register to.
      */
-    protected abstract filterMappings(mapping: SemanticMapping): boolean;
+    protected abstract shouldRegisterElement(mapping: SemanticMapping): boolean;
 
     /**
      * The mappings to use for this semantic tracker.
@@ -125,7 +125,7 @@ export abstract class SemanticTracker {
      */
     public withMappings(mappings: SemanticMapping[]): SemanticTracker {
         const remapped = mappings
-            .filter(this.filterMappings)
+            .filter(this.shouldRegisterElement)
             .map((mapping) => <[string, string]>[mapping.selector, mapping.name]);
         this.registerElements(remapped);
 

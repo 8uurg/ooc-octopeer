@@ -159,7 +159,7 @@ class WrongSemanticTracker
         return "WrongSemanticTracker";
     }
 
-    public filterMappings(mapping: SemanticMapping) {
+    public shouldRegisterElement(mapping: SemanticMapping) {
         return true;
     }
 
