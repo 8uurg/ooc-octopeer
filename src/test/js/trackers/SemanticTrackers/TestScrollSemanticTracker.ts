@@ -5,26 +5,21 @@ import {ScrollSemanticTracker} from "../../../../main/js/trackers/SemanticTracke
 
 describe("The mouse semantic tracker", function () {
 
-    let tracker: ScrollSemanticTracker;
-    let collector: TrackingCollector;
-    let monitor: any;
-    let fireEvent: any;
-
     beforeEach(function () {
-        tracker = new ScrollSemanticTracker();
-        collector = jasmine.createSpyObj("collector", ["sendMessage"]);
-        tracker.withCollector(collector);
+        this.tracker = new ScrollSemanticTracker();
+        this.collector = jasmine.createSpyObj("collector", ["sendMessage"]);
+        this.tracker.withCollector(this.collector);
         jasmine.clock().install();
         jasmine.clock().mockDate();
 
-        monitor = jasmine.createSpyObj("scrollMonitor", ["enterViewport", "exitViewport"]);
-        fireEvent = {};
-        monitor.enterViewport.and.callFake((f: Function) => fireEvent["enterViewport"] = f);
-        monitor.exitViewport.and.callFake((f: Function) => fireEvent["exitViewport"] = f);
-        spyOn(scrollMonitor, "create").and.returnValue(monitor);
+        this.monitor = jasmine.createSpyObj("scrollMonitor", ["enterViewport", "exitViewport"]);
+        this.fireEvent = {};
+        this.monitor.enterViewport.and.callFake((f: Function) => this.fireEvent["enterViewport"] = f);
+        this.monitor.exitViewport.and.callFake((f: Function) => this.fireEvent["exitViewport"] = f);
+        spyOn(scrollMonitor, "create").and.returnValue(this.monitor);
 
         let element = jasmine.createSpyObj("elem", ["addEventListener"]);
-        tracker.registerElement(element, "Comment textfield");
+        this.tracker.registerElement(element, "Comment textfield");
     });
 
     afterEach(function () {
@@ -32,11 +27,11 @@ describe("The mouse semantic tracker", function () {
     });
 
     it("should return ScrollSemanticTracker as name", function() {
-        expect(tracker.getName()).toEqual("ScrollSemanticTracker");
+        expect(this.tracker.getName()).toEqual("ScrollSemanticTracker");
     });
 
     it("should ignore mappings without scroll", function() {
-        expect(tracker.filterMappings({
+        expect(this.tracker.filterMappings({
             name: "Everything",
             selector: "*",
             track: {
@@ -49,7 +44,7 @@ describe("The mouse semantic tracker", function () {
     });
 
     it("should accept mappings with scroll", function() {
-        expect(tracker.filterMappings({
+        expect(this.tracker.filterMappings({
             name: "Everything",
             selector: "*",
             track: {
@@ -62,9 +57,9 @@ describe("The mouse semantic tracker", function () {
     });
 
     it("should correctly register a viewport enter", function () {
-        fireEvent["enterViewport"]();
-        expect(collector.sendMessage).toHaveBeenCalledTimes(1);
-        expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
+        this.fireEvent["enterViewport"]();
+        expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
+        expect(this.collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
             data: jasmine.objectContaining({
                 event_type: 301
             })
@@ -72,9 +67,9 @@ describe("The mouse semantic tracker", function () {
     });
 
     it("should correctly register a viewport leave", function () {
-        fireEvent["exitViewport"]();
-        expect(collector.sendMessage).toHaveBeenCalledTimes(1);
-        expect(collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
+        this.fireEvent["exitViewport"]();
+        expect(this.collector.sendMessage).toHaveBeenCalledTimes(1);
+        expect(this.collector.sendMessage).toHaveBeenCalledWith(jasmine.objectContaining({
             data: jasmine.objectContaining({
                 event_type: 302
             })
