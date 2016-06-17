@@ -107,7 +107,7 @@ gulp.task('copy-dependencies', ['clean'], function() {
 });
 
 gulp.task('update-submodules', ['clean'], shell.task([
-        "git pull --recurse-submodules", // Pull the newest data analytics build
+        "git submodule init",
         "git submodule update --recursive" // Update the submodule contents.
     ], { verbose: true })
 );
