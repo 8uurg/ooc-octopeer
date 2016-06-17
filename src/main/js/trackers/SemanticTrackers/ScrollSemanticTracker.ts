@@ -4,14 +4,13 @@ declare var OCTOPEER_CONSTANTS: any;
 declare var scrollMonitor: any;
 
 /**
- * The semantic visible element scroll tracker
+ * The semantic visible element scroll tracker.
  */
 export class ScrollSemanticTracker
     extends SemanticTracker {
 
     /**
-     * The name of this semantic tracker
-     * @returns {string}
+     * The name of this semantic tracker.
      */
     public getName(): string {
         return "ScrollSemanticTracker";
@@ -20,7 +19,7 @@ export class ScrollSemanticTracker
     /**
      * Register an HTMLElement to this semantic tracker.
      * @param element The element to monitor
-     * @param eventName The name of the event.
+     * @param elementName The name of the element.
      */
     public registerElement(element: Element, elementName: string): void {
         let sm = scrollMonitor.create(element);
