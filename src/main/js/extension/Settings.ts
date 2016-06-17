@@ -57,9 +57,11 @@ export function setUpDatabaseLocationElements() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    setupCheckboxes();
-    setUpDatabaseLocationElements();
-});
+export function initialize() {
+    document.addEventListener("DOMContentLoaded", () => {
+        setupCheckboxes();
+        setUpDatabaseLocationElements();
+    });
+}
 
-
+initialize();

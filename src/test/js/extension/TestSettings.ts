@@ -1,7 +1,7 @@
 ///<reference path="../../../../typings/index.d.ts" />
 
 import {
-    registerCheckbox,
+    registerCheckbox, initialize,
     setUpDatabaseLocationElements, setupCheckboxes
 } from "../../../main/js/extension/Settings";
 
@@ -11,6 +11,17 @@ let browser: any = new MockBrowser();
 /**
  * Tests for popup.
  */
+describe("The settings", function () {
+    it("should initiate on DOM load", function () {
+        spyOn(chrome.storage.sync, "get").and.callThrough();
+        initialize();
+        let evt = document.createEvent("MutationEvents");
+        evt.initMutationEvent("DOMContentLoaded", true, true, document, "", "", "", 0);
+        document.dispatchEvent(evt);
+        expect(chrome.storage.sync.get).toHaveBeenCalledTimes(12);
+    });
+});
+
 describe("Settings.ts tests", function () {
     let checkbox: HTMLInputElement;
     beforeEach(function () {
