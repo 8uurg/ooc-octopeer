@@ -26,4 +26,11 @@ export class LastMessageThrottle extends Throttle {
             super.sendThrottledMessage(message, drop);
         }, this.maxDelay);
     }
+
+    /**
+     * Get a factory for this throttle.
+     */
+    public static getFactory(): (collector: TrackingCollector) => LastMessageThrottle {
+        return (collector) => new LastMessageThrottle(collector);
+    }
 }
