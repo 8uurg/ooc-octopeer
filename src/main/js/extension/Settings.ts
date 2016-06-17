@@ -29,7 +29,7 @@ export function setupCheckboxes() {
     registerCheckbox(OCTOPEER_CONSTANTS.track_key_strokes,              "checkboxKeystrokes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_scroll,                   "checkboxScroll");
     registerCheckbox(OCTOPEER_CONSTANTS.track_dom,                      "checkboxDom");
-    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_position,        "checkboxSemanticHover");
+    registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_hover,           "checkboxSemanticHover");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_clicks,          "checkboxSemanticClicks");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_key_strokes,     "checkboxSemanticKeystrokes");
     registerCheckbox(OCTOPEER_CONSTANTS.track_semantic_scrolling,       "checkboxSemanticScrolling");
@@ -39,7 +39,7 @@ export function setupCheckboxes() {
 /**
  * Creates the functionality for the database setting's textfield and apply button.
  */
-export function setUpDatabaseLocationElements() {
+export function setupDatabaseLocationElements() {
     let databaseLocationField = <HTMLInputElement> document.getElementById("database_location");
     let apiRegex = new RegExp("^(http|https)://.*/api/$");
     chrome.storage.sync.get(
@@ -57,10 +57,7 @@ export function setUpDatabaseLocationElements() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    setupCheckboxes();
-    setUpDatabaseLocationElements();
-
+export function setupAnalyticsButton() {
     let openAnalyticsButton = document.getElementById("openAnalytics");
     openAnalyticsButton.addEventListener("click", (e) => {
         e.preventDefault();
@@ -74,4 +71,14 @@ document.addEventListener("DOMContentLoaded", () => {
             window.open(url, target);
         });
     });
-});
+}
+
+export function initialize() {
+    document.addEventListener("DOMContentLoaded", () => {
+        setupCheckboxes();
+        setupDatabaseLocationElements();
+        setupAnalyticsButton();
+    });
+}
+
+initialize();
